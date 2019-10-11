@@ -20,6 +20,7 @@
 		D08777322350E3D3007E4CC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08777312350E3D3007E4CC2 /* SceneDelegate.swift */; };
 		D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08777342350ED5B007E4CC2 /* HomeViewList.swift */; };
 		D087775723510B68007E4CC2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087775623510B68007E4CC2 /* ContentView.swift */; };
+		D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087775823512453007E4CC2 /* HomeViewListRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		D08777312350E3D3007E4CC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D08777342350ED5B007E4CC2 /* HomeViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewList.swift; sourceTree = "<group>"; };
 		D087775623510B68007E4CC2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D087775823512453007E4CC2 /* HomeViewListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				D08777342350ED5B007E4CC2 /* HomeViewList.swift */,
+				D087775823512453007E4CC2 /* HomeViewListRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,
 				D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */,
 				D08777302350E362007E4CC2 /* IdeaViewModel.swift in Sources */,
 				D087775723510B68007E4CC2 /* ContentView.swift in Sources */,

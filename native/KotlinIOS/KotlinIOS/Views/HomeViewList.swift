@@ -15,11 +15,13 @@ struct HomeViewList: View {
     var body: some View {
         VStack {
             Text(CommonKt.createApplicationScreenMessage())
-            /* List(ideaViewModel.ideas) {
-               idea in
-                    HomeViewListRow(ideaModel: idea)
+             
+            List(ideaViewModel.ideas){
+                idea in
+                  HomeViewListRow(ideaModel: idea)
             }
- */
+ 
+
         }
     }
 }
