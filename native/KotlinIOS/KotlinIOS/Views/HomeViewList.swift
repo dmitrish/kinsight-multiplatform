@@ -10,7 +10,7 @@ import SwiftUI
 import SharedCode
 
 struct HomeViewList: View {
-    @ObservedObject var ideaViewModel = IdeasViewModel()
+    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository())
     
     var body: some View {
         VStack {
@@ -18,8 +18,10 @@ struct HomeViewList: View {
              
             List(ideaViewModel.ideas){
                 idea in
-                  HomeViewListRow(ideaModel: idea)
+                HomeViewListRow(ideaModel: idea.ideaModel)
             }
+ 
+ 
  
 
         }

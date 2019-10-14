@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "com.jetbrains.handson.mpp.mobile"
+        applicationId "com.kinsight.kinsightmultiplatform.mobile"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -27,6 +27,21 @@ android {
         //Like these
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/kotlinx-io.kotlin_module'
+        pickFirst 'META-INF/atomicfu.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-io.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
+        pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
+        pickFirst 'META-INF/ktor-http.kotlin_module'
+        pickFirst 'META-INF/ktor-utils.kotlin_module'
+        pickFirst 'META-INF/kotlinx-serialization-runtime.kotlin_module'
+        pickFirst 'META-INF/ktor-http-cio.kotlin_module'
+        pickFirst 'META-INF/ktor-client-json.kotlin_module'
+        pickFirst 'META-INF/ktor-client-logging.kotlin_module'
+        pickFirst 'META-INF/ktor-client-core.kotlin_module'
     }
 }
 

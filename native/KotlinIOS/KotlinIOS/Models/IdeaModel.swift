@@ -6,8 +6,15 @@
 
 
 import Foundation
+import SharedCode
 
-struct IdeaModel : Hashable, Identifiable, Codable {
+struct IdeaModelExt:  Identifiable {
+    var id: Int    
+    var ideaModel: IdeaModel
+}
+ 
+
+struct IdeaModelSwift : Hashable, Identifiable, Codable {
     var id: Int
     //var ticker: String
     var securityName: String
