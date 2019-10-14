@@ -14,8 +14,10 @@ struct IdeaModelExt:  Identifiable {
 }
  
 
+
 struct IdeaModelSwift : Hashable, Identifiable, Codable {
-    var id: Int
+    var id: Int32
+ 
     //var ticker: String
     var securityName: String
     var absolutePerformance: Double

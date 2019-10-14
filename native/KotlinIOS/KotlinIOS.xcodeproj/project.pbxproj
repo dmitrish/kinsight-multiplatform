@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AF326202353F990006B3594 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF3261F2353F990006B3594 /* HomeView.swift */; };
+		2AF326222353FD60006B3594 /* HomeViewListNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF326212353FD60006B3594 /* HomeViewListNative.swift */; };
+		2AF3262423540FDE006B3594 /* HomeViewListRowNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */; };
 		47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47729E0522F447C800B9B36B /* AppDelegate.swift */; };
 		47729E0D22F447CA00B9B36B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47729E0C22F447CA00B9B36B /* Assets.xcassets */; };
 		47729E1022F447CA00B9B36B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47729E0E22F447CA00B9B36B /* LaunchScreen.storyboard */; };
@@ -55,6 +58,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2AF3261F2353F990006B3594 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2AF326212353FD60006B3594 /* HomeViewListNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListNative.swift; sourceTree = "<group>"; };
+		2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListRowNative.swift; sourceTree = "<group>"; };
 		47729E0222F447C800B9B36B /* KotlinIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KotlinIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47729E0522F447C800B9B36B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47729E0722F447C800B9B36B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +187,9 @@
 			children = (
 				D08777342350ED5B007E4CC2 /* HomeViewList.swift */,
 				D087775823512453007E4CC2 /* HomeViewListRow.swift */,
+				2AF3261F2353F990006B3594 /* HomeView.swift */,
+				2AF326212353FD60006B3594 /* HomeViewListNative.swift */,
+				2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -337,13 +346,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AF326202353F990006B3594 /* HomeView.swift in Sources */,
 				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,
 				D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */,
 				D08777302350E362007E4CC2 /* IdeaViewModel.swift in Sources */,
 				D087775723510B68007E4CC2 /* ContentView.swift in Sources */,
 				D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */,
+				2AF3262423540FDE006B3594 /* HomeViewListRowNative.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
 				D087772D2350E2DC007E4CC2 /* Data.swift in Sources */,
+				2AF326222353FD60006B3594 /* HomeViewListNative.swift in Sources */,
 				D08777322350E3D3007E4CC2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

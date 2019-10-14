@@ -14,19 +14,24 @@ class IdeasViewModel : ObservableObject {
     
     @Published var ideas = [IdeaModelExt]()
     
-    var ideasOriginal = [IdeaModel]()
+    @Published var ideasOriginal = [IdeaModelSwift]()
     
-    private let repository: IdeaRepository
+    private let repository: IdeaRepository?
     
     init(repository: IdeaRepository) {
         self.repository = repository
-        fetch()
+        fetchKotlin()
     }
     
-    func fetch() {
-        repository.fetchIdeas(success: { data in
-            self.ideasOriginal = data
-            self.ideasOriginal.forEach {
+    init() {
+        self.repository = nil
+        fetchNative()
+    }
+    
+    func fetchKotlin() {
+        repository?.fetchIdeas(success: { data in
+            let ideas  = data
+            ideas.forEach {
                 var ideaExt = IdeaModelExt(id: Int($0.id), ideaModel: $0)
                 self.ideas.append(ideaExt)
             }
@@ -48,8 +53,8 @@ class IdeasViewModel : ObservableObject {
     }
 
     
-    func search() {
-      /*
+    func fetchNative() {
+      
         var urlComponents = URLComponents(string: "https://alphacapture.appspot.com/api/ideas")!
        
 
@@ -63,9 +68,9 @@ class IdeasViewModel : ObservableObject {
             .replaceError(with: [])
             .receive(on: RunLoop.main)
            // .sink(receiveValue: {p in print (p.count)})
-           // .assign(to: \.ideas, on: self)
+            .assign(to: \.ideasOriginal, on: self)
  
- */
+ 
     }
     
 }
