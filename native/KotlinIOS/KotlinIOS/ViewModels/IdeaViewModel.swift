@@ -10,11 +10,18 @@ import SwiftUI
 import Combine
 import SharedCode
 
+
+class ProgressModel : ObservableObject {
+    var inProgress = false
+}
+
 class IdeasViewModel : ObservableObject {
     
     @Published var ideas = [IdeaModelExt]()
     
     @Published var ideasOriginal = [IdeaModelSwift]()
+    
+    @Published var dataRequestInProgress = ProgressModel()
     
     private let repository: IdeaRepository?
     
@@ -25,18 +32,29 @@ class IdeasViewModel : ObservableObject {
     
     init() {
         self.repository = nil
-        fetchNative()
+        //dummy delay - to make sure progress indicator working
+        let seconds = 5.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            self.fetchNative()  // Put your code which should be executed with a delay here
+        }
+       
     }
     
     func fetchKotlin() {
-        repository?.fetchIdeas(success: { data in
+         dataRequestInProgress.inProgress = true
+        let seconds = 5.0
+       // DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+       
+            self.repository?.fetchIdeas(success: { data in
             let ideas  = data
             ideas.forEach {
                 var ideaExt = IdeaModelExt(id: Int($0.id), ideaModel: $0)
                 self.ideas.append(ideaExt)
             }
+            self.dataRequestInProgress.inProgress = false
             print(self.ideas)
         })
+       // }
     }
     
     private var searchCancellable: Cancellable? {

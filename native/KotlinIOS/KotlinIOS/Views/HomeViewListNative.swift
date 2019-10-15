@@ -11,9 +11,16 @@ import SwiftUI
 
 struct HomeViewListNative: View {
     @ObservedObject var ideaViewModel = IdeasViewModel()
+    @State private var showProgress: Bool = true
+   
+    func stopShowing(){
+        showProgress = false
+    }
     
     var body: some View {
         VStack {
+            
+           // ActivityIndicator(isAnimating: $showProgress)
             Text("Native iOS")
             
             List(ideaViewModel.ideasOriginal) {
@@ -21,12 +28,28 @@ struct HomeViewListNative: View {
                 //Text(idea.securityName)
                HomeViewListRowNative(ideaModel: idea)
             }
- 
- 
- 
- 
- 
+        
+           
+         }
+    }
+    
+    
+}
+
+struct ActivityIndicator: UIViewRepresentable {
+    @Binding var isAnimating: ProgressModel
+    
+    func makeUIView(context: Context) -> UIActivityIndicatorView {
+        let v = UIActivityIndicatorView()
+        
+        return v
+    }
+    
+    func updateUIView(_ activityIndicator: UIActivityIndicatorView, context: Context) {
+        if isAnimating.inProgress {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
         }
     }
 }
-   

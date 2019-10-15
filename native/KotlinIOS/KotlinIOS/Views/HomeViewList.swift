@@ -13,17 +13,24 @@ struct HomeViewList: View {
     @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository())
     
     var body: some View {
-        VStack {
-            Text(CommonKt.createApplicationScreenMessage())
-             
-            List(ideaViewModel.ideas){
-                idea in
-                HomeViewListRow(ideaModel: idea.ideaModel)
-            }
- 
- 
- 
+         ZStack{
+           VStack{
+                ActivityIndicator(isAnimating: $ideaViewModel.dataRequestInProgress)
+                                   
+                              
+            }.zIndex(1)
+           VStack {
 
+                    
+                
+                    Text(CommonKt.createApplicationScreenMessage())
+                     
+                    List(ideaViewModel.ideas){
+                        idea in
+                        HomeViewListRow(ideaModel: idea.ideaModel)
+                    }
+           }.zIndex(0)
+           
         }
     }
 }

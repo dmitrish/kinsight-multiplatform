@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129CE23556050006C5329 /* WelcomeView.swift */; };
 		2AF326202353F990006B3594 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF3261F2353F990006B3594 /* HomeView.swift */; };
 		2AF326222353FD60006B3594 /* HomeViewListNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF326212353FD60006B3594 /* HomeViewListNative.swift */; };
 		2AF3262423540FDE006B3594 /* HomeViewListRowNative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2AE129CE23556050006C5329 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		2AF3261F2353F990006B3594 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2AF326212353FD60006B3594 /* HomeViewListNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListNative.swift; sourceTree = "<group>"; };
 		2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListRowNative.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				2AF3261F2353F990006B3594 /* HomeView.swift */,
 				2AF326212353FD60006B3594 /* HomeViewListNative.swift */,
 				2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */,
+				2AE129CE23556050006C5329 /* WelcomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				D087775723510B68007E4CC2 /* ContentView.swift in Sources */,
 				D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */,
 				2AF3262423540FDE006B3594 /* HomeViewListRowNative.swift in Sources */,
+				2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
 				D087772D2350E2DC007E4CC2 /* Data.swift in Sources */,
 				2AF326222353FD60006B3594 /* HomeViewListNative.swift in Sources */,
@@ -524,6 +528,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GD4G9TGE9T;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../SharedCode/build/xcode-frameworks";
 				INFOPLIST_FILE = KotlinIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -543,6 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GD4G9TGE9T;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../SharedCode/build/xcode-frameworks";
 				INFOPLIST_FILE = KotlinIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
