@@ -25,8 +25,11 @@ struct HomeViewListNative: View {
             
             List(ideaViewModel.ideasOriginal) {
                 idea in
+                //NavigationLink(destination: IdeaView(ideaModel: idea)) {
+                    HomeViewListRowNative(ideaModel: idea)
+               // }
                 //Text(idea.securityName)
-               HomeViewListRowNative(ideaModel: idea)
+              // HomeViewListRowNative(ideaModel: idea)
             }
         
            

@@ -11,9 +11,15 @@ import SwiftUI
 
 struct WelcomeView: View {
     
+    @State private var opacity = 0.0
+    @State var textAlpha = 0.0
+    @State var textScale: CGFloat = 1
+    
     @State var gradient = [Color.blue, Color.purple, Color.orange]
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
+    
+    @State var showWelcome = false
     
     
    var body: some View {
@@ -28,17 +34,22 @@ struct WelcomeView: View {
                     self.endPoint = UnitPoint(x: 0, y: 1)
                 }
             }
-            
+
              VStack {
                    NavigationLink(destination: HomeView()) {
-                    Text("Happy Alpha Fishing!").foregroundColor(.white).fontWeight(.bold)
-                }.navigationBarHidden(true)
+                    if showWelcome{
+                    Text("Happy Alpha Fishing!")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .transition(.opacity)
+                        }
                 
+                    }
+                }.navigationBarHidden(true)
+                .onAppear(){
+                    self.showWelcome = true
+                }
             }
-           
         }
     }
-    }
-   
-    
 }

@@ -16,7 +16,6 @@ struct HomeView: View {
     var body: some View {
        
         TabView{
-           
            HomeViewList()
                 .tabItem {
                   Image(systemName: "1.circle")
@@ -28,9 +27,8 @@ struct HomeView: View {
                     Text("Native View")
                 }.tag(1)
         }.padding (.top, 5)
-            
-            .navigationBarBackButtonHidden(true)
-    .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .navigationBarTitle("", displayMode: .inline)
     }
 }

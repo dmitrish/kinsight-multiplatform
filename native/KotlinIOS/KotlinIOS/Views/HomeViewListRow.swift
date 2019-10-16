@@ -15,13 +15,10 @@ struct HomeViewListRow: View {
    
     var body: some View {
         VStack (alignment:.leading) {
-            Text(ideaModel.securityName).fontWeight(.bold)
-            Text("Alpha: \(ideaModel.alpha)" )
+                Text(ideaModel.securityName).fontWeight(.bold)
+                Text("Alpha: \(ideaModel.alpha)" )
             }
             .lineSpacing(4)
-            
     }
-    
-    
 }
 
