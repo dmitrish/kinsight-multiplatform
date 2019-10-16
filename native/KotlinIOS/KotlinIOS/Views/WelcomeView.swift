@@ -22,9 +22,13 @@ struct WelcomeView: View {
     @State var showWelcome = false
     
     
+    
    var body: some View {
     NavigationView {
-        ZStack{
+        ZStack {
+            
+            
+            
         RoundedRectangle(cornerRadius: 0)
             .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
             .edgesIgnoringSafeArea(.all)
@@ -34,22 +38,60 @@ struct WelcomeView: View {
                     self.endPoint = UnitPoint(x: 0, y: 1)
                 }
             }
-
+ 
              VStack {
+                Spacer()
+                 
                    NavigationLink(destination: HomeView()) {
-                    if showWelcome{
-                    Text("Happy Alpha Fishing!")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                        .transition(.opacity)
-                        }
-                
+                        WelcomeText()
+                   
                     }
+               
+                
+                Spacer()
+
+                HStack { Spacer() }
+               
                 }.navigationBarHidden(true)
+                
                 .onAppear(){
-                    self.showWelcome = true
-                }
-            }
+                   withAnimation(.easeIn(duration: 3)){
+                    self.showWelcome.toggle()
+                    
+                  }
+                     
+               }
+          HStack { Spacer() }
+        }
+       
+        }
+  
+    }
+}
+
+struct WelcomeText : View {
+    
+    @State var textAlpha = 0.0
+    @State var textScale: CGFloat = 1
+    var body: some View {
+        
+        return Text("Happy Alpha Fishing").foregroundColor(.white)
+         .fontWeight(.bold)
+         .opacity(textAlpha)
+         .scaleEffect(textScale)
+         .onAppear() {
+            withAnimation (.linear(duration: 5)){
+                self.runAnimations()
+             }
+         }
+    }
+    
+    func runAnimations() {
+           withAnimation(Animation.easeIn(duration: 4).delay(0.2)) {
+            textAlpha = 1.0
+            textScale = 1.2
         }
     }
 }
+
+
