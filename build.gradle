@@ -15,6 +15,7 @@ buildscript {
         
     }
     dependencies {
+        classpath 'org.reflections:reflections:0.9.11'
         classpath 'com.android.tools.build:gradle:3.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
@@ -22,6 +23,7 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
 }
 
 /*Add Compile options in following block*/
@@ -37,8 +39,43 @@ allprojects {
         maven { url "https://plugins.gradle.org/m2/" }
         
     }
+
+    project.tasks.whenTaskAdded { task ->
+        println("task added: " + task.name)
+    }
+
+    afterEvaluate {
+        println "evaluated project: $project"
+    }
+
+    gradle.taskGraph.afterTask { task ->
+        println("task $task.name inputs:")
+      //  task.inputs.files.each {println "   " + it}
+    }
+
+    gradle.taskGraph.afterTask { task ->
+        println("task $task.name outputs:")
+       // task.outputs.files.each {println "   " + it}
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task doReflectyStuff {
+   // dependsOn compileJava
+    doLast {
+        URL[] urls = sourceSets.main.runtimeClasspath.files.collect {
+            it.toURI().toURL()
+            println(it)
+        }
+        ClassLoader classLoader = new URLClassLoader(urls, null)
+        org.reflections.Configuration config = org.reflections.util.ConfigurationBuilder
+                .build("package.name.of.interest.here")
+                .addClassLoader(classLoader)
+                .setUrls(urls)
+        org.reflections.Reflections reflections = new org.reflections.Reflections(config)
+
+    }
 }

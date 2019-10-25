@@ -1,4 +1,10 @@
+
+import groovy.util.XmlParser
+import org.jdom2.input.SAXBuilder
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import java.io.File
+
+
 
 repositories {
     google()
@@ -32,6 +38,9 @@ kotlin {
     }
 
     jvm("android")
+
+    val sp = sourceSets["commonMain"].kotlin.sourceDirectories.single().absolutePath
+    println("Sp is " + sp)
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
@@ -82,11 +91,7 @@ kotlin {
         implementation ("io.ktor:ktor-client-logging-native:1.2.4")
         implementation ("io.ktor:ktor-client-serialization-native:1.2.4")
     }
-
-
 }
-
-
 
 
 val packForXcode by tasks.creating(Sync::class) {
@@ -111,3 +116,58 @@ val packForXcode by tasks.creating(Sync::class) {
 }
 
 tasks.getByName("build").dependsOn(packForXcode)
+
+
+tasks.getByName("androidProcessResources").dependsOn("resourceConverter")
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.register("resourceConverter") {
+
+    val baseResourcesPath = "app/src/main/res/values/"
+
+    val builder =  SAXBuilder()
+    val colorsSourcePath = baseResourcesPath + "colors.xml"
+    val stringsSourcePath = baseResourcesPath + "strings.xml"
+    val targetPath   = project.projectDir.resolve("src/commonMain/kotlin/resources")
+
+   
+    doLast {
+        convert(builder, colorsSourcePath, targetPath.absolutePath, "color")
+        println("Generated colors resource object file in common shared")
+
+
+        convert(builder, stringsSourcePath, targetPath.absolutePath, "string")
+        println("Generated strings resource object file in common shared")
+
+
+    }
+}
+fun convert(builder: SAXBuilder, sourcePath: String, targetPath: String, identity: String) {
+    var nm = project.rootDir.resolve(sourcePath)
+
+    val doc = builder.build(nm)
+    val root = doc.rootElement
+    val elements = root.getChildren(identity)
+    var lines = String()
+    elements.forEach {
+        lines =
+            lines + (" val " + it.getAttributeValue("name") + " = " + "\"" + it.textTrim + "\"" + "\n")
+    }
+
+    val className = identity.capitalize() + "s"
+    val fileName = className + ".kt"
+
+    File(targetPath, fileName).writeText(
+
+        """//this is gradle generated file. Do not modify. 
+package com.kinsight.kinsightmultiplatform.resources  
+
+object ${className} {
+$lines}
+            """
+    )
+}

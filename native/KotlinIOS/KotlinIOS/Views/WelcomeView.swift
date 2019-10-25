@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftUI
+import SharedCode
 
 struct WelcomeView: View {
     
@@ -15,7 +16,7 @@ struct WelcomeView: View {
     @State var textAlpha = 0.0
     @State var textScale: CGFloat = 1
     
-    @State var gradient = [Color.blue, Color.purple, Color.orange]
+    @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
     
@@ -75,7 +76,7 @@ struct WelcomeText : View {
     @State var textScale: CGFloat = 1
     var body: some View {
         
-        return Text("Happy Alpha Fishing").foregroundColor(.white)
+        return Text(Strings().welcomeMessage).foregroundColor(.white)
          .fontWeight(.bold)
          .opacity(textAlpha)
          .scaleEffect(textScale)
