@@ -21,8 +21,7 @@ struct WelcomeView: View {
     @State var endPoint = UnitPoint(x: 0, y: 2)
     
     @State var showWelcome = false
-    
-    
+   
     
    var body: some View {
     NavigationView {
@@ -94,5 +93,16 @@ struct WelcomeText : View {
         }
     }
 }
+
+struct WelcomeView_Preview: PreviewProvider {
+    
+    
+    
+    static var previews: some View {
+        WelcomeView()
+    }
+}
+
+
 
 

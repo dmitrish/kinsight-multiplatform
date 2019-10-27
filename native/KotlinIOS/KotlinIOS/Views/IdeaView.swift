@@ -25,3 +25,16 @@ struct IdeaView: View {
         }
     }
 }
+  
+struct IdeaView_Preview: PreviewProvider {
+    
+    
+  
+    static var previews: some View {
+        IdeaView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample  )
+    }
+ 
+
+}
+  
+

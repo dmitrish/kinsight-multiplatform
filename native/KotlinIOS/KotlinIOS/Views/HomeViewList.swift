@@ -40,9 +40,3 @@ struct HomeViewList: View {
     }
 }
   
-/*
- //NavigationLink(destination: IdeaView(ideaModel: idea)) {
-                    HomeViewListRowNative(ideaModel: idea)
-               // }
- */
- 

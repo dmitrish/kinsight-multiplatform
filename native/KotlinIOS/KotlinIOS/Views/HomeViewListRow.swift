@@ -22,3 +22,10 @@ struct HomeViewListRow: View {
     }
 }
 
+struct HomeViewListRow_Preview: PreviewProvider {
+   
+    static var previews: some View {
+        HomeViewListRow(ideaModel: IdeaSample.sharedInstance.ideaModelSample)
+    }
+}
+

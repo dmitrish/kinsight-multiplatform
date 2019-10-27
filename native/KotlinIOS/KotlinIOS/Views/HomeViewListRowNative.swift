@@ -23,3 +23,12 @@ struct HomeViewListRowNative: View {
         
     }
 
+struct HomeViewListRowNative_Preview: PreviewProvider {
+    
+    static var ideaModel = IdeaModelSwift(id: 3, securityName: "MSFT", absolutePerformance: 2.345, alpha: 2.45)
+    
+    static var previews: some View {
+        HomeViewListRowNative(ideaModel: ideaModel)
+    }
+}
+

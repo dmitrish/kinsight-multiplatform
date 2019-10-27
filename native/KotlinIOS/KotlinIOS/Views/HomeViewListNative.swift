@@ -19,19 +19,11 @@ struct HomeViewListNative: View {
     
     var body: some View {
         VStack {
-            
-           // ActivityIndicator(isAnimating: $showProgress)
             Text("Native iOS")
-            
             List(ideaViewModel.ideasOriginal) {
-                idea in
-                //NavigationLink(destination: IdeaView(ideaModel: idea)) {
+                    idea in
                     HomeViewListRowNative(ideaModel: idea)
-               // }
-                //Text(idea.securityName)
-              // HomeViewListRowNative(ideaModel: idea)
-            }
-        
+             }
            
          }
     }
@@ -56,3 +48,12 @@ struct ActivityIndicator: UIViewRepresentable {
         }
     }
 }
+
+struct HomeViewListNative_Preview: PreviewProvider {
+    
+    static var previews: some View {
+        HomeViewListNative()
+    }
+}
+
+

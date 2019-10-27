@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A480DA5236625D200894630 /* IdeaSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A480DA4236625D200894630 /* IdeaSample.swift */; };
 		2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129CE23556050006C5329 /* WelcomeView.swift */; };
 		2AE129D12356952F006C5329 /* IdeaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129D02356952F006C5329 /* IdeaView.swift */; };
 		2AE129D6235C1570006C5329 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129D5235C1570006C5329 /* Utils.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A480DA4236625D200894630 /* IdeaSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaSample.swift; sourceTree = "<group>"; };
 		2AE129CE23556050006C5329 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		2AE129D02356952F006C5329 /* IdeaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaView.swift; sourceTree = "<group>"; };
 		2AE129D5235C1570006C5329 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 		D08777292350E270007E4CC2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2A480DA4236625D200894630 /* IdeaSample.swift */,
 				D087772A2350E296007E4CC2 /* IdeaModel.swift */,
 				D087772C2350E2DC007E4CC2 /* Data.swift */,
 			);
@@ -355,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A480DA5236625D200894630 /* IdeaSample.swift in Sources */,
 				2AF326202353F990006B3594 /* HomeView.swift in Sources */,
 				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,
 				D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */,
@@ -466,7 +470,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -521,7 +525,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -583,6 +587,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jetbrains.handson.mpp.mobile.KotlinIOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -603,6 +608,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jetbrains.handson.mpp.mobile.KotlinIOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

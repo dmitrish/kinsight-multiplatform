@@ -32,3 +32,13 @@ struct HomeView: View {
         .navigationBarTitle("", displayMode: .inline)
     }
 }
+
+struct HomeView_Preview: PreviewProvider {
+    
+    
+    
+    static var previews: some View {
+        HomeView()
+    }
+}
+
