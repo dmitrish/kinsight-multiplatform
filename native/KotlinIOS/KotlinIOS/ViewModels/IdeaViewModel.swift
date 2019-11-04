@@ -17,7 +17,7 @@ class ProgressModel : ObservableObject {
 
 class IdeasViewModel : ObservableObject {
     
-    @Published var ideas = [IdeaModelExt]()
+    @Published var ideas = [IdeaModel]()
     
     @Published var ideasOriginal = [IdeaModelSwift]()
     
@@ -42,15 +42,15 @@ class IdeasViewModel : ObservableObject {
     
     func fetchKotlin() {
          dataRequestInProgress.inProgress = true
-        let seconds = 5.0
+//        let seconds = 5.0
        // DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
        
             self.repository?.fetchIdeas(success: { data in
-            let ideas  = data
-            ideas.forEach {
-                var ideaExt = IdeaModelExt(id: Int($0.id), ideaModel: $0)
-                self.ideas.append(ideaExt)
-            }
+                self.ideas  = data
+//            ideas.forEach {
+//                var ideaExt = IdeaModelExt(id: Int($0.id), ideaModel: $0)
+//                self.ideas.append(ideaExt)
+//            }
             self.dataRequestInProgress.inProgress = false
             print(self.ideas)
         })

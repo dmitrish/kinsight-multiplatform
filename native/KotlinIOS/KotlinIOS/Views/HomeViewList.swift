@@ -25,9 +25,9 @@ struct HomeViewList: View {
                     Text(CommonKt.createApplicationScreenMessage())
                     List(ideaViewModel.ideas){
                         idea in
-                        NavigationLink(destination: IdeaView(ideaModel: idea.ideaModel)) {
+                        NavigationLink(destination: IdeaView(ideaModel: idea)) {
                            
-                            HomeViewListRow(ideaModel: idea.ideaModel)
+                            HomeViewListRow(ideaModel: idea)
                         }
                       
                     }

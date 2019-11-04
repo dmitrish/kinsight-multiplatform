@@ -8,11 +8,14 @@
 import Foundation
 import SharedCode
 
-struct IdeaModelExt:  Identifiable {
-    var id: Int    
-    var ideaModel: IdeaModel
-}
+//struct IdeaModelExt:  Identifiable {
+//    var id: Int
+//    var ideaModel: IdeaModel
+//}
  
+extension IdeaModel : Identifiable {
+    // Dummy for compiler
+}
 
 
 struct IdeaModelSwift : Hashable, Identifiable, Codable {
