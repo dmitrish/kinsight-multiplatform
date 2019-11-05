@@ -38,6 +38,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         val intent = Intent(this, IdeaDetailActivity::class.java)
         intent.putExtra("idea", idea.securityName)
         startActivity(intent)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
