@@ -28,7 +28,7 @@ import java.time.Month
 
 data class Idea(val id: Int,
                 val absolutePerformance: Double,
-                val alpha: Double,
+                var alpha: Double,
                 val benchMarkTicker: String = "SPX",
                 val benchMarkTickerDesk: String = "S&P 500 Index",
                 val benchMarkCurrentPrice: Double,
@@ -251,6 +251,11 @@ fun Application.main() {
         post("/api/postidea") {
             val post = call.receive<Idea>()
             ideas.add(post)
+            call.respond(mapOf("OK" to true))
+        }
+        post("/api/updateidea") {
+            val post = call.receive<Idea>()
+            ideas.find { it.id == post.id }?.alpha = post.alpha
             call.respond(mapOf("OK" to true))
         }
     }
