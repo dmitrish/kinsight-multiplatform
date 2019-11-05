@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Alpha Capture</string>
     <string name="welcomeMessage">Happy Alpha Fishing!</string>
+
+    <string name="title_activity_idea_detail">IdeaDetailActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
