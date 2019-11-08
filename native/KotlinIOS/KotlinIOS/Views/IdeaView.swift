@@ -14,15 +14,23 @@ struct IdeaView: View {
     var ideaModel: IdeaModel
     
     var body: some View {
-        VStack {
+        
+        ZStack {
+            Color.init(hex: bkDark)
+                .edgesIgnoringSafeArea(.all)
             
-            Text(ideaModel.securityName).font(.headline)
-            Text("Alpha: \(ideaModel.alpha)" )
-            Text("Entry price: \(ideaModel.entryPrice)" )
-            Text("Target price: \(ideaModel.targetPrice)" )
-            Text("Time Horizon: \(ideaModel.timeHorizon)" )
- 
+                   VStack {
+                       
+                       Text(ideaModel.securityName).font(.headline)
+                       Text("Alpha: \(ideaModel.alpha)" )
+                       Text("Entry price: \(ideaModel.entryPrice)" )
+                       Text("Target price: \(ideaModel.targetPrice)" )
+                       Text("Time Horizon: \(ideaModel.timeHorizon)" )
+            
+                   }.foregroundColor(.white)
         }
+        
+
     }
 }
   
