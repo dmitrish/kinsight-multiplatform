@@ -3,3 +3,6 @@
 
 # Kotlin Multiplafrorm projects: Sharing code between iOS, Android, and JVM Web Server (Ktor)
 
+Switching server between google app angine and netty build - settings.gradle:
+![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settings.png)
+
