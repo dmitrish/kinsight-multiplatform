@@ -42,6 +42,7 @@ android {
         pickFirst 'META-INF/ktor-client-json.kotlin_module'
         pickFirst 'META-INF/ktor-client-logging.kotlin_module'
         pickFirst 'META-INF/ktor-client-core.kotlin_module'
+        pickFirst 'META-INF/ktor-client-websockets.kotlin_module'
     }
 }
 
@@ -62,4 +63,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    implementation "org.java-websocket:Java-WebSocket:1.4.0"
 }

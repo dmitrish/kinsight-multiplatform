@@ -3,12 +3,14 @@ package com.kinsight.kinsightmultiplatform.ViewModels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.kinsight.kinsightmultiplatform.api.WsClient
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
 import kotlinx.coroutines.*
 
 class IdeasViewModel (application: Application, userName: String) : AndroidViewModel(application) {
 
+    //private val  wsClient by lazy { WsClient("ws://10.0.2.2:8081/ws")}
     //region private area
     private val ideaRep by lazy { IdeaRepository() }
 
@@ -27,11 +29,22 @@ class IdeasViewModel (application: Application, userName: String) : AndroidViewM
 
     private fun loadIdeas(createdBy: String?) {
         viewModelScope.launch(){
+
             var ideasTemp : List<IdeaModel>? = null
+           // for (x in 1..400) {
             withContext(Dispatchers.IO) {
                 ideasTemp = ideaRep.fetchIdeas()
             }
             ideas.value = ideasTemp
+
+            withContext(Dispatchers.IO) {
+                ideaRep.receive("10.0.2.2", 8081) {
+                    println("android app received from server: $it")
+                    if (it == "reload") {
+                        loadIdeas("s")
+                    }
+                }
+            }
         }
     }
     //endregion

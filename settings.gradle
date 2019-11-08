@@ -2,5 +2,10 @@ include ':app'
 include ':SharedCode'
 include ':server'
 
+//Server project has two flavors - google app engine - use standard build.gradle
+//for netty use build.netty.gradle
+//project(':server').buildFileName = 'build.gradle'
+project(':server').buildFileName = 'build.netty.gradle'
+
 
 enableFeaturePreview('GRADLE_METADATA')
