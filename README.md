@@ -17,4 +17,9 @@ To run appengine locally, execute this gradle task
 ![appengine run task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/googleappenginerun.png)
 
 
+Note - if you want websockets enabled, you need to run the netty build. Change settings.gradle as described above and execute this gradle task
+
+![netty run task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/nettyrun.png)
+
+
 
