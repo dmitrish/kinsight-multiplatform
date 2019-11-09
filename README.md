@@ -5,8 +5,8 @@
 
 ![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/Screen%20Shot%202019-11-07%20at%209.06.33%20PM.png)
 
-Switching server between google app angine and netty build - settings.gradle:
-![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settings.png)
+Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
+![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settingsgradle.png)
 
 If you want to run the google appengine locally, remember to change the engine path to your path!
 
@@ -17,7 +17,7 @@ To run appengine locally, execute this gradle task
 ![appengine run task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/googleappenginerun.png)
 
 
-Note - if you want websockets enabled, you need to run the netty build. Change settings.gradle as described above and execute this gradle task
+Note - if you want websockets enabled, you need to run one of the netty builds (regular netty or fatjar netty). Change settings.gradle as described above and execute this gradle task for the regular netty build:
 
 ![netty run task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/nettyrun.png)
 
