@@ -22,4 +22,11 @@ Note - if you want websockets enabled, you need to run one of the netty builds (
 ![netty run task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/nettyrun.png)
 
 
+To run the fatjar build, first build with this build task:
+
+
+
+Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
+
+
 
