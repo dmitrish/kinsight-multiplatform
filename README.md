@@ -12,3 +12,9 @@ If you want to run the google appengine locally, remember to change the engine p
 
 ![appengine path](https://github.com/dmitrish/kinsight-multiplatform/blob/master/googleappenginepath.png)
 
+To run appengine locally, execute this gradle task
+
+![appengine run task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/googleappenginerun.png)
+
+
+
