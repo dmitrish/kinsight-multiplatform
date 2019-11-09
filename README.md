@@ -23,6 +23,7 @@ Note - if you want websockets enabled, you need to run one of the netty builds (
 
 
 To run the fatjar build, first build with this build task:
+![fatjar build task](https://github.com/dmitrish/kinsight-multiplatform/blob/master/fatjargradletask.png)
 
 
 
