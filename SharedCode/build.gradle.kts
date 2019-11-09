@@ -54,6 +54,8 @@ kotlin {
         implementation ("io.ktor:ktor-client-json:1.2.4")
         implementation ("io.ktor:ktor-client-logging:1.2.4")
         implementation ("io.ktor:ktor-client-serialization:1.2.4")
+        implementation("io.ktor:ktor-client-websockets:1.2.4")
+        implementation ("io.ktor:ktor-client-cio:1.2.4")
         //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common")
     }
@@ -68,6 +70,7 @@ kotlin {
         implementation ("io.ktor:ktor-client-json-jvm:1.2.4")
         implementation ("io.ktor:ktor-client-logging-jvm:1.2.4")
         implementation ("io.ktor:ktor-client-serialization-jvm:1.2.4")
+        implementation("io.ktor:ktor-client-websockets-jvm:1.2.4")
         //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
 
     }
@@ -90,6 +93,7 @@ kotlin {
         implementation ("io.ktor:ktor-client-json-native:1.2.4")
         implementation ("io.ktor:ktor-client-logging-native:1.2.4")
         implementation ("io.ktor:ktor-client-serialization-native:1.2.4")
+        implementation("io.ktor:ktor-client-websockets-native:1.2.4")
     }
 }
 

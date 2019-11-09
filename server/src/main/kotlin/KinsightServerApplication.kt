@@ -10,6 +10,10 @@ import io.ktor.response.respondText
 import io.ktor.routing.*
 import kotlinx.html.*
 import io.ktor.client.*
+import io.ktor.http.cio.websocket.*
+import io.ktor.http.cio.websocket.CloseReason
+import io.ktor.http.cio.websocket.Frame
+import io.ktor.websocket.*
 import io.ktor.client.request.get
 import io.ktor.client.request.url
 import java.io.*
@@ -18,6 +22,9 @@ import java.time.LocalDate
 import io.ktor.gson.*
 import io.ktor.request.receive
 import io.ktor.response.respond
+import io.ktor.sessions.*
+import io.ktor.util.generateNonce
+import kotlinx.coroutines.channels.consumeEach
 import java.util.*
 
 import java.time.LocalDateTime
@@ -50,6 +57,10 @@ data class Idea(val id: Int,
                 val createdBy: String)
 
 var ideas = mutableListOf<Idea>()
+var wssessions=  mutableListOf<WebSocketSession>()
+
+
+data class ChatSession(val id: String)
 /**
  * Entry Point of the application. This function is referenced in the
  * resources/application.conf file inside the ktor.application.modules.
@@ -81,7 +92,20 @@ fun Application.main() {
         createdBy = "Dmitri"))
 
 
+    install(WebSockets) {
+        pingPeriod = java.time.Duration.ofMinutes(1)
+    }
 
+    install(Sessions) {
+        cookie<ChatSession>("SESSION")
+    }
+
+    // This adds an interceptor that will create a specific session in each request if no session is available already.
+    intercept(ApplicationCallPipeline.Features) {
+        if (call.sessions.get<ChatSession>() == null) {
+            call.sessions.set(ChatSession(generateNonce()))
+        }
+    }
     //ideas.add(Idea(12, "GOOD US", 5.30))
 
     // This adds automatically Date and Server headers to each response, and would allow you to configure
@@ -95,6 +119,8 @@ fun Application.main() {
             setPrettyPrinting()
         }
     }
+
+
 
     // Registers routes
     routing {
@@ -248,15 +274,52 @@ fun Application.main() {
                 ContentType.Application.Json)
         }
 
+        post("/api/hi"){
+            for (wssession in wssessions) {
+                wssession.send(Frame.Text("reload"))
+            }
+        }
+
         post("/api/postidea") {
             val post = call.receive<Idea>()
             ideas.add(post)
+            for (wssession in wssessions) {
+                wssession.send(Frame.Text("reload"))
+            }
             call.respond(mapOf("OK" to true))
         }
         post("/api/updateidea") {
             val post = call.receive<Idea>()
             ideas.find { it.id == post.id }?.alpha = post.alpha
+            for (wssession in wssessions) {
+                wssession.send(Frame.Text("reload"))
+            }
             call.respond(mapOf("OK" to true))
+        }
+
+        webSocket("/ws") { // this: WebSocketSession ->
+
+            wssessions.add(this)
+
+            for (frame in incoming) {
+
+                when (frame) {
+                    is Frame.Text -> {
+                        val text = frame.readText()
+                        this.send(Frame.Text("33"))
+                        for (wssession in wssessions) {
+                            wssession.send(Frame.Text("55"))
+                        }
+                        println("server received: " + text)
+                        outgoing.send(Frame.Text("33"))
+                        if (text.equals("bye", ignoreCase = true)) {
+                            close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
+                        }
+                    }
+                }
+            }
+
+
         }
     }
 }

@@ -19,6 +19,10 @@ class IdeaRepository {
         return ideas
     }
 
+    suspend fun receive(host: String, port: Int, callback: (String) -> Unit ) {
+        ideaApi.receive(host, port, callback)
+    }
+
     fun fetchIdeas(success: (List<IdeaModel>) -> Unit) {
         GlobalScope.launch(ApplicationDispatcher) {
             success(fetchIdeas())
