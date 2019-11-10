@@ -15,7 +15,8 @@ apply plugin: 'kotlin'
 apply plugin: 'war'
 apply plugin: 'com.google.cloud.tools.appengine'
 
-appengine.tools.cloudSdkHome="/Users/dmitri/Documents/appengine/google-cloud-sdk"
+//appengine.tools.cloudSdkHome="/Users/dmitri/Documents/appengine/google-cloud-sdk"
+appengine.tools.cloudSdkHome="C:/Program Files (x86)/Google/Cloud SDK/google-cloud-sdk"
 
 sourceSets {
     main.kotlin.srcDirs = [ 'src/main/kotlin' ]
