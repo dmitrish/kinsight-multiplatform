@@ -18,19 +18,13 @@ import io.ktor.client.request.get
 import io.ktor.client.request.url
 import java.io.*
 import java.text.DateFormat
-import java.time.LocalDate
 import io.ktor.gson.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.sessions.*
 import io.ktor.util.generateNonce
 import kotlinx.coroutines.channels.consumeEach
-import java.util.*
-
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.Month
-
+import java.lang.Exception
 
 
 data class Idea(val id: Int,
@@ -60,7 +54,8 @@ var ideas = mutableListOf<Idea>()
 var wssessions=  mutableListOf<WebSocketSession>()
 
 
-data class ChatSession(val id: String)
+data class ClientSession
+    (val id: String)
 /**
  * Entry Point of the application. This function is referenced in the
  * resources/application.conf file inside the ktor.application.modules.
@@ -97,13 +92,13 @@ fun Application.main() {
     }
 
     install(Sessions) {
-        cookie<ChatSession>("SESSION")
+        cookie<ClientSession>("SESSION")
     }
 
     // This adds an interceptor that will create a specific session in each request if no session is available already.
     intercept(ApplicationCallPipeline.Features) {
-        if (call.sessions.get<ChatSession>() == null) {
-            call.sessions.set(ChatSession(generateNonce()))
+        if (call.sessions.get<ClientSession>() == null) {
+            call.sessions.set(ClientSession(generateNonce()))
         }
     }
     //ideas.add(Idea(12, "GOOD US", 5.30))
@@ -120,9 +115,21 @@ fun Application.main() {
         }
     }
 
-
-
     // Registers routes
+    suspend fun sendReloadSignal() {
+        try {
+            for (wssession in wssessions) {
+                try {
+                    wssession.send(Frame.Text("reload"))
+                } catch (e: Throwable) {
+                    println("Exception in Hi: ${e.message}")
+                }
+            }
+        } catch (e: Throwable) {
+            println("Exception in outer Hi: ${e.message}")
+        }
+    }
+
     routing {
         // For the root / route, we respond with an Html.
         // The `respondHtml` extension method is available at the `ktor-html-builder` artifact.
@@ -157,9 +164,6 @@ fun Application.main() {
             var result = ""
 
             try {
-
-
-
                  result = client.get {
                     url(address.toString())
                 }
@@ -168,9 +172,7 @@ fun Application.main() {
                 call.respondText ( (if (t.message != null) t.message!! else ""), ContentType.Application.Json )
             }
 
-
             call.respondHtml { result }
-            //call.respondText(result, ContentType.Application.Json)
 
         }
         get("/api/data") {
@@ -275,51 +277,94 @@ fun Application.main() {
         }
 
         post("/api/hi"){
-            for (wssession in wssessions) {
-                wssession.send(Frame.Text("reload"))
-            }
+            sendReloadSignal()
+            call.respond(mapOf("OK" to true))
         }
 
         post("/api/postidea") {
             val post = call.receive<Idea>()
             ideas.add(post)
-            for (wssession in wssessions) {
-                wssession.send(Frame.Text("reload"))
-            }
+            sendReloadSignal()
             call.respond(mapOf("OK" to true))
         }
         post("/api/updateidea") {
             val post = call.receive<Idea>()
-            ideas.find { it.id == post.id }?.alpha = post.alpha
-            for (wssession in wssessions) {
-                wssession.send(Frame.Text("reload"))
-            }
+            var idea = ideas.find { it.id == post.id }
+            var index = ideas.indexOf(idea)
+            ideas[index] = post
+           sendReloadSignal()
             call.respond(mapOf("OK" to true))
         }
 
         webSocket("/ws") { // this: WebSocketSession ->
+            val wssession = this
 
-            wssessions.add(this)
+            println("ws route hit")
 
-            for (frame in incoming) {
+            incoming.consumeEach { frame ->
+                // Frames can be [Text], [Binary], [Ping], [Pong], [Close].
+                // We are only interested in textual messages, so we filter it.
+                if (frame is Frame.Text) {
 
-                when (frame) {
-                    is Frame.Text -> {
-                        val text = frame.readText()
-                        this.send(Frame.Text("33"))
+                    val text = frame.readText()
+                    println("server ws received frame with text: $text")
+
+                    if (text == "Android client connecting") {
+                       println ("session hashcode: " + wssession.hashCode())
+                        wssessions.add(wssession)
+                        this.send(Frame.Text("server acknowledged client connection"))
                         for (wssession in wssessions) {
-                            wssession.send(Frame.Text("55"))
+                            try {
+                                wssession.send(Frame.Text("server received this message from client: $text"))
+                            }
+                            catch(e: Throwable){
+                                println("Exception in ws channel: ${e.message}")
+                            }
                         }
+
                         println("server received: " + text)
-                        outgoing.send(Frame.Text("33"))
+
                         if (text.equals("bye", ignoreCase = true)) {
-                            close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
+                            close(
+                                CloseReason(
+                                    CloseReason.Codes.NORMAL,
+                                    "Client said BYE. Disconnecting..."
+                                )
+                            )
                         }
                     }
                 }
             }
 
+           /* for (frame in incoming) {
+                when (frame) {
+                    is Frame.Text -> {
 
+                        val text = frame.readText()
+                        //frame.
+                        if (text == "Android client connecting") {
+                            wssessions.add(this)
+                            this.send(Frame.Text("server acknowledged client connection"))
+                            for (wssession in wssessions) {
+                                wssession.send(Frame.Text("server received this message from client: $text"))
+                            }
+
+                            println("server received: " + text)
+
+                            if (text.equals("bye", ignoreCase = true)) {
+                                close(
+                                    CloseReason(
+                                        CloseReason.Codes.NORMAL,
+                                        "Client said BYE. Disconnecting..."
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            */
         }
     }
 }
