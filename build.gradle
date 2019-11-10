@@ -16,7 +16,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.reflections:reflections:0.9.11'
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"

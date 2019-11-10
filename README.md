@@ -30,4 +30,20 @@ To run the fatjar build, first build with this build task:
 Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
 
 
+GOOGLE APP ENGINE and DOCKER - COMMANDS
 
+gcloud projects create kinsight-multiplatform
+gcloud app create
+gcloud config set project kinsight-multiplatform
+
+docker build -t server-all .
+
+docker run -m512M --cpus 1 --expose 8081 -p 8081:8081 -p 8080:8080 -it server-all
+
+docker images
+
+docker ps
+
+docker stop instance_id
+
+docker rmi image_name
