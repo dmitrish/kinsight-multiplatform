@@ -2,21 +2,29 @@ package com.kinsight.kinsightmultiplatform.ViewModels
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import com.kinsight.kinsightmultiplatform.api.WsClient
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class IdeasViewModel (application: Application, userName: String) : AndroidViewModel(application) {
-
-    //private val  wsClient by lazy { WsClient("ws://10.0.2.2:8081/ws")}
+class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
+    //private val serverApiUrl =  "http://$SERVER_URL_LOCAL_BASE_FOR_EMULATOR:$PORT/api/ideas"
     //region private area
-    private val ideaRep by lazy { IdeaRepository() }
+    private val serverApiUrl =  "http://10.0.2.2:8081"
+
+    private var isSubscribedToLiveUpdates: Boolean = false
+
+    private val ideaRep by lazy { IdeaRepository(serverApiUrl) }
 
     private val ideas: MutableLiveData<List<IdeaModel>> by lazy {
         MutableLiveData<List<IdeaModel>>().also {
-           loadIdeas("ideaCreator")
+           loadIdeas(userName, !isSubscribedToLiveUpdates)
         }
     }
 
@@ -27,23 +35,32 @@ class IdeasViewModel (application: Application, userName: String) : AndroidViewM
         }
     }
 
-    private fun loadIdeas(createdBy: String?) {
+    private fun loadIdeas(createdBy: String?, subsribeToLiveUpdates: Boolean) {
         viewModelScope.launch(){
-
-            var ideasTemp : List<IdeaModel>? = null
-           // for (x in 1..400) {
-            withContext(Dispatchers.IO) {
-                ideasTemp = ideaRep.fetchIdeas()
+            doLoadIdeas()
+            if (subsribeToLiveUpdates) {
+                subscribeToLiveUpdates()
             }
-            ideas.value = ideasTemp
+        }
+    }
 
-            withContext(Dispatchers.IO) {
-                ideaRep.receive("10.0.2.2", 8081) {
-                    println("android app received from server: $it")
-                    if (it == "reload") {
-                        loadIdeas("s")
-                    }
+    private suspend fun doLoadIdeas() {
+        var ideasTemp: List<IdeaModel>? = null
+
+        withContext(Dispatchers.IO) {
+            ideasTemp = ideaRep.fetchIdeas()
+        }
+        ideas.value = ideasTemp
+    }
+
+    private suspend fun subscribeToLiveUpdates() {
+        withContext(Dispatchers.IO) {
+            ideaRep.receive("10.0.2.2", 8081) {
+                println("android app received from server: $it")
+                if (it == "reload") {
+                    loadIdeas()
                 }
+                isSubscribedToLiveUpdates = true
             }
         }
     }

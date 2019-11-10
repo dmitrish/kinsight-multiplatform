@@ -5,4 +5,8 @@
     <string name="title_activity_idea_detail">IdeaDetailActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="SERVER_URL_LOCAL_BASE_FOR_EMULATOR">10.0.0.2</string>
+    <string name="SERVER_URL_REMOTE_BASE">https://alphacapture.appspot.com</string>
+    <string name="PORT">8081</string>
 </resources>
