@@ -10,7 +10,7 @@ import SwiftUI
 import SharedCode
 
 struct HomeViewList: View {
-    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "http://alphacapture.appspot.com"))
+    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "https://alphacapture.appspot.com"))
     
     var body: some View {
        
