@@ -9,14 +9,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class IdeaRepository {
+class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
 
-    private val ideaApi = IdeaApi()
+    private val ideaApi = IdeaApi(baseUrl)
 
 
     suspend fun fetchIdeas(): List<IdeaModel> {
         val ideas = ideaApi.fetchIdeas()
         return ideas
+    }
+
+    suspend fun receive(host: String, port: Int, onReceive: (String) -> Unit ) {
+        ideaApi.receive(host, port, onReceive)
     }
 
     fun fetchIdeas(success: (List<IdeaModel>) -> Unit) {

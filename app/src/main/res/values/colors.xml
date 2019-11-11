@@ -9,4 +9,8 @@
     <color name="colorGradientStart">#0000FF</color>
     <color name="colorGradientCenter">#800080</color>
     <color name="colorGradientEnd">#ffa500</color>
+
+    <color name="colorViewBackground">#3F3F3F</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

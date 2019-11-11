@@ -7,8 +7,10 @@ import kotlinx.serialization.*
     val id: Int,
     @SerialName("securityName")
     val securityName: String,
+    @SerialName("securityTicker")
+    val securityTicker: String,
     @SerialName("alpha")
-    val alpha: Double,
+    var alpha: Double,
     @SerialName("benchMarkTicker")
     var benchMarkTicker: String,
    // @SerialName("benchMarkTickerDesk")

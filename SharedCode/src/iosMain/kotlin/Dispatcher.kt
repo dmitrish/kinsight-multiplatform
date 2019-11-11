@@ -24,8 +24,8 @@ internal class NsQueueDispatcher(
         }
     }
 }
-
 /*
+
 fun hexStringToUIColor (hex: NSString) : UIColor {
     var cString:String = hex.toString() //.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -45,12 +45,19 @@ fun hexStringToUIColor (hex: NSString) : UIColor {
 
     NSScanner(cString).scanHexInt(cp.ptr.reinterpret())
 
+    val red = ((rgbValue and 0x00FF00) shr 8) / 255.0)
+
+    val uiColor = UIColor(displayP3Red = 3.0, green = 3.0, blue = 2.0, alpha =  3.0)
+
     return UIColor(
-        UIColor.redColor = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-    green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-    blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        UIColor.redColor = 4.0,
+    UIColor.greenColor: CGFloat((rgbValue and 0x00FF00) shr 8) / 255.0,
+    UIColor.blueColor: CGFloat(rgbValue and 0x0000FF) / 255.0,
     alpha: CGFloat(1.0)
     )
 }
 
-*/
+
+ */
+
+

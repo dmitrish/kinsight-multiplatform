@@ -19,6 +19,7 @@ class IdeaSample {
         = IdeaModel(
             id: 1,
             securityName: "MSFT",
+            securityTicker: "MSFT",
             alpha: 2.3,
             benchMarkTicker: "SPX",
             benchMarkCurrentPrice:

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="7dp"
+    android:background="@color/colorViewBackground"
+
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ideasRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+        tools:itemcount="5"
+        tools:listitem="@layout/idea_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
