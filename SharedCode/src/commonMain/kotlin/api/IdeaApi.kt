@@ -2,6 +2,7 @@ package com.kinsight.kinsightmultiplatform.api
 
 
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.models.TickerModel
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -26,7 +27,7 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(Json(JsonConfiguration(strictMode = false))).apply {
                     setMapper(IdeaModel::class, IdeaModel.serializer())
-
+                    setMapper(TickerModel::class, TickerModel.serializer())
                 }
             }
         }
@@ -84,6 +85,13 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
             url("$baseUrl/api/ideas")
         }
         return Json.nonstrict.parse(IdeaModel.serializer().list, jsonArrayString)
+    }
+
+    suspend fun fetchTickers(tickerFilter: String): List<TickerModel> {
+        val jsonArrayString = client.get<String> {
+            url("$baseUrl/api/ticker/$tickerFilter")
+        }
+        return Json.nonstrict.parse(TickerModel.serializer().list, jsonArrayString)
     }
 
     suspend fun fetchIdea(id: Int): IdeaModel {

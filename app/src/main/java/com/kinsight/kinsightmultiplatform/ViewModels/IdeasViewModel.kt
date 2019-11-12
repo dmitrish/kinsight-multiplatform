@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
     //private val serverApiUrl =  "http://$SERVER_URL_LOCAL_BASE_FOR_EMULATOR:$PORT/api/ideas"
     //region private area
-    private val serverApiUrl =  "http://10.0.2.2:8081"
+    private val serverApiUrl =  "https://alphacapture.appspot.com"
 
     private var isSubscribedToLiveUpdates: Boolean = false
 
@@ -51,6 +51,12 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             ideasTemp = ideaRep.fetchIdeas()
         }
         ideas.value = ideasTemp
+
+        ///this is temp, just to test ticker search
+        withContext(Dispatchers.IO){
+            val tickers = ideaRep.fetchTickers("AB")
+            println("tickers: $tickers")
+        }
     }
 
     private suspend fun subscribeToLiveUpdates() {

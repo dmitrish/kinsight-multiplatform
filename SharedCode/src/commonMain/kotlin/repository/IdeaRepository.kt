@@ -4,6 +4,7 @@ package com.kinsight.kinsightmultiplatform.repository
 import com.kinsight.kinsightmultiplatform.ApplicationDispatcher
 import com.kinsight.kinsightmultiplatform.api.IdeaApi
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.models.TickerModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,6 +27,17 @@ class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
     fun fetchIdeas(success: (List<IdeaModel>) -> Unit) {
         GlobalScope.launch(ApplicationDispatcher) {
             success(fetchIdeas())
+        }
+    }
+
+    suspend fun fetchTickers(tickerFilter: String): List<TickerModel> {
+        val tickers = ideaApi.fetchTickers(tickerFilter)
+        return tickers
+    }
+
+    fun fetchTickers(tickerFilter: String, success: (List<TickerModel>) -> Unit) {
+        GlobalScope.launch(ApplicationDispatcher) {
+            success(fetchTickers(tickerFilter))
         }
     }
 
