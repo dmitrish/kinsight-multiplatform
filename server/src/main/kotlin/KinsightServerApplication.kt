@@ -87,7 +87,7 @@ var ideas = mutableListOf<Idea>()
 var wssessions=  mutableListOf<WebSocketSession>()
 var tickers = mutableListOf<Ticker>()
 
-val iexToken = "use_your_own"
+val iexToken = "useyourown"
 
 data class ClientSession
     (val id: String)
