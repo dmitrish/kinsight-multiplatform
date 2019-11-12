@@ -10,6 +10,8 @@ import io.ktor.response.respondText
 import io.ktor.routing.*
 import kotlinx.html.*
 import io.ktor.client.*
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.http.cio.websocket.*
 import io.ktor.http.cio.websocket.CloseReason
 import io.ktor.http.cio.websocket.Frame
@@ -24,8 +26,39 @@ import io.ktor.response.respond
 import io.ktor.sessions.*
 import io.ktor.util.generateNonce
 import kotlinx.coroutines.channels.consumeEach
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.list
 import java.lang.Exception
+import com.google.appengine.api.urlfetch.*
+import com.google.appengine.api.urlfetch.URLFetchServiceFactory
+import com.google.appengine.api.urlfetch.HTTPResponse
+import com.google.appengine.api.urlfetch.HTTPMethod
+import com.google.appengine.api.urlfetch.HTTPRequest
+import java.net.URL
+import java.net.URLEncoder
+import java.util.*
 
+
+//import google.a
+
+@Serializable data class Ticker (
+    @SerialName("symbol")
+    val symbol: String,
+    @SerialName("exchange")
+                   val exchange: String,
+    @SerialName("name")
+                   val name: String,
+    @SerialName("type")
+                   val type: String,
+    @SerialName("region")
+                   val region: String,
+    @SerialName("currency")
+                   val currency: String,
+    @SerialName("isEnabled")
+                   val isEnabled: Boolean)
 
 data class Idea(val id: Int,
                 val absolutePerformance: Double,
@@ -52,10 +85,23 @@ data class Idea(val id: Int,
 
 var ideas = mutableListOf<Idea>()
 var wssessions=  mutableListOf<WebSocketSession>()
+var tickers = mutableListOf<Ticker>()
 
+val iexToken = "use_your_own"
 
 data class ClientSession
     (val id: String)
+
+private val clientOutgoing by lazy {
+    HttpClient() {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(Json(JsonConfiguration(strictMode = false))).apply {
+                setMapper(Ticker::class, Ticker.serializer())
+
+            }
+        }
+    }
+}
 /**
  * Entry Point of the application. This function is referenced in the
  * resources/application.conf file inside the ktor.application.modules.
@@ -158,21 +204,53 @@ fun Application.main() {
                 call.respondText(html, ContentType.Text.Html)
 
         }
-        get("/api/remotedata"){
-            val client = HttpClient()
-            val  address = Url("http://google.com")
-            var result = ""
 
-            try {
-                 result = client.get {
-                    url(address.toString())
+        get("/api/ticker/{ticker}"){
+            val filter =  call.parameters["ticker"]!!.toUpperCase(Locale.ROOT)
+            val filtered = tickers.filter { it.symbol.startsWith(filter) }
+            call.respond(filtered)
+        }
+
+        get ("/appengine/loadtickers"){
+            if (tickers == null || tickers.count() == 0) {
+                var urlString = "https://cloud.iexapis.com/stable/ref-data/symbols?token=$iexToken"
+                val url = URL(urlString)
+                val response = URLFetchServiceFactory.getURLFetchService().fetch(url)
+                val text = String(response.content)
+                println(text)
+                tickers = Json.nonstrict.parse(Ticker.serializer().list, text).toMutableList()
+            }
+            call.respond(tickers)
+        }
+
+        get("/api/loadtickers"){
+
+            if (tickers == null || tickers.count() == 0) {
+                val client = HttpClient()
+                val address =
+                    Url("https://cloud.iexapis.com/stable/ref-data/symbols?token=$iexToken")
+                var result = ""
+                var finalResult: List<Ticker>? = null
+
+                try {
+                    result = client.get<String> {
+                        url(address.toString())
+
+                    }
+                    println(result)
+                    tickers =  Json.nonstrict.parse(Ticker.serializer().list, result).toMutableList()
+                } catch (t: Throwable) {
+                    call.respondText(
+                        (if (t.message != null) t.message!! else ""),
+                        ContentType.Application.Json
+                    )
                 }
             }
-            catch(t: Throwable){
-                call.respondText ( (if (t.message != null) t.message!! else ""), ContentType.Application.Json )
+            else{
+
             }
 
-            call.respondHtml { result }
+            call.respond(tickers)
 
         }
         get("/api/data") {
