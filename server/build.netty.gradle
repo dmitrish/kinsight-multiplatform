@@ -1,4 +1,9 @@
 buildscript {
+    /*
+    we dont use them here, but need to load urlfetch imports so that the project builds
+     */
+    ext.appengine_version = '1.9.60'
+    ext.appengine_plugin_version = '1.3.4'
     repositories {
         jcenter()
     }
@@ -31,6 +36,7 @@ dependencies {
     compile "com.google.cloud:google-cloud-logging-logback:$gce_logback_version"
     compile "io.ktor:ktor-client-apache:$ktor_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
+    compile "com.google.appengine:appengine-api-1.0-sdk:$appengine_version"
 
 }
 
