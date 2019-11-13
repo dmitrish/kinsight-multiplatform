@@ -31,18 +31,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.list
-import java.lang.Exception
-import com.google.appengine.api.urlfetch.*
 import com.google.appengine.api.urlfetch.URLFetchServiceFactory
-import com.google.appengine.api.urlfetch.HTTPResponse
-import com.google.appengine.api.urlfetch.HTTPMethod
-import com.google.appengine.api.urlfetch.HTTPRequest
 import java.net.URL
-import java.net.URLEncoder
 import java.util.*
 
 
-//import google.a
 
 @Serializable data class Ticker (
     @SerialName("symbol")
@@ -60,32 +53,55 @@ import java.util.*
     @SerialName("isEnabled")
                    val isEnabled: Boolean)
 
-data class Idea(val id: Int,
-                val absolutePerformance: Double,
-                var alpha: Double,
-                val benchMarkTicker: String = "SPX",
-                val benchMarkTickerDesk: String = "S&P 500 Index",
-                val benchMarkCurrentPrice: Double,
-                val benchMarkPerformance: Double,
-                val convictionId: Int,
-                val currentPrice: Double,
-                val direction: String,
-                val directionId: Int,
-                val entryPrice: Double,
-                val reason: String,
-                val securityName: String,
-                val securityTicker: String,
-                val stockCurrency: String,
-                val stopLoss:Int,
-                val stopLossValue: Double,
-                val targetPrice: Double,
-                val targetPricePercentage: Double,
-                val timeHorizon: String,
-                val createdBy: String)
+@Serializable data class Idea(val id: Int,
+                              @SerialName("absolutePerformance")
+                              val absolutePerformance: Double,
+                              @SerialName("alpha")
+                              var alpha: Double,
+                              @SerialName("benchMarkTicker")
+                              val benchMarkTicker: String = "SPX",
+                              @SerialName("benchMarkTickerDesk")
+                              val benchMarkTickerDesk: String = "S&P 500 Index",
+                              @SerialName("benchMarkCurrentPrice")
+                              val benchMarkCurrentPrice: Double,
+                              @SerialName("benchMarkPerformance")
+                              val benchMarkPerformance: Double,
+                              @SerialName("convictionId")
+                              val convictionId: Int,
+                              @SerialName("currentPrice")
+                              val currentPrice: Double,
+                              @SerialName("direction")
+                              val direction: String,
+                              @SerialName("directionId")
+                              val directionId: Int,
+                              @SerialName("entryPrice")
+                              val entryPrice: Double,
+                              @SerialName("reason")
+                              val reason: String,
+                              @SerialName("securityName")
+                              val securityName: String,
+                              @SerialName("securityTicker")
+                              val securityTicker: String,
+                              @SerialName("stockCurrency")
+                              val stockCurrency: String,
+                              @SerialName("stopLoss")
+                              val stopLoss:Int,
+                              @SerialName("stopLossValue")
+                              val stopLossValue: Double,
+                              @SerialName("targetPrice")
+                              val targetPrice: Double,
+                              @SerialName("targetPricePercentage")
+                              val targetPricePercentage: Double,
+                              @SerialName("timeHorizon")
+                              val timeHorizon: String,
+                              @SerialName("createdBy")
+                              val createdBy: String)
 
 var ideas = mutableListOf<Idea>()
 var wssessions=  mutableListOf<WebSocketSession>()
 var tickers = mutableListOf<Ticker>()
+
+val iexUrl = "https://cloud.iexapis.com/stable/ref-data/symbols?token="
 
 val iexToken = "useyourown"
 
@@ -131,6 +147,16 @@ fun Application.main() {
         targetPricePercentage = 0.00,
         timeHorizon = "1 Week",
         createdBy = "Dmitri"))
+
+
+    try {
+        val fileIdeasText = File("WEB-INF/ideas.json").readText()
+        val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
+        ideas.addAll(fileIdeas)
+    }
+    catch(e: Throwable){
+        println("exception loading ideas file: ${e.message} ${e.stackTrace}")
+    }
 
 
     install(WebSockets) {
@@ -199,10 +225,8 @@ fun Application.main() {
         }
 
         get ("/api/1"){
-            val html = File("files/index.html").readText()
-
-                call.respondText(html, ContentType.Text.Html)
-
+            val json = File("WEB-INF/ideas.json").readText()
+                call.respondText(json,  ContentType.Application.Json)
         }
 
         get("/api/ticker/{ticker}"){
@@ -213,7 +237,7 @@ fun Application.main() {
 
         get ("/appengine/loadtickers"){
             if (tickers == null || tickers.count() == 0) {
-                var urlString = "https://cloud.iexapis.com/stable/ref-data/symbols?token=$iexToken"
+                val urlString = "$iexUrl$iexToken"
                 val url = URL(urlString)
                 val response = URLFetchServiceFactory.getURLFetchService().fetch(url)
                 val text = String(response.content)
@@ -227,15 +251,13 @@ fun Application.main() {
 
             if (tickers == null || tickers.count() == 0) {
                 val client = HttpClient()
-                val address =
-                    Url("https://cloud.iexapis.com/stable/ref-data/symbols?token=$iexToken")
+                val address =    Url("$iexUrl$iexToken")
                 var result = ""
                 var finalResult: List<Ticker>? = null
 
                 try {
                     result = client.get<String> {
                         url(address.toString())
-
                     }
                     println(result)
                     tickers =  Json.nonstrict.parse(Ticker.serializer().list, result).toMutableList()
@@ -246,112 +268,9 @@ fun Application.main() {
                     )
                 }
             }
-            else{
-
-            }
 
             call.respond(tickers)
 
-        }
-        get("/api/data") {
-            call.response.header("Access-Control-Allow-Origin", "*")
-            call.respondText(
-                "[\n" +
-                        "    {\n" +
-                        "        \"id\": 12386,\n" +
-                        "        \"ticker\": \"BA US\",\n" +
-                        "        \"alpha\": 3.0192,\n" +
-                        "        \"benchMarkTicker\": \"SPX\",\n" +
-                        "        \"absolutePerformance\": 3.4212,\n" +
-                        "        \"benchMarkTickerDesc\": \"S&P 500 Index\",\n" +
-                        "        \"benchMarkCurrentPrice\": 2856.6600,\n" +
-                        "        \"benchMarkPerformance\": 0.3929,\n" +
-                        "        \"convictionId\": 3,\n" +
-                        "        \"currentPrice\": 360.2000,\n" +
-                        "        \"direction\": \"Long\",\n" +
-                        "        \"directionId\": 1,\n" +
-                        "        \"entryPrice\": 348.3150,\n" +
-                        "        \"reason\": \"Target Price\",\n" +
-                        "        \"securityName\": \"Boeing\",\n" +
-                        "        \"stockCurrency\": \"USD\",\n" +
-                        "        \"stopLoss\": 10.0000,\n" +
-                        "        \"stopLossValue\": 313.4835,\n" +
-                        "        \"targetPrice\": 360.000,\n" +
-                        "        \"targetPricePercentage\": 0.0000,\n" +
-                        "        \"timeHorizon\" : \"1 week\"\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "        \"id\": 50001928,\n" +
-                        "        \"ticker\": \"BA US\",\n" +
-                        "        \"alpha\": 2.544,\n" +
-                        "        \"benchMarkTicker\": \"SPX\",\n" +
-                        "        \"absolutePerformance\": 1.8837,\n" +
-                        "        \"benchMarkTickerDesc\": \"S&P 500 Index\",\n" +
-                        "        \"benchMarkCurrentPrice\": 2838.5200,\n" +
-                        "        \"benchMarkPerformance\": -0.6607,\n" +
-                        "        \"convictionId\": 3,\n" +
-                        "        \"currentPrice\": 80.0500,\n" +
-                        "        \"direction\": \"Long\",\n" +
-                        "        \"directionId\": 1,\n" +
-                        "        \"entryPrice\": 78.5700,\n" +
-                        "        \"reason\": \"Target Price\",\n" +
-                        "        \"securityName\": \"Target Corp.\",\n" +
-                        "        \"stockCurrency\": \"USD\",\n" +
-                        "        \"stopLoss\": 5.0000,\n" +
-                        "        \"stopLossValue\": 74.6415,\n" +
-                        "        \"targetPrice\": 80.000,\n" +
-                        "        \"targetPricePercentage\": 0.0000,\n" +
-                        "        \"timeHorizon\" : \"1 Month\"\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "        \"id\": 50002278,\n" +
-                        "        \"ticker\": \"ROKU US\",\n" +
-                        "        \"alpha\": 2.6737,\n" +
-                        "        \"benchMarkTicker\": \"SPX\",\n" +
-                        "        \"absolutePerformance\": 3.0274,\n" +
-                        "        \"benchMarkTickerDesc\": \"S&P 500 Index\",\n" +
-                        "        \"benchMarkCurrentPrice\": 2909.3500,\n" +
-                        "        \"benchMarkPerformance\": 0.3537,\n" +
-                        "        \"convictionId\": 2,\n" +
-                        "        \"currentPrice\": 130.0000,\n" +
-                        "        \"direction\": \"Long\",\n" +
-                        "        \"directionId\": 1,\n" +
-                        "        \"entryPrice\": 78.5700,\n" +
-                        "        \"reason\": \"Target Price\",\n" +
-                        "        \"securityName\": \"Target Corp.\",\n" +
-                        "        \"stockCurrency\": \"USD\",\n" +
-                        "        \"stopLoss\": 5.0000,\n" +
-                        "        \"stopLossValue\": 119.8710,\n" +
-                        "        \"targetPrice\": 130.000,\n" +
-                        "        \"targetPricePercentage\": 0.0000,\n" +
-                        "        \"timeHorizon\" : \"1 Month\"\n" +
-                        "    },\n" +
-                        "    \n" +
-                        "    {\n" +
-                        "        \"id\": 500001841,\n" +
-                        "        \"ticker\": \"KR US\",\n" +
-                        "        \"alpha\": 12.2780,\n" +
-                        "        \"benchMarkTicker\": \"SPX\",\n" +
-                        "        \"absolutePerformance\": -0.3712,\n" +
-                        "        \"benchMarkTickerDesc\": \"S&P 500 Index\",\n" +
-                        "        \"benchMarkCurrentPrice\": 2944.6300,\n" +
-                        "        \"benchMarkPerformance\": -2.5861,\n" +
-                        "        \"convictionId\": 3,\n" +
-                        "        \"currentPrice\": 21.9900,\n" +
-                        "        \"direction\":\"Short\",\n" +
-                        "        \"directionId\":3,\n" +
-                        "        \"entryPrice\": 24.3500,\n" +
-                        "        \"reason\": \"Target Price\",\n" +
-                        "        \"securityName\": \"The Kroger Cо.\",\n" +
-                        "        \"stockCurrency\": \"USD\",\n" +
-                        "        \"stopLoss\": 5.0000,\n" +
-                        "        \"stopLossValue\": 25.5675,\n" +
-                        "        \"targetPrice\": 22.000,\n" +
-                        "        \"targetPricePercentage\":0.0000,\n" +
-                        "        \"timeHorizon\": \"1 Month\"\n" +
-                        "    }\n" +
-                        "]",
-                ContentType.Application.Json)
         }
 
         post("/api/hi"){
@@ -370,7 +289,16 @@ fun Application.main() {
             var idea = ideas.find { it.id == post.id }
             var index = ideas.indexOf(idea)
             ideas[index] = post
-           sendReloadSignal()
+            sendReloadSignal()
+            call.respond(mapOf("OK" to true))
+        }
+
+        post("/api/deleteidea") {
+            val post = call.receive<Idea>()
+            var idea = ideas.find { it.id == post.id }
+            var index = ideas.indexOf(idea)
+            ideas.removeAt(index)
+            sendReloadSignal()
             call.respond(mapOf("OK" to true))
         }
 
@@ -413,36 +341,6 @@ fun Application.main() {
                     }
                 }
             }
-
-           /* for (frame in incoming) {
-                when (frame) {
-                    is Frame.Text -> {
-
-                        val text = frame.readText()
-                        //frame.
-                        if (text == "Android client connecting") {
-                            wssessions.add(this)
-                            this.send(Frame.Text("server acknowledged client connection"))
-                            for (wssession in wssessions) {
-                                wssession.send(Frame.Text("server received this message from client: $text"))
-                            }
-
-                            println("server received: " + text)
-
-                            if (text.equals("bye", ignoreCase = true)) {
-                                close(
-                                    CloseReason(
-                                        CloseReason.Codes.NORMAL,
-                                        "Client said BYE. Disconnecting..."
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
-            */
         }
     }
 }
