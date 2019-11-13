@@ -14,6 +14,7 @@ buildscript {
 apply plugin: 'kotlin'
 apply plugin: 'war'
 apply plugin: 'com.google.cloud.tools.appengine'
+apply plugin: 'kotlinx-serialization'
 
 //appengine.tools.cloudSdkHome="/Users/dmitri/Documents/appengine/google-cloud-sdk"
 appengine.tools.cloudSdkHome="C:/Program Files (x86)/Google/Cloud SDK/google-cloud-sdk"
@@ -34,8 +35,13 @@ dependencies {
     compile "io.ktor:ktor-websockets:$ktor_version"
     compile "io.ktor:ktor-gson:$ktor_version"
     compile "com.google.cloud:google-cloud-logging-logback:$gce_logback_version"
+    compile "com.google.appengine:appengine-api-1.0-sdk:$appengine_version"
     compile "io.ktor:ktor-client-apache:$ktor_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+    implementation ("io.ktor:ktor-client-serialization-jvm:1.2.4")
+    implementation ("io.ktor:ktor-client-core-jvm:1.2.4")
+    implementation ("io.ktor:ktor-client-json-jvm:1.2.4")
    providedCompile "com.google.appengine:appengine:$appengine_version"
 }
 

@@ -1,4 +1,9 @@
 buildscript {
+    /*
+    we dont use them here, but need to load urlfetch imports so that the project builds
+     */
+    ext.appengine_version = '1.9.60'
+    ext.appengine_plugin_version = '1.3.4'
     repositories {
         jcenter()
     }
@@ -11,6 +16,7 @@ buildscript {
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'kotlin'
 apply plugin: 'application'
+apply plugin: 'kotlinx-serialization'
 
 
 mainClassName = 'io.ktor.server.netty.EngineMain'
@@ -34,6 +40,17 @@ dependencies {
     compile "com.google.cloud:google-cloud-logging-logback:$gce_logback_version"
     compile "io.ktor:ktor-client-apache:$ktor_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
+    compile "com.google.appengine:appengine-api-1.0-sdk:$appengine_version"
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
+
+
+
+    implementation ("io.ktor:ktor-client-serialization-jvm:1.2.4")
+
+    implementation ("io.ktor:ktor-client-core-jvm:1.2.4")
+
+    implementation ("io.ktor:ktor-client-json-jvm:1.2.4")
 
 }
 
