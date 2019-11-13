@@ -31,19 +31,35 @@ Then navigate to the libs folder in the terminal and execute: libs % java -jar s
 
 
 GOOGLE APP ENGINE and DOCKER - COMMANDS
+---------------------------------------
 
-gcloud projects create kinsight-multiplatform
-gcloud app create
-gcloud config set project kinsight-multiplatform
+Prerequisite install Google Cloud SDK and Docker(optional)
 
-docker build -t server-all .
+Create Google Project:
+1. gcloud init
+2. gcloud projects create kinsight-multiplatform
+3. gcloud app create
+4. gcloud config set project kinsight-multiplatform
+5. gcloud auth configure-docker
 
-docker run -m512M --cpus 1 --expose 8081 -p 8081:8081 -p 8080:8080 -it server-all
+Create Docker Image and Run:
 
-docker images
+1. Navigate to \server folder
+2. docker build -t server-all .
+3. docker run -m512M --cpus 1 --expose 8081 -p 8081:8081 -it server-all
 
-docker ps
+Other Docker Commands:
+    docker images
+    docker ps
+    docker stop instance_id
+    docker rmi image_name
 
-docker stop instance_id
+Uploading Docker Image to Google Cloud Registry:
 
-docker rmi image_name
+1. Add Tag to Image (V3 is the tag here)
+    docker tag quickstart-image gcr.io/project-kinsight/server-all-image:V3
+2. Push Image to cloud registry
+    docker push gcr.io/project-kinsight/server-all-image:V3
+
+Next follow below to deploy Docker image into Google Kubernetes Engine:
+https://cloud.google.com/kubernetes-engine/docs/quickstart
