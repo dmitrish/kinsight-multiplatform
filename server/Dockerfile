@@ -1,5 +1,6 @@
 # We select the base image from. Locally available or from https://hub.docker.com/
-FROM openjdk:8-jre-alpine
+#FROM openjdk:8-jre-alpine
+FROM koosiedemoer/netty-tcnative-alpine
 
 # We define the user we will use in this instance to prevent using root that even in a container, can be a security risk.
 ENV APPLICATION_USER ktor
