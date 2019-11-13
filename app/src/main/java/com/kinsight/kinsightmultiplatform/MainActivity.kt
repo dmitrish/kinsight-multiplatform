@@ -3,17 +3,13 @@ package com.kinsight.kinsightmultiplatform
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kinsight.kinsightmultiplatform.ViewModels.IdeaViewModelFactory
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.views.FullScreenActivity
 import com.kinsight.kinsightmultiplatform.views.OnItemClickListener
 import com.kinsight.kinsightmultiplatform.views.RecyclerAdapter
@@ -37,7 +33,9 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
         val intent = Intent(this, IdeaDetailActivity::class.java)
         intent.putExtra("idea", idea.securityName)
-        startActivity(intent)
+        //startActivity(intent)
+
+
 
     }
 
@@ -46,6 +44,8 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         setContentView(R.layout.ideas_layout)
         initRecyclerView()
         initViewModelListener()
+        NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
+
     }
 
     private fun initViewModelListener() {
