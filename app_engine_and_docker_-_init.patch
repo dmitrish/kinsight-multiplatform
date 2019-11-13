@@ -1,0 +1,65 @@
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- settings.gradle	(revision 151e0ad40462e95addf033ce4ad31d6c96b211c5)
++++ settings.gradle	(date 1573346677481)
+@@ -6,9 +6,9 @@
+ // 1. google app engine - use standard build.gradle
+ // 2. netty - use build.netty.gradle
+ // 3. netty with fatjar - use build.fatjar.gradle
+-project(':server').buildFileName = 'build.gradle'
++//project(':server').buildFileName = 'build.gradle'
+ //project(':server').buildFileName = 'build.netty.gradle'
+-//project(':server').buildFileName ='build.fatjar.gradle'
++project(':server').buildFileName ='build.fatjar.gradle'
+ 
+ 
+ enableFeaturePreview('GRADLE_METADATA')
+\ No newline at end of file
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- README.md	(revision 151e0ad40462e95addf033ce4ad31d6c96b211c5)
++++ README.md	(date 1573363769824)
+@@ -30,4 +30,20 @@
+ Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
+ 
+ 
++GOOGLE APP ENGINE and DOCKER - COMMANDS
++
++gcloud projects create kinsight-multiplatform
++gcloud app create
++gcloud config set project kinsight-multiplatform
++
++docker build -t server-all .
++
++docker run -m512M --cpus 1 --expose 8081 -p 8081:8081 -p 8080:8080 -it server-all
++
++docker images
++
++docker ps
++
++docker stop instance_id
+ 
++docker rmi image_name
+\ No newline at end of file
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(revision 151e0ad40462e95addf033ce4ad31d6c96b211c5)
++++ build.gradle	(date 1573346744245)
+@@ -16,7 +16,7 @@
+     }
+     dependencies {
+         classpath 'org.reflections:reflections:0.9.11'
+-        classpath 'com.android.tools.build:gradle:3.4.2'
++        classpath 'com.android.tools.build:gradle:3.5.2'
+         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+ 
+         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"

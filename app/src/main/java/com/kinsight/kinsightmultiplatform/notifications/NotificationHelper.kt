@@ -56,7 +56,7 @@ object NotificationHelper {
 
         val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(R.drawable.ic_menu_share)
+            //setSmallIcon(R.drawable.ic_menu_share)
             setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
                     R.mipmap.ic_launcher))
             setContentTitle(title)
