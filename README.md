@@ -5,7 +5,11 @@
 
 ![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/Screen%20Shot%202019-11-07%20at%209.06.33%20PM.png)
 
+
 ![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideassidebyside.png)
+
+
+![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaperformance.png)
 
 Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
 ![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settingsgradle.png)
