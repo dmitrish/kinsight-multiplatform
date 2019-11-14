@@ -118,6 +118,22 @@ private val clientOutgoing by lazy {
         }
     }
 }
+
+fun loadEmbeddedJsonIdeas(){
+
+    try{
+        println("trying to read embedded ideas json...")
+        val i = Application::class.java.getResourceAsStream("/ideas.json")
+        val fileIdeasText = BufferedReader(InputStreamReader(i)).readText()
+        val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
+        ideas.addAll(fileIdeas)
+        println("reader: $fileIdeasText")
+
+    }
+    catch(e: Throwable){
+        println("failed loading embedded ideas json: " + e.message)
+    }
+}
 /**
  * Entry Point of the application. This function is referenced in the
  * resources/application.conf file inside the ktor.application.modules.
@@ -125,6 +141,8 @@ private val clientOutgoing by lazy {
  * For more information about this file: https://ktor.io/servers/configuration.html#hocon-file
  */
 fun Application.main() {
+
+    loadEmbeddedJsonIdeas()
 
     ideas.add(Idea(11,
         absolutePerformance = 3.4212,

@@ -49,7 +49,7 @@ kotlin {
         // Serialize
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
 
-        implementation ("io.ktor:ktor-client-core:1.2.5")
+        implementation ("io.ktor:ktor-client-core:1.2.4")
 
         implementation ("io.ktor:ktor-client-json:1.2.4")
         implementation ("io.ktor:ktor-client-logging:1.2.4")
