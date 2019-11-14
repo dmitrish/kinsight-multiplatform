@@ -1,7 +1,9 @@
 package com.kinsight.kinsightmultiplatform.api
 
 
+import com.kinsight.kinsightmultiplatform.models.GraphModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.models.TickModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
@@ -28,6 +30,8 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
                 serializer = KotlinxSerializer(Json(JsonConfiguration(strictMode = false))).apply {
                     setMapper(IdeaModel::class, IdeaModel.serializer())
                     setMapper(TickerModel::class, TickerModel.serializer())
+                    setMapper(TickModel::class, TickModel.serializer())
+                    setMapper(GraphModel::class, GraphModel.serializer())
                 }
             }
         }
@@ -101,5 +105,10 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
         return Json.nonstrict.parse(IdeaModel.serializer(), jsonString)
     }
 
-
+    suspend fun fetchGraph(id: Int): GraphModel {
+        val jsonString = client.get<String> {
+            url("$baseUrl/api/graph/${id}")
+        }
+        return Json.nonstrict.parse(GraphModel.serializer(), jsonString)
+    }
 }

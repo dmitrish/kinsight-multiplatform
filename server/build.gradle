@@ -16,7 +16,8 @@ apply plugin: 'war'
 apply plugin: 'com.google.cloud.tools.appengine'
 apply plugin: 'kotlinx-serialization'
 
-appengine.tools.cloudSdkHome="/Users/dmitri/Documents/appengine/google-cloud-sdk"
+//appengine.tools.cloudSdkHome="/Users/dmitri/Documents/appengine/google-cloud-sdk"
+appengine.tools.cloudSdkHome="C:/Program Files (x86)/Google/Cloud SDK/google-cloud-sdk"
 
 sourceSets {
     main.kotlin.srcDirs = [ 'src/main/kotlin' ]

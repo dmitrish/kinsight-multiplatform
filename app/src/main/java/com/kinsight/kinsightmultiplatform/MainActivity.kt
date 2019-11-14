@@ -35,7 +35,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         intent.putExtra("idea", idea.securityName)
         //startActivity(intent)
 
-
+        NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
 
     }
 
