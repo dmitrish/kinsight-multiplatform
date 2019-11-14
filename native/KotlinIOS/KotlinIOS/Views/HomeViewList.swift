@@ -22,7 +22,7 @@ struct HomeViewList: View {
                 }.zIndex(1)
                 NavigationView{
                VStack {
-                    Text(CommonKt.createApplicationScreenMessage())
+                    Text("My Team Ideas")
                     List(ideaViewModel.ideas){
                         idea in
                         NavigationLink(destination: IdeaView(ideaModel: idea)) {
