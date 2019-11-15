@@ -112,6 +112,8 @@ val iexUrl = "https://cloud.iexapis.com/stable/ref-data/symbols?token="
 
 val iexToken = "useyourown"
 
+val widgetService = WidgetService()
+
 data class ClientSession
     (val id: String)
 
@@ -239,7 +241,8 @@ fun Application.main() {
         }
     }
 
-    /*
+
+
     routing {
         // For the root / route, we respond with an Html.
         // The `respondHtml` extension method is available at the `ktor-html-builder` artifact.
@@ -386,16 +389,11 @@ fun Application.main() {
                 }
             }
         }
+
+            widget(widgetService)
+
     }
-*/
+
     DatabaseFactory.init()
-
-
-    val widgetService = WidgetService()
-
-    install(Routing) {
-        widget(widgetService)
-    }
-
 
 }
