@@ -33,7 +33,7 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
             override fun onQueryTextChange(newText: String): Boolean {
                 currentSearchText = newText
                 println("filter text: $newText")
-                viewModel.loadTickers(newText)
+                if (!newText.isNullOrEmpty()) viewModel.loadTickers(newText)
                 return false
             }
 
