@@ -10,6 +10,7 @@ import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
 import kotlinx.android.synthetic.main.activity_idea_create.*
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.widget.*
 import com.kinsight.kinsightmultiplatform.ViewModels.TickerSearchModel
 
@@ -28,34 +29,7 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idea_create)
 
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                currentSearchText = newText
-                println("filter text: $newText")
-                if (!newText.isNullOrEmpty()) viewModel.loadTickers(newText)
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                // task HERE
-                return false
-            }
-
-        })
-
-       /* viewModel.getTickers().observe(
-            this,
-            Observer<List<TickerModel>> { tickers ->
-                Log.i("APP", "Tickers observed: $tickers")
-                if (currentSearchText == viewModel.lastFilter) {
-                    adapter = TickerRecyclerAdapter(tickers, this)
-                    tickersRecyclerView.adapter = adapter
-                }
-            }
-        )
-
-        */
+        setUpSearchBarListener()
 
         viewModel.getTickerSearchModel().observe(
             this,
@@ -68,7 +42,26 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
             }
         )
 
+        setSearchBarAppearance()
+    }
 
+    private fun setUpSearchBarListener() {
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                currentSearchText = newText
+                println("filter text: $newText")
+                if (newText.isNotEmpty()) viewModel.loadTickers(newText)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+        })
+    }
+
+    private fun setSearchBarAppearance() {
         val id = search.getContext().getResources().getIdentifier(
             "android:id/search_src_text",
             null, null
@@ -82,7 +75,7 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
 
         searchIcon.setColorFilter(
             Color.WHITE,
-            android.graphics.PorterDuff.Mode.SRC_IN
+            PorterDuff.Mode.SRC_IN
         )
 
         val textView = search.findViewById(id) as TextView
@@ -103,3 +96,16 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
         tickersRecyclerView.layoutManager = linearLayoutManager
     }
 }
+
+/* viewModel.getTickers().observe(
+     this,
+     Observer<List<TickerModel>> { tickers ->
+         Log.i("APP", "Tickers observed: $tickers")
+         if (currentSearchText == viewModel.lastFilter) {
+             adapter = TickerRecyclerAdapter(tickers, this)
+             tickersRecyclerView.adapter = adapter
+         }
+     }
+ )
+
+ */
