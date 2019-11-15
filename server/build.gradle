@@ -26,6 +26,7 @@ sourceSets {
 repositories {
     jcenter()
     maven { url "https://dl.bintray.com/kotlin/ktor" }
+    maven { url "https://dl.bintray.com/kotlin/kotlinx" }
 }
 
 dependencies {
@@ -38,11 +39,16 @@ dependencies {
     compile "com.google.appengine:appengine-api-1.0-sdk:$appengine_version"
     compile "io.ktor:ktor-client-apache:$ktor_version"
     compile "io.ktor:ktor-server-netty:$ktor_version"
+    compile "io.ktor:ktor-jackson:$ktor_version"
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.13.0")
     implementation ("io.ktor:ktor-client-serialization-jvm:1.2.4")
     implementation ("io.ktor:ktor-client-core-jvm:1.2.4")
     implementation ("io.ktor:ktor-client-json-jvm:1.2.4")
    providedCompile "com.google.appengine:appengine:$appengine_version"
+
+    implementation "com.h2database:h2:$h2_version"
+    implementation "org.jetbrains.exposed:exposed:$exposed_version"
+    implementation 'com.zaxxer:HikariCP:3.4.1'
 }
 
 task run(dependsOn: appengineRun)
