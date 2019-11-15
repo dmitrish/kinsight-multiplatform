@@ -69,9 +69,9 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             val tickers = ideaRep.fetchTickers("AB")
             println("tickers: $tickers")
             try {
-                val graph = ideaRep.fetchGraph(11)
-                println(graph)
-                println(graph.benchmark[0].tickDate())
+              //  val graph = ideaRep.fetchGraph(11)
+              //  println(graph)
+              //  println(graph.benchmark[0].tickDate())
             }
             catch(e: Throwable){
                 println(e.message)
