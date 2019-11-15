@@ -7,6 +7,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.Url
 import io.ktor.response.header
 import io.ktor.response.respondText
+import io.ktor.jackson.jackson
 import io.ktor.routing.*
 import kotlinx.html.*
 import io.ktor.client.*
@@ -37,6 +38,11 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
+import kinsight.server.api.model.*
+import kinsight.server.api.service.*
+import kinsight.server.api.web.*
+
+import com.fasterxml.jackson.databind.SerializationFeature
 
 @Serializable data class Ticker (
     @SerialName("symbol")
@@ -209,6 +215,15 @@ fun Application.main() {
         }
     }
 
+    /*
+    install(ContentNegotiation) {
+        jackson {
+            configure(SerializationFeature.INDENT_OUTPUT, true)
+        }
+    }
+
+     */
+
     // Registers routes
     suspend fun sendReloadSignal() {
         try {
@@ -224,6 +239,7 @@ fun Application.main() {
         }
     }
 
+    /*
     routing {
         // For the root / route, we respond with an Html.
         // The `respondHtml` extension method is available at the `ktor-html-builder` artifact.
@@ -371,4 +387,15 @@ fun Application.main() {
             }
         }
     }
+*/
+    DatabaseFactory.init()
+
+
+    val widgetService = WidgetService()
+
+    install(Routing) {
+        widget(widgetService)
+    }
+
+
 }
