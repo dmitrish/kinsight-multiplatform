@@ -27,13 +27,15 @@ import io.ktor.response.respond
 import io.ktor.sessions.*
 import io.ktor.util.generateNonce
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.list
 import com.google.appengine.api.urlfetch.URLFetchServiceFactory
+import io.ktor.http.cio.websocket.Serializer
+import kotlinx.serialization.*
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringDescriptor
 import java.net.URL
+import java.text.SimpleDateFormat
 import java.util.*
 
 import kinsight.server.api.model.*
@@ -123,6 +125,25 @@ private val clientOutgoing by lazy {
         }
     }
 }
+
+fun loadResourceText(path: String): String {
+    println("trying to read embedded ideas json...")
+    val jsonStreamResource = Application::class.java.getResourceAsStream(path)
+    val text = BufferedReader(InputStreamReader(jsonStreamResource)).readText()
+    return text
+}
+
+fun loadEmbeddedJsonIdeas(){
+    try{
+        val fileIdeasText = loadResourceText("/ideas.json")
+       val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
+        ideas.addAll(fileIdeas)
+        println("reader: $fileIdeasText")
+    }
+    catch(e: Throwable){
+        println("failed loading embedded ideas json: " + e.message)
+    }
+}
 /**
  * Entry Point of the application. This function is referenced in the
  * resources/application.conf file inside the ktor.application.modules.
@@ -130,6 +151,8 @@ private val clientOutgoing by lazy {
  * For more information about this file: https://ktor.io/servers/configuration.html#hocon-file
  */
 fun Application.main() {
+
+    loadEmbeddedJsonIdeas()
 
     ideas.add(Idea(11,
         absolutePerformance = 3.4212,
@@ -248,6 +271,12 @@ fun Application.main() {
             val filter =  call.parameters["ticker"]!!.toUpperCase(Locale.ROOT)
             val filtered = tickers.filter { it.symbol.startsWith(filter) }
             call.respond(filtered)
+        }
+
+        get("/api/graph/{id}"){
+            val id =  call.parameters["id"]!!.toUpperCase(Locale.ROOT)
+            val text = loadResourceText("/${id}.json")
+            call.respondText ( text, ContentType.Application.Json )
         }
 
         get ("/appengine/loadtickers"){
