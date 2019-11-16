@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.IdeaCreateActivity"></activity>
+        <activity android:name=".views.TickerSearchActivity"></activity>
         <activity
             android:name=".views.CreateNewIdeaActivity"
             android:label="@string/title_activity_create_new_idea"

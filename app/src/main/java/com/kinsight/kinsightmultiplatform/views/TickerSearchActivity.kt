@@ -8,14 +8,15 @@ import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeaCreateViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
-import kotlinx.android.synthetic.main.activity_idea_create.*
+import kotlinx.android.synthetic.main.activity_ticker_search.*
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.widget.*
+import androidx.core.view.isVisible
 import com.kinsight.kinsightmultiplatform.ViewModels.TickerSearchModel
 
 
-class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
+class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
 
     private lateinit var adapter: TickerRecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -27,7 +28,7 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_idea_create)
+        setContentView(R.layout.activity_ticker_search)
 
         setUpSearchBarListener()
 
@@ -38,11 +39,18 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
                 if (currentSearchText == model.searchFilter) {
                     adapter = TickerRecyclerAdapter(model.tickers, this)
                     tickersRecyclerView.adapter = adapter
+                    tickersRecyclerView.isVisible = true
                 }
+                if (currentSearchText == ""){
+                    tickersRecyclerView.isVisible = false
+                }
+
             }
         )
 
         setSearchBarAppearance()
+
+       tickersRecyclerView.isVisible = false
     }
 
     private fun setUpSearchBarListener() {
@@ -51,7 +59,12 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
             override fun onQueryTextChange(newText: String): Boolean {
                 currentSearchText = newText
                 println("filter text: $newText")
-                if (newText.isNotEmpty()) viewModel.loadTickers(newText)
+                if (newText.isNotEmpty()) {
+                    viewModel.loadTickers(newText)
+                }
+                else{
+                    tickersRecyclerView.isVisible = false
+                }
                 return false
             }
 
@@ -62,12 +75,12 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
     }
 
     private fun setSearchBarAppearance() {
-        val id = search.getContext().getResources().getIdentifier(
+        val id = search.context.resources.getIdentifier(
             "android:id/search_src_text",
             null, null
         )
 
-        val iconid = search.getContext().getResources().getIdentifier(
+        val iconid = search.context.resources.getIdentifier(
             "android:id/search_button",
             null, null
         )
@@ -87,7 +100,7 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
     override fun onItemClicked(ticker: TickerModel) {
         Toast.makeText(this,"Ticker ${ticker.symbol} ", Toast.LENGTH_LONG)
             .show()
-        Log.i("IDEA_", ticker.symbol)
+        Log.i("TICKER_", ticker.symbol)
 
     }
 
@@ -96,16 +109,3 @@ class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
         tickersRecyclerView.layoutManager = linearLayoutManager
     }
 }
-
-/* viewModel.getTickers().observe(
-     this,
-     Observer<List<TickerModel>> { tickers ->
-         Log.i("APP", "Tickers observed: $tickers")
-         if (currentSearchText == viewModel.lastFilter) {
-             adapter = TickerRecyclerAdapter(tickers, this)
-             tickersRecyclerView.adapter = adapter
-         }
-     }
- )
-
- */
