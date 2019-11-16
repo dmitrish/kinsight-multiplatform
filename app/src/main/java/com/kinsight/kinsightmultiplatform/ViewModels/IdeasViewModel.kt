@@ -19,9 +19,9 @@ import kotlinx.coroutines.withContext
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
     //private val serverApiUrl =  "http://$SERVER_URL_LOCAL_BASE_FOR_EMULATOR:$PORT/api/ideas"
     //region private area
-    private val serverApiUrl =  "https://alphacapture.appspot.com"
+   // private val serverApiUrl =  "https://alphacapture.appspot.com"
 
-   // private val serverApiUrl =  "http://35.239.179.43:8081"
+    private val serverApiUrl =  "http://35.239.179.43:8081"
 
  //   private val serverApiUrl =  "http://10.0.2.2:8081"
 

@@ -6,13 +6,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.views.FullScreenActivity
-import com.kinsight.kinsightmultiplatform.views.IdeaCreateActivity
+import com.kinsight.kinsightmultiplatform.views.TickerSearchActivity
 import com.kinsight.kinsightmultiplatform.views.OnItemClickListener
 import com.kinsight.kinsightmultiplatform.views.RecyclerAdapter
 import kotlinx.android.synthetic.main.ideas_layout.*
@@ -48,7 +47,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
 
         fab.setOnClickListener { view ->
-            val intent = Intent(this, IdeaCreateActivity::class.java)
+            val intent = Intent(this, TickerSearchActivity::class.java)
             startActivity(intent)
         }
     }

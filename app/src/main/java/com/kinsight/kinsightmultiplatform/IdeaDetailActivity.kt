@@ -9,7 +9,7 @@ import androidx.core.app.NavUtils
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
-import com.kinsight.kinsightmultiplatform.views.IdeaCreateActivity
+import com.kinsight.kinsightmultiplatform.views.TickerSearchActivity
 //import com.kinsight.kinsightmultiplatform.mobile.R
 import kotlinx.android.synthetic.main.activity_idea_detail.*
 
@@ -73,7 +73,7 @@ class IdeaDetailActivity : AppCompatActivity() {
 
 
         dummy_button.setOnClickListener{
-            val intent = Intent(this, IdeaCreateActivity::class.java)
+            val intent = Intent(this, TickerSearchActivity::class.java)
 
             startActivity(intent)
         }
