@@ -10,10 +10,7 @@ import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
-import com.kinsight.kinsightmultiplatform.views.FullScreenActivity
-import com.kinsight.kinsightmultiplatform.views.TickerSearchActivity
-import com.kinsight.kinsightmultiplatform.views.OnItemClickListener
-import com.kinsight.kinsightmultiplatform.views.RecyclerAdapter
+import com.kinsight.kinsightmultiplatform.views.*
 import kotlinx.android.synthetic.main.ideas_layout.*
 
 
@@ -47,7 +44,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
 
         fab.setOnClickListener { view ->
-            val intent = Intent(this, TickerSearchActivity::class.java)
+            val intent = Intent(this, IdeaCreateActivity::class.java)
             startActivity(intent)
         }
     }

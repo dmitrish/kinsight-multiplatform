@@ -102,6 +102,17 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
             .show()
         Log.i("TICKER_", ticker.symbol)
 
+        intent.putExtra("ticker", ticker.symbol)
+
+        // Set the resultCode to Activity.RESULT_OK to
+        // indicate a success and attach the Intent
+        // which contains our result data
+        setResult(RESULT_OK, intent);
+
+        // With finish() we close the SecondActivity to
+        // return to FirstActivity
+        finish();
+
     }
 
     private fun initRecyclerView() {
