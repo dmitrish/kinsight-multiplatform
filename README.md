@@ -5,6 +5,14 @@
 
 ![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/Screen%20Shot%202019-11-07%20at%209.06.33%20PM.png)
 
+
+![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideassidebyside.png)
+
+
+![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaperformance.png)
+
+![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/notification.png)
+
 Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
 ![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settingsgradle.png)
 
@@ -30,4 +38,36 @@ To run the fatjar build, first build with this build task:
 Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
 
 
+GOOGLE APP ENGINE and DOCKER - COMMANDS
+---------------------------------------
 
+Prerequisite install Google Cloud SDK and Docker(optional)
+
+Create Google Project:
+1. gcloud init
+2. gcloud projects create kinsight-multiplatform
+3. gcloud app create
+4. gcloud config set project kinsight-multiplatform
+5. gcloud auth configure-docker
+
+Create Docker Image and Run:
+
+1. Navigate to \server folder
+2. docker build -t server-all .
+3. docker run -m512M --cpus 1 --expose 8081 -p 8081:8081 -it server-all
+
+Other Docker Commands:
+    docker images
+    docker ps
+    docker stop instance_id
+    docker rmi image_name
+
+Uploading Docker Image to Google Cloud Registry:
+
+1. Add Tag to Image (V3 is the tag here)
+    docker tag quickstart-image gcr.io/project-kinsight/server-all-image:V3
+2. Push Image to cloud registry
+    docker push gcr.io/project-kinsight/server-all-image:V3
+
+Next follow below to deploy Docker image into Google Kubernetes Engine:
+https://cloud.google.com/kubernetes-engine/docs/quickstart

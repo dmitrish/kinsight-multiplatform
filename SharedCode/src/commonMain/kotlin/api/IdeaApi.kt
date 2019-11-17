@@ -1,7 +1,10 @@
 package com.kinsight.kinsightmultiplatform.api
 
 
+import com.kinsight.kinsightmultiplatform.models.GraphModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.models.TickModel
+import com.kinsight.kinsightmultiplatform.models.TickerModel
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -12,6 +15,7 @@ import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.list
 import io.ktor.client.features.websocket.WebSockets
 import io.ktor.client.features.websocket.ws
+import io.ktor.client.request.post
 import io.ktor.http.HttpMethod
 import io.ktor.http.cio.websocket.Frame
 import io.ktor.http.cio.websocket.readText
@@ -26,7 +30,9 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(Json(JsonConfiguration(strictMode = false))).apply {
                     setMapper(IdeaModel::class, IdeaModel.serializer())
-
+                    setMapper(TickerModel::class, TickerModel.serializer())
+                    setMapper(TickModel::class, TickModel.serializer())
+                    setMapper(GraphModel::class, GraphModel.serializer())
                 }
             }
         }
@@ -86,6 +92,13 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
         return Json.nonstrict.parse(IdeaModel.serializer().list, jsonArrayString)
     }
 
+    suspend fun fetchTickers(tickerFilter: String): List<TickerModel> {
+        val jsonArrayString = client.get<String> {
+            url("$baseUrl/api/ticker/$tickerFilter")
+        }
+        return Json.nonstrict.parse(TickerModel.serializer().list, jsonArrayString)
+    }
+
     suspend fun fetchIdea(id: Int): IdeaModel {
         val jsonString = client.get<String> {
             url("$baseUrl/api/ideas/${id}")
@@ -93,5 +106,18 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
         return Json.nonstrict.parse(IdeaModel.serializer(), jsonString)
     }
 
+    suspend fun fetchGraph(id: Int): GraphModel {
+        val jsonString = client.get<String> {
+            url("$baseUrl/api/graph/${id}")
+        }
+        return Json.nonstrict.parse(GraphModel.serializer(), jsonString)
+    }
 
+    suspend fun saveIdea(ideaModel: IdeaModel){
+        val json = io.ktor.client.features.json.defaultSerializer()
+        client.post<Unit>() {
+            url("$baseUrl/api/postidea")
+            body = json.write(ideaModel) // Generates an OutgoingContent
+        }
+    }
 }

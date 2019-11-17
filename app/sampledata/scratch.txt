@@ -39,3 +39,21 @@
                />
 
    </layout>
+
+   /*
+   fun TickModel.tickDate() : Date {
+
+       val numericString = this.sourceDate.toCharArray()
+           .filter { it.isDigit() }
+           .joinToString(separator = "")
+
+       val date = Date(numericString)
+       // format of the date
+       //val jdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss z")
+       //jdf.setTimeZone(TimeZone.getTimeZone("GMT-4"))
+       //val java_date = jdf.format(date)
+       return date
+   }
+
+
+    */

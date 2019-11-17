@@ -4,7 +4,7 @@ import org.jdom2.input.SAXBuilder
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import java.io.File
 
-
+val klockVersion = "1.7.0"
 
 repositories {
     google()
@@ -49,13 +49,15 @@ kotlin {
         // Serialize
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
 
-        implementation ("io.ktor:ktor-client-core:1.2.5")
+        implementation ("io.ktor:ktor-client-core:1.2.4")
 
         implementation ("io.ktor:ktor-client-json:1.2.4")
         implementation ("io.ktor:ktor-client-logging:1.2.4")
         implementation ("io.ktor:ktor-client-serialization:1.2.4")
         implementation("io.ktor:ktor-client-websockets:1.2.4")
         implementation ("io.ktor:ktor-client-cio:1.2.5")
+
+        implementation ("com.soywiz.korlibs.klock:klock:$klockVersion")
         //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core")
         //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common")
     }
@@ -71,7 +73,7 @@ kotlin {
         implementation ("io.ktor:ktor-client-logging-jvm:1.2.4")
         implementation ("io.ktor:ktor-client-serialization-jvm:1.2.4")
         implementation("io.ktor:ktor-client-websockets-jvm:1.2.4")
-        //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
+          //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
 
     }
 

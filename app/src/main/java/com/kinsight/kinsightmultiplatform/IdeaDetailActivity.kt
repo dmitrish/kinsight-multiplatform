@@ -1,5 +1,6 @@
 package com.kinsight.kinsightmultiplatform
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -8,7 +9,7 @@ import androidx.core.app.NavUtils
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
-import com.kinsight.kinsightmultiplatform.resources.Strings.dummy_content
+import com.kinsight.kinsightmultiplatform.views.TickerSearchActivity
 //import com.kinsight.kinsightmultiplatform.mobile.R
 import kotlinx.android.synthetic.main.activity_idea_detail.*
 
@@ -70,6 +71,12 @@ class IdeaDetailActivity : AppCompatActivity() {
         // while interacting with the UI.
         dummy_button.setOnTouchListener(mDelayHideTouchListener)
 
+
+        dummy_button.setOnClickListener{
+            val intent = Intent(this, TickerSearchActivity::class.java)
+
+            startActivity(intent)
+        }
 
 
         fullscreen_content.text = intent.getStringExtra("idea");

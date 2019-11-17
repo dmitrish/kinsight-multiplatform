@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0B036B2379FF5E00614430 /* GraphView.swift */; };
+		1DCC628D237F324D00D5D955 /* IdeaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DCC628C237F324D00D5D955 /* IdeaData.json */; };
 		2A480DA5236625D200894630 /* IdeaSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A480DA4236625D200894630 /* IdeaSample.swift */; };
 		2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129CE23556050006C5329 /* WelcomeView.swift */; };
 		2AE129D12356952F006C5329 /* IdeaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129D02356952F006C5329 /* IdeaView.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D0B036B2379FF5E00614430 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		1DCC628C237F324D00D5D955 /* IdeaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdeaData.json; sourceTree = "<group>"; };
 		2A480DA4236625D200894630 /* IdeaSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaSample.swift; sourceTree = "<group>"; };
 		2AE129CE23556050006C5329 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		2AE129D02356952F006C5329 /* IdeaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaView.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				47729E0C22F447CA00B9B36B /* Assets.xcassets */,
 				47729E0E22F447CA00B9B36B /* LaunchScreen.storyboard */,
 				47729E1122F447CA00B9B36B /* Info.plist */,
+				1DCC628C237F324D00D5D955 /* IdeaData.json */,
 				D08777312350E3D3007E4CC2 /* SceneDelegate.swift */,
 				D087775623510B68007E4CC2 /* ContentView.swift */,
 				2AE129D5235C1570006C5329 /* Utils.swift */,
@@ -202,6 +207,7 @@
 				2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */,
 				2AE129CE23556050006C5329 /* WelcomeView.swift */,
 				2AE129D02356952F006C5329 /* IdeaView.swift */,
+				1D0B036B2379FF5E00614430 /* GraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DCC628D237F324D00D5D955 /* IdeaData.json in Resources */,
 				47729E1022F447CA00B9B36B /* LaunchScreen.storyboard in Resources */,
 				47729E0D22F447CA00B9B36B /* Assets.xcassets in Resources */,
 			);
@@ -365,6 +372,7 @@
 				2AE129D6235C1570006C5329 /* Utils.swift in Sources */,
 				D08777302350E362007E4CC2 /* IdeaViewModel.swift in Sources */,
 				D087775723510B68007E4CC2 /* ContentView.swift in Sources */,
+				1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */,
 				D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */,
 				2AF3262423540FDE006B3594 /* HomeViewListRowNative.swift in Sources */,
 				2AE129D12356952F006C5329 /* IdeaView.swift in Sources */,

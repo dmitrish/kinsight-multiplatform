@@ -10,52 +10,52 @@ import SwiftUI
 import SharedCode
 
 struct HomeViewList: View {
-    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository())
-    
-    
+    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "https://alphacapture.appspot.com"))
+
+
     init() {
         UITableView.appearance().backgroundColor = UIColor.init(hex: bkDark)
         UITableViewCell.appearance().backgroundColor = UIColor.init(hex: bkDark)
         UITableView.appearance().tableFooterView = UIView()
-//        
+//
 ////        UITableView.appearance().backgroundColor = .clear
 ////        UITableViewCell.appearance().backgroundColor = .clear
 
     }
-    
+
     var body: some View {
-       
+
              ZStack{
-                
+
                 Color.init(hex: bkDark)
                      .edgesIgnoringSafeArea(.all)
-                
+
                VStack{
                     ActivityIndicator(isAnimating: $ideaViewModel.dataRequestInProgress)
-                
+
                 }.zIndex(1)
                 NavigationView {
                VStack {
-                Text(CommonKt.createApplicationScreenMessage())
+                    Text("My Team Ideas")
                     List(ideaViewModel.ideas){
                         idea in
                         NavigationLink(destination: IdeaView(ideaModel: idea)) {
                            HomeViewListRow(ideaModel: idea).listRowBackground(Color.init(hex: bkDark))
                         }
-                      
+
                     }
-                
+
                }.zIndex(0)
                 .background(Color.init(hex: bkDark))
                 .foregroundColor(.white)
                 }.navigationBarHidden(true)
                 .navigationBarTitle("")
-               
+
         }.background(Color.init(hex: bkDark))
-       
+
     }
 }
-  
+
 struct HomeList_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone XS"], id: \.self) { deviceName in
