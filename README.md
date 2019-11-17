@@ -8,8 +8,15 @@
 
 ![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideassidebyside.png)
 
+New design coming. Android with the new design:
+
+![android new design](https://github.com/dmitrish/kinsight-multiplatform/blob/master/newdesign-android.png)
+
+Idea Graph:
 
 ![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaperformance.png)
+
+Idea Alert:
 
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/notification.png)
 
