@@ -20,8 +20,6 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val viewModel: IdeasViewModel by lazy {
         getViewModel { IdeasViewModel(application, "dmitri") }
-       // ViewModelProvider(this).get(IdeasViewModel::class.java)
-        //ViewModelProviders.of(this, IdeaViewModelFactory(application, "s"))
     }
 
     override fun onItemClicked(idea: IdeaModel) {
@@ -29,10 +27,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
             .show()
         Log.i("IDEA_", idea.securityName)
 
-
-
         NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +37,9 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         initViewModelListener()
         NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
 
-
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             val intent = Intent(this, IdeaCreateActivity::class.java)
+            intent.putExtra("nextId", viewModel.nextId() + 2)
             startActivity(intent)
         }
     }

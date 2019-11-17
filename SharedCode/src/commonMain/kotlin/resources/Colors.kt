@@ -11,5 +11,6 @@ object Colors {
  val colorGradientEnd = "#ffa500"
  val colorViewBackground = "#3F3F3F"
  val black_overlay = "#66000000"
+ val separator_color = "#696969"
 }
             
