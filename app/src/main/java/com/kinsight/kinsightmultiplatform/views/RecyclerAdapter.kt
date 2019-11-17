@@ -9,6 +9,8 @@ import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.extensions.inflate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import kotlinx.android.synthetic.main.idea_item.view.*
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerAdapter.IdeaHolder>()  {
@@ -39,9 +41,18 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
         }
 
         fun bindIdea(idea: IdeaModel, clickListener: OnItemClickListener) {
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+            val alpha = df.format(idea.alpha)
             this.idea = idea
+            if (idea.alpha > 3){
+                view.ideaImage.setImageResource(R.drawable.ic_fish_blue)
+            }
+            if (idea.alpha < 1){
+                view.ideaImage.setImageResource(R.drawable.ic_fish_onfire)
+            }
             view.nameText.text = idea.securityName
-            view.ideaAlpha.text = "Alpha: ${idea.alpha}"
+            view.ideaAlpha.text = "Alpha: ${alpha}"
             view.ideaTargetPrice.text = "Target: ${idea.targetPrice} ${idea.stockCurrency}"
 
             itemView.setOnClickListener {

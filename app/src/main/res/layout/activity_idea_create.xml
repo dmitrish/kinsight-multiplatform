@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorViewBackground"
+    android:background="@drawable/gradient_animation"
     android:orientation="vertical"
     tools:context="com.kinsight.kinsightmultiplatform.views.IdeaCreateActivity">
     <TextView
@@ -45,7 +45,7 @@
         android:textColor="@android:color/white"
         android:backgroundTint="@android:color/white"
         android:textColorHighlight="@android:color/white"
-        android:layout_marginLeft="45dp"
+        android:layout_marginLeft="49dp"
         android:layout_marginTop="10dp"
         android:layout_width="100dp"
         android:layout_height="wrap_content"/>
