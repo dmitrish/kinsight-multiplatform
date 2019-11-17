@@ -44,6 +44,14 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        swiperefresh.setOnRefreshListener {
+            swiperefresh.isRefreshing = true
+           initViewModelListener()
+        }
+    }
+
     private fun initViewModelListener() {
         viewModel.getIdeas().observe(
             this,
@@ -51,6 +59,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
                 Log.i("APP", "Ideas observed: $ideas")
                 adapter = RecyclerAdapter(ideas, this)
                 ideasRecyclerView.adapter = adapter
+                swiperefresh.isRefreshing = false
             }
         )
     }

@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.kinsight.kinsightmultiplatform.BuildConfig
 import com.kinsight.kinsightmultiplatform.extensions.tickDate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
@@ -21,9 +22,9 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     //region private area
    // private val serverApiUrl =  "https://alphacapture.appspot.com"
 
-   // private val serverApiUrl =  "http://35.239.179.43:8081"
+    private val serverApiUrl = BuildConfig.url//  "http://35.239.179.43:8081"
 
-   private val serverApiUrl =  "http://10.0.2.2:8081"
+  // private val serverApiUrl =  "http://10.0.2.2:8081"
 
     private var isSubscribedToLiveUpdates: Boolean = false
 
@@ -92,7 +93,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
 
     private suspend fun subscribeToLiveUpdates() {
         withContext(Dispatchers.IO) {
-            ideaRep.receive("10.0.2.2", 8081) {
+            ideaRep.receive("35.239.179.43", 8081) {
                 println("android app received from server: $it")
                 if (it == "reload") {
                     loadIdeas()
