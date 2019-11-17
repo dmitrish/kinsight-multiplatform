@@ -53,6 +53,16 @@ class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
         }
     }
 
+    suspend fun saveIdea(ideaModel: IdeaModel): Unit {
+       ideaApi.saveIdea(ideaModel)
+    }
+
+    fun saveIdea(ideaModel: IdeaModel, success: () -> Unit){
+        GlobalScope.launch (ApplicationDispatcher){
+            saveIdea(ideaModel)
+        }
+    }
+
 
 
 

@@ -10,10 +10,7 @@ import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
-import com.kinsight.kinsightmultiplatform.views.FullScreenActivity
-import com.kinsight.kinsightmultiplatform.views.TickerSearchActivity
-import com.kinsight.kinsightmultiplatform.views.OnItemClickListener
-import com.kinsight.kinsightmultiplatform.views.RecyclerAdapter
+import com.kinsight.kinsightmultiplatform.views.*
 import kotlinx.android.synthetic.main.ideas_layout.*
 
 
@@ -23,8 +20,6 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private val viewModel: IdeasViewModel by lazy {
         getViewModel { IdeasViewModel(application, "dmitri") }
-       // ViewModelProvider(this).get(IdeasViewModel::class.java)
-        //ViewModelProviders.of(this, IdeaViewModelFactory(application, "s"))
     }
 
     override fun onItemClicked(idea: IdeaModel) {
@@ -32,10 +27,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
             .show()
         Log.i("IDEA_", idea.securityName)
 
-
-
         NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +37,9 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         initViewModelListener()
         NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
 
-
-        fab.setOnClickListener { view ->
-            val intent = Intent(this, TickerSearchActivity::class.java)
+        fab.setOnClickListener {
+            val intent = Intent(this, IdeaCreateActivity::class.java)
+            intent.putExtra("nextId", viewModel.nextId() + 2)
             startActivity(intent)
         }
     }

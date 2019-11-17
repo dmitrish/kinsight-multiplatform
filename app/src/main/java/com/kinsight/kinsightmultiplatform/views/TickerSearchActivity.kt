@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinsight.kinsightmultiplatform.R
-import com.kinsight.kinsightmultiplatform.ViewModels.IdeaCreateViewModel
+import com.kinsight.kinsightmultiplatform.ViewModels.TickerSearchViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
 import kotlinx.android.synthetic.main.activity_ticker_search.*
@@ -22,8 +22,8 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var currentSearchText: String =""
 
-    private val viewModel: IdeaCreateViewModel by lazy {
-        getViewModel { IdeaCreateViewModel() }
+    private val viewModel: TickerSearchViewModel by lazy {
+        getViewModel { TickerSearchViewModel() }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,6 +101,17 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
         Toast.makeText(this,"Ticker ${ticker.symbol} ", Toast.LENGTH_LONG)
             .show()
         Log.i("TICKER_", ticker.symbol)
+
+        intent.putExtra("ticker", ticker.symbol)
+
+        // Set the resultCode to Activity.RESULT_OK to
+        // indicate a success and attach the Intent
+        // which contains our result data
+        setResult(RESULT_OK, intent);
+
+        // With finish() we close the SecondActivity to
+        // return to FirstActivity
+        finish();
 
     }
 

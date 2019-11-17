@@ -15,6 +15,7 @@ import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.list
 import io.ktor.client.features.websocket.WebSockets
 import io.ktor.client.features.websocket.ws
+import io.ktor.client.request.post
 import io.ktor.http.HttpMethod
 import io.ktor.http.cio.websocket.Frame
 import io.ktor.http.cio.websocket.readText
@@ -110,5 +111,13 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
             url("$baseUrl/api/graph/${id}")
         }
         return Json.nonstrict.parse(GraphModel.serializer(), jsonString)
+    }
+
+    suspend fun saveIdea(ideaModel: IdeaModel){
+        val json = io.ktor.client.features.json.defaultSerializer()
+        client.post<Unit>() {
+            url("$baseUrl/api/postidea")
+            body = json.write(ideaModel) // Generates an OutgoingContent
+        }
     }
 }

@@ -13,4 +13,6 @@
     <color name="colorViewBackground">#3F3F3F</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="separator_color">#696969</color>
 </resources>
