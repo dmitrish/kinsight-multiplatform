@@ -8,12 +8,17 @@
     android:background="@drawable/gradient_animation"
     android:orientation="vertical"
     tools:context="com.kinsight.kinsightmultiplatform.views.IdeaActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_undraw_fishing_hoxa"/>
     <TextView
         android:id="@+id/ideaCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:textColor="@android:color/white"
         android:text="Oracle Corporation"/>
