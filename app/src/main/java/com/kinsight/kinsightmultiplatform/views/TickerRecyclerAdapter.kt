@@ -10,13 +10,16 @@ import com.kinsight.kinsightmultiplatform.extensions.inflate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
 import kotlinx.android.synthetic.main.idea_item.view.*
+import kotlinx.android.synthetic.main.idea_item.view.ideaAlpha
+import kotlinx.android.synthetic.main.idea_item.view.ideaTargetPrice
+import kotlinx.android.synthetic.main.ticker_item.view.*
 
 class TickerRecyclerAdapter (private val tickers: List<TickerModel>, val itemClickListener: OnTickerClickListener) :
     RecyclerView.Adapter<TickerRecyclerAdapter.TickerHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
             TickerRecyclerAdapter.TickerHolder {
-        val inflatedView = parent.inflate(R.layout.idea_item, false)
+        val inflatedView = parent.inflate(R.layout.ticker_item, false)
         return TickerHolder(inflatedView)
     }
 
@@ -41,9 +44,9 @@ class TickerRecyclerAdapter (private val tickers: List<TickerModel>, val itemCli
 
         fun bindTicker(ticker: TickerModel, clickListener: OnTickerClickListener) {
             this.ticker = ticker
-            view.nameText.text =ticker.symbol
-            view.ideaAlpha.text = ticker.name
-            view.ideaTargetPrice.text = ticker.exchange
+            view.tickerSymbol.text =ticker.symbol + " (" + ticker.exchange + ")"
+            view.tickerName.text = ticker.name
+           // view.exchangeName.text = ticker.exchange
 
             itemView.setOnClickListener {
                 clickListener.onItemClicked(ticker)

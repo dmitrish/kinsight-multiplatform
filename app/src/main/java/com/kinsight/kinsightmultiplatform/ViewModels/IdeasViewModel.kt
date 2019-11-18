@@ -11,10 +11,7 @@ import com.kinsight.kinsightmultiplatform.extensions.tickDate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
@@ -39,6 +36,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     private fun loadIdeas() {
         Log.i("APP", "loading ideas")
         CoroutineScope(Dispatchers.IO).launch {
+            delay(1000)
            ideas.postValue( ideaRep.fetchIdeas())
         }
     }
@@ -58,6 +56,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
         withContext(Dispatchers.IO) {
             ideasTemp = ideaRep.fetchIdeas()
         }
+        delay(1000)
         ideas.value = ideasTemp
 
         /*
