@@ -46,7 +46,7 @@ struct HomeViewListRow: View {
                 VStack (alignment:.trailing) {
                                       Text( String(format: "%.2f", ideaModel.alpha))
                                         .fontWeight(.bold)
-                                        .foregroundColor(Color.init(hex: green))
+                                        .foregroundColor(Color.init(hex:(Colors().colorGreen)))
                     
                                         Text( String(format: "%.2f", ideaModel.alpha))
                                             .fontWeight(.semibold)

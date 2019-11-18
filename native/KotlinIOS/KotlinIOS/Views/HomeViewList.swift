@@ -14,9 +14,11 @@ struct HomeViewList: View {
 
 
     init() {
+        UINavigationBar.appearance().backgroundColor = UIColor.init(hex: bkDark)
         UITableView.appearance().backgroundColor = UIColor.init(hex: bkDark)
         UITableViewCell.appearance().backgroundColor = UIColor.init(hex: bkDark)
         UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorColor = .white
 //
 ////        UITableView.appearance().backgroundColor = .clear
 ////        UITableViewCell.appearance().backgroundColor = .clear
@@ -36,7 +38,7 @@ struct HomeViewList: View {
                 }.zIndex(1)
                 NavigationView {
                VStack {
-                    Text("My Team Ideas")
+//                    Text("My Team Ideas")
                     List(ideaViewModel.ideas){
                         idea in
                         NavigationLink(destination: IdeaView(ideaModel: idea)) {
@@ -48,8 +50,14 @@ struct HomeViewList: View {
                }.zIndex(0)
                 .background(Color.init(hex: bkDark))
                 .foregroundColor(.white)
-                }.navigationBarHidden(true)
-                .navigationBarTitle("")
+                .navigationBarTitle("My Team Ideas", displayMode: .inline)
+                                  .navigationBarItems(trailing:
+                                             Button("Add Idea") {
+                                                 print("Add Idea Tapped")
+                                             }
+                                         )
+                }
+          
 
         }.background(Color.init(hex: bkDark))
 

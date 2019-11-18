@@ -15,7 +15,7 @@ struct HomeView: View {
     @State private var selection = 0
     
     init() {
-        UINavigationBar.appearance().backgroundColor = UIColor.init(hex: bkDark)
+       
 //        UIView.appearance().backgroundColor =  UIColor.init(hex: bkDark)
     }
     
@@ -36,7 +36,8 @@ struct HomeView: View {
                         Image(systemName: "2.circle")
                         Text("Native View")
                     }.tag(1)
-            }.padding (.top, 5)
+            }
+            .padding (.top, 5)
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .navigationBarTitle("", displayMode: .inline)
