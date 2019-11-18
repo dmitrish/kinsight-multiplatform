@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.IdeaCreateActivity"></activity>
+        <activity android:name=".views.IdeaActivity"></activity>
+        <activity android:name=".views.IdeaCreateActivity" />
         <activity android:name=".views.TickerSearchActivity" />
         <activity
             android:name=".views.CreateNewIdeaActivity"
