@@ -20,14 +20,15 @@
         android:layout_marginLeft="80dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
+        android:textSize="20dp"
         android:textColor="@android:color/white"
         android:text="Oracle Corporation"/>
     <ImageView
         android:id="@+id/alphaLabl"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="-200dp"
         app:srcCompat="@drawable/ic_fish_yellow"
         android:textColor="@android:color/white"
         android:text="Alpha:"/>
@@ -36,8 +37,8 @@
         android:id="@+id/alphaValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="73dp"
+        android:layout_marginTop="10dp"
         android:textSize="40dp"
         android:textColor="@android:color/white"
         android:text="2.50"/>
