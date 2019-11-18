@@ -27,7 +27,7 @@ class IdeaActivity : FullScreenActivity() {
             alphaLabl.setImageResource(R.drawable.ic_fish_blue)
         }
         if (alpha.toDouble() < 1){
-            alphaLabl.ideaImage.setImageResource(R.drawable.ic_fish_onfire)
+            alphaLabl.setImageResource(R.drawable.ic_fish_onfire)
         }
 
 
