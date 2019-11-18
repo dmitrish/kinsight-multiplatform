@@ -36,7 +36,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     private fun loadIdeas() {
         Log.i("APP", "loading ideas")
         CoroutineScope(Dispatchers.IO).launch {
-            delay(1000)
+            delay(500)
            ideas.postValue( ideaRep.fetchIdeas())
         }
     }
@@ -56,7 +56,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
         withContext(Dispatchers.IO) {
             ideasTemp = ideaRep.fetchIdeas()
         }
-        delay(1000)
+        delay(500)
         ideas.value = ideasTemp
 
         /*

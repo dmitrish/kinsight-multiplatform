@@ -54,6 +54,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@sample/ideassample.json/data/alpha"/>
     <TextView
+        android:id="@+id/ideaPsi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingRight="10dp"
+        android:gravity="start"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/ideaAlpha"
+        app:layout_constraintLeft_toRightOf="@id/ideaImage"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@sample/ideassample.json/data/alpha"/>
+    <TextView
         android:id="@+id/ideaTargetPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

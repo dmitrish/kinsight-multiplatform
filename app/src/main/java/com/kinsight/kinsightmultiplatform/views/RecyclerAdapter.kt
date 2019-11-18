@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.extensions.inflate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.resources.Strings
 import kotlinx.android.synthetic.main.idea_item.view.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -41,9 +42,10 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
         }
 
         fun bindIdea(idea: IdeaModel, clickListener: OnItemClickListener) {
-            val df = DecimalFormat("#.##")
+            val df = DecimalFormat("#0.00")
             df.roundingMode = RoundingMode.CEILING
             val alpha = df.format(idea.alpha)
+            val psi = df.format(idea.benchMarkPerformance)
             this.idea = idea
             if (idea.alpha > 3){
                 view.ideaImage.setImageResource(R.drawable.ic_fish_blue)
@@ -52,9 +54,11 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
                 view.ideaImage.setImageResource(R.drawable.ic_fish_onfire)
             }
             view.nameText.text = idea.securityName
-            view.ideaAlpha.text = "Alpha: ${alpha}"
+
+            view.ideaAlpha.text = Strings.alpha + ": "  + alpha
             view.ideaTargetPrice.text = "Target: ${idea.targetPrice} ${idea.stockCurrency}"
-            view.ideaCreatedBy.text ="Created by: ${idea.createdBy}"
+            view.ideaCreatedBy.text ="Author: ${idea.createdBy}"
+            view.ideaPsi.text = Strings.psi + ": " + psi
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea)
             }
