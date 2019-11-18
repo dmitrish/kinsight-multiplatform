@@ -47,7 +47,10 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             val alpha = df.format(idea.alpha)
             val psi = df.format(idea.benchMarkPerformance)
             this.idea = idea
-            if (idea.alpha > 3){
+            if (idea.alpha > 4){
+                view.ideaImage.setImageResource(R.drawable.ic_fish_superhot)
+            }
+            if (idea.alpha > 3 && idea.alpha < 4){
                 view.ideaImage.setImageResource(R.drawable.ic_fish_blue)
             }
             if (idea.alpha < 1){

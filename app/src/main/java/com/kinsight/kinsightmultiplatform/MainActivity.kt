@@ -30,7 +30,12 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
             .show()
         Log.i("IDEA_", idea.securityName)
 
-        NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
+        val intent = Intent(this, IdeaActivity::class.java)
+        intent.putExtra("ideaCompanyName", idea.securityName)
+        intent.putExtra("ideaAlpha", idea.alpha.toString())
+        startActivity(intent)
+
+      //  NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

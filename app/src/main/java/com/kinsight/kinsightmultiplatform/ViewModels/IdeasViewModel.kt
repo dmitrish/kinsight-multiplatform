@@ -31,7 +31,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
         Log.i("APP", "loading ideas")
         CoroutineScope(Dispatchers.IO).launch {
             delay(500)
-           ideas.postValue( ideaRep.fetchIdeas())
+           ideas.postValue( ideaRep.fetchIdeas().sortedByDescending { it.alpha })
         }
     }
 
@@ -51,7 +51,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             ideasTemp = ideaRep.fetchIdeas()
         }
         delay(500)
-        ideas.value = ideasTemp
+        ideas.value = ideasTemp?.sortedByDescending{ it.alpha }
 
         /*
         * this is temp, just to test ticker search and graph reading
