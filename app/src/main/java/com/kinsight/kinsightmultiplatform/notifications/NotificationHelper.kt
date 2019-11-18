@@ -10,6 +10,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Build
 
 
@@ -56,9 +57,10 @@ object NotificationHelper {
 
         val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(R.drawable.ic_alpha3)
+            setSmallIcon(R.drawable.ic_fish_24)
+            setColor(Color.YELLOW)
             setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
-                    R.drawable.ic_alpha3))
+                    R.drawable.ic_fish_24))
             setContentTitle(title)
             setContentText(message)
             setAutoCancel(autoCancel)

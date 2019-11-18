@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
@@ -11,7 +12,9 @@ import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.views.*
+import kotlinx.android.synthetic.main.customprogress.*
 import kotlinx.android.synthetic.main.ideas_layout.*
+import kotlinx.android.synthetic.main.loading.*
 
 
 class MainActivity : FullScreenActivity(), OnItemClickListener {
@@ -47,7 +50,8 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
     override fun onResume() {
         super.onResume()
         swiperefresh.setOnRefreshListener {
-            swiperefresh.isRefreshing = true
+           // swiperefresh.isRefreshing = true
+            loading.isVisible = true
            initViewModelListener()
         }
     }
@@ -60,6 +64,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
                 adapter = RecyclerAdapter(ideas, this)
                 ideasRecyclerView.adapter = adapter
                 swiperefresh.isRefreshing = false
+                loading.isVisible = false
             }
         )
     }

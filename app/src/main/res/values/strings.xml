@@ -23,4 +23,6 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="alpha">\u03B1</string>
+    <string name="psi">\u03c8</string>
 </resources>
