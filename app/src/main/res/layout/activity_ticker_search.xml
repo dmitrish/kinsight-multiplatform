@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toTopOf="@id/tickersRecyclerView">
         <requestFocus />
     </SearchView>
-
+    <include layout="@layout/loading" android:id="@+id/loading"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tickersRecyclerView"
         android:layout_width="match_parent"

@@ -54,7 +54,7 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             view.nameText.text = idea.securityName
             view.ideaAlpha.text = "Alpha: ${alpha}"
             view.ideaTargetPrice.text = "Target: ${idea.targetPrice} ${idea.stockCurrency}"
-
+            view.ideaCreatedBy.text ="Created by: ${idea.createdBy}"
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea)
             }

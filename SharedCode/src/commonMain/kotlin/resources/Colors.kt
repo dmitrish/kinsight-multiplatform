@@ -12,5 +12,7 @@ object Colors {
  val colorViewBackground = "#3F3F3F"
  val black_overlay = "#66000000"
  val separator_color = "#696969"
+ val missingData = "#ffff00"
+ val circleFill = "#ffff00"
 }
             

@@ -15,4 +15,7 @@
     <color name="black_overlay">#66000000</color>
 
     <color name="separator_color">#696969</color>
+
+    <color name="missingData">#ffff00</color>
+    <color name="circleFill">#ffff00</color>
 </resources>

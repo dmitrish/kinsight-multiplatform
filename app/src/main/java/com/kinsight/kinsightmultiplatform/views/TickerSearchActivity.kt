@@ -40,6 +40,7 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
                     adapter = TickerRecyclerAdapter(model.tickers, this)
                     tickersRecyclerView.adapter = adapter
                     tickersRecyclerView.isVisible = true
+                    loading.isVisible = false
                 }
                 if (currentSearchText == ""){
                     tickersRecyclerView.isVisible = false
@@ -60,6 +61,7 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
                 println("filter text: $newText")
                 if (newText.isNotEmpty()) {
                     viewModel.loadTickers(newText)
+                    loading.isVisible = true
                 }
                 else{
                     tickersRecyclerView.isVisible = false

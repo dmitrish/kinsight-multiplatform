@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="My Team Ideas" />
 
-
+    <include layout="@layout/loading" android:id="@+id/loading"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ideasRecyclerView"
         android:layout_width="match_parent"
