@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kinsight.kinsightmultiplatform.BuildConfig
-import com.kinsight.kinsightmultiplatform.extensions.tickDate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
@@ -15,13 +14,8 @@ import kotlinx.coroutines.*
 
 
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
-    //private val serverApiUrl =  "http://$SERVER_URL_LOCAL_BASE_FOR_EMULATOR:$PORT/api/ideas"
-    //region private area
-   // private val serverApiUrl =  "https://alphacapture.appspot.com"
 
-    private val serverApiUrl = BuildConfig.url//  "http://35.239.179.43:8081"
-
-  // private val serverApiUrl =  "http://10.0.2.2:8081"
+    private val serverApiUrl = BuildConfig.url
 
     private var isSubscribedToLiveUpdates: Boolean = false
 
