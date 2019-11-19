@@ -29,8 +29,18 @@ struct SearchBar : UIViewRepresentable {
         return Cordinator(text: $text)
     }
     
+    
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
+        searchBar.barTintColor = UIColor.white
+        searchBar.backgroundColor = UIColor.clear
+        searchBar.isTranslucent = true
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+      
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = .white
+        
+        
         searchBar.delegate = context.coordinator
         return searchBar
     }

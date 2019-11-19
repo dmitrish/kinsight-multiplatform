@@ -20,12 +20,12 @@ struct AddButton<Destination : View>: View {
 }
 
 struct HomeViewList: View {
-
+    
     @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"))
     @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
-
+    
     init() {
         UINavigationBar.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
@@ -33,35 +33,37 @@ struct HomeViewList: View {
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorColor = .clear
     }
-
+    
     var body: some View {
 
+        VStack {
+            HStack {
+            Text("My Team Ideas").foregroundColor(Color.white).font(.title)
+                AddButton(destination: TickerSearchView())
+                
+            }
+            List(ideaViewModel.ideas){
+                idea in
+                NavigationLink(destination: IdeaView(ideaModel: idea)) {
+                    
+                    HomeViewListRow(ideaModel: idea)
+                }.background(Color.clear)
+                    .foregroundColor(Color.white)
 
-
-   VStack {
-                Text("My Team Ideas").foregroundColor(Color.white).font(.title)
-                List(ideaViewModel.ideas){
-                        idea in
-                        NavigationLink(destination: IdeaView(ideaModel: idea)) {
-                           
-                            HomeViewListRow(ideaModel: idea)
-                        }.background(Color.clear)
-                            .foregroundColor(Color.white)
-                            
-                      
-                    }.background(Color.clear)
-               }.navigationBarTitle("My Team Ideas", displayMode: .inline)
-                                  .navigationBarItems(trailing:
-                                           AddButton(destination: TickerSearchView())
-                                         )
-             }
-          
-
+            }.background(Color.clear)
         }
-        
-
+//        }.navigationBarTitle("My Team Ideas", displayMode: .inline)
+//            .navigationBarItems(trailing:
+//
+//        )
     }
+    
+    
 }
+        
+//
+//    }
+//}
 
 //              ZStack{
                 
