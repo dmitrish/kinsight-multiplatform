@@ -26,6 +26,7 @@
 		64E57BA9869DA5FCA45BA070 /* Pods_KotlinIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */; };
 		7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2872382FAB20096A4D5 /* TickerSearchView.swift */; };
 		7831D28A2382FACB0096A4D5 /* TickerSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */; };
+		7831D28C238426810096A4D5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D28B238426810096A4D5 /* SearchBar.swift */; };
 		D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772A2350E296007E4CC2 /* IdeaModel.swift */; };
 		D087772D2350E2DC007E4CC2 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772C2350E2DC007E4CC2 /* Data.swift */; };
 		D08777302350E362007E4CC2 /* IdeaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772F2350E362007E4CC2 /* IdeaViewModel.swift */; };
@@ -97,6 +98,7 @@
 		78004EEF4A43165255C95AFC /* Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7831D2872382FAB20096A4D5 /* TickerSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchView.swift; sourceTree = "<group>"; };
 		7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchViewModel.swift; sourceTree = "<group>"; };
+		7831D28B238426810096A4D5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		96ABD00FE6EBA474897CA94A /* Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS.release.xcconfig"; sourceTree = "<group>"; };
 		D087772A2350E296007E4CC2 /* IdeaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaModel.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				2AE129D02356952F006C5329 /* IdeaView.swift */,
 				1D0B036B2379FF5E00614430 /* GraphView.swift */,
 				7831D2872382FAB20096A4D5 /* TickerSearchView.swift */,
+				7831D28B238426810096A4D5 /* SearchBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
 				7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */,
+				7831D28C238426810096A4D5 /* SearchBar.swift in Sources */,
 				D087772D2350E2DC007E4CC2 /* Data.swift in Sources */,
 				2AF326222353FD60006B3594 /* HomeViewListNative.swift in Sources */,
 				D08777322350E3D3007E4CC2 /* SceneDelegate.swift in Sources */,

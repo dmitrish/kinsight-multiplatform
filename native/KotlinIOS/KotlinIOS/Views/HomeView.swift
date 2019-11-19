@@ -15,16 +15,13 @@ struct HomeView: View {
     @State private var selection = 0
     
     init() {
-       
-//        UIView.appearance().backgroundColor =  UIColor.init(hex: bkDark)
+          UITabBar.appearance().backgroundColor = .clear
     }
     
     var body: some View {
         
         ZStack {
-            Color.init(hex: bkDark)
-                .edgesIgnoringSafeArea(.all)
-            
+
             TabView{
                HomeViewList()
                     .tabItem {
@@ -41,7 +38,7 @@ struct HomeView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .navigationBarTitle("", displayMode: .inline)
-        }.background(Color.init(hex: bkDark))
+        }
     }
 }
 

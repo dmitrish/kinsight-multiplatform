@@ -16,9 +16,6 @@ struct IdeaView: View {
     var body: some View {
 
         ZStack {
-            Color.init(hex: bkDark)
-                .edgesIgnoringSafeArea(.all)
-
             Text(ideaModel.securityName).font(.headline)
             Text("Alpha: \(ideaModel.alpha)" )
             Text("Entry price: \(ideaModel.entryPrice)" )

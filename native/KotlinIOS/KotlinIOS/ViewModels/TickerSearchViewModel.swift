@@ -12,17 +12,27 @@ import Combine
 import SharedCode
 
 
+extension TickerModel: Identifiable {
+    
+}
+
 public class TickerSearchViewModel : ObservableObject {
     
     
     @Published var tickers = [TickerModel]()
     @Published var dataRequestInProgress = ProgressModel()
+    @Published var searchText = "aapl"
     
+    private var searchSubscriber: AnyCancellable!
+      private var disposables = Set<AnyCancellable>()
     private let repository: IdeaRepository?
     
     
     init(repository: IdeaRepository) {
         self.repository = repository
+        searchSubscriber = $searchText.removeDuplicates()
+            .debounce(for: 0.8, scheduler: DispatchQueue.main)
+            .sink(receiveValue: fetchTickers(for:))
     }
     
     
@@ -44,3 +54,5 @@ public class TickerSearchViewModel : ObservableObject {
     
     
 }
+
+

@@ -9,29 +9,38 @@ import Foundation
 import SwiftUI
 import SharedCode
 
-struct HomeViewList: View {
-    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "https://alphacapture.appspot.com"))
 
+struct AddButton<Destination : View>: View {
+
+    var destination:  Destination
+
+    var body: some View {
+        NavigationLink(destination: self.destination) { Image(systemName: "plus") }
+    }
+}
+
+struct HomeViewList: View {
+    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"))
+    @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
+    @State var startPoint = UnitPoint(x: 0, y: 0)
+    @State var endPoint = UnitPoint(x: 0, y: 2)
 
     init() {
-        UINavigationBar.appearance().backgroundColor = UIColor.init(hex: bkDark)
-        UITableView.appearance().backgroundColor = UIColor.init(hex: bkDark)
-        UITableViewCell.appearance().backgroundColor = UIColor.init(hex: bkDark)
+        UINavigationBar.appearance().backgroundColor = .clear
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
         UITableView.appearance().tableFooterView = UIView()
-        UITableView.appearance().separatorColor = .white
-//
-////        UITableView.appearance().backgroundColor = .clear
-////        UITableViewCell.appearance().backgroundColor = .clear
-
+        UITableView.appearance().separatorColor = .clear
     }
 
     var body: some View {
 
+
              ZStack{
-
-                Color.init(hex: bkDark)
-                     .edgesIgnoringSafeArea(.all)
-
+                
+                LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint)
+                .edgesIgnoringSafeArea(.all)
+                .zIndex(0)
                VStack{
                     ActivityIndicator(isAnimating: $ideaViewModel.dataRequestInProgress)
 
@@ -42,24 +51,22 @@ struct HomeViewList: View {
                     List(ideaViewModel.ideas){
                         idea in
                         NavigationLink(destination: IdeaView(ideaModel: idea)) {
-                           HomeViewListRow(ideaModel: idea).listRowBackground(Color.init(hex: bkDark))
+                           HomeViewListRow(ideaModel: idea)
                         }
 
                     }
 
                }.zIndex(0)
-                .background(Color.init(hex: bkDark))
                 .foregroundColor(.white)
                 .navigationBarTitle("My Team Ideas", displayMode: .inline)
                                   .navigationBarItems(trailing:
-                                             Button("Add Idea") {
-                                                 print("Add Idea Tapped")
-                                             }
+                                           AddButton(destination: TickerSearchView())
                                          )
                 }
           
 
-        }.background(Color.init(hex: bkDark))
+        }
+        
 
     }
 }

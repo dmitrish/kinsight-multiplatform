@@ -31,8 +31,6 @@ struct HomeViewListRow: View {
    
     var body: some View {
         ZStack {
-            Color.init(hex: bkDark)
-            .edgesIgnoringSafeArea(.all)
             HStack {
                 VStack (alignment:.leading) {
                         Text(ideaModel.benchMarkTicker)
@@ -56,8 +54,7 @@ struct HomeViewListRow: View {
             }
             .lineSpacing(4)
             .padding()
-//            .background(Color.init(hex: bkDark))
-        }.listRowBackground(Color.init(hex: bkDark))
+        }
     }
 }
 
