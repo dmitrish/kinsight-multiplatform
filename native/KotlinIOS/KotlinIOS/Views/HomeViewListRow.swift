@@ -17,7 +17,7 @@ struct HomeViewListRow: View {
         VStack (alignment:.leading) {
                 Text(ideaModel.securityName).fontWeight(.bold)
                 Text("Alpha: \(ideaModel.alpha)" )
-            }
+        }.background(Color.clear)
             .lineSpacing(4)
     }
 }
