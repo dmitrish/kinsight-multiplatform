@@ -32,7 +32,10 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
         val intent = Intent(this, IdeaActivity::class.java)
         intent.putExtra("ideaCompanyName", idea.securityName)
-        intent.putExtra("ideaAlpha", idea.alpha.toString())
+        intent.putExtra("ideaTicker", idea.securityTicker)
+        intent.putExtra("ideaAlpha", idea.alpha)
+        intent.putExtra("ideaTargetPrice", idea.targetPrice.toString())
+        intent.putExtra("ideaCreatedBy", idea.createdBy)
         startActivity(intent)
 
       //  NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
