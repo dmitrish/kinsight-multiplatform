@@ -6,12 +6,9 @@
 ![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside.png)
 
 
-![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideassidebyside.png)
+![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
 
-New design coming. Android with the new design:
 
-Welcome (new design):
-![android new design -welcome](https://github.com/dmitrish/kinsight-multiplatform/blob/master/newdesign-android-welcome.png)
 
 Ideas (new design)
 ![android new design](https://github.com/dmitrish/kinsight-multiplatform/blob/master/newdesign-android.png)
