@@ -12,6 +12,7 @@ import SharedCode
 
 struct HomeView: View {
     
+
     @State private var selection = 0
     
     @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]

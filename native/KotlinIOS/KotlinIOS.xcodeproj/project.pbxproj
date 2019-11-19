@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,10 @@
 		47729E2622F447CA00B9B36B /* KotlinIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47729E2522F447CA00B9B36B /* KotlinIOSUITests.swift */; };
 		47729E6E22F4806C00B9B36B /* SharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47729E6D22F4806B00B9B36B /* SharedCode.framework */; };
 		47729E6F22F4806C00B9B36B /* SharedCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47729E6D22F4806B00B9B36B /* SharedCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		64E57BA9869DA5FCA45BA070 /* Pods_KotlinIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */; };
+		7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2872382FAB20096A4D5 /* TickerSearchView.swift */; };
+		7831D28A2382FACB0096A4D5 /* TickerSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */; };
+		7831D28C238426810096A4D5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D28B238426810096A4D5 /* SearchBar.swift */; };
 		D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772A2350E296007E4CC2 /* IdeaModel.swift */; };
 		D087772D2350E2DC007E4CC2 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772C2350E2DC007E4CC2 /* Data.swift */; };
 		D08777302350E362007E4CC2 /* IdeaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772F2350E362007E4CC2 /* IdeaViewModel.swift */; };
@@ -30,6 +34,8 @@
 		D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08777342350ED5B007E4CC2 /* HomeViewList.swift */; };
 		D087775723510B68007E4CC2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087775623510B68007E4CC2 /* ContentView.swift */; };
 		D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087775823512453007E4CC2 /* HomeViewListRow.swift */; };
+		ECAC704850F47CAE8129BC87 /* Pods_KotlinIOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A16C584A74157E300F947AF /* Pods_KotlinIOSTests.framework */; };
+		F529139D84759E8E9D96523E /* Pods_KotlinIOS_KotlinIOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A717EB6618B6FA7229A274 /* Pods_KotlinIOS_KotlinIOSUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A16C584A74157E300F947AF /* Pods_KotlinIOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0B036B2379FF5E00614430 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		1DCC628C237F324D00D5D955 /* IdeaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdeaData.json; sourceTree = "<group>"; };
 		2A480DA4236625D200894630 /* IdeaSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaSample.swift; sourceTree = "<group>"; };
@@ -86,6 +94,13 @@
 		47729E2522F447CA00B9B36B /* KotlinIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinIOSUITests.swift; sourceTree = "<group>"; };
 		47729E2722F447CA00B9B36B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47729E6D22F4806B00B9B36B /* SharedCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedCode.framework; path = "../../SharedCode/build/xcode-frameworks/SharedCode.framework"; sourceTree = "<group>"; };
+		496AF2B30F4EF28D98FBC27F /* Pods-KotlinIOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOSTests.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOSTests/Pods-KotlinIOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		78004EEF4A43165255C95AFC /* Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7831D2872382FAB20096A4D5 /* TickerSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchView.swift; sourceTree = "<group>"; };
+		7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchViewModel.swift; sourceTree = "<group>"; };
+		7831D28B238426810096A4D5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		96ABD00FE6EBA474897CA94A /* Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS.release.xcconfig"; sourceTree = "<group>"; };
 		D087772A2350E296007E4CC2 /* IdeaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaModel.swift; sourceTree = "<group>"; };
 		D087772C2350E2DC007E4CC2 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		D087772F2350E362007E4CC2 /* IdeaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewModel.swift; sourceTree = "<group>"; };
@@ -93,6 +108,9 @@
 		D08777342350ED5B007E4CC2 /* HomeViewList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewList.swift; sourceTree = "<group>"; };
 		D087775623510B68007E4CC2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D087775823512453007E4CC2 /* HomeViewListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListRow.swift; sourceTree = "<group>"; };
+		E0C8F6AD955A6E60063470C4 /* Pods-KotlinIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS.debug.xcconfig"; path = "Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS.debug.xcconfig"; sourceTree = "<group>"; };
+		EBCDE65BA9049A8369A87208 /* Pods-KotlinIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOSTests.debug.xcconfig"; path = "Target Support Files/Pods-KotlinIOSTests/Pods-KotlinIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F7A717EB6618B6FA7229A274 /* Pods_KotlinIOS_KotlinIOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOS_KotlinIOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47729E6E22F4806C00B9B36B /* SharedCode.framework in Frameworks */,
+				64E57BA9869DA5FCA45BA070 /* Pods_KotlinIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECAC704850F47CAE8129BC87 /* Pods_KotlinIOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F529139D84759E8E9D96523E /* Pods_KotlinIOS_KotlinIOSUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +150,8 @@
 				47729E1922F447CA00B9B36B /* KotlinIOSTests */,
 				47729E2422F447CA00B9B36B /* KotlinIOSUITests */,
 				47729E0322F447C800B9B36B /* Products */,
+				AAD103CAA6401CD460107721 /* Pods */,
+				762D412FC2F3222F1EB2D5FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -179,6 +202,29 @@
 			path = KotlinIOSUITests;
 			sourceTree = "<group>";
 		};
+		762D412FC2F3222F1EB2D5FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */,
+				F7A717EB6618B6FA7229A274 /* Pods_KotlinIOS_KotlinIOSUITests.framework */,
+				0A16C584A74157E300F947AF /* Pods_KotlinIOSTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AAD103CAA6401CD460107721 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E0C8F6AD955A6E60063470C4 /* Pods-KotlinIOS.debug.xcconfig */,
+				CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */,
+				78004EEF4A43165255C95AFC /* Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig */,
+				96ABD00FE6EBA474897CA94A /* Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig */,
+				EBCDE65BA9049A8369A87208 /* Pods-KotlinIOSTests.debug.xcconfig */,
+				496AF2B30F4EF28D98FBC27F /* Pods-KotlinIOSTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D08777292350E270007E4CC2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				D087772F2350E362007E4CC2 /* IdeaViewModel.swift */,
+				7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -208,6 +255,8 @@
 				2AE129CE23556050006C5329 /* WelcomeView.swift */,
 				2AE129D02356952F006C5329 /* IdeaView.swift */,
 				1D0B036B2379FF5E00614430 /* GraphView.swift */,
+				7831D2872382FAB20096A4D5 /* TickerSearchView.swift */,
+				7831D28B238426810096A4D5 /* SearchBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,11 +268,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47729E2A22F447CA00B9B36B /* Build configuration list for PBXNativeTarget "KotlinIOS" */;
 			buildPhases = (
+				7C78140A459AC96393361809 /* [CP] Check Pods Manifest.lock */,
 				47729E7122F480EB00B9B36B /* ShellScript */,
 				47729DFE22F447C800B9B36B /* Sources */,
 				47729DFF22F447C800B9B36B /* Frameworks */,
 				47729E0022F447C800B9B36B /* Resources */,
 				47729E7022F4806C00B9B36B /* Embed Frameworks */,
+				FB4AFE5291EA344AF9420D4C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,6 +289,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47729E2D22F447CA00B9B36B /* Build configuration list for PBXNativeTarget "KotlinIOSTests" */;
 			buildPhases = (
+				A34A9256F8F326F120E53A6E /* [CP] Check Pods Manifest.lock */,
 				47729E1222F447CA00B9B36B /* Sources */,
 				47729E1322F447CA00B9B36B /* Frameworks */,
 				47729E1422F447CA00B9B36B /* Resources */,
@@ -256,9 +308,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47729E3022F447CA00B9B36B /* Build configuration list for PBXNativeTarget "KotlinIOSUITests" */;
 			buildPhases = (
+				D36ED17EAE46814BF43479BD /* [CP] Check Pods Manifest.lock */,
 				47729E1D22F447CA00B9B36B /* Sources */,
 				47729E1E22F447CA00B9B36B /* Frameworks */,
 				47729E1F22F447CA00B9B36B /* Resources */,
+				8657703962C8E2AE6CA14ABC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,6 +412,106 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\ncd \"$SRCROOT/../../SharedCode/build/xcode-frameworks\"\n./gradlew :SharedCode:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
 		};
+		7C78140A459AC96393361809 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KotlinIOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8657703962C8E2AE6CA14ABC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A34A9256F8F326F120E53A6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KotlinIOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D36ED17EAE46814BF43479BD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KotlinIOS-KotlinIOSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB4AFE5291EA344AF9420D4C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -369,6 +523,7 @@
 				2AF326202353F990006B3594 /* HomeView.swift in Sources */,
 				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,
 				D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */,
+				7831D28A2382FACB0096A4D5 /* TickerSearchViewModel.swift in Sources */,
 				2AE129D6235C1570006C5329 /* Utils.swift in Sources */,
 				D08777302350E362007E4CC2 /* IdeaViewModel.swift in Sources */,
 				D087775723510B68007E4CC2 /* ContentView.swift in Sources */,
@@ -378,6 +533,8 @@
 				2AE129D12356952F006C5329 /* IdeaView.swift in Sources */,
 				2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
+				7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */,
+				7831D28C238426810096A4D5 /* SearchBar.swift in Sources */,
 				D087772D2350E2DC007E4CC2 /* Data.swift in Sources */,
 				2AF326222353FD60006B3594 /* HomeViewListNative.swift in Sources */,
 				D08777322350E3D3007E4CC2 /* SceneDelegate.swift in Sources */,
@@ -545,11 +702,16 @@
 		};
 		47729E2B22F447CA00B9B36B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0C8F6AD955A6E60063470C4 /* Pods-KotlinIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GD4G9TGE9T;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../SharedCode/build/xcode-frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../SharedCode/build/xcode-frameworks",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KotlinIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -565,11 +727,15 @@
 		};
 		47729E2C22F447CA00B9B36B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GD4G9TGE9T;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../SharedCode/build/xcode-frameworks";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../SharedCode/build/xcode-frameworks",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = KotlinIOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -585,6 +751,7 @@
 		};
 		47729E2E22F447CA00B9B36B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBCDE65BA9049A8369A87208 /* Pods-KotlinIOSTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -606,6 +773,7 @@
 		};
 		47729E2F22F447CA00B9B36B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 496AF2B30F4EF28D98FBC27F /* Pods-KotlinIOSTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -627,6 +795,7 @@
 		};
 		47729E3122F447CA00B9B36B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78004EEF4A43165255C95AFC /* Pods-KotlinIOS-KotlinIOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -646,6 +815,7 @@
 		};
 		47729E3222F447CA00B9B36B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96ABD00FE6EBA474897CA94A /* Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
