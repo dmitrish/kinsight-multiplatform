@@ -22,5 +22,7 @@ object Colors {
  val colorbackgroundDark = "#2f3746"
  val colorbackgroundDarker = "#232b38"
  val colorWhite = "#ffffff"
+ val missingData = "#ffff00"
+ val circleFill = "#ffff00"
 }
             

@@ -6,9 +6,10 @@ android {
     compileSdkVersion 28
     buildToolsVersion "29.0.1"
     defaultConfig {
-        buildConfigField("String", "url", '"https://alphacapture.appspot.com"')
+        // buildConfigField("String", "url", '"https://alphacapture.appspot.com"')
+        buildConfigField("String", "url", '"http://35.239.179.43:8081"')
         applicationId "com.kinsight.kinsightmultiplatform.mobile"
-        minSdkVersion 15
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

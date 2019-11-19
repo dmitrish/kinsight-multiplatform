@@ -28,4 +28,6 @@
     <color name="colorbackgroundDarker">#232b38</color>
     <color name="colorWhite">#ffffff</color>
 
+    <color name="missingData">#ffff00</color>
+    <color name="circleFill">#ffff00</color>
 </resources>

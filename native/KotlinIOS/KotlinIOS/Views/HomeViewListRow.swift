@@ -30,7 +30,7 @@ struct HomeViewListRow: View {
     var ideaModel: IdeaModel
    
     var body: some View {
-        ZStack {
+
             HStack {
                 VStack (alignment:.leading) {
                         Text(ideaModel.benchMarkTicker)
@@ -54,7 +54,8 @@ struct HomeViewListRow: View {
             }
             .lineSpacing(4)
             .padding()
-        }
+            .background(Color.clear)
+        
     }
 }
 

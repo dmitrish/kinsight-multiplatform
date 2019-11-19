@@ -20,7 +20,7 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
 
     private lateinit var adapter: TickerRecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private var currentSearchText: String =""
+    private var currentSearchText: String = ""
 
     private val viewModel: TickerSearchViewModel by lazy {
         getViewModel { TickerSearchViewModel() }
@@ -40,17 +40,17 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
                     adapter = TickerRecyclerAdapter(model.tickers, this)
                     tickersRecyclerView.adapter = adapter
                     tickersRecyclerView.isVisible = true
+                    loading.isVisible = false
                 }
                 if (currentSearchText == ""){
                     tickersRecyclerView.isVisible = false
                 }
-
             }
         )
 
         setSearchBarAppearance()
 
-       tickersRecyclerView.isVisible = false
+        tickersRecyclerView.isVisible = false
     }
 
     private fun setUpSearchBarListener() {
@@ -61,6 +61,7 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
                 println("filter text: $newText")
                 if (newText.isNotEmpty()) {
                     viewModel.loadTickers(newText)
+                    loading.isVisible = true
                 }
                 else{
                     tickersRecyclerView.isVisible = false
@@ -104,13 +105,8 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
 
         intent.putExtra("ticker", ticker.symbol)
 
-        // Set the resultCode to Activity.RESULT_OK to
-        // indicate a success and attach the Intent
-        // which contains our result data
         setResult(RESULT_OK, intent);
 
-        // With finish() we close the SecondActivity to
-        // return to FirstActivity
         finish();
 
     }

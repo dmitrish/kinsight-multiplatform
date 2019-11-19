@@ -23,5 +23,7 @@ object Strings {
  val menu_tools = "Tools"
  val menu_share = "Share"
  val menu_send = "Send"
+ val alpha = "\u03B1"
+ val psi = "\u03c8"
 }
             

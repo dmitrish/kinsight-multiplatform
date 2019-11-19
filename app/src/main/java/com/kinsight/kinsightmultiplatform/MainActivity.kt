@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeasViewModel
@@ -11,7 +12,9 @@ import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.views.*
+import kotlinx.android.synthetic.main.customprogress.*
 import kotlinx.android.synthetic.main.ideas_layout.*
+import kotlinx.android.synthetic.main.loading.*
 
 
 class MainActivity : FullScreenActivity(), OnItemClickListener {
@@ -27,7 +30,15 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
             .show()
         Log.i("IDEA_", idea.securityName)
 
-        NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
+        val intent = Intent(this, IdeaActivity::class.java)
+        intent.putExtra("ideaCompanyName", idea.securityName)
+        intent.putExtra("ideaTicker", idea.securityTicker)
+        intent.putExtra("ideaAlpha", idea.alpha)
+        intent.putExtra("ideaTargetPrice", idea.targetPrice.toString())
+        intent.putExtra("ideaCreatedBy", idea.createdBy)
+        startActivity(intent)
+
+      //  NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +58,8 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
     override fun onResume() {
         super.onResume()
         swiperefresh.setOnRefreshListener {
-            swiperefresh.isRefreshing = true
+           // swiperefresh.isRefreshing = true
+            loading.isVisible = true
            initViewModelListener()
         }
     }
@@ -60,6 +72,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
                 adapter = RecyclerAdapter(ideas, this)
                 ideasRecyclerView.adapter = adapter
                 swiperefresh.isRefreshing = false
+                loading.isVisible = false
             }
         )
     }
