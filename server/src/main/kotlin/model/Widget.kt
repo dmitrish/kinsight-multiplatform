@@ -23,3 +23,10 @@ data class NewWidget(
     val name: String,
     val quantity: Int
 )
+
+object WidgetDetails : Table() {
+    val id = integer("id").primaryKey().autoIncrement()
+    val name = varchar("name", 255)
+    val quantity = integer("quantity")
+    val dateUpdated = long("dateUpdated")
+}
