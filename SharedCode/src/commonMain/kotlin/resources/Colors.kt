@@ -18,7 +18,7 @@ object Colors {
  val colorGreen = "#14c1a4"
  val colorRed = "#e86565"
  val primaryblue = "#59a2fd"
- val backgrounddarkest = "e7e8ea"
+ val backgrounddarkest = "#e7e8ea"
  val colorbackgroundDark = "#2f3746"
  val colorbackgroundDarker = "#232b38"
  val colorWhite = "#ffffff"
