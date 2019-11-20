@@ -46,6 +46,12 @@ To run the fatjar build, first build with this build task:
 Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
 
 
+# Kotlin Native iOS project: Steps to run iOS project
+Compile the shared code module in Android.
+Move to Kotlin ios Folder
+Do a 'pod install'
+Open .xcworkspace file
+
 GOOGLE APP ENGINE and DOCKER - COMMANDS
 ---------------------------------------
 
