@@ -47,10 +47,10 @@ Then navigate to the libs folder in the terminal and execute: libs % java -jar s
 
 
 # Kotlin Native iOS project: Steps to run iOS project
-Compile the shared code module in Android.
-Move to Kotlin ios Folder
-Do a 'pod install'
-Open .xcworkspace file
+1. Compile the shared code module in Android.
+2. Move to Kotlin ios Folder
+3. Do a 'pod install'
+4. Open .xcworkspace file
 
 GOOGLE APP ENGINE and DOCKER - COMMANDS
 ---------------------------------------
