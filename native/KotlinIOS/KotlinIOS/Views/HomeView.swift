@@ -8,29 +8,37 @@
 
 import Foundation
 import SwiftUI
+import SharedCode
 
 struct HomeView: View {
     
+
     @State private var selection = 0
     
+    @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
+    @State var startPoint = UnitPoint(x: 0, y: 0)
+    @State var endPoint = UnitPoint(x: 0, y: 2)
+    
     var body: some View {
+        
+      
        
-        TabView{
-           HomeViewList()
-                .tabItem {
-                  Image(systemName: "1.circle")
-                  Text("Kotlin View")
-                }.tag(0)
-           HomeViewListNative()
-                .tabItem {
-                    Image(systemName: "2.circle")
-                    Text("Native View")
-                }.tag(1)
-        }.padding (.top, 5)
+        ZStack {
+            RoundedRectangle(cornerRadius: 0)
+                             .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
+                             .edgesIgnoringSafeArea(.all)
+            VStack{
+                Spacer()
+       
+                HomeViewList()
+            }
+                
+        }.padding (.top, 0)
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .navigationBarTitle("", displayMode: .inline)
     }
+
 }
 
 struct HomeView_Preview: PreviewProvider {

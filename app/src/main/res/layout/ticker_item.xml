@@ -8,11 +8,11 @@
     android:padding="16dp"
     android:clickable="true"
     android:focusable="true"
-    android:background="@color/colorViewBackground"
+
     >
 
     <TextView
-        android:id="@+id/nameText"
+        android:id="@+id/tickerSymbol"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
@@ -27,7 +27,7 @@
         tools:text="@sample/ideassample.json/data/securityName"/>
 
     <TextView
-        android:id="@+id/ideaAlpha"
+        android:id="@+id/tickerName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -35,13 +35,13 @@
         android:layout_marginStart="5dp"
         android:gravity="start"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/nameText"
+        app:layout_constraintTop_toBottomOf="@id/tickerSymbol"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@sample/ideassample.json/data/alpha"/>
     <TextView
-        android:id="@+id/ideaTargetPrice"
+        android:id="@+id/exchangeName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -49,7 +49,7 @@
         android:layout_marginStart="5dp"
         android:gravity="start"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/ideaAlpha"
+        app:layout_constraintTop_toBottomOf="@id/tickerName"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

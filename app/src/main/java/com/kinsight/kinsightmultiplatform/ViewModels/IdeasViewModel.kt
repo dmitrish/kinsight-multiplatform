@@ -6,24 +6,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.kinsight.kinsightmultiplatform.extensions.tickDate
+import com.kinsight.kinsightmultiplatform.BuildConfig
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
-    //private val serverApiUrl =  "http://$SERVER_URL_LOCAL_BASE_FOR_EMULATOR:$PORT/api/ideas"
-    //region private area
-    private val serverApiUrl =  "https://alphacapture.appspot.com"
 
-   // private val serverApiUrl =  "http://35.239.179.43:8081"
-
- //   private val serverApiUrl =  "http://10.0.2.2:8081"
+    private val serverApiUrl = BuildConfig.url
 
     private var isSubscribedToLiveUpdates: Boolean = false
 
@@ -38,7 +30,8 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     private fun loadIdeas() {
         Log.i("APP", "loading ideas")
         CoroutineScope(Dispatchers.IO).launch {
-           ideas.postValue( ideaRep.fetchIdeas())
+            delay(500)
+           ideas.postValue( ideaRep.fetchIdeas().sortedByDescending { it.alpha })
         }
     }
 
@@ -57,7 +50,8 @@ class IdeasViewModel (application: Application, private val userName: String) : 
         withContext(Dispatchers.IO) {
             ideasTemp = ideaRep.fetchIdeas()
         }
-        ideas.value = ideasTemp
+        delay(500)
+        ideas.value = ideasTemp?.sortedByDescending{ it.alpha }
 
         /*
         * this is temp, just to test ticker search and graph reading
@@ -108,6 +102,8 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     fun getIdeas(): LiveData<List<IdeaModel>> = ideas
 
     fun getIdea(id: Int) = ideas.value!!.filter { it.id == id }.single()
+
+    fun nextId() = ideas.value!!.maxBy { it.id }!!.id
     //endregion
 }
 

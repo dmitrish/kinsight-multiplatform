@@ -41,7 +41,7 @@ struct WelcomeView: View {
  
              VStack {
                 Spacer()
-                 
+                   Image("fish")
                    NavigationLink(destination: HomeView()) {
                         WelcomeText()
                    

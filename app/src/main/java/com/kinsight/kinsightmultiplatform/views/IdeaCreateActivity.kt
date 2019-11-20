@@ -1,111 +1,90 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.View
+import android.widget.Toast
+import com.kinsight.kinsightmultiplatform.Constans.PICK_TICKER_REQUEST
 import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeaCreateViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
-import com.kinsight.kinsightmultiplatform.models.TickerModel
+import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import kotlinx.android.synthetic.main.activity_idea_create.*
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.widget.*
-import com.kinsight.kinsightmultiplatform.ViewModels.TickerSearchModel
 
 
-class IdeaCreateActivity : FullScreenActivity(), OnTickerClickListener {
+class IdeaCreateActivity : FullScreenActivity() {
 
-    private lateinit var adapter: TickerRecyclerAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
-    private var currentSearchText: String =""
-
-    private val viewModel: IdeaCreateViewModel by lazy {
-        getViewModel { IdeaCreateViewModel() }
-    }
+    private val viewModel by lazy { getViewModel {IdeaCreateViewModel()}}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idea_create)
 
-        setUpSearchBarListener()
+        val startIntent = intent
+        val nextId = startIntent.getIntExtra("nextId", 0)
 
-        viewModel.getTickerSearchModel().observe(
-            this,
-            Observer<TickerSearchModel> { model ->
-                Log.i("APP", "Tickers observed: $model")
-                if (currentSearchText == model.searchFilter) {
-                    adapter = TickerRecyclerAdapter(model.tickers, this)
-                    tickersRecyclerView.adapter = adapter
-                }
+
+        chooseTicker.setOnClickListener {
+            val intent = Intent(this, TickerSearchActivity::class.java)
+            startActivityForResult(intent, PICK_TICKER_REQUEST)
+        }
+
+        saveIdea.setOnClickListener{
+            try {
+                val securityTicker = chooseTicker.text.toString()
+                val targetPrice = targetPrice.text.toString().plus(".00").toDouble()
+                val stopLoss = stopLoss.text.toString().toInt()
+                val newIdea = IdeaModel(
+                    id = nextId,
+                    alpha = 0.0,
+                    benchMarkTicker = "SPX",
+                    //benchMarkTickerDesk= "SP 500 Index",
+                    benchMarkCurrentPrice = 2856.66,
+                    benchMarkPerformance = 0.392,
+                    convictionId = 1,
+                    currentPrice = 24.59,
+                    direction = "Long",
+                    directionId = 1,
+                    entryPrice = 24.59,
+                    reason = "Target Price",
+                    securityName = securityTicker,
+                    securityTicker = securityTicker,
+                    stockCurrency = "USD",
+                    stopLoss = stopLoss,
+                    stopLossValue = 313.4823,
+                    targetPrice = targetPrice,
+                    targetPricePercentage = 0.0,
+                    timeHorizon = "1 Week",
+                    createdBy = "Dmitri - from Android"
+
+                )
+
+                viewModel.saveIdea(newIdea)
+                finish()
             }
-        )
-
-        setSearchBarAppearance()
-    }
-
-    private fun setUpSearchBarListener() {
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                currentSearchText = newText
-                println("filter text: $newText")
-                if (newText.isNotEmpty()) viewModel.loadTickers(newText)
-                return false
+            catch(e: Throwable){
+                Toast.makeText(this,"Failed to save: ${e.message}", Toast.LENGTH_LONG)
+                    .show()
+                Log.e("IDEA_", e.message + e.stackTrace)
             }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
-            }
-        })
+        }
     }
 
-    private fun setSearchBarAppearance() {
-        val id = search.getContext().getResources().getIdentifier(
-            "android:id/search_src_text",
-            null, null
-        )
-
-        val iconid = search.getContext().getResources().getIdentifier(
-            "android:id/search_button",
-            null, null
-        )
-        val searchIcon = search.findViewById<ImageView>(iconid)
-
-        searchIcon.setColorFilter(
-            Color.WHITE,
-            PorterDuff.Mode.SRC_IN
-        )
-
-        val textView = search.findViewById(id) as TextView
-        textView.setTextColor(Color.WHITE)
-        textView.setHintTextColor(Color.WHITE)
-    }
-
-
-    override fun onItemClicked(ticker: TickerModel) {
-        Toast.makeText(this,"Ticker ${ticker.symbol} ", Toast.LENGTH_LONG)
-            .show()
-        Log.i("IDEA_", ticker.symbol)
+    fun onRadioButtonClicked(v: View){
 
     }
 
-    private fun initRecyclerView() {
-        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        tickersRecyclerView.layoutManager = linearLayoutManager
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        // Check which request we're responding to
+        if (requestCode == PICK_TICKER_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == Activity.RESULT_OK) {
+               chooseTicker.text = data?.getStringExtra("ticker")
+             }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
-
-/* viewModel.getTickers().observe(
-     this,
-     Observer<List<TickerModel>> { tickers ->
-         Log.i("APP", "Tickers observed: $tickers")
-         if (currentSearchText == viewModel.lastFilter) {
-             adapter = TickerRecyclerAdapter(tickers, this)
-             tickersRecyclerView.adapter = adapter
-         }
-     }
- )
-
- */

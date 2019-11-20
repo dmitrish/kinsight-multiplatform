@@ -12,10 +12,10 @@ import SharedCode
 
 struct IdeaView: View {
     var ideaModel: IdeaModel
-    
+
     var body: some View {
-        VStack {
-            
+
+        ZStack {
             Text(ideaModel.securityName).font(.headline)
             Text("Alpha: \(ideaModel.alpha)" )
             Text("Entry price: \(ideaModel.entryPrice)" )
@@ -23,18 +23,18 @@ struct IdeaView: View {
             Text("Time Horizon: \(ideaModel.timeHorizon)" )
             GraphView()
         }
+
+
     }
 }
-  
+
 struct IdeaView_Preview: PreviewProvider {
-    
-    
-  
+
+
+
     static var previews: some View {
         IdeaView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample  )
     }
- 
+
 
 }
-  
-

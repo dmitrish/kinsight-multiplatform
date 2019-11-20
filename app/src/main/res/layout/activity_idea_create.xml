@@ -1,36 +1,203 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/colorViewBackground"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <SearchView
-        android:id="@+id/search"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:layout_marginTop="35dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tickersRecyclerView">
-        <requestFocus />
-    </SearchView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tickersRecyclerView"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_animation"
+    android:orientation="vertical"
+    tools:context="com.kinsight.kinsightmultiplatform.views.IdeaCreateActivity">
+    <TextView
+        android:id="@+id/chooseTicker"
         android:layout_width="match_parent"
-        android:layout_height="800dp"
-        android:layout_marginTop="65dp"
-        android:clipToPadding="false"
-        android:paddingTop="15dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:itemcount="5"
-        tools:listitem="@layout/ticker_item" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:textColor="@android:color/white"
+        android:text="Choose Ticker"/>
+    <View
+        android:id="@+id/separatorOne"
+        android:layout_marginLeft="@dimen/create_separator_left_right_margin"
+        android:layout_marginRight="@dimen/create_separator_left_right_margin"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/separator_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/chooseTargetPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:text="Target Price:"/>
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/targetPrice"
+        android:inputType="number"
+
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:layout_marginLeft="49dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/separatorThree"
+        android:layout_marginLeft="@dimen/create_separator_left_right_margin"
+        android:layout_marginRight="@dimen/create_separator_left_right_margin"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/separator_color"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/chooseStopLoss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="Stop Loss Value:"/>
+    <EditText
+        android:id="@+id/stopLoss"
+
+        android:inputType="number"
+
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+    <View
+        android:id="@+id/separatorFour"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="@dimen/create_separator_left_right_margin"
+        android:layout_marginRight="@dimen/create_separator_left_right_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/separator_color"/>
+    <TextView
+        android:id="@+id/chooseDirection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="Direction"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+        <RadioButton android:id="@+id/radio_pirates"
+            android:layout_width="wrap_content"
+            android:buttonTint="@android:color/white"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Long"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjas"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:buttonTint="@android:color/white"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Short"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+</LinearLayout>
+    <View
+        android:id="@+id/separatorTwo"
+        android:layout_marginLeft="@dimen/create_separator_left_right_margin"
+        android:layout_marginRight="@dimen/create_separator_left_right_margin"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/separator_color"/>
+    <TextView
+        android:id="@+id/chooseConviction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="Conviction:"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/radio_conviction_high"
+                android:layout_width="wrap_content"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="High"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radio_conviction_medium"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Medium"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radio_conviction_low"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Low"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
+    </LinearLayout>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/saveIdea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:layout_marginTop="150dp"
+
+        android:contentDescription="Save Idea"
+        android:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_check_white24" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

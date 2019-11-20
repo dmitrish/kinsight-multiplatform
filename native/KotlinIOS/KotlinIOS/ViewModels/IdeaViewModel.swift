@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 import Combine
 import SharedCode
-
+import Starscream
 
 class ProgressModel : ObservableObject {
     var inProgress = false
 }
 
-class IdeasViewModel : ObservableObject {
+public class IdeasViewModel : ObservableObject {
     
     @Published var ideas = [IdeaModel]()
     
@@ -24,6 +24,8 @@ class IdeasViewModel : ObservableObject {
     @Published var dataRequestInProgress = ProgressModel()
     
     private let repository: IdeaRepository?
+    private var socket: WebSocket!
+    private var hasSubscribed: Bool = false
     
     init(repository: IdeaRepository) {
         self.repository = repository
@@ -39,6 +41,8 @@ class IdeasViewModel : ObservableObject {
         }
        
     }
+ 
+    
     
     func fetchKotlin() {
          dataRequestInProgress.inProgress = true
@@ -47,6 +51,8 @@ class IdeasViewModel : ObservableObject {
        
             self.repository?.fetchIdeas(success: { data in
                 self.ideas  = data
+                self.setupSockets()
+                
 //            ideas.forEach {
 //                var ideaExt = IdeaModelExt(id: Int($0.id), ideaModel: $0)
 //                self.ideas.append(ideaExt)
@@ -73,7 +79,7 @@ class IdeasViewModel : ObservableObject {
     
     func fetchNative() {
       
-        var urlComponents = URLComponents(string: "https://alphacapture.appspot.com/api/ideas")!
+        var urlComponents = URLComponents(string: "http://localhost:8081/api/ideas")!
        
 
         var request = URLRequest(url: urlComponents.url!)
@@ -90,6 +96,57 @@ class IdeasViewModel : ObservableObject {
  
  
     }
+    
+     func setupSockets(){
+        if(!self.hasSubscribed) {
+         var request = URLRequest(url: URL(string: "ws://localhost:8081/ws")!)
+               request.timeoutInterval = 1
+               socket = WebSocket(request: request)
+               socket.delegate = self
+               socket.connect()
+        }
+    }
+    
+    func registerChannel()
+    {
+        socket.write(string: "Android client connecting")
+          hasSubscribed = true
+    }
+}
+
+extension IdeasViewModel : WebSocketDelegate {
+    // MARK: Websocket Delegate Methods.
+    
+    public func websocketDidConnect(socket: WebSocketClient) {
+      
+        registerChannel()
+        
+        print("websocket is connected")
+    
+    }
+    
+    public func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        hasSubscribed = false
+        if let e = error as? WSError {
+            print("websocket is disconnected: \(e.message)")
+        } else if let e = error {
+            print("websocket is disconnected: \(e.localizedDescription)")
+        } else {
+             print("websocket disconnected")
+        }
+    }
+    
+    public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        print("Received text: \(text)")
+        if (text == "reload") {
+            fetchKotlin()
+        }
+    }
+    
+    public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
+        print("Received data: \(data.count)")
+    }
+    
     
 }
 

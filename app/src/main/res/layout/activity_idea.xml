@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_animation"
+    android:orientation="vertical"
+    tools:context="com.kinsight.kinsightmultiplatform.views.IdeaActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_undraw_fishing_hoxa"/>
+
+    <ImageView
+        android:id="@+id/alphaLabl"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="-95dp"
+        app:srcCompat="@drawable/ic_fish_yellow"
+        android:textColor="@android:color/white"
+        android:text="Alpha:"/>
+    <TextView
+        android:id="@+id/alphaValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="63dp"
+        android:layout_marginTop="-31dp"
+        android:textSize="40dp"
+
+        android:textColor="@android:color/white"
+        android:text="2.50"/>
+    <TextView
+        android:id="@+id/ideaTicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="36dp"
+        android:textColor="@android:color/white"
+        android:text="AMZN"/>
+    <TextView
+        android:id="@+id/ideaCompany"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:text="Oracle Corporation"/>
+
+    <TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:letterSpacing="3.5"
+        android:layout_marginTop="45dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:text="PRICE"/>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target"/>
+    <TextView
+        android:textColor="@android:color/white"
+        android:layout_marginLeft="225dp"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current"/>
+
+</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/ideaDetailTargetPrice"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="40dp"
+            android:textSize="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45"/>
+        <TextView
+            android:id="@+id/ideaDetailCurrentPrice"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="230dp"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textSize="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
