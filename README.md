@@ -21,6 +21,9 @@ Idea Alert:
 
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/notification.png)
 
+
+# Steps to build different server flavors and run them locally
+
 Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
 ![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settingsgradle.png)
 
@@ -44,6 +47,28 @@ To run the fatjar build, first build with this build task:
 
 
 Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
+
+
+# Kotlin Native iOS project: Steps to run iOS project
+# Note: XCode 11 is required
+1. Compile the shared code module in Android Studio (see snapshot below).
+2. Move to Kotlin ios Folder
+3. Do a 'pod install'
+4. Open .xcworkspace file
+
+# Steps to run Android app
+1. Compile the shared code module in Android Studio (see snapshot below)
+2. In Android's build.gradle, in Android -> DefaultConfig -> change this build config field to be:
+buildConfigField("String", "url", '"https://10.0.2.2:8081"')
+
+
+
+# Build shared code first - before running android, ios or server!
+
+![build shared module](https://github.com/dmitrish/kinsight-multiplatform/blob/master/buildsharedcode.png)
+
+# Steps to deploy Server
+
 
 
 GOOGLE APP ENGINE and DOCKER - COMMANDS

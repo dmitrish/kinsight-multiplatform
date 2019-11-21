@@ -3,7 +3,6 @@ package com.kinsight.kinsightmultiplatform.views
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.extensions.inflate
@@ -48,19 +47,20 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             val psi = df.format(idea.benchMarkPerformance)
             this.idea = idea
             if (idea.alpha > 4){
-                view.ideaImage.setImageResource(R.drawable.ic_fish_superhot)
+                view.ideaImage2.setImageResource(R.drawable.ic_fish_green)
             }
             if (idea.alpha > 3 && idea.alpha < 4){
-                view.ideaImage.setImageResource(R.drawable.ic_fish_blue)
+                view.ideaImage2.setImageResource(R.drawable.ic_fish_yellow)
             }
             if (idea.alpha < 1){
-                view.ideaImage.setImageResource(R.drawable.ic_fish_onfire)
+                view.ideaImage2.setImageResource(R.drawable.ic_fish_pale_yellow)
             }
-            view.nameText.text = idea.securityName
+            view.nameText.text = idea.securityTicker
 
-            view.ideaAlpha.text = Strings.alpha + ": "  + alpha
-            view.ideaTargetPrice.text = "Target: ${idea.targetPrice} ${idea.stockCurrency}"
-            view.ideaCreatedBy.text ="Author: ${idea.createdBy}"
+            view.ideaAlpha.text =  alpha
+            view.ideaTargetPrice.text = idea.securityName
+
+            view.ideaCreatedBy.text ="By: ${idea.createdBy}"
             view.ideaPsi.text = Strings.psi + ": " + psi
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea)
