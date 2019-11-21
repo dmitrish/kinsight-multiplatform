@@ -59,7 +59,7 @@ Then navigate to the libs folder in the terminal and execute: libs % java -jar s
 # Steps to run Android app
 1. Compile the shared code module in Android Studio (see snapshot below)
 2. In Android's build.gradle, in Android -> DefaultConfig -> change this build config field to be:
-buildConfigField("String", "url", '"https://localhost:8081"')
+buildConfigField("String", "url", '"https://10.0.2.2:8081"')
 
 
 ![build shared module](https://github.com/dmitrish/kinsight-multiplatform/blob/master/buildsharedcode.png)
