@@ -25,22 +25,6 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         getViewModel { IdeasViewModel(application, "dmitri") }
     }
 
-    override fun onItemClicked(idea: IdeaModel) {
-        Toast.makeText(this,"Idea ${idea.securityName} \n Alpha: ${idea.alpha}", Toast.LENGTH_LONG)
-            .show()
-        Log.i("IDEA_", idea.securityName)
-
-        val intent = Intent(this, IdeaActivity::class.java)
-        intent.putExtra("ideaCompanyName", idea.securityName)
-        intent.putExtra("ideaTicker", idea.securityTicker)
-        intent.putExtra("ideaAlpha", idea.alpha)
-        intent.putExtra("ideaTargetPrice", idea.targetPrice)
-        intent.putExtra("ideaCreatedBy", idea.createdBy)
-        startActivity(intent)
-
-      //  NotificationHelper.sendNotification(this, "${idea.securityName} Idea Alert", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", "Price objective of ${idea.targetPrice} ${idea.stockCurrency} achieved", false)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ideas_layout)
@@ -49,19 +33,37 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
 
         fab.setOnClickListener {
-            val intent = Intent(this, IdeaCreateActivity::class.java)
-            intent.putExtra("nextId", viewModel.nextId() + 2)
-            startActivity(intent)
+            startIdeaCreateActivity()
         }
     }
 
     override fun onResume() {
         super.onResume()
         swiperefresh.setOnRefreshListener {
-           // swiperefresh.isRefreshing = true
             loading.isVisible = true
-           initViewModelListener()
+            initViewModelListener()
         }
+    }
+
+    override fun onItemClicked(idea: IdeaModel) {
+        Log.i("IDEA_", idea.securityName)
+        startIdeaDetailActivity(idea)
+    }
+
+    private fun startIdeaDetailActivity(idea: IdeaModel) {
+        val intent = Intent(this, IdeaActivity::class.java)
+        intent.putExtra("ideaCompanyName", idea.securityName)
+        intent.putExtra("ideaTicker", idea.securityTicker)
+        intent.putExtra("ideaAlpha", idea.alpha)
+        intent.putExtra("ideaTargetPrice", idea.targetPrice)
+        intent.putExtra("ideaCreatedBy", idea.createdBy)
+        startActivity(intent)
+    }
+
+    private fun startIdeaCreateActivity() {
+        val intent = Intent(this, IdeaCreateActivity::class.java)
+        intent.putExtra("nextId", viewModel.nextId() + 2)
+        startActivity(intent)
     }
 
     private fun initViewModelListener() {

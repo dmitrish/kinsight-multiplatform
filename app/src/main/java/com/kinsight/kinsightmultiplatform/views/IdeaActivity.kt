@@ -32,42 +32,18 @@ class IdeaActivity : FullScreenActivity() {
         ideaDetailCurrentPrice.text ="$${targetFormatted}"
         ideaDetailTargetPrice.text ="$${targetFormatted}"
 
-        if (alpha >= 4){
-            alphaLabl.setImageResource(R.drawable.ic_fish_superhot)
-       }
-        else if (alpha >= 3 && alpha < 4){
-            alphaLabl.setImageResource(R.drawable.ic_fish_green)
-        }
-        else if (alpha >= 1 && alpha < 3){
-            alphaLabl.setImageResource(R.drawable.ic_fish_pale_yellow)
-        }
-        if (alpha < 1){
-            alphaLabl.setImageResource(R.drawable.ic_fish_yellow)
-        }
+        val fishImageResource = getFishImageForAlpha(alpha)
+        alphaLabl.setImageResource(fishImageResource)
 
+        animateFish()
+    }
 
-
-       /* val path = Path().apply {
-            arcTo(0f, 0f, 1000f, 1000f, 270f, -180f, true)
-        }
-        val pathInterpolator = PathInterpolator(path)
-
-
-        */
+    private fun animateFish() {
         alphaLabl.alpha = 0F
         alphaLabl.animate().apply {
             duration = 3000
             alpha(1f)
             start()
         }
-
-       /* val animation = ObjectAnimator.ofFloat(alphaLabl, "translationX", 100f).apply {
-            interpolator = pathInterpolator
-            start()
-        }
-
-        */
-
-
     }
 }
