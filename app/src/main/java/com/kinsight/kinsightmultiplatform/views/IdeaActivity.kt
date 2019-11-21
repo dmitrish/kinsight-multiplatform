@@ -36,13 +36,13 @@ class IdeaActivity : FullScreenActivity() {
             alphaLabl.setImageResource(R.drawable.ic_fish_superhot)
        }
         else if (alpha >= 3 && alpha < 4){
-            alphaLabl.setImageResource(R.drawable.ic_fish_blue)
+            alphaLabl.setImageResource(R.drawable.ic_fish_green)
         }
         else if (alpha >= 1 && alpha < 3){
-            alphaLabl.setImageResource(R.drawable.ic_fish_red)
+            alphaLabl.setImageResource(R.drawable.ic_fish_pale_yellow)
         }
         if (alpha < 1){
-            alphaLabl.setImageResource(R.drawable.ic_fish_onfire)
+            alphaLabl.setImageResource(R.drawable.ic_fish_yellow)
         }
 
 

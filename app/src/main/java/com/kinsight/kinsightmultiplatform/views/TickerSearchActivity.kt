@@ -123,7 +123,7 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
             PorterDuff.Mode.SRC_IN
         )
         searchIcon.setImageDrawable(whiteIcon)
-       // searchIcon.setImageResource(R.drawable.ic_fish_yellow)
+       // searchIcon.setImageResource(R.drawable.ic_fish_blue)
        // searchIcon.foreground.setTint(Color.WHITE)
 
         searchIcon.setColorFilter(
