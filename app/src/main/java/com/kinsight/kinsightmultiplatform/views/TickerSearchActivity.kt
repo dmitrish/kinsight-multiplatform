@@ -14,6 +14,20 @@ import android.graphics.PorterDuff
 import android.widget.*
 import androidx.core.view.isVisible
 import com.kinsight.kinsightmultiplatform.ViewModels.TickerSearchModel
+import androidx.core.graphics.drawable.DrawableCompat.setTint
+import android.graphics.drawable.Drawable
+
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
+
+
+
+
 
 
 class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
@@ -54,6 +68,8 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
     }
 
     private fun setUpSearchBarListener() {
+
+
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
@@ -73,6 +89,9 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
                 return false
             }
         })
+
+
+
     }
 
     private fun setSearchBarAppearance() {
@@ -87,10 +106,33 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
         )
         val searchIcon = search.findViewById<ImageView>(iconid)
 
+
+        search.setIconifiedByDefault(false)
+      //  search.se
+
+       // android.widget.SearchView.
+       // search.foreground.setTint(Color.WHITE)
+
+       // val searchIco = resources.getDrawable(android.R.drawable.)
+       // searchIco.setTint(Color.WHITE)
+        /*
+        val whiteIcon = searchIcon.getDrawable()
+        whiteIcon.setVisible(false, true)
+        whiteIcon.setTint(Color.WHITE) //Whatever color you want it to be
+        whiteIcon.setColorFilter(Color.WHITE,
+            PorterDuff.Mode.SRC_IN
+        )
+        searchIcon.setImageDrawable(whiteIcon)
+       // searchIcon.setImageResource(R.drawable.ic_fish_blue)
+       // searchIcon.foreground.setTint(Color.WHITE)
+
         searchIcon.setColorFilter(
             Color.WHITE,
             PorterDuff.Mode.SRC_IN
         )
+
+
+         */
 
         val textView = search.findViewById(id) as TextView
         textView.setTextColor(Color.WHITE)

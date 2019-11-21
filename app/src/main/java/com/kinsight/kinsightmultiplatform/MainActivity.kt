@@ -34,7 +34,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         intent.putExtra("ideaCompanyName", idea.securityName)
         intent.putExtra("ideaTicker", idea.securityTicker)
         intent.putExtra("ideaAlpha", idea.alpha)
-        intent.putExtra("ideaTargetPrice", idea.targetPrice.toString())
+        intent.putExtra("ideaTargetPrice", idea.targetPrice)
         intent.putExtra("ideaCreatedBy", idea.createdBy)
         startActivity(intent)
 

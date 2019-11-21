@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.kinsight.kinsightmultiplatform.BuildConfig
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
@@ -12,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TickerSearchViewModel: ViewModel() {
-    private val serverApiUrl =  "https://alphacapture.appspot.com"
+    private val serverApiUrl =  BuildConfig.url
 
     private val repository by lazy { IdeaRepository(serverApiUrl) }
 

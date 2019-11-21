@@ -20,7 +20,7 @@
         android:layout_height="96dp"
         android:layout_marginLeft="48dp"
         android:layout_marginTop="-95dp"
-        app:srcCompat="@drawable/ic_fish_yellow"
+        app:srcCompat="@drawable/ic_fish_blue"
         android:textColor="@android:color/white"
         android:text="Alpha:"/>
     <TextView
@@ -72,13 +72,17 @@
     android:layout_height="wrap_content">
     <TextView
         android:textColor="@android:color/white"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Target"/>
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <TextView
         android:textColor="@android:color/white"
-        android:layout_marginLeft="225dp"
+        android:layout_marginRight="50dp"
         android:layout_gravity="right"
         android:gravity="right"
         android:layout_width="wrap_content"
@@ -94,21 +98,27 @@
         <TextView
             android:id="@+id/ideaDetailTargetPrice"
             android:textColor="@android:color/white"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="45dp"
             android:textSize="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45"/>
+            android:layout_gravity="left"
+
+            android:text="$45"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
         <TextView
             android:id="@+id/ideaDetailCurrentPrice"
             android:textColor="@android:color/white"
-            android:layout_marginLeft="230dp"
+            android:layout_marginRight="45dp"
             android:layout_gravity="right"
             android:gravity="right"
             android:textSize="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50"/>
+            android:text="$50"/>
 
     </LinearLayout>
 

@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
         android:layout_marginTop="35dp"
+        android:searchIcon="@drawable/ic_search_white"
         android:queryHint="Search by ticker"
-
+        android:foregroundTint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

@@ -16,6 +16,9 @@ import kotlinx.android.synthetic.main.activity_idea_create.*
 
 class IdeaCreateActivity : FullScreenActivity() {
 
+    private var isBear: Boolean = false
+    private var isBull: Boolean = false
+
     private val viewModel by lazy { getViewModel {IdeaCreateViewModel()}}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +33,102 @@ class IdeaCreateActivity : FullScreenActivity() {
             val intent = Intent(this, TickerSearchActivity::class.java)
             startActivityForResult(intent, PICK_TICKER_REQUEST)
         }
+
+        imageBear.setOnClickListener{
+
+            if (!isBear) {
+                imageBear.animate().apply {
+                    duration = 1000
+                    xBy(120f)
+                    scaleXBy(0.5F)
+                    scaleYBy(0.5F)
+                    start()
+                }
+                imageBull.animate().apply {
+                    duration = 1000
+                    xBy(120f)
+                    scaleXBy(-0.2F)
+                    scaleYBy(-0.2F)
+                    start()
+                }
+                isBear = true
+
+            }
+            else {
+                    imageBear.animate().apply {
+                        duration = 1000
+                        xBy(-120f)
+                        scaleXBy(-0.5F)
+                        scaleYBy(-0.5F)
+                        start()
+                    }
+                    imageBull.animate().apply {
+                        duration = 1000
+                        xBy(-120f)
+                        scaleXBy(0.2F)
+                        scaleYBy(0.2F)
+                        start()
+                    }
+                    isBear = false
+                }
+            isBull = false
+        }
+
+        imageBull.setOnClickListener{
+            if (!isBull && !isBear) {
+                imageBull.animate().apply {
+                    duration = 1000
+                    xBy(-120f)
+                    scaleXBy(0.5F)
+                    scaleYBy(0.5F)
+                    start()
+                }
+                imageBear.animate().apply {
+                    duration = 1000
+                    xBy(-120f)
+                    scaleXBy(-0.2F)
+                    scaleYBy(-0.2F)
+                    start()
+                }
+                isBull = true
+            }
+            else if (!isBull && isBear) {
+                imageBull.animate().apply {
+                    duration = 1000
+                    xBy(-240f)
+                    scaleXBy(0.7F)
+                    scaleYBy(0.7F)
+                    start()
+                }
+                imageBear.animate().apply {
+                    duration = 1000
+                    xBy(-240f)
+                    scaleXBy(-0.7F)
+                    scaleYBy(-0.7F)
+                    start()
+                }
+                isBull = true
+            }
+            else {
+                imageBull.animate().apply {
+                    duration = 1000
+                    xBy(120f)
+                    scaleXBy(-0.5F)
+                    scaleYBy(-0.5F)
+                    start()
+                }
+                imageBear.animate().apply {
+                    duration = 1000
+                    xBy(-120f)
+                    scaleXBy(0.2F)
+                    scaleYBy(0.2F)
+                    start()
+                }
+                isBull = false
+            }
+            isBear = false
+        }
+
 
         saveIdea.setOnClickListener{
             try {
