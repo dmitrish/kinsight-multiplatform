@@ -17,6 +17,7 @@ object DatabaseFactory {
         Database.connect(hikari())
         transaction {
             create(Widgets)
+            create(WidgetDetails)
             Widgets.insert {
                 it[name] = "widget one"
                 it[quantity] = 27
@@ -27,16 +28,39 @@ object DatabaseFactory {
                 it[quantity] = 14
                 it[dateUpdated] = System.currentTimeMillis()
             }
+
+            WidgetDetails.insert {
+                it[name] = "widget details one"
+                it[quantity] = 1
+                it[dateUpdated] = System.currentTimeMillis()
+            }
+
         }
     }
 
     private fun hikari(): HikariDataSource {
         val config = HikariConfig()
+
+
         config.driverClassName = "org.h2.Driver"
         config.jdbcUrl = "jdbc:h2:mem:test"
+
+
+/*
+        config.driverClassName = "com.mysql.jdbc.GoogleDriver" //"org.h2.Driver"
+        config.jdbcUrl = "jdbc:google:mysql://project-kinsight:us-east1:tradeideas2019"//"jdbc:h2:mem:test"
+        config.username = ""
+        config.password = ""
+        config.isRegisterMbeans = false
+//config.dataSource = "TIData"
+*/
         config.maximumPoolSize = 3
         config.isAutoCommit = false
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+
+
+
+
         config.validate()
         return HikariDataSource(config)
     }

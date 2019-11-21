@@ -108,7 +108,8 @@ var ideas = mutableListOf<Idea>()
 var wssessions=  mutableListOf<WebSocketSession>()
 var tickers = mutableListOf<Ticker>()
 
-val iexUrl = "https://cloud.iexapis.com/stable/ref-data/symbols?token="
+val iexBaseUrl = "https://cloud.iexapis.com/stable"
+val iexRefDataUrl = "/ref-data/symbols?token="
 
 val iexToken = "useyourown"
 
@@ -276,6 +277,30 @@ fun Application.main() {
             call.respond(filtered)
         }
 
+        get("/api/stock/quote/{ticker}"){
+
+            var ticker =call.parameters["ticker"]!!.toUpperCase(Locale.ROOT)
+
+            val client = HttpClient()
+            val address =    Url("$iexBaseUrl/stock/$ticker/quote?token=$iexToken")
+            var result = ""
+
+            try {
+                result = client.get<String> {
+                    url(address.toString())
+                }
+                println(result)
+                call.respond(result)
+
+            } catch (t: Throwable) {
+                call.respondText(
+                    (if (t.message != null) t.message!! else ""),
+                    ContentType.Application.Json
+                )
+            }
+
+        }
+
         get("/api/graph/{id}"){
             val id =  call.parameters["id"]!!.toUpperCase(Locale.ROOT)
             val text = loadResourceText("/${id}.json")
@@ -284,7 +309,7 @@ fun Application.main() {
 
         get ("/appengine/loadtickers"){
             if (tickers == null || tickers.count() == 0) {
-                val urlString = "$iexUrl$iexToken"
+                val urlString = "$iexBaseUrl$iexRefDataUrl$iexToken"
                 val url = URL(urlString)
                 val response = URLFetchServiceFactory.getURLFetchService().fetch(url)
                 val text = String(response.content)
@@ -298,7 +323,7 @@ fun Application.main() {
 
             if (tickers == null || tickers.count() == 0) {
                 val client = HttpClient()
-                val address =    Url("$iexUrl$iexToken")
+                val address =    Url("$iexBaseUrl$iexRefDataUrl$iexToken")
                 var result = ""
                 var finalResult: List<Ticker>? = null
 
