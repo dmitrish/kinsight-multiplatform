@@ -62,6 +62,9 @@ Then navigate to the libs folder in the terminal and execute: libs % java -jar s
 buildConfigField("String", "url", '"https://10.0.2.2:8081"')
 
 
+
+# Build shared code first - before running android, ios or server!
+
 ![build shared module](https://github.com/dmitrish/kinsight-multiplatform/blob/master/buildsharedcode.png)
 
 # Steps to deploy Server
