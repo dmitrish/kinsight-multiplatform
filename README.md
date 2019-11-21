@@ -22,7 +22,7 @@ Idea Alert:
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/notification.png)
 
 
-# Steps to build differen server flavors and run them locally
+# Steps to build different server flavors and run them locally
 
 Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
 ![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settingsgradle.png)
