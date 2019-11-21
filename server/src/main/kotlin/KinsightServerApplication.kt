@@ -7,6 +7,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.Url
 import io.ktor.response.header
 import io.ktor.response.respondText
+import io.ktor.jackson.jackson
 import io.ktor.routing.*
 import kotlinx.html.*
 import io.ktor.client.*
@@ -37,6 +38,11 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
+import kinsight.server.api.model.*
+import kinsight.server.api.service.*
+import kinsight.server.api.web.*
+
+import com.fasterxml.jackson.databind.SerializationFeature
 
 @Serializable data class Ticker (
     @SerialName("symbol")
@@ -105,6 +111,8 @@ var tickers = mutableListOf<Ticker>()
 val iexUrl = "https://cloud.iexapis.com/stable/ref-data/symbols?token="
 
 val iexToken = "useyourown"
+
+val widgetService = WidgetService()
 
 data class ClientSession
     (val id: String)
@@ -209,6 +217,15 @@ fun Application.main() {
         }
     }
 
+    /*
+    install(ContentNegotiation) {
+        jackson {
+            configure(SerializationFeature.INDENT_OUTPUT, true)
+        }
+    }
+
+     */
+
     // Registers routes
     suspend fun sendReloadSignal() {
         try {
@@ -223,6 +240,8 @@ fun Application.main() {
             println("Exception in outer Hi: ${e.message}")
         }
     }
+
+
 
     routing {
         // For the root / route, we respond with an Html.
@@ -370,5 +389,11 @@ fun Application.main() {
                 }
             }
         }
+
+            widget(widgetService)
+
     }
+
+    DatabaseFactory.init()
+
 }

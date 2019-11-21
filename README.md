@@ -3,7 +3,23 @@
 
 # Kotlin Multiplafrorm project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
 
-![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/Screen%20Shot%202019-11-07%20at%209.06.33%20PM.png)
+![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside.png)
+
+
+![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
+
+
+
+Ideas (new design)
+![android new design](https://github.com/dmitrish/kinsight-multiplatform/blob/master/newdesign-android.png)
+
+Idea Graph:
+
+![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaperformance.png)
+
+Idea Alert:
+
+![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/notification.png)
 
 Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
 ![Switching server between google app engine and netty builds](https://github.com/dmitrish/kinsight-multiplatform/blob/master/settingsgradle.png)
@@ -29,6 +45,12 @@ To run the fatjar build, first build with this build task:
 
 Then navigate to the libs folder in the terminal and execute: libs % java -jar server-all.jar
 
+
+# Kotlin Native iOS project: Steps to run iOS project
+1. Compile the shared code module in Android.
+2. Move to Kotlin ios Folder
+3. Do a 'pod install'
+4. Open .xcworkspace file
 
 GOOGLE APP ENGINE and DOCKER - COMMANDS
 ---------------------------------------
