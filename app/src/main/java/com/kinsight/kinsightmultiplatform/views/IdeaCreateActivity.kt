@@ -18,6 +18,7 @@ class IdeaCreateActivity : FullScreenActivity() {
 
     private var isBear: Boolean = false
     private var isBull: Boolean = false
+    private var companyName: String? = null
 
     private val viewModel by lazy { getViewModel {IdeaCreateViewModel()}}
 
@@ -148,7 +149,7 @@ class IdeaCreateActivity : FullScreenActivity() {
                     directionId = 1,
                     entryPrice = 24.59,
                     reason = "Target Price",
-                    securityName = securityTicker,
+                    securityName = companyName?: securityTicker,
                     securityTicker = securityTicker,
                     stockCurrency = "USD",
                     stopLoss = stopLoss,
@@ -181,6 +182,7 @@ class IdeaCreateActivity : FullScreenActivity() {
             // Make sure the request was successful
             if (resultCode == Activity.RESULT_OK) {
                chooseTicker.text = data?.getStringExtra("ticker")
+                companyName = data?.getStringExtra("companyName")
              }
         }
 

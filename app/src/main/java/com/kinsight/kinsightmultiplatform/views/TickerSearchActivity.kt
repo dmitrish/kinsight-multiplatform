@@ -146,6 +146,7 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
         Log.i("TICKER_", ticker.symbol)
 
         intent.putExtra("ticker", ticker.symbol)
+        intent.putExtra("companyName", ticker.name)
 
         setResult(RESULT_OK, intent);
 
