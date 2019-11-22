@@ -40,10 +40,23 @@ class IdeaActivity : FullScreenActivity() {
 
     private fun animateFish() {
         alphaLabl.alpha = 0F
+        alphaLabl.y = 3500f
+        alphaLabl.x = 1000f
+        alphaLabl.scaleY = -2f
+        alphaLabl.scaleX = -2f
         alphaLabl.animate().apply {
             duration = 3000
+            x(164f)
+            y(730f)
             alpha(1f)
             start()
         }
+        alphaLabl.animate().apply {
+            duration = 2000
+            scaleX(1.2f)
+            scaleY(1.2f)
+            start()
+        }
+
     }
 }
