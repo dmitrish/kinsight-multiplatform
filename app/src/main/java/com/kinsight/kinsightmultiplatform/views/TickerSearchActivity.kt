@@ -108,31 +108,6 @@ class TickerSearchActivity : FullScreenActivity(), OnTickerClickListener {
 
 
         search.setIconifiedByDefault(false)
-      //  search.se
-
-       // android.widget.SearchView.
-       // search.foreground.setTint(Color.WHITE)
-
-       // val searchIco = resources.getDrawable(android.R.drawable.)
-       // searchIco.setTint(Color.WHITE)
-        /*
-        val whiteIcon = searchIcon.getDrawable()
-        whiteIcon.setVisible(false, true)
-        whiteIcon.setTint(Color.WHITE) //Whatever color you want it to be
-        whiteIcon.setColorFilter(Color.WHITE,
-            PorterDuff.Mode.SRC_IN
-        )
-        searchIcon.setImageDrawable(whiteIcon)
-       // searchIcon.setImageResource(R.drawable.ic_fish_blue)
-       // searchIcon.foreground.setTint(Color.WHITE)
-
-        searchIcon.setColorFilter(
-            Color.WHITE,
-            PorterDuff.Mode.SRC_IN
-        )
-
-
-         */
 
         val textView = search.findViewById(id) as TextView
         textView.setTextColor(Color.WHITE)
