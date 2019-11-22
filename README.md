@@ -98,7 +98,7 @@ Other Docker Commands:
 Uploading Docker Image to Google Cloud Registry:
 
 1. Add Tag to Image (V3 is the tag here)
-    docker tag quickstart-image gcr.io/project-kinsight/server-all-image:V3
+    docker tag server-all gcr.io/project-kinsight/server-all-image:V3
 2. Push Image to cloud registry
     docker push gcr.io/project-kinsight/server-all-image:V3
 
