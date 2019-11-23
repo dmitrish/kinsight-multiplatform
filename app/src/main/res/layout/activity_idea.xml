@@ -107,12 +107,12 @@
         android:text="PRICE"/>
 <LinearLayout
     android:orientation="horizontal"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="15dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="25dp">
     <TextView
         android:textColor="@android:color/white"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Target"/>
@@ -134,7 +134,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
         <TextView
             android:id="@+id/ideaDetailTargetPrice"
             android:textColor="@android:color/white"
