@@ -43,6 +43,23 @@ import kinsight.server.api.service.*
 import kinsight.server.api.web.*
 
 import com.fasterxml.jackson.databind.SerializationFeature
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+
+import java.util.Timer
+import kotlin.concurrent.fixedRateTimer
+import kotlin.concurrent.schedule
+import kotlin.system.measureTimeMillis
+
+/**
+ * A dedicated context for sample "compute-intensive" tasks.
+ */
+val compute = newFixedThreadPoolContext(4, "compute")
+
+/**
+ * An alias to simplify a suspending functional type.
+ */
+typealias DelayProvider = suspend (ms: Int) -> Unit
 
 @Serializable data class Ticker (
     @SerialName("symbol")
@@ -111,7 +128,7 @@ var tickers = mutableListOf<Ticker>()
 val iexBaseUrl = "https://cloud.iexapis.com/stable"
 val iexRefDataUrl = "/ref-data/symbols?token="
 
-val iexToken = "useyourown"
+val iexToken = "pk_8d8f1bbd966643e0984dd17aa9fa8fbb"//"useyourown"
 
 val widgetService = WidgetService()
 
@@ -153,7 +170,7 @@ fun loadEmbeddedJsonIdeas(){
  *
  * For more information about this file: https://ktor.io/servers/configuration.html#hocon-file
  */
-fun Application.main() {
+fun Application.main(random: Random = Random(), delayProvider: DelayProvider = { delay(it.toLong()) }) {
 
     loadEmbeddedJsonIdeas()
 
@@ -227,8 +244,10 @@ fun Application.main() {
 
      */
 
+
+
     // Registers routes
-    suspend fun sendReloadSignal() {
+    suspend fun sendReloadSignalNew() {
         try {
             for (wssession in wssessions) {
                 try {
@@ -241,8 +260,6 @@ fun Application.main() {
             println("Exception in outer Hi: ${e.message}")
         }
     }
-
-
 
     routing {
         // For the root / route, we respond with an Html.
@@ -346,7 +363,7 @@ fun Application.main() {
         }
 
         post("/api/hi"){
-            sendReloadSignal()
+            sendReloadSignalNew()
             call.respond(mapOf("OK" to true))
         }
 
@@ -372,6 +389,18 @@ fun Application.main() {
             ideas.removeAt(index)
             sendReloadSignal()
             call.respond(mapOf("OK" to true))
+        }
+
+        post("/api/simulate/{id}") {
+            val id =  call.parameters["id"]!!.toUpperCase(Locale.ROOT)
+
+            println("simulate start...")
+
+            sendReloadSignal()
+
+            val startTime = System.currentTimeMillis()
+            call.respondHandlingLongCalculation(random, delayProvider, startTime)
+
         }
 
         webSocket("/ws") { // this: WebSocketSession ->
@@ -421,4 +450,45 @@ fun Application.main() {
 
     DatabaseFactory.init()
 
+
+
+}
+
+// Registers routes
+private suspend fun Application.sendReloadSignal() {
+    try {
+        for (wssession in wssessions) {
+            try {
+                wssession.send(Frame.Text("reload"))
+            } catch (e: Throwable) {
+                println("Exception in Application.sendReloadSignal: ${e.message}")
+            }
+        }
+    } catch (e: Throwable) {
+        println("Exception in outer Application.sendReloadSignal: ${e.message}")
+    }
+}
+
+/**
+ * Function that will perform a long computation in a threadpool generating random numbers
+ * and then will respond with the result.
+ */
+private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long) {
+    val queueTime = System.currentTimeMillis() - startTime
+
+    val computeTime = measureTimeMillis {
+        // We specify a coroutine context, that will use a thread pool for long computing operations.
+        // In this case it is not necessary since we are "delaying", not sleeping the thread.
+        // But serves as an example of what to do if we want to perform slow non-asynchronous operations
+        // that would block threads.
+        withContext(compute) {
+            for (index in 0 until 5) {
+                delayProvider(20000)
+
+                application.sendReloadSignal()
+            }
+        }
+    }
+
+    respond(mapOf("OK" to true))
 }
