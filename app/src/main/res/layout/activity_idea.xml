@@ -43,7 +43,7 @@
         android:id="@+id/fishermanLabel"
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="285dp"
+        android:layout_marginLeft="283dp"
         android:layout_height="wrap_content"
         android:text="Fisherman:"/>
     <TextView
@@ -51,7 +51,7 @@
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="298dp"
+        android:layout_marginLeft="296dp"
         android:layout_height="wrap_content"
         android:text="Dmitri"/>
     <ImageView
@@ -107,9 +107,9 @@
         android:text="PRICE"/>
 <LinearLayout
     android:orientation="horizontal"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="15dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="25dp">
     <TextView
         android:textColor="@android:color/white"
         android:layout_marginLeft="50dp"
@@ -134,7 +134,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
         <TextView
             android:id="@+id/ideaDetailTargetPrice"
             android:textColor="@android:color/white"
