@@ -362,7 +362,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
 
         }
 
-        get("/api/hi"){
+        post("/api/hi"){
             sendReloadSignalNew()
             call.respond(mapOf("OK" to true))
         }
@@ -391,7 +391,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             call.respond(mapOf("OK" to true))
         }
 
-        get("/api/simulate/{id}") {
+        post("/api/simulate/{id}") {
             val id =  call.parameters["id"]!!.toUpperCase(Locale.ROOT)
 
             println("simulate start...")
@@ -401,26 +401,6 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             val startTime = System.currentTimeMillis()
             call.respondHandlingLongCalculation(random, delayProvider, startTime)
 
-            /*
-            // create a fixed rate timer that prints hello world every 100ms
-            // after a 100ms delay
-            val fixedRateTimer = fixedRateTimer(name = "hello-timer",
-                initialDelay = 100, period = 100) {
-                println("hello world!")
-            }
-
-             */
-            /*
-            var i = 0
-            while (i < 10) {
-                launch {
-                    sendReloadSignal()
-                    println("simulate --> $i")
-                    i = i+1
-                    Thread.sleep(1000)
-                }
-            }
-             */
         }
 
         webSocket("/ws") { // this: WebSocketSession ->
@@ -481,11 +461,11 @@ private suspend fun Application.sendReloadSignal() {
             try {
                 wssession.send(Frame.Text("reload"))
             } catch (e: Throwable) {
-                println("Exception in Hi: ${e.message}")
+                println("Exception in Application.sendReloadSignal: ${e.message}")
             }
         }
     } catch (e: Throwable) {
-        println("Exception in outer Hi: ${e.message}")
+        println("Exception in outer Application.sendReloadSignal: ${e.message}")
     }
 }
 
@@ -495,35 +475,20 @@ private suspend fun Application.sendReloadSignal() {
  */
 private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long) {
     val queueTime = System.currentTimeMillis() - startTime
-    var number = 0
+
     val computeTime = measureTimeMillis {
         // We specify a coroutine context, that will use a thread pool for long computing operations.
         // In this case it is not necessary since we are "delaying", not sleeping the thread.
         // But serves as an example of what to do if we want to perform slow non-asynchronous operations
         // that would block threads.
         withContext(compute) {
-            for (index in 0 until 300) {
-                delayProvider(10)
-                number += random.nextInt(100)
+            for (index in 0 until 5) {
+                delayProvider(20000)
 
                 application.sendReloadSignal()
             }
         }
     }
 
-    // Responds with an HTML file, generated with the kotlinx.html DSL.
-    // More information about this DSL: https://github.com/Kotlin/kotlinx.html
-    respondHtml {
-        head {
-            title { +"Ktor: async" }
-        }
-        body {
-            p {
-                +"Hello from Ktor Async sample application"
-            }
-            p {
-                +"We calculated number $number in $computeTime ms of compute time, spending $queueTime ms in queue."
-            }
-        }
-    }
+    respond(mapOf("OK" to true))
 }
