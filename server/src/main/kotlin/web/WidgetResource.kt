@@ -21,6 +21,10 @@ fun Route.widget(widgetService: WidgetService) {
             call.respond(widgetService.getAllWidgets())
         }
 
+        get("/details") {
+            call.respond(widgetService.getAllWidgetDetails())
+        }
+
         get("/{id}") {
             val id = call.parameters["id"]?.toInt() ?: throw IllegalStateException("Must provide id");
             val widget = widgetService.getWidget(id)

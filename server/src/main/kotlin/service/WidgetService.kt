@@ -71,6 +71,10 @@ class WidgetService {
         }
     }
 
+    suspend fun getAllWidgetDetails(): List<Widget> = dbQuery {
+        WidgetDetails.selectAll().map { toWidget(it) }
+    }
+
     private fun toWidget(row: ResultRow): Widget =
         Widget(
             id = row[Widgets.id],
