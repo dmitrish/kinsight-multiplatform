@@ -8,6 +8,11 @@
 
 ![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
 
+Ideas list - Android
+
+![ideas list android](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideas-android.jpg)
+
+
 
 
 Ideas (new design)
