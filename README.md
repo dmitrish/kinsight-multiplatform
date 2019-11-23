@@ -11,7 +11,7 @@
 
 
 Ideas (new design)
-![android new design](https://github.com/dmitrish/kinsight-multiplatform/blob/master/newdesign-android.png)
+![android detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/detail.jpg)
 
 Idea Graph:
 
