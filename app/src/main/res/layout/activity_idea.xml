@@ -15,8 +15,9 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/ic_undraw_fishing_hoxa"/>
     <androidx.cardview.widget.CardView
+        android:id="@+id/fishermanCard"
         android:layout_width="100dp"
-
+        android:background="@android:color/holo_orange_dark"
         android:layout_height="100dp"
         android:layout_marginTop="-280dp"
         android:layout_marginLeft="270dp"
@@ -25,13 +26,17 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="100dp"
+            android:background="@android:color/holo_orange_dark"
             android:layout_height="100dp"
             app:cardCornerRadius="150dp"
             android:layout_gravity="center">
 
             <ImageView
+                android:id="@+id/fishermanImage"
+                android:background="@android:color/holo_orange_dark"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:visibility="invisible"
                 android:src="@drawable/ic_man"
                 android:scaleType="centerCrop"/>
 

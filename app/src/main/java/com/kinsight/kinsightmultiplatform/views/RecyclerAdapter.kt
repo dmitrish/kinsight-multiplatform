@@ -16,14 +16,14 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
     RecyclerView.Adapter<RecyclerAdapter.IdeaHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            RecyclerAdapter.IdeaHolder {
+           IdeaHolder {
         val inflatedView = parent.inflate(R.layout.idea_item, false)
         return IdeaHolder(inflatedView)
     }
 
     override fun getItemCount(): Int = ideas.size
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.IdeaHolder, position: Int) {
+    override fun onBindViewHolder(holder: IdeaHolder, position: Int) {
         val itemIdea = ideas[position]
         holder.bindIdea(itemIdea, itemClickListener)
     }
