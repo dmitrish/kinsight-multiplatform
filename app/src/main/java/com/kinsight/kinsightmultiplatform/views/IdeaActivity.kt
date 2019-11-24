@@ -90,7 +90,7 @@ class IdeaActivity : FullScreenActivity() {
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch {
-            delay(1000)
+            delay(250)
             withContext(Dispatchers.Main) {
                 alphaLabl.scaleX = 6.5f
                 alphaLabl.scaleY = 6.5f
@@ -143,7 +143,7 @@ class IdeaActivity : FullScreenActivity() {
             })
     }
 
-    fun createSpringAnimation(view: View,
+    private fun createSpringAnimation(view: View,
                               property: DynamicAnimation.ViewProperty,
                               finalPosition: Float,
                               stiffness: Float,

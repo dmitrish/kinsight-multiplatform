@@ -44,7 +44,6 @@ kotlin {
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-       // implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.2")
         // Serialize
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
@@ -78,20 +77,10 @@ kotlin {
     }
 
     sourceSets["iosMain"].dependencies{
-        // Coroutines
-        //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
-        //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.2")
-
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2")
-        // Serialize
-       // implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:1.3.0")
-
-        // Serialize
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.13.0")
-
         implementation ("io.ktor:ktor-client-ios:1.2.4")
         implementation ("io.ktor:ktor-client-core-native:1.2.4")
-
         implementation ("io.ktor:ktor-client-json-native:1.2.4")
         implementation ("io.ktor:ktor-client-logging-native:1.2.4")
         implementation ("io.ktor:ktor-client-serialization-native:1.2.4")
