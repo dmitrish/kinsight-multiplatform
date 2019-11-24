@@ -1,5 +1,7 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -16,6 +18,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import android.view.ViewAnimationUtils
+
+
+
+
+
+
 
 
 
@@ -97,6 +106,20 @@ class IdeaActivity : FullScreenActivity() {
                 scaleXAnimation.start()
                 scaleYAnimation.start()
             }
+            animateFisherman()
+        }
+
+
+    }
+
+    private fun animateFisherman(){
+        fishermanCard.alpha = 0f
+        fishermanCard.visibility = View.VISIBLE
+        fishermanImage.visibility = View.VISIBLE
+        fishermanCard.animate().apply {
+            duration = 2000
+            alpha(1f)
+            start()
         }
     }
 
@@ -154,5 +177,18 @@ class IdeaActivity : FullScreenActivity() {
         spring.dampingRatio = dampingRatio
         animation.spring = spring
         return animation
+    }
+    private fun circularRevealCard(view: View) {
+        val finalRadius = Math.max(view.width, view.height).toFloat()
+
+        // create the animator for this view (the start radius is zero)
+        val circularReveal =
+            ViewAnimationUtils.createCircularReveal(view, 0, 0, 0f, finalRadius * 1.1f)
+        circularReveal.duration = 1000
+
+        // make the view visible and start the animation
+        view.visibility = View.VISIBLE
+
+        circularReveal.start()
     }
 }
