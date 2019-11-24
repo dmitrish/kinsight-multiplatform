@@ -28,7 +28,7 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
         holder.bindIdea(itemIdea, itemClickListener)
     }
 
-    class IdeaHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class IdeaHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         private var view: View = v
         private var idea: IdeaModel? = null
 
@@ -37,6 +37,7 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
         }
 
         override fun onClick(v: View) {
+            itemClickListener.onItemClicked(idea!!, view)
             Log.d("Ideas RecyclerView", "Idea Clicked")
         }
 
@@ -63,16 +64,13 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             view.ideaCreatedBy.text ="By: ${idea.createdBy}"
             view.ideaPsi.text = Strings.psi + ": " + psi
             itemView.setOnClickListener {
-                clickListener.onItemClicked(idea)
+                clickListener.onItemClicked(idea, view)
             }
         }
 
-        companion object {
-            private val IDEA_KEY = "IDEA"
-        }
     }
 }
 
 interface OnItemClickListener{
-    fun onItemClicked(idea: IdeaModel)
+    fun onItemClicked(idea: IdeaModel, view: View)
 }
