@@ -1,7 +1,5 @@
 package com.kinsight.kinsightmultiplatform.views
 
-import android.content.res.Resources
-import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -19,13 +17,6 @@ import kotlinx.coroutines.withContext
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
-
-
-
-
-
-
-
 
 
 class IdeaActivity : FullScreenActivity() {

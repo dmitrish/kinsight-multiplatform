@@ -1,0 +1,97 @@
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   android:background="@drawable/gradient_animation"
+    android:layout_height="500dp"
+
+    tools:context="com.kinsight.kinsightmultiplatform.views.PickIdeaDurationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/pickDurationHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:paddingTop="35dp"
+            android:text="Choose Idea Duration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/ic_fish_monogram_38"
+            android:drawablePadding="50dp"
+
+            tools:text="Choose Idea Duration" />
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="90dp"
+            android:onClick="onRadioButtonClicked"
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/oneweek"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="1 week"
+                android:onClick="onRadioButtonClicked"
+                />
+            <RadioButton android:id="@+id/onemonth"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="1 month"
+                />
+            <RadioButton android:id="@+id/threemonths"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="3 months"
+                />
+            <RadioButton android:id="@+id/sixmonths"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="6 months"
+                />
+            <RadioButton android:id="@+id/oneyear"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:buttonTint="@android:color/white"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="1 year"
+                />
+        </RadioGroup>
+    </LinearLayout>
+
+</FrameLayout>
