@@ -12,16 +12,26 @@ import SharedCode
 
 struct IdeaViewDetail: View {
     var ideaModel: IdeaModel
+    
+    @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
+     @State var startPoint = UnitPoint(x: 0, y: 0)
+     @State var endPoint = UnitPoint(x: 0, y: 2)
 
     var body: some View {
 
         ZStack {
-            Text(ideaModel.securityName).font(.headline)
-            Text("Alpha: \(ideaModel.alpha)" )
-            Text("Entry price: \(ideaModel.entryPrice)" )
-            Text("Target price: \(ideaModel.targetPrice)" )
-            Text("Time Horizon: \(ideaModel.timeHorizon)" )
-            GraphView()
+            RoundedRectangle(cornerRadius: 0)
+                                      .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
+                                      .edgesIgnoringSafeArea(.all)
+                     VStack{
+                        Image("undraw_fishing_hoxa").resizable().scaledToFit().frame(width: 400, height: 280, alignment: .topLeading)
+                        Spacer()
+                        Text(ideaModel.securityTicker).font(.headline).foregroundColor(.white)
+                        Text("\(ideaModel.securityName)" ).foregroundColor(.white)
+            Text("Entry price: \(ideaModel.entryPrice)" ).foregroundColor(.white)
+            Text("Target price: \(ideaModel.targetPrice)" ).foregroundColor(.white)
+            Text("Time Horizon: \(ideaModel.timeHorizon)" ).foregroundColor(.white)
+                    }
         }
 
 
