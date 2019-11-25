@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_animation"
+    android:orientation="vertical"
+    tools:context="com.kinsight.kinsightmultiplatform.views.IdeaCreateActivity">
+    <TextView
+        android:id="@+id/chooseTicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:textColor="@android:color/white"
+        android:text="Ticker:"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/chooseTargetPrice"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+
+            android:textColor="@android:color/white"
+            android:text="Target Price:"/>
+
+        <EditText
+            android:id="@+id/targetPrice"
+            android:inputType="number"
+
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/chooseStopLoss"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:layout_marginTop="2dp"
+            android:textColor="@android:color/white"
+            android:text="Stop Loss %:"/>
+        <EditText
+            android:id="@+id/stopLoss"
+
+            android:inputType="number"
+
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/white"
+            android:textColorHighlight="@android:color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/chooseDirection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="Direction"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/segmented2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="#FFFFFF"
+            segmentedgroup:sc_unchecked_tint_color="#ff0000"
+            segmentedgroup:sc_checked_text_color="#7C4DFF"
+            >
+
+            <RadioButton
+
+                android:id="@+id/button21"
+                android:layout_width="187dp"
+                android:layout_height="wrap_content"
+                android:text="Long"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/button22"
+                android:layout_width="187dp"
+                android:layout_height="wrap_content"
+                android:text="Short"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/chooseConviction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="Conviction:"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/segmented3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="#FFFFFF"
+            segmentedgroup:sc_unchecked_tint_color="#ff0000"
+            segmentedgroup:sc_checked_text_color="#7C4DFF"
+            >
+
+            <RadioButton
+
+                android:id="@+id/button23"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="High"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/button24"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+            <RadioButton
+                android:id="@+id/button25"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Low"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/chooseDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:text="Duration:"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <info.hoang8f.android.segmented.SegmentedGroup
+            xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/segmentedDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="1dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="#FFFFFF"
+            segmentedgroup:sc_unchecked_tint_color="#ff0000"
+            segmentedgroup:sc_checked_text_color="#7C4DFF"
+            >
+
+            <RadioButton
+
+                android:id="@+id/buttonDurationOneWeek"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="1 week"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+
+            <RadioButton
+                android:id="@+id/buttonDurationMonth"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="1 month"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+            <RadioButton
+                android:id="@+id/buttonDurationThreeMonths"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="3 months"
+                android:onClick="onRadioButtonClicked"
+                style="@style/RadioButton" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </LinearLayout>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/saveIdea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:layout_marginTop="150dp"
+
+            android:contentDescription="Save Idea"
+            android:elevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:pressedTranslationZ="12dp"
+            app:srcCompat="@drawable/ic_check_white24" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
+
+    <!-- segmentedgroup:sc_tint_color="#FFEB3B"-->
