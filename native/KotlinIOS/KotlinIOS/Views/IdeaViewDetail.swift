@@ -26,11 +26,12 @@ struct IdeaViewDetail: View {
                      VStack{
                         Image("undraw_fishing_hoxa").resizable().scaledToFit().frame(width: 400, height: 280, alignment: .topLeading)
                         Spacer()
-                        Text(ideaModel.securityTicker).font(.headline).foregroundColor(.white)
-                        Text("\(ideaModel.securityName)" ).foregroundColor(.white)
-            Text("Entry price: \(ideaModel.entryPrice)" ).foregroundColor(.white)
+                        Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white).padding(.bottom)
+                        Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
+                        Text("PRICE" ).kerning(65).foregroundColor(.white).padding(.leading, 40).padding(.bottom, 20)
             Text("Target price: \(ideaModel.targetPrice)" ).foregroundColor(.white)
             Text("Time Horizon: \(ideaModel.timeHorizon)" ).foregroundColor(.white)
+                        Spacer()
                     }
         }
 
