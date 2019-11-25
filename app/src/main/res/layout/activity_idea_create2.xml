@@ -5,26 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_animation"
+    style="@style/AlphaCaptureBackground"
     android:orientation="vertical"
     tools:context="com.kinsight.kinsightmultiplatform.views.IdeaCreateActivity">
     <TextView
         android:id="@+id/newIdeaHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:paddingTop="35dp"
+        style="@style/AlphaCaptureAppHeader"
         android:text="New Idea"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:drawableLeft="@drawable/ic_fish_monogram_38"
-        android:drawablePadding="-10dp"
-
         tools:text="New Idea" />
-
     <TextView
         android:id="@+id/chooseTicker"
         android:layout_width="match_parent"

@@ -36,7 +36,24 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AlphaCaptureBackground">
+        <item name="android:background">@drawable/gradient_animation</item>
+    </style>
 
+    <style name="AlphaCaptureAppHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">35dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawableLeft">@drawable/ic_fish_monogram_38</item>
+        <item name="android:drawablePadding">-10dp</item>
+    </style>
 
 
 </resources>
+
