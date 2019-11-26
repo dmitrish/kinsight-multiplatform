@@ -18,8 +18,16 @@ struct IdeaViewDetail: View {
      @State var endPoint = UnitPoint(x: 0, y: 2)
     
     @State private var jiggle = false
+    
+    init(ideaModel: IdeaModel){
+        self.ideaModel = ideaModel
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+    }
 
     var body: some View {
+        
+        
 
         ZStack {
             RoundedRectangle(cornerRadius: 0)
@@ -33,10 +41,10 @@ struct IdeaViewDetail: View {
                                 HStack {
                                     Image("man")
                                     .resizable()
-                                        .frame(width: 72, height: 72)
+                                        .frame(width: 82, height: 82)
                                        
                                 }
-                                .frame(width: 80, height: 80)
+                                .frame(width: 88, height: 88)
                                 Text("Fisherman")
                                 .foregroundColor(.white)
                                 Text("Dmitri")
@@ -78,7 +86,7 @@ struct IdeaViewDetail: View {
                         Spacer()
                         Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white).padding(.bottom)
                         Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
-                        Text("PRICE" ).kerning(64).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
+                        Text("PRICE" ).kerning(62).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
                         VStack (alignment: .leading){
                             HStack (alignment: .top){
                                 Text("Target")
