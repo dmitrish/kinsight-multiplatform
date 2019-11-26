@@ -44,7 +44,7 @@ struct HomeViewList: View {
             }
             List(ideaViewModel.ideas){
                 idea in
-                NavigationLink(destination: IdeaView(ideaModel: idea)) {
+                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
                     
                     HomeViewListRow(ideaModel: idea)
                 }.background(Color.clear)
