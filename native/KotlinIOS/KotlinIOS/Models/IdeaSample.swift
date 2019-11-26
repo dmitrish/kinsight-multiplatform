@@ -18,7 +18,7 @@ class IdeaSample {
     let ideaModelSample: IdeaModel
         = IdeaModel(
             id: 1,
-            securityName: "MSFT",
+            securityName: "Microsoft Corp.",
             securityTicker: "MSFT",
             alpha: 2.3,
             benchMarkTicker: "SPX",
