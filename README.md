@@ -6,7 +6,7 @@
 ![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside1.png)
 
 
-![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
+![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogethernewdesign.png)
 
 Ideas list - Android
 
