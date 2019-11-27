@@ -3,7 +3,7 @@
 
 # Kotlin Multiplafrorm project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
 
-![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside.png)
+![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside2.png)
 
 
 ![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
