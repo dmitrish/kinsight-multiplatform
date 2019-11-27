@@ -16,7 +16,8 @@ Ideas list - Android
 
 
 Ideas (new design)
-![android detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/detail.jpg)
+
+![android and iphone detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideadetailsidebyside.png)
 
 Idea Graph:
 
