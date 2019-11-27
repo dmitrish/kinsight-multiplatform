@@ -16,9 +16,7 @@ struct WelcomeView: View {
     @State var textAlpha = 0.0
     @State var textScale: CGFloat = 1
     
-    @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
-    @State var startPoint = UnitPoint(x: 0, y: 0)
-    @State var endPoint = UnitPoint(x: 0, y: 2)
+  
     
     @State var showWelcome = false
    
@@ -27,37 +25,18 @@ struct WelcomeView: View {
     NavigationView {
         ZStack {
             
-            
-            
-        RoundedRectangle(cornerRadius: 0)
-            .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
-            .edgesIgnoringSafeArea(.all)
-            .onAppear() {
-                withAnimation (.easeInOut(duration: 5)){
-                    self.startPoint = UnitPoint(x: 1, y: -1)
-                    self.endPoint = UnitPoint(x: 0, y: 1)
-                }
-            }
- 
+        AnimatedBackground()
              VStack {
-               
                 Spacer()
-                Image("fish").overlay(
-                    VStack {
-                        Text("Ex Unum, Pluribus")
-                            .foregroundColor(.white)
-                            .font(.callout)
-                        Text("Powered by Kotlin Multiplatform")
-                            .foregroundColor(.white)
-                        .font(.callout)
-                    }.padding(.top, -400)
-                )
+                Image("fish")
+                    .padding(.top, -100)
+                    .overlay(
+                        KotlinProjectLogo().padding(.top, 500)
+                    )
                    
                    NavigationLink(destination: HomeView()) {
                        WelcomeText()
-                   
                     }
-               
                 
                 Spacer()
 
@@ -79,6 +58,8 @@ struct WelcomeView: View {
   
     }
 }
+
+
 
 struct WelcomeText : View {
     

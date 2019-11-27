@@ -10,6 +10,8 @@
 		1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0B036B2379FF5E00614430 /* GraphView.swift */; };
 		1DCC628D237F324D00D5D955 /* IdeaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DCC628C237F324D00D5D955 /* IdeaData.json */; };
 		2A480DA5236625D200894630 /* IdeaSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A480DA4236625D200894630 /* IdeaSample.swift */; };
+		2A9276CD238E222000DC6600 /* AnimatedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9276CC238E222000DC6600 /* AnimatedBackground.swift */; };
+		2A9276CF238E22C800DC6600 /* KotlinProjectLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9276CE238E22C800DC6600 /* KotlinProjectLogo.swift */; };
 		2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129CE23556050006C5329 /* WelcomeView.swift */; };
 		2AE129D12356952F006C5329 /* IdeaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129D02356952F006C5329 /* IdeaView.swift */; };
 		2AE129D6235C1570006C5329 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE129D5235C1570006C5329 /* Utils.swift */; };
@@ -76,6 +78,8 @@
 		1D0B036B2379FF5E00614430 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		1DCC628C237F324D00D5D955 /* IdeaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdeaData.json; sourceTree = "<group>"; };
 		2A480DA4236625D200894630 /* IdeaSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaSample.swift; sourceTree = "<group>"; };
+		2A9276CC238E222000DC6600 /* AnimatedBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBackground.swift; sourceTree = "<group>"; };
+		2A9276CE238E22C800DC6600 /* KotlinProjectLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinProjectLogo.swift; sourceTree = "<group>"; };
 		2AE129CE23556050006C5329 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		2AE129D02356952F006C5329 /* IdeaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaView.swift; sourceTree = "<group>"; };
 		2AE129D5235C1570006C5329 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				7831D2872382FAB20096A4D5 /* TickerSearchView.swift */,
 				7831D28B238426810096A4D5 /* SearchBar.swift */,
 				D04BA3F4238C598F0098F7F2 /* IdeaViewDetail.swift */,
+				2A9276CC238E222000DC6600 /* AnimatedBackground.swift */,
+				2A9276CE238E22C800DC6600 /* KotlinProjectLogo.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -523,7 +529,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A480DA5236625D200894630 /* IdeaSample.swift in Sources */,
+				2A9276CD238E222000DC6600 /* AnimatedBackground.swift in Sources */,
 				2AF326202353F990006B3594 /* HomeView.swift in Sources */,
+				2A9276CF238E22C800DC6600 /* KotlinProjectLogo.swift in Sources */,
 				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,
 				D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */,
 				D04BA3F5238C598F0098F7F2 /* IdeaViewDetail.swift in Sources */,
