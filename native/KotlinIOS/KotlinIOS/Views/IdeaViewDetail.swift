@@ -35,24 +35,25 @@ struct IdeaViewDetail: View {
                                       .edgesIgnoringSafeArea(.all)
                      VStack{
                         Image("undraw_fishing_hoxa")
-                            .resizable().scaledToFit().frame(width: 400, height: 280, alignment: .topLeading)
+                            .resizable().scaledToFit().frame(width: 400, height: 250, alignment: .topLeading)
+                            .padding(.leading, 20)
                         .overlay(
                             VStack (alignment: .leading){
                                 HStack {
-                                    Image("man")
+                                    Image("dmitri")
                                     .resizable()
-                                        .frame(width: 82, height: 82)
+                                        .frame(width: 88, height: 88)
                                        
                                 }
                                 .frame(width: 88, height: 88)
                                 Text("Fisherman")
-                                .foregroundColor(.white)
+                                    .foregroundColor(.white)
                                 Text("Dmitri")
-                                                               .foregroundColor(.white)
+                                    .foregroundColor(.white)
                                     .padding(.leading, 20)
                                     
                             }.padding(.leading, 210)
-                                .padding(.bottom, 110)
+                                .padding(.bottom, 130)
                         )
                             
                             .overlay(
@@ -60,11 +61,12 @@ struct IdeaViewDetail: View {
                             HStack {
                                 Image("fishyellow")
                                 .resizable()
-                                    .frame(width:72, height: 72)
-                                    .padding(.top, 200)
-                                    .padding(.leading, 38)
+                                    .frame(width:92, height: 92)
+                                    .padding(.top, 240)
+                                    .padding(.leading, 43)
                                     .scaleEffect(jiggle ? 1.0 : 2.0)
-                                    .animation(.interpolatingSpring(mass: 1, stiffness: 4, damping: 0.4, initialVelocity: 4))
+                                    .animation(.interpolatingSpring(mass: 10, stiffness: 50, damping: 5.9, initialVelocity: 2))
+                                    
                                     .onAppear(){
                                         self.jiggle.toggle()
                                 }
@@ -73,7 +75,7 @@ struct IdeaViewDetail: View {
                             }
                                     Text(String(format: "%.2f", ideaModel.alpha))
                                         .foregroundColor(.white)
-                                        .fontWeight(.bold)
+                                        .fontWeight(Font.Weight.semibold)
                                         .font(.largeTitle)
                                         .padding(.trailing, 170)
                                     
@@ -98,15 +100,17 @@ struct IdeaViewDetail: View {
                                     .padding(.trailing, 44)
                             }.padding(.top, 30)
                             HStack (alignment: .top){
-                                Text(String(format: "%.2f", ideaModel.targetPrice))
+                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
                                     .foregroundColor(.white)
                                     .padding(.leading, 43)
                                     .padding(.top, 30)
+                                    .font(.largeTitle)
                                     Spacer()
-                                Text(String(format: "%.2f", ideaModel.targetPrice))
+                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
                                      .foregroundColor(.white)
                                     .padding(.trailing, 44)
                                     .padding(.top, 30)
+                                    .font(.largeTitle)
                             }
                         }
                         Spacer()
