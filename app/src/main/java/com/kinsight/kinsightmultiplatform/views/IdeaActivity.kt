@@ -57,6 +57,8 @@ class IdeaActivity : FullScreenActivity() {
         val fishImageResource = getFishImageForAlpha(alpha)
         alphaLabl.setImageResource(fishImageResource)
 
+        setFishermanImage(alpha)
+
        // animateFish()
 
         // create scaleX and scaleY animations
@@ -85,6 +87,33 @@ class IdeaActivity : FullScreenActivity() {
         }
 
 
+    }
+
+    private fun setFishermanImage(alpha: Double) {
+        val imageResource = getFishermanImageForAlpha(alpha)
+        fishermanImage.setImageResource(imageResource)
+        val fishermanName = getFishermanImageName(imageResource)
+        fishermanText.text = fishermanName
+    }
+
+    private fun getFishermanImageForAlpha(alpha: Double) : Int{
+        return when {
+            alpha >= 4 -> R.drawable.ic_man
+            alpha >= 3 -> R.drawable.ic_ajay
+            alpha >= 1 -> R.drawable.ic_piyush
+            alpha < 1 -> R.drawable.ic_mark
+            else -> R.drawable.ic_fish_blue
+        }
+    }
+
+    private fun getFishermanImageName(resourceId: Int) : String{
+        return when (resourceId) {
+             R.drawable.ic_man  -> "Dmitri"
+             R.drawable.ic_ajay -> "Ajay"
+             R.drawable.ic_piyush -> "Piyush"
+             R.drawable.ic_mark -> "Mark"
+            else -> "Unknown"
+        }
     }
 
     override fun onResume() {

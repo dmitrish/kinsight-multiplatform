@@ -29,4 +29,6 @@ abstract class FullScreenActivity : AppCompatActivity(){
         }
     }
 
+
+
 }
