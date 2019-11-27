@@ -40,10 +40,21 @@ struct WelcomeView: View {
             }
  
              VStack {
+               
                 Spacer()
-                   Image("fish")
+                Image("fish").overlay(
+                    VStack {
+                        Text("Ex Unum, Pluribus")
+                            .foregroundColor(.white)
+                            .font(.callout)
+                        Text("Powered by Kotlin Multiplatform")
+                            .foregroundColor(.white)
+                        .font(.callout)
+                    }.padding(.top, -400)
+                )
+                   
                    NavigationLink(destination: HomeView()) {
-                        WelcomeText()
+                       WelcomeText()
                    
                     }
                
