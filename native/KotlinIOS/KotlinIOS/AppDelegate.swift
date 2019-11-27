@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITableView.appearance().backgroundColor = UIColor.clear
          UITableViewCell.appearance().backgroundColor = .clear
+        
         return true
     }
 

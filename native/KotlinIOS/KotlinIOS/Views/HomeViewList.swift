@@ -30,19 +30,27 @@ struct HomeViewList: View {
         UINavigationBar.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
+  
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorColor = .clear
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        
+        UITableViewCell.appearance().selectedBackgroundView = backgroundView
     }
     
     var body: some View {
 
         VStack {
             HStack {
-            Text("My Team Ideas").foregroundColor(Color.white).font(.title)
-                AddButton(destination: TickerSearchView())
+                Image("fish").resizable().frame(width:30, height:30).padding(.leading, 10)
+                Spacer()
+                Text("My Team Ideas").foregroundColor(Color.white).font(.title).padding(.trailing, 60)
+                AddButton(destination: TickerSearchView()).padding(.trailing, 30)
                 
             }
-            List(ideaViewModel.ideas){
+            List(ideaViewModel.ideasSortedByAlpha){
                 idea in
                 NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
                     
@@ -99,6 +107,6 @@ struct HomeList_Previews: PreviewProvider {
             HomeViewList()
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
-        }
+        }.background(AnimatedBackground())
     }
 }

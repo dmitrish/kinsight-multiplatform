@@ -3,10 +3,10 @@
 
 # Kotlin Multiplafrorm project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
 
-![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside.png)
+![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside1.png)
 
 
-![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
+![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogethernewdesign.png)
 
 Ideas list - Android
 
@@ -16,7 +16,8 @@ Ideas list - Android
 
 
 Ideas (new design)
-![android detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/detail.jpg)
+
+![android and iphone detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideadetailsidebyside.png)
 
 Idea Graph:
 
