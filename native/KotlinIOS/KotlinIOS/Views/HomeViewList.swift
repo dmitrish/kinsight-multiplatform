@@ -44,7 +44,7 @@ struct HomeViewList: View {
                 AddButton(destination: TickerSearchView()).padding(.trailing, 30)
                 
             }
-            List(ideaViewModel.ideas){
+            List(ideaViewModel.ideasSortedByAlpha){
                 idea in
                 NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
                     

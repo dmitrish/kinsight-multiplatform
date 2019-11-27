@@ -41,6 +41,10 @@ public class IdeasViewModel : ObservableObject {
         }
        
     }
+    
+    var ideasSortedByAlpha : [IdeaModel] {
+        return ideas.sorted {$0.alpha > $1.alpha}
+    }
  
     
     
