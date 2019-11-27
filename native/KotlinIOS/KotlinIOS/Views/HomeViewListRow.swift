@@ -62,7 +62,7 @@ struct HomeViewListRow: View {
                                         Text( "φ")
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.init(hex: white))
-                    .padding(.top, -20)
+                    .padding(.top, -22)
                                         Text( String(format: "%.2f", ideaModel.alpha))
                                             .fontWeight(.semibold)
                                             .foregroundColor(Color.init(hex: white))

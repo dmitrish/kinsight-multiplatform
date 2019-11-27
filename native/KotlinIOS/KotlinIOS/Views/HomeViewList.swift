@@ -30,8 +30,14 @@ struct HomeViewList: View {
         UINavigationBar.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
+  
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorColor = .clear
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        
+        UITableViewCell.appearance().selectedBackgroundView = backgroundView
     }
     
     var body: some View {
