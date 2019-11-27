@@ -33,27 +33,46 @@ struct HomeViewListRow: View {
 
             HStack {
                 VStack (alignment:.leading) {
-                        Text(ideaModel.benchMarkTicker)
-                            .foregroundColor(Color.init(hex: white))
-                            .fontWeight(.heavy)
-                        Text(ideaModel.securityName)
-                    .foregroundColor(Color.init(hex: labeltext))
-                    .fontWeight(.bold)
+                    Text(ideaModel.securityTicker)
+                        .foregroundColor(Color.init(hex: white))
+                        .fontWeight(.heavy)
+                    Text(ideaModel.securityName)
+                        //.foregroundColor(Color.init(hex: labeltext))
+                        .foregroundColor(Color.init(hex: white))
+                        .fontWeight(.bold)
+                    Text("By: \(ideaModel.createdBy)")
+                       // .foregroundColor(Color.init(hex: labeltext))
+                        .foregroundColor(Color.init(hex: white))
+                        .fontWeight(.bold)
                 }
-                 Spacer()
+                Spacer()
                 VStack (alignment:.trailing) {
-                                      Text( String(format: "%.2f", ideaModel.alpha))
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color.init(hex:(Colors().colorGreen)))
+                    HStack{
+                        Image("fishyellow").resizable().frame(width: 40, height: 40)
+                            .padding(.top, 20)
+                            .padding(.trailing, -7)
+                      Text( String(format: "%.2f", ideaModel.alpha))
+                        .fontWeight(.bold)
+                        .foregroundColor(Color.init(hex:(Colors().colorWhite)))
+                       
+                        
+                    }
+                    HStack{
                     
+                                        Text( "φ")
+                                            .fontWeight(.semibold)
+                                            .foregroundColor(Color.init(hex: white))
+                    .padding(.top, -20)
                                         Text( String(format: "%.2f", ideaModel.alpha))
                                             .fontWeight(.semibold)
-                                            .foregroundColor(Color.init(hex: red))
+                                            .foregroundColor(Color.init(hex: white))
+                    .padding(.top, -20)
                                   }
+                }
                
             }
             .lineSpacing(4)
-            .padding()
+            .padding(5)
             .background(Color.clear)
         
     }
@@ -62,9 +81,11 @@ struct HomeViewListRow: View {
 struct HomeViewListRow_Preview: PreviewProvider {
    
     static var previews: some View {
+        Group {
         HomeViewListRow(ideaModel: IdeaSample.sharedInstance.ideaModelSample)
-        .previewLayout(.fixed(width: 400, height: 80
-            ))
+        .previewLayout(.fixed(width: 400, height: 100
+            )).background(AnimatedBackground())
+        }
     }
 }
-
+//φ

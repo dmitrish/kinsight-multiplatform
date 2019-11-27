@@ -38,8 +38,10 @@ struct HomeViewList: View {
 
         VStack {
             HStack {
-            Text("My Team Ideas").foregroundColor(Color.white).font(.title)
-                AddButton(destination: TickerSearchView())
+                Image("fish").resizable().frame(width:30, height:30).padding(.leading, 10)
+                Spacer()
+                Text("My Team Ideas").foregroundColor(Color.white).font(.title).padding(.trailing, 60)
+                AddButton(destination: TickerSearchView()).padding(.trailing, 30)
                 
             }
             List(ideaViewModel.ideas){
@@ -99,6 +101,6 @@ struct HomeList_Previews: PreviewProvider {
             HomeViewList()
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
-        }
+        }.background(AnimatedBackground())
     }
 }
