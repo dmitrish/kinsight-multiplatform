@@ -1,6 +1,7 @@
 package com.kinsight.kinsightmultiplatform
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.customprogress.*
 import kotlinx.android.synthetic.main.ideas_layout.*
 import kotlinx.android.synthetic.main.loading.*
 import androidx.core.util.Pair
+import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.android.synthetic.main.idea_item.*
 
 
@@ -37,6 +39,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         setContentView(R.layout.ideas_layout)
         initRecyclerView()
         initViewModelListener()
+        animate()
         NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
 
         fab.setOnClickListener {
@@ -98,5 +101,12 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
     private fun initRecyclerView() {
         linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         ideasRecyclerView.layoutManager = linearLayoutManager
+    }
+
+    private fun animate() {
+        val animDrawable = rootConstraintLayout.background as AnimationDrawable
+        animDrawable.setEnterFadeDuration(10)
+        animDrawable.setExitFadeDuration(5000)
+        animDrawable.start()
     }
 }

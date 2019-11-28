@@ -44,9 +44,13 @@ struct HomeViewList: View {
 
         VStack {
             HStack {
-                Image("fish").resizable().frame(width:30, height:30).padding(.leading, 10)
+                Image("fish").resizable().frame(width:36, height:36).padding(.leading, 15)
                 Spacer()
-                Text("My Team Ideas").foregroundColor(Color.white).font(.title).padding(.trailing, 60)
+                Text("My Team Ideas").foregroundColor(Color.yellow)
+                    //.font(.headline)
+                    .fontWeight(Font.Weight.semibold)
+                    .font(.system(size: 20))
+                    .padding(.trailing, 70)
                 AddButton(destination: TickerSearchView()).padding(.trailing, 30)
                 
             }

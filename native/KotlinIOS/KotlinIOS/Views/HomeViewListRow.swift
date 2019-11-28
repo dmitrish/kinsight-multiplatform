@@ -35,44 +35,46 @@ struct HomeViewListRow: View {
                 VStack (alignment:.leading) {
                     Text(ideaModel.securityTicker)
                         .foregroundColor(Color.init(hex: white))
-                        .fontWeight(.heavy)
+                        .fontWeight(.bold)
                     Text(ideaModel.securityName)
                         //.foregroundColor(Color.init(hex: labeltext))
                         .foregroundColor(Color.init(hex: white))
-                        .fontWeight(.bold)
+                        .fontWeight(.medium)
                     Text("By: \(ideaModel.createdBy)")
                        // .foregroundColor(Color.init(hex: labeltext))
                         .foregroundColor(Color.init(hex: white))
-                        .fontWeight(.bold)
+                        .fontWeight(.medium)
                 }
                 Spacer()
                 VStack (alignment:.trailing) {
                     HStack{
-                        Image("fishyellow").resizable().frame(width: 40, height: 40)
-                            .padding(.top, 20)
+                        Image(ideaModel.alpha >= 4 ? "fishgreen" : (ideaModel.alpha >= 3 ? "fishyellow" : "fishred")).resizable().frame(width: 40, height: 40)
+                            .padding(.top, 30)
                             .padding(.trailing, -7)
                       Text( String(format: "%.2f", ideaModel.alpha))
-                        .fontWeight(.bold)
+                        .fontWeight(.regular)
                         .foregroundColor(Color.init(hex:(Colors().colorWhite)))
+                        .padding(.top, 10)
                        
                         
                     }
                     HStack{
                     
                                         Text( "φ")
-                                            .fontWeight(.semibold)
+                                            .fontWeight(.regular)
                                             .foregroundColor(Color.init(hex: white))
-                    .padding(.top, -22)
+                    .padding(.top, -28)
                                         Text( String(format: "%.2f", ideaModel.alpha))
-                                            .fontWeight(.semibold)
+                                            .fontWeight(.regular)
                                             .foregroundColor(Color.init(hex: white))
-                    .padding(.top, -20)
+                    .padding(.top, -25)
                                   }
                 }
                
             }
             .lineSpacing(4)
-            .padding(5)
+            .padding(.leading, 3)
+            .padding(.trailing, 5)
             .background(Color.clear)
         
     }
