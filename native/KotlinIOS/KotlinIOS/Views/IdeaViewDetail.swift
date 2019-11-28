@@ -59,13 +59,19 @@ struct IdeaViewDetail: View {
                             .overlay(
                                 VStack{
                             HStack {
-                                Image("fishyellow")
+                                Image(ideaModel.alpha > 4 ? "fishgreen" : (ideaModel.alpha > 3 ? "fishyellow" : "fishred"))
                                 .resizable()
                                     .frame(width:92, height: 92)
-                                    .padding(.top, 240)
-                                    .padding(.leading, 43)
+                                    .padding(.top, 207)
+                                    .padding(.leading, 31)
                                     .scaleEffect(jiggle ? 1.0 : 2.0)
-                                    .animation(.interpolatingSpring(mass: 10, stiffness: 50, damping: 5.9, initialVelocity: 2))
+                                    .animation(.interpolatingSpring(
+                                        mass: 10,
+                                        stiffness: (ideaModel.alpha > 4 ? 50 : 150),
+                                        damping: 5.9,
+                                        initialVelocity: (ideaModel.alpha > 4 ? 5 : 2)
+                                        )
+                                    )
                                     
                                     .onAppear(){
                                         self.jiggle.toggle()
@@ -77,7 +83,8 @@ struct IdeaViewDetail: View {
                                         .foregroundColor(.white)
                                         .fontWeight(Font.Weight.semibold)
                                         .font(.largeTitle)
-                                        .padding(.trailing, 170)
+                                        .padding(.trailing, 198)
+                                        .padding(.top, -61)
                                     
                                     }
                                   
