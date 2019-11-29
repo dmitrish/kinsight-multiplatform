@@ -57,7 +57,7 @@ class IdeaActivity : FullScreenActivity() {
         val fishImageResource = getFishImageForAlpha(alpha)
         alphaLabl.setImageResource(fishImageResource)
 
-        setFishermanImage(alpha)
+        setFishermanImage(createdBy)
 
        // animateFish()
 
@@ -89,8 +89,8 @@ class IdeaActivity : FullScreenActivity() {
 
     }
 
-    private fun setFishermanImage(alpha: Double) {
-        val imageResource = getFishermanImageForAlpha(alpha)
+    private fun setFishermanImage(createdBy: String) {
+        val imageResource = getFishermanImageForCreatedBy(createdBy)
         fishermanImage.setImageResource(imageResource)
         val fishermanName = getFishermanImageName(imageResource)
         fishermanText.text = fishermanName
@@ -102,6 +102,16 @@ class IdeaActivity : FullScreenActivity() {
             alpha >= 3 -> R.drawable.ic_ajay
             alpha >= 1 -> R.drawable.ic_piyush
             alpha < 1 -> R.drawable.ic_mark
+            else -> R.drawable.ic_fish_blue
+        }
+    }
+
+    private fun getFishermanImageForCreatedBy(createdBy: String) : Int{
+        return when (createdBy) {
+            "Dmitri"  -> R.drawable.ic_man
+            "Ajay" -> R.drawable.ic_ajay
+            "Piyush"  -> R.drawable.ic_piyush
+            "Mark"  -> R.drawable.ic_mark
             else -> R.drawable.ic_fish_blue
         }
     }
