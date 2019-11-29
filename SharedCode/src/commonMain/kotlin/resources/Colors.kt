@@ -24,7 +24,7 @@ object Colors {
  val colorWhite = "#ffffff"
  val missingData = "#ffff00"
  val circleFill = "#ffff00"
- val yellow = "#F7F70E"
+ val yellow = "#ffbf00"
  val radio_button_selected_color = "#ff33b5e5"
  val radio_button_unselected_color = "@android:color/transparent"
 }

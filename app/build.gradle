@@ -3,15 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
         // buildConfigField("String", "url", '"https://alphacapture.appspot.com"')
         // buildConfigField("String", "url", '"https://localhost:8081"')
         buildConfigField("String", "url", '"http://35.239.179.43:8081"')
         applicationId "com.kinsight.kinsightmultiplatform.mobile"
-        minSdkVersion 25
-        targetSdkVersion 28
+        minSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary true
