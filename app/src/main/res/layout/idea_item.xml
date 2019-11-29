@@ -45,9 +45,10 @@
         android:transitionName="tImage"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="2dp"
         android:paddingLeft="0dp"
-        android:paddingTop="2dp"
+        android:paddingTop="0dp"
+
         app:layout_constraintTop_toBottomOf="@+id/nameText"
         app:layout_constraintRight_toLeftOf="@+id/ideaAlpha"
 
@@ -80,7 +81,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginRight="5dp"
         android:paddingRight="10dp"
-        android:paddingTop="1dp"
+        android:paddingTop="2dp"
         android:gravity="start"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/ideaAlpha"
@@ -94,14 +95,15 @@
         android:layout_height="wrap_content"
          android:textStyle="normal"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="0dp"
+
         android:gravity="start"
         android:textColor="@android:color/white"
         android:textFontWeight="600"
         app:layout_constraintTop_toBottomOf="@id/nameText"
         app:layout_constraintLeft_toRightOf="@id/ideaImage"
 
-        tools:text="@sample/ideassample.json/data/targetPrice"/>
+        tools:text="SecurityName"/>
     <TextView
         android:id="@+id/ideaCreatedBy"
         android:layout_width="0dp"
@@ -109,10 +111,11 @@
         android:textStyle="normal"
         android:textFontWeight="600"
         android:layout_marginStart="5dp"
+
         android:gravity="start"
         android:textColor="@android:color/white"
         android:paddingBottom="15dp"
-        app:layout_constraintTop_toBottomOf="@id/ideaTargetPrice"
+        app:layout_constraintTop_toBottomOf="@id/ideaAlpha"
         app:layout_constraintLeft_toRightOf="@id/ideaImage"
 
         tools:text="@sample/ideassample.json/data/createdBy"/>
