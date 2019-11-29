@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <solid
+
+        android:color="@color/colorGradientCenter"/>
+    <corners
+        android:radius="30dp" />
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp" />
+</shape>
+    </item>
+    <item
+        android:drawable="@drawable/gradient_animation"
+        android:top="0dp"
+        android:bottom="5dp"
+        android:right="5dp"
+        android:left="5dp"
+        />
+</layer-list>

@@ -1,17 +1,23 @@
 [![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Kotlin Multiplafrorm project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
+# Kotlin Multiplatform project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
 
-![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside.png)
+![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside1.png)
 
 
-![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogether.png)
+![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogethernewdesign.png)
+
+Ideas list - Android
+
+![ideas list android](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideas-android.jpg)
+
 
 
 
 Ideas (new design)
-![android new design](https://github.com/dmitrish/kinsight-multiplatform/blob/master/newdesign-android.png)
+
+![android and iphone detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideadetailsidebyside.png)
 
 Idea Graph:
 
@@ -98,7 +104,7 @@ Other Docker Commands:
 Uploading Docker Image to Google Cloud Registry:
 
 1. Add Tag to Image (V3 is the tag here)
-    docker tag quickstart-image gcr.io/project-kinsight/server-all-image:V3
+    docker tag server-all gcr.io/project-kinsight/server-all-image:V3
 2. Push Image to cloud registry
     docker push gcr.io/project-kinsight/server-all-image:V3
 

@@ -25,5 +25,6 @@ object Strings {
  val menu_send = "Send"
  val alpha = "\u03B1"
  val psi = "\u03c8"
+ val hello_blank_fragment = "Hello blank fragment"
 }
             

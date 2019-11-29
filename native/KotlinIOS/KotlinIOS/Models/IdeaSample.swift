@@ -18,7 +18,7 @@ class IdeaSample {
     let ideaModelSample: IdeaModel
         = IdeaModel(
             id: 1,
-            securityName: "MSFT",
+            securityName: "Microsoft Corp.",
             securityTicker: "MSFT",
             alpha: 2.3,
             benchMarkTicker: "SPX",
@@ -37,7 +37,10 @@ class IdeaSample {
             targetPrice: 37,
             targetPricePercentage: 4,
             timeHorizon: "1 week",
-            createdBy: "Someone"
+            createdBy: "Someone",
+            createdFrom: "iPhone",
+            previousCurrentPrice: 32.23,
+            isActive: true
         )
 }
 

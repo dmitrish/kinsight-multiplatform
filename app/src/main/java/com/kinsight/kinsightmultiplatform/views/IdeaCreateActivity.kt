@@ -12,9 +12,17 @@ import com.kinsight.kinsightmultiplatform.ViewModels.IdeaCreateViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import kotlinx.android.synthetic.main.activity_idea_create.*
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.net.Uri
+
+import androidx.fragment.app.FragmentManager
 
 
-class IdeaCreateActivity : FullScreenActivity() {
+class IdeaCreateActivity : FullScreenActivity(),
+    PickIdeaDurationFragment.OnFragmentInteractionListener {
+
 
     private var isBear: Boolean = false
     private var isBull: Boolean = false
@@ -24,7 +32,7 @@ class IdeaCreateActivity : FullScreenActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_idea_create)
+        setContentView(R.layout.activity_idea_create2)
 
         val startIntent = intent
         val nextId = startIntent.getIntExtra("nextId", 0)
@@ -35,100 +43,8 @@ class IdeaCreateActivity : FullScreenActivity() {
             startActivityForResult(intent, PICK_TICKER_REQUEST)
         }
 
-        imageBear.setOnClickListener{
 
-            if (!isBear) {
-                imageBear.animate().apply {
-                    duration = 1000
-                    xBy(120f)
-                    scaleXBy(0.5F)
-                    scaleYBy(0.5F)
-                    start()
-                }
-                imageBull.animate().apply {
-                    duration = 1000
-                    xBy(120f)
-                    scaleXBy(-0.2F)
-                    scaleYBy(-0.2F)
-                    start()
-                }
-                isBear = true
 
-            }
-            else {
-                    imageBear.animate().apply {
-                        duration = 1000
-                        xBy(-120f)
-                        scaleXBy(-0.5F)
-                        scaleYBy(-0.5F)
-                        start()
-                    }
-                    imageBull.animate().apply {
-                        duration = 1000
-                        xBy(-120f)
-                        scaleXBy(0.2F)
-                        scaleYBy(0.2F)
-                        start()
-                    }
-                    isBear = false
-                }
-            isBull = false
-        }
-
-        imageBull.setOnClickListener{
-            if (!isBull && !isBear) {
-                imageBull.animate().apply {
-                    duration = 1000
-                    xBy(-120f)
-                    scaleXBy(0.5F)
-                    scaleYBy(0.5F)
-                    start()
-                }
-                imageBear.animate().apply {
-                    duration = 1000
-                    xBy(-120f)
-                    scaleXBy(-0.2F)
-                    scaleYBy(-0.2F)
-                    start()
-                }
-                isBull = true
-            }
-            else if (!isBull && isBear) {
-                imageBull.animate().apply {
-                    duration = 1000
-                    xBy(-240f)
-                    scaleXBy(0.7F)
-                    scaleYBy(0.7F)
-                    start()
-                }
-                imageBear.animate().apply {
-                    duration = 1000
-                    xBy(-240f)
-                    scaleXBy(-0.7F)
-                    scaleYBy(-0.7F)
-                    start()
-                }
-                isBull = true
-            }
-            else {
-                imageBull.animate().apply {
-                    duration = 1000
-                    xBy(120f)
-                    scaleXBy(-0.5F)
-                    scaleYBy(-0.5F)
-                    start()
-                }
-                imageBear.animate().apply {
-                    duration = 1000
-                    xBy(-120f)
-                    scaleXBy(0.2F)
-                    scaleYBy(0.2F)
-                    start()
-                }
-                isBull = false
-            }
-            isBear = false
-        }
 
 
         saveIdea.setOnClickListener{
@@ -157,7 +73,10 @@ class IdeaCreateActivity : FullScreenActivity() {
                     targetPrice = targetPrice,
                     targetPricePercentage = 0.0,
                     timeHorizon = "1 Week",
-                    createdBy = "Dmitri - from Android"
+                    createdBy = "Dmitri",
+                    createdFrom = "Android",
+                    previousCurrentPrice = 24.59,
+                    isActive = true
 
                 )
 
@@ -188,4 +107,16 @@ class IdeaCreateActivity : FullScreenActivity() {
 
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    private fun showEditDialog() {
+      val fm = supportFragmentManager
+      val fragment = PickIdeaDurationFragment.newInstance("Pick Idea Duration", "s");
+
+        fragment.show(fm, "fragment_pick_idea_duration");
+  }
+
+    override fun onFragmentInteraction(uri: Uri) {
+       println("callback from dialog fragment")//To change body of created functions use File | Settings | File Templates.
+    }
+
 }

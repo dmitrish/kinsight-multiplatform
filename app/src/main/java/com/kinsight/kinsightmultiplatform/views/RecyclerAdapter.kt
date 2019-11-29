@@ -1,5 +1,6 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -16,19 +17,19 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
     RecyclerView.Adapter<RecyclerAdapter.IdeaHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-            RecyclerAdapter.IdeaHolder {
+           IdeaHolder {
         val inflatedView = parent.inflate(R.layout.idea_item, false)
         return IdeaHolder(inflatedView)
     }
 
     override fun getItemCount(): Int = ideas.size
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.IdeaHolder, position: Int) {
+    override fun onBindViewHolder(holder: IdeaHolder, position: Int) {
         val itemIdea = ideas[position]
         holder.bindIdea(itemIdea, itemClickListener)
     }
 
-    class IdeaHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class IdeaHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         private var view: View = v
         private var idea: IdeaModel? = null
 
@@ -37,6 +38,7 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
         }
 
         override fun onClick(v: View) {
+            itemClickListener.onItemClicked(idea!!, view)
             Log.d("Ideas RecyclerView", "Idea Clicked")
         }
 
@@ -61,18 +63,32 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             view.ideaTargetPrice.text = idea.securityName
 
             view.ideaCreatedBy.text ="By: ${idea.createdBy}"
-            view.ideaPsi.text = Strings.psi + ": " + psi
+            view.ideaPsi.text ="φ" + "  " + psi.drop(0)
             itemView.setOnClickListener {
-                clickListener.onItemClicked(idea)
+                clickListener.onItemClicked(idea, view)
             }
+
+            animateAlpha()
         }
 
-        companion object {
-            private val IDEA_KEY = "IDEA"
+        private fun animateAlpha(){
+            view.ideaAlpha.alpha = 0.5f
+            view.ideaAlpha.setTextColor(Color.GREEN)
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.animate().apply {
+                duration = 2000
+
+                alpha(1f)
+                start()
+            }
+
+            view.ideaAlpha.postDelayed ( {view.ideaAlpha.setTextColor(Color.WHITE)}, 2000 )
         }
+
     }
 }
 
 interface OnItemClickListener{
-    fun onItemClicked(idea: IdeaModel)
+    fun onItemClicked(idea: IdeaModel, view: View)
 }

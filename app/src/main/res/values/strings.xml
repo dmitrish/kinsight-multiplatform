@@ -25,4 +25,7 @@
     <string name="menu_send">Send</string>
     <string name="alpha">\u03B1</string>
     <string name="psi">\u03c8</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

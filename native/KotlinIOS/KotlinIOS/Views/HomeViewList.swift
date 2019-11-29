@@ -26,31 +26,58 @@ struct HomeViewList: View {
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
     
+    //@Binding var progress : Bool
+    
     init() {
         UINavigationBar.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
+  
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorColor = .clear
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.clear
+        
+        UITableViewCell.appearance().selectedBackgroundView = backgroundView
+        
+       // progress = ideaViewModel.inProgress
+        
+       
     }
     
     var body: some View {
 
         VStack {
             HStack {
-            Text("My Team Ideas").foregroundColor(Color.white).font(.title)
-                AddButton(destination: TickerSearchView())
+                Image("fish").resizable().frame(width:36, height:36).padding(.leading, 15)
+                Spacer()
+                Text("My Team Ideas").foregroundColor(Color.yellow)
+                    //.font(.headline)
+                    .fontWeight(Font.Weight.semibold)
+                    .font(.system(size: 20))
+                    .padding(.trailing, 70)
+                AddButton(destination: TickerSearchView()).padding(.trailing, 30)
                 
             }
-            List(ideaViewModel.ideas){
+            List(ideaViewModel.ideasSortedByAlpha){
                 idea in
-                NavigationLink(destination: IdeaView(ideaModel: idea)) {
+                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
                     
                     HomeViewListRow(ideaModel: idea)
                 }.background(Color.clear)
                     .foregroundColor(Color.white)
 
             }.background(Color.clear)
+                .overlay(ProgressView()
+                    .opacity(ideaViewModel.inProgress ? 1 : 0)
+                
+            )
+        }.onAppear(){
+            let seconds = 1.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+               // self.progress = false  // Put your code which should be executed with a delay here
+            }
         }
 //        }.navigationBarTitle("My Team Ideas", displayMode: .inline)
 //            .navigationBarItems(trailing:
@@ -99,6 +126,6 @@ struct HomeList_Previews: PreviewProvider {
             HomeViewList()
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
-        }
+        }.background(AnimatedBackground())
     }
 }

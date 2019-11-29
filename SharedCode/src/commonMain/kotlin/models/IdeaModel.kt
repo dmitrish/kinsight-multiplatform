@@ -23,6 +23,7 @@ import kotlinx.serialization.*
     var convictionId: Int,
     @SerialName("currentPrice")
     var currentPrice: Double,
+
     @SerialName("direction")
     var direction: String,
     @SerialName("directionId")
@@ -44,7 +45,13 @@ import kotlinx.serialization.*
     @SerialName("timeHorizon")
     var timeHorizon: String,
     @SerialName("createdBy")
-    var createdBy: String
+    var createdBy: String,
+    @SerialName("createdFrom")
+    var createdFrom: String,
+    @SerialName("previousCurrentPrice")
+    var previousCurrentPrice: Double,
+    @SerialName ("isActive")
+    var isActive: Boolean
 )
 
 interface Idea {
