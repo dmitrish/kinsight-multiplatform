@@ -73,7 +73,10 @@ class IdeaCreateActivity : FullScreenActivity(),
                     targetPrice = targetPrice,
                     targetPricePercentage = 0.0,
                     timeHorizon = "1 Week",
-                    createdBy = "Dmitri - from Android"
+                    createdBy = "Dmitri",
+                    createdFrom = "Android",
+                    previousCurrentPrice = 24.59,
+                    isActive = true
 
                 )
 

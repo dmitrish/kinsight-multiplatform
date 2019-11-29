@@ -66,6 +66,19 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea, view)
             }
+
+            animateAlpha()
+        }
+
+        private fun animateAlpha(){
+            view.ideaAlpha.alpha = 0f
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.animate().apply {
+                duration = 2000
+                alpha(1f)
+                start()
+            }
         }
 
     }
