@@ -40,7 +40,7 @@ struct IdeaViewDetail: View {
                         .overlay(
                             VStack (alignment: .leading){
                                 HStack {
-                                    Image(ideaModel.alpha > 4 ? "dmitri" : (ideaModel.alpha > 3 ? "ajay" : "piyush"))
+                                    Image(ideaModel.createdBy.lowercased())
                                     .resizable()
                                         .frame(width: 88, height: 88)
                                        
@@ -48,7 +48,7 @@ struct IdeaViewDetail: View {
                                 .frame(width: 88, height: 88)
                                 Text("Fisherman")
                                     .foregroundColor(.white)
-                                Text(ideaModel.alpha > 4 ? "Dmitri" : (ideaModel.alpha > 3 ? "Ajay" : "Piyush"))
+                                Text(ideaModel.createdBy)
                                     .foregroundColor(.white)
                                     .padding(.leading, 20)
                                     

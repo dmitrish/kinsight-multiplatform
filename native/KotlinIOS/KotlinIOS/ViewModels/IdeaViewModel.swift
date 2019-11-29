@@ -53,7 +53,7 @@ public class IdeasViewModel : ObservableObject {
     func fetchKotlin() {
          dataRequestInProgress.inProgress = true
         inProgress = true
-        let seconds = 5.0
+        let seconds = 1.0
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
        
             self.repository?.fetchIdeas(success: { data in

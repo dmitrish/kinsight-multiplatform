@@ -28,6 +28,8 @@ let white = "#ffffff"
 struct HomeViewListRow: View {
 
     var ideaModel: IdeaModel
+    
+    @State private var changeColor = false
    
     var body: some View {
 
@@ -53,8 +55,20 @@ struct HomeViewListRow: View {
                             .padding(.trailing, -7)
                       Text( String(format: "%.2f", ideaModel.alpha))
                         .fontWeight(.regular)
-                        .foregroundColor(Color.init(hex:(Colors().colorWhite)))
+                        .foregroundColor(changeColor ? Color.green : Color.init(hex:(Colors().colorWhite)))
                         .padding(.top, 10)
+                        .onAppear(){
+                            withAnimation(.easeIn(duration: 1.0)){
+                                if (self.ideaModel.alpha > 4){
+                                    self.changeColor.toggle()
+                                    let seconds = 2.0
+                                          DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                                             self.changeColor.toggle()
+                                    }
+                                }
+                            }
+                            
+                        }
                        
                         
                     }

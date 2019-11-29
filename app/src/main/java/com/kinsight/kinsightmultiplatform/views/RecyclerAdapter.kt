@@ -1,5 +1,6 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +67,23 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea, view)
             }
+
+            animateAlpha()
+        }
+
+        private fun animateAlpha(){
+            view.ideaAlpha.alpha = 0.5f
+            view.ideaAlpha.setTextColor(Color.GREEN)
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.animate().apply {
+                duration = 2000
+
+                alpha(1f)
+                start()
+            }
+
+            view.ideaAlpha.postDelayed ( {view.ideaAlpha.setTextColor(Color.WHITE)}, 2000 )
         }
 
     }
