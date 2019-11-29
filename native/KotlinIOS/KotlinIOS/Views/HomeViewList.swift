@@ -26,6 +26,8 @@ struct HomeViewList: View {
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
     
+    //@Binding var progress : Bool
+    
     init() {
         UINavigationBar.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
@@ -38,6 +40,10 @@ struct HomeViewList: View {
         backgroundView.backgroundColor = UIColor.clear
         
         UITableViewCell.appearance().selectedBackgroundView = backgroundView
+        
+       // progress = ideaViewModel.inProgress
+        
+       
     }
     
     var body: some View {
@@ -63,6 +69,15 @@ struct HomeViewList: View {
                     .foregroundColor(Color.white)
 
             }.background(Color.clear)
+                .overlay(ProgressView()
+                    .opacity(ideaViewModel.inProgress ? 1 : 0)
+                
+            )
+        }.onAppear(){
+            let seconds = 1.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+               // self.progress = false  // Put your code which should be executed with a delay here
+            }
         }
 //        }.navigationBarTitle("My Team Ideas", displayMode: .inline)
 //            .navigationBarItems(trailing:

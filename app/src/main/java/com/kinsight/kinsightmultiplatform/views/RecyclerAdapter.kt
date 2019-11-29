@@ -62,7 +62,7 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
             view.ideaTargetPrice.text = idea.securityName
 
             view.ideaCreatedBy.text ="By: ${idea.createdBy}"
-            view.ideaPsi.text ="φ" + ": " + psi.drop(0)
+            view.ideaPsi.text ="φ" + "  " + psi.drop(0)
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea, view)
             }
