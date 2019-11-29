@@ -22,7 +22,10 @@
     "targetPrice": 43.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 month",
-    "createdBy": "Dmitri"
+    "createdBy": "Dmitri",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 37.2000,
+    "isActive": true
   },
   {
     "id": 90001900,
@@ -47,7 +50,10 @@
     "targetPrice": 220.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Dmitri",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 80.050,
+    "isActive": true
   },
   {
     "id": 90001901,
@@ -72,7 +78,10 @@
     "targetPrice": 62.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Ajay",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 130.0000,
+    "isActive": true
   },
 
   {
@@ -98,7 +107,10 @@
     "targetPrice": 30.000,
     "targetPricePercentage":0.0000,
     "timeHorizon": "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Ajay",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 36.9900,
+    "isActive": true
   },
   {
     "id": 90001902,
@@ -123,7 +135,10 @@
     "targetPrice": 71.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Dmitri",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 61.3500,
+    "isActive": true
   },
   {
     "id": 90001904,
@@ -148,7 +163,10 @@
     "targetPrice": 15.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Piyush",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 10.3500,
+    "isActive": true
   },
   {
     "id": 90001905,
@@ -173,7 +191,10 @@
     "targetPrice": 14.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Mark",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 10.3500,
+    "isActive": true
   },
   {
     "id": 90001909,
@@ -198,7 +219,10 @@
     "targetPrice": 84.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Ajay",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 10.3500,
+    "isActive": true
   },
   {
     "id": 90001910,
@@ -223,7 +247,10 @@
     "targetPrice": 27.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Piyush",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 20.3500,
+    "isActive": true
   },
   {
     "id": 90001911,
@@ -248,7 +275,10 @@
     "targetPrice": 72.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Mark",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 69.3500,
+    "isActive": true
   },
   {
     "id": 90001912,
@@ -273,6 +303,9 @@
     "targetPrice": 17.000,
     "targetPricePercentage": 0.0000,
     "timeHorizon" : "1 Month",
-    "createdBy": "Dmitri"
+    "createdBy": "Dmitri",
+    "createdFrom": "Web",
+    "previousCurrentPrice": 14.3500,
+    "isActive": true
   }
 ]
