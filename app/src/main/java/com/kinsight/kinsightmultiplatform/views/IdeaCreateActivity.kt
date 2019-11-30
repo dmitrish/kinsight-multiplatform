@@ -18,6 +18,8 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.Uri
 
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Observer
+import com.kinsight.kinsightmultiplatform.models.TickerPriceModel
 
 
 class IdeaCreateActivity : FullScreenActivity(),
@@ -44,7 +46,7 @@ class IdeaCreateActivity : FullScreenActivity(),
         }
 
 
-
+        initViewModelListener()
 
 
         saveIdea.setOnClickListener{
@@ -91,6 +93,18 @@ class IdeaCreateActivity : FullScreenActivity(),
         }
     }
 
+    private fun initViewModelListener() {
+        viewModel.getTickerPrice().observe (
+            this,
+            Observer<TickerPriceModel> { tickerPriceModel ->
+                Log.i("APP", "Ticker price model observed: $tickerPriceModel")
+                val ticker = chooseTicker.text.toString()
+                chooseTicker.text = ticker + " | Latest Price: ${tickerPriceModel.latestPrice}"
+
+            }
+        )
+    }
+
     fun onRadioButtonClicked(v: View){
 
     }
@@ -100,8 +114,10 @@ class IdeaCreateActivity : FullScreenActivity(),
         if (requestCode == PICK_TICKER_REQUEST) {
             // Make sure the request was successful
             if (resultCode == Activity.RESULT_OK) {
-               chooseTicker.text = data?.getStringExtra("ticker")
+                val ticker = data?.getStringExtra("ticker")
+                chooseTicker.text = ticker
                 companyName = data?.getStringExtra("companyName")
+                viewModel.fetchTickerPrice(ticker!!)
              }
         }
 
