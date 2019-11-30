@@ -40,10 +40,10 @@
         android:layout_width="wrap_content"
         android:text="Ex Unum, Pluribus"
         android:id="@+id/exunum"
-        android:layout_margin="60sp"
+        android:layout_marginTop="60sp"
         android:gravity="top|center"
         android:textAlignment="center"
-
+        android:paddingBottom="0dp"
         android:textColor="@android:color/white"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/welcome_text"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:text="Powered by Kotlin Multiplatform"
         android:id="@+id/powered"
-        android:layout_margin="0sp"
+        android:layout_marginTop="0sp"
         android:gravity="top|center"
         android:textAlignment="center"
 

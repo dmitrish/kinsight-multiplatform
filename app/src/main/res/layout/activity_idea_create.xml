@@ -183,7 +183,7 @@
                 android:onClick="onRadioButtonClicked"
                 style="@style/RadioButton" />
         </info.hoang8f.android.segmented.SegmentedGroup>
-    
+
 </LinearLayout>
     <View
         android:id="@+id/separatorTwo"
