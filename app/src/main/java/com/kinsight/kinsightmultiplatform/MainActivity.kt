@@ -72,7 +72,9 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         intent.putExtra("ideaTicker", idea.securityTicker)
         intent.putExtra("ideaAlpha", idea.alpha)
         intent.putExtra("ideaTargetPrice", idea.targetPrice)
+        intent.putExtra("ideaCurrentPrice", idea.currentPrice)
         intent.putExtra("ideaCreatedBy", idea.createdBy)
+        intent.putExtra("ideaCreatedFrom", idea.createdFrom)
        // startActivity(intent)
 
         ActivityCompat.startActivity(this@MainActivity, intent, options.toBundle())

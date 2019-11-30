@@ -16,10 +16,12 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.Uri
+import android.widget.RadioButton
 
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.kinsight.kinsightmultiplatform.models.TickerPriceModel
+import com.kinsight.kinsightmultiplatform.resources.Strings
 
 
 class IdeaCreateActivity : FullScreenActivity(),
@@ -29,6 +31,12 @@ class IdeaCreateActivity : FullScreenActivity(),
     private var isBear: Boolean = false
     private var isBull: Boolean = false
     private var companyName: String? = null
+    private var companyTicker: String? = null
+    private var companyPrice: Double? = null
+    private var companyDirection: String? = null
+    private var companyDirectionId: Int? = null
+    private var timeHorizon: String? = null
+    private var companyConvictionId: Int? = null
 
     private val viewModel by lazy { getViewModel {IdeaCreateViewModel()}}
 
@@ -49,46 +57,57 @@ class IdeaCreateActivity : FullScreenActivity(),
         initViewModelListener()
 
 
-        saveIdea.setOnClickListener{
-            try {
-                val securityTicker = chooseTicker.text.toString()
-                val targetPrice = targetPrice.text.toString().plus(".00").toDouble()
-                val stopLoss = stopLoss.text.toString().toInt()
-                val newIdea = IdeaModel(
-                    id = nextId,
-                    alpha = 0.0,
-                    benchMarkTicker = "SPX",
-                    //benchMarkTickerDesk= "SP 500 Index",
-                    benchMarkCurrentPrice = 2856.66,
-                    benchMarkPerformance = 0.392,
-                    convictionId = 1,
-                    currentPrice = 24.59,
-                    direction = "Long",
-                    directionId = 1,
-                    entryPrice = 24.59,
-                    reason = "Target Price",
-                    securityName = companyName?: securityTicker,
-                    securityTicker = securityTicker,
-                    stockCurrency = "USD",
-                    stopLoss = stopLoss,
-                    stopLossValue = 313.4823,
-                    targetPrice = targetPrice,
-                    targetPricePercentage = 0.0,
-                    timeHorizon = "1 Week",
-                    createdBy = "Dmitri",
-                    createdFrom = "Android",
-                    previousCurrentPrice = 24.59,
-                    isActive = true
+        saveIdea.setOnClickListener {
 
-                )
-
-                viewModel.saveIdea(newIdea)
-                finish()
-            }
-            catch(e: Throwable){
-                Toast.makeText(this,"Failed to save: ${e.message}", Toast.LENGTH_LONG)
+            if (companyTicker == null) {
+                Toast.makeText(this, "Please choose ticker first!", Toast.LENGTH_LONG)
                     .show()
-                Log.e("IDEA_", e.message + e.stackTrace)
+            }
+            else if (companyDirection == null || timeHorizon == null) {
+                Toast.makeText(this, "Direction, Conviction and Investment Horizon are required!", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            else {
+                try {
+                    val securityTicker = companyTicker
+                    val targetPrice = targetPrice.text.toString().plus(".00").toDouble()
+                    val stopLoss = stopLoss.text.toString().toInt()
+                    val newIdea = IdeaModel(
+                        id = nextId,
+                        alpha = 0.0,
+                        benchMarkTicker = "SPX",
+                        //benchMarkTickerDesk= "SP 500 Index",
+                        benchMarkCurrentPrice = 2856.66,
+                        benchMarkPerformance = 0.392,
+                        convictionId = companyConvictionId!!,
+                        currentPrice = companyPrice!!,
+                        direction = companyDirection!!,
+                        directionId = if (companyDirection!! == "Long")  1 else 2,
+                        entryPrice = companyPrice!!,
+                        reason = "Target Price",
+                        securityName = companyName ?: companyTicker!!,
+                        securityTicker = companyTicker!!,
+                        stockCurrency = "USD",
+                        stopLoss = stopLoss,
+                        stopLossValue = 313.4823,
+                        targetPrice = targetPrice,
+                        targetPricePercentage = 0.0,
+                        timeHorizon = timeHorizon!!,
+                        createdBy = "Dmitri",
+                        createdFrom = "Android",
+                        previousCurrentPrice = companyPrice!!,
+                        isActive = true
+
+                    )
+
+                    viewModel.saveIdea(newIdea)
+                    finish()
+                } catch (e: Throwable) {
+                    Toast.makeText(this, "Failed to save: ${e.message}", Toast.LENGTH_LONG)
+                        .show()
+                    Log.e("IDEA_", e.message + e.stackTrace)
+                }
             }
         }
     }
@@ -98,15 +117,25 @@ class IdeaCreateActivity : FullScreenActivity(),
             this,
             Observer<TickerPriceModel> { tickerPriceModel ->
                 Log.i("APP", "Ticker price model observed: $tickerPriceModel")
-                val ticker = chooseTicker.text.toString()
-                chooseTicker.text = ticker + " | Latest Price: ${tickerPriceModel.latestPrice}"
+                val ticker = companyTicker
+                companyPrice = tickerPriceModel.latestPrice
+                chooseTicker.text = "$ticker  | Latest Price: USD ${companyPrice} | Benchmark: SPX"
 
             }
         )
     }
 
     fun onRadioButtonClicked(v: View){
-
+            when ((v as RadioButton).text.toString()){
+                Strings.direction_long ->  companyDirection = Strings.direction_long
+                Strings.direction_short -> companyDirection = Strings.direction_short
+                Strings.conviction_low -> companyConvictionId = 1
+                Strings.conviction_medium -> companyConvictionId = 2
+                Strings.conviction_high -> companyConvictionId = 3
+                Strings.time_horizon_one_month -> timeHorizon = Strings.time_horizon_one_month
+                Strings.time_horizon_three_months -> timeHorizon = Strings.time_horizon_three_months
+                Strings.time_horizon_one_week -> timeHorizon = Strings.time_horizon_one_week
+            }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,10 +143,11 @@ class IdeaCreateActivity : FullScreenActivity(),
         if (requestCode == PICK_TICKER_REQUEST) {
             // Make sure the request was successful
             if (resultCode == Activity.RESULT_OK) {
-                val ticker = data?.getStringExtra("ticker")
-                chooseTicker.text = ticker
+                companyTicker = data?.getStringExtra("ticker")
+
+                chooseTicker.text = companyTicker
                 companyName = data?.getStringExtra("companyName")
-                viewModel.fetchTickerPrice(ticker!!)
+                viewModel.fetchTickerPrice(companyTicker!!)
              }
         }
 
