@@ -42,6 +42,8 @@ class IdeaActivity : FullScreenActivity() {
         val alpha = startIntent.getDoubleExtra("ideaAlpha", 0.0)
         val createdBy = startIntent.getStringExtra("ideaCreatedBy")
         val targetPrice = startIntent.getDoubleExtra("ideaTargetPrice", 0.0)
+        val currentPrice = startIntent.getDoubleExtra("ideaCurrentPrice", 0.0)
+
 
         ideaCompany.text = companyName
         ideaTicker.text = ticker
@@ -51,7 +53,8 @@ class IdeaActivity : FullScreenActivity() {
         val alphaFormatted = df.format(alpha)
         alphaValue.text = alphaFormatted
         val targetFormatted = df.format(targetPrice)
-        ideaDetailCurrentPrice.text ="$${targetFormatted}"
+        val currentFormatted = df.format(currentPrice)
+        ideaDetailCurrentPrice.text ="$${currentFormatted}"
         ideaDetailTargetPrice.text ="$${targetFormatted}"
 
         val fishImageResource = getFishImageForAlpha(alpha)

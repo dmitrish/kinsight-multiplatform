@@ -26,5 +26,13 @@ object Strings {
  val alpha = "\u03B1"
  val psi = "\u03c8"
  val hello_blank_fragment = "Hello blank fragment"
+ val direction_long = "Long"
+ val direction_short = "Short"
+ val conviction_high = "High"
+ val conviction_medium = "Medium"
+ val conviction_low = "Low"
+ val time_horizon_one_week = "1 week"
+ val time_horizon_one_month = "1 month"
+ val time_horizon_three_months = "3 months"
 }
             
