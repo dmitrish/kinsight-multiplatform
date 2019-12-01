@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@sample/ideassample.json/data/alpha"/>
     <TextView
-        android:id="@+id/ideaTargetPrice"
+        android:id="@+id/ideaSecurityName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
          android:textStyle="normal"
