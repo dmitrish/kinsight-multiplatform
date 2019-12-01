@@ -113,7 +113,7 @@ struct IdeaViewDetail: View {
                                     .padding(.top, 30)
                                     .font(.largeTitle)
                                     Spacer()
-                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
+                                Text("$" + String(format: "%.2f", ideaModel.currentPrice))
                                      .foregroundColor(.white)
                                     .padding(.trailing, 44)
                                     .padding(.top, 30)
