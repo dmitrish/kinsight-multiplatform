@@ -3,6 +3,14 @@
 
 # Kotlin Multiplatform project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
 
+IPhone intro:
+
+![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
+
+Screenshots:
+
+
+
 ![screens](https://github.com/dmitrish/kinsight-multiplatform/blob/master/welcomesidebyside1.png)
 
 
