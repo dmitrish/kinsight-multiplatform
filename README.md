@@ -7,6 +7,11 @@ IPhone intro:
 
 ![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
 
+Android intro:
+
+![android gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif)
+
+
 Screenshots:
 
 
