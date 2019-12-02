@@ -92,34 +92,27 @@ struct IdeaViewDetail: View {
                                  
                             
                         )
+                        
                         Spacer()
-                        Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white).padding(.bottom)
-                        Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
-                        Text("PRICE" ).kerning(62).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
-                        VStack (alignment: .leading){
-                            HStack (alignment: .top){
-                                Text("Target")
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 43)
-                                    Spacer()
-                                Text("Current")
-                                     .foregroundColor(.white)
-                                    .padding(.trailing, 44)
-                            }.padding(.top, 30)
-                            HStack (alignment: .top){
-                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 43)
-                                    .padding(.top, 30)
-                                    .font(.largeTitle)
-                                    Spacer()
-                                Text("$" + String(format: "%.2f", ideaModel.currentPrice))
-                                     .foregroundColor(.white)
-                                    .padding(.trailing, 44)
-                                    .padding(.top, 30)
-                                    .font(.largeTitle)
-                            }
-                        }
+                        
+                      
+                    IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
+                        
+                       /* Text("IDEA DETAIL" ).kerning(22).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
+ */
+                                               
+                        Rectangle()
+                                      .frame(height: 1.0, alignment: .bottom)
+                        
+                            .foregroundColor(Color.white)
+                            .padding(.leading, 43)
+                            .padding(.trailing, 43)
+                            .padding(.bottom, 25)
+
+                         IdeaViewDetailThesisBlock(ideaModel: ideaModel)
+                       
+                        IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
+                        
                         Spacer()
            
                     }

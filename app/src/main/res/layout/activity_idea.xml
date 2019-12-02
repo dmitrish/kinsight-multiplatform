@@ -79,11 +79,22 @@
 
         android:textColor="@android:color/white"
         android:text="2.50"/>
+    <ImageView
+        android:id="@+id/directionImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="90dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+
+        app:srcCompat="@drawable/ic_bullmarket"
+        android:textColor="@android:color/white"
+        android:text="Alpha:"/>
     <TextView
         android:id="@+id/ideaTicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:textSize="36dp"
@@ -99,6 +110,8 @@
         android:textSize="18dp"
         android:textColor="@android:color/white"
         android:text="Oracle Corporation"/>
+
+
 
     <TextView
         android:id="@+id/priceLabel"
