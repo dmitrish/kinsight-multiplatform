@@ -15,9 +15,11 @@ struct IdeaViewDetailSecurityHeader: View {
     var body: some View {
         VStack {
             Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28)
-                                       .padding(.top, 15).padding(.bottom, 7);
-                                   Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white).padding(.bottom)
-                                   Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
+                   .padding(.top, 15).padding(.bottom, 7);
+               Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white)
+                .padding(.bottom)
+                .frame(width: 300)
+               Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
         }
     }
 }
