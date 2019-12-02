@@ -43,16 +43,18 @@ struct IdeaViewDetail: View {
                                     Image(ideaModel.createdBy.lowercased())
                                     .resizable()
                                         .frame(width: 88, height: 88)
+                                        .padding(.leading, 30)
                                        
                                 }
                                 .frame(width: 88, height: 88)
                                 Text("Fisherman")
                                     .foregroundColor(.white)
+                                    .padding(.leading, 15)
                                 Text(ideaModel.createdBy)
                                     .foregroundColor(.white)
-                                    .padding(.leading, 20)
+                                    .padding(.leading, 47)
                                     
-                            }.padding(.leading, 210)
+                            }.padding(.leading, 240)
                                 .padding(.bottom, 130)
                         )
                             
@@ -96,7 +98,7 @@ struct IdeaViewDetail: View {
                         Spacer()
                         
                       
-                    IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
+                        IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
                         
                        /* Text("IDEA DETAIL" ).kerning(22).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
  */
