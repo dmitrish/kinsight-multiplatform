@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.isVisible
@@ -17,13 +16,8 @@ import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.views.*
-import kotlinx.android.synthetic.main.activity_idea.*
-import kotlinx.android.synthetic.main.customprogress.*
 import kotlinx.android.synthetic.main.ideas_layout.*
-import kotlinx.android.synthetic.main.loading.*
 import androidx.core.util.Pair
-import kotlinx.android.synthetic.main.activity_welcome.*
-import kotlinx.android.synthetic.main.idea_item.*
 
 
 class MainActivity : FullScreenActivity(), OnItemClickListener {
@@ -68,17 +62,16 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, imagePair)
 
         val intent = Intent(this, IdeaActivity::class.java)
-        intent.putExtra("ideaCompanyName", idea.securityName)
-        intent.putExtra("ideaTicker", idea.securityTicker)
-        intent.putExtra("ideaAlpha", idea.alpha)
-        intent.putExtra("ideaTargetPrice", idea.targetPrice)
-        intent.putExtra("ideaCurrentPrice", idea.currentPrice)
-        intent.putExtra("ideaCreatedBy", idea.createdBy)
-        intent.putExtra("ideaCreatedFrom", idea.createdFrom)
-        intent.putExtra("ideaDirection", idea.direction)
-        intent.putExtra("ideaHorizon", idea.timeHorizon)
-        intent.putExtra("ideaConviction", getConvictionFromId(idea.convictionId))
-       // startActivity(intent)
+        intent.putExtra(IdeaActivity.IDEA_COMPANY_NAME, idea.securityName)
+        intent.putExtra(IdeaActivity.IDEA_TICKER, idea.securityTicker)
+        intent.putExtra(IdeaActivity.IDEA_ALPHA, idea.alpha)
+        intent.putExtra(IdeaActivity.IDEA_TARGET_PRICE, idea.targetPrice)
+        intent.putExtra(IdeaActivity.IDEA_CURRENT_PRICE, idea.currentPrice)
+        intent.putExtra(IdeaActivity.IDEA_CREATED_BY, idea.createdBy)
+        intent.putExtra(IdeaActivity.IDEA_CREATED_FROM, idea.createdFrom)
+        intent.putExtra(IdeaActivity.IDEA_DIRECTION, idea.direction)
+        intent.putExtra(IdeaActivity.IDEA_HORIZON, idea.timeHorizon)
+        intent.putExtra(IdeaActivity.IDEA_DIRECTION, getConvictionFromId(idea.convictionId))
 
         ActivityCompat.startActivity(this@MainActivity, intent, options.toBundle())
 
