@@ -75,9 +75,22 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         intent.putExtra("ideaCurrentPrice", idea.currentPrice)
         intent.putExtra("ideaCreatedBy", idea.createdBy)
         intent.putExtra("ideaCreatedFrom", idea.createdFrom)
+        intent.putExtra("ideaDirection", idea.direction)
+        intent.putExtra("ideaHorizon", idea.timeHorizon)
+        intent.putExtra("ideaConviction", getConvictionFromId(idea.convictionId))
        // startActivity(intent)
 
         ActivityCompat.startActivity(this@MainActivity, intent, options.toBundle())
+
+    }
+
+    private fun getConvictionFromId(convictionId: Int) : String {
+        return when (convictionId) {
+            1  -> "High"
+            2 -> "Medium"
+            3  -> "Low"
+            else -> "NA"
+        }
 
     }
 
