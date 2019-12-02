@@ -43,6 +43,9 @@ class IdeaActivity : FullScreenActivity() {
         val createdBy = startIntent.getStringExtra("ideaCreatedBy")
         val targetPrice = startIntent.getDoubleExtra("ideaTargetPrice", 0.0)
         val currentPrice = startIntent.getDoubleExtra("ideaCurrentPrice", 0.0)
+        val direction = startIntent.getStringExtra("ideaDirection")
+        val horizon = startIntent.getStringExtra("ideaHorizon")
+        val conviction = startIntent.getStringExtra("ideaConviction")
 
 
         ideaCompany.text = companyName
@@ -57,10 +60,15 @@ class IdeaActivity : FullScreenActivity() {
         ideaDetailCurrentPrice.text ="$${currentFormatted}"
         ideaDetailTargetPrice.text ="$${targetFormatted}"
 
+        ideaHorizon.text = horizon
+        ideaConviction.text = conviction
+
         val fishImageResource = getFishImageForAlpha(alpha)
         alphaLabl.setImageResource(fishImageResource)
 
         setFishermanImage(createdBy)
+
+        setDirectionImage(direction)
 
        // animateFish()
 
@@ -97,6 +105,19 @@ class IdeaActivity : FullScreenActivity() {
         fishermanImage.setImageResource(imageResource)
         val fishermanName = getFishermanImageName(imageResource)
         fishermanText.text = fishermanName
+    }
+
+    private fun setDirectionImage(directon: String) {
+        val imageResource = getDirectionImageResource(directon)
+        directionImage.setImageResource(imageResource)
+    }
+
+    private fun getDirectionImageResource(direction: String) : Int{
+        return when (direction){
+            "Long" -> R.drawable.ic_bullmarket
+            "Short" -> R.drawable.ic_bearmarket
+            else -> R.drawable.ic_bearmarket
+        }
     }
 
     private fun getFishermanImageForAlpha(alpha: Double) : Int{
