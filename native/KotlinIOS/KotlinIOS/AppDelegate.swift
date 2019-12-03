@@ -8,16 +8,26 @@
 //
 
 import UIKit
+import UserNotifications
 
 @available(iOS 13.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let notificationCenter = UNUserNotificationCenter.current()
+    
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        notificationCenter.requestAuthorization(options: options) {
+            (didAllow, error) in
+            if !didAllow {
+                print("User has declined notifications")
+            }
+        }
         UITableView.appearance().backgroundColor = UIColor.clear
          UITableViewCell.appearance().backgroundColor = .clear
         

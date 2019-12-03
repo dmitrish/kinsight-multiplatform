@@ -49,6 +49,7 @@ public class IdeasViewModel : ObservableObject {
     
     
     func fetchKotlin() {
+        sendNotification()
          dataRequestInProgress.inProgress = true
 //        let seconds = 5.0
        // DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
@@ -103,11 +104,33 @@ public class IdeasViewModel : ObservableObject {
     
      func setupSockets(){
         if(!self.hasSubscribed) {
-         var request = URLRequest(url: URL(string: "ws://localhost:8081/ws")!)
+            var request = URLRequest(url: URL(string: Constants.websocketUrl)!)
                request.timeoutInterval = 1
                socket = WebSocket(request: request)
                socket.delegate = self
                socket.connect()
+        }
+    }
+    
+    func sendNotification() {
+        
+        let identifier = "Local Notification"
+        
+        let content = UNMutableNotificationContent()
+        
+        content.title = "Reload"
+        content.body = "test notification"
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if let error = error {
+                print("notification Error \(error.localizedDescription)")
+            }
         }
     }
     
@@ -144,6 +167,7 @@ extension IdeasViewModel : WebSocketDelegate {
         print("Received text: \(text)")
         if (text == "reload") {
             fetchKotlin()
+            
         }
     }
     

@@ -21,7 +21,7 @@ struct AddButton<Destination : View>: View {
 
 struct HomeViewList: View {
     
-    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"))
+    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: Constants.htttpUrl))
     @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
@@ -46,12 +46,12 @@ struct HomeViewList: View {
             HStack {
                 Image("fish").resizable().frame(width:36, height:36).padding(.leading, 15)
                 Spacer()
-                Text("My Team Ideas").foregroundColor(Color.yellow)
-                    //.font(.headline)
-                    .fontWeight(Font.Weight.semibold)
-                    .font(.system(size: 20))
-                    .padding(.trailing, 70)
-                AddButton(destination: TickerSearchView()).padding(.trailing, 30)
+//                Text("My Team Ideas").foregroundColor(Color.yellow)
+//                    //.font(.headline)
+//                    .fontWeight(Font.Weight.semibold)
+//                    .font(.system(size: 20))
+//                    .padding(.trailing, 70)
+                AddButton(destination: NewIdeaView()).padding(.trailing, 30)
                 
             }
             List(ideaViewModel.ideasSortedByAlpha){

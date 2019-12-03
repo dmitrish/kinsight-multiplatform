@@ -19,6 +19,21 @@ struct HomeView: View {
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
     
+    
+       init() {
+           UINavigationBar.appearance().backgroundColor = .clear
+           UITableView.appearance().backgroundColor = .clear
+           UITableViewCell.appearance().backgroundColor = .clear
+     
+           UITableView.appearance().tableFooterView = UIView()
+           UITableView.appearance().separatorColor = .clear
+           
+           let backgroundView = UIView()
+           backgroundView.backgroundColor = UIColor.clear
+           
+           UITableViewCell.appearance().selectedBackgroundView = backgroundView
+       }
+    
     var body: some View {
         
       
@@ -32,7 +47,15 @@ struct HomeView: View {
             VStack{
                 Spacer()
        
-                HomeViewList()
+                NavigationView {
+                     HomeViewList()
+                    .navigationBarHidden(true)
+                    .navigationBarTitle(Text("Home"))
+                    .edgesIgnoringSafeArea([.top, .bottom])
+                    
+                }
+               
+               
             }
                 
         }.padding (.top, 0)
