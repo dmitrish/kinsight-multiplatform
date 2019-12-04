@@ -9,7 +9,7 @@ fun createApplicationScreenMessage(): String {
     return "Kotlin Alpha Capture Concept on ${platformName()}"
 }
 
-
+//expect class IdeaModelLogicDecorator (ideaModel: IdeaModel)
 
 fun inspect(){
     //IdeaModel::class.

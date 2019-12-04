@@ -17,6 +17,7 @@ import kotlinx.coroutines.withContext
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
+import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.resources.Strings
 
 
@@ -41,6 +42,7 @@ class IdeaActivity : FullScreenActivity() {
     lateinit var scaleXAnimation: SpringAnimation
     lateinit var scaleYAnimation: SpringAnimation
     lateinit var scaleGestureDetector: ScaleGestureDetector
+    lateinit var ideaModel: IdeaModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,36 +50,33 @@ class IdeaActivity : FullScreenActivity() {
         setContentView(R.layout.activity_idea)
 
         val startIntent = intent
-        val companyName = startIntent.getStringExtra(IDEA_COMPANY_NAME)
-        val ticker = startIntent.getStringExtra(IDEA_TICKER)
-        val alpha = startIntent.getDoubleExtra(IDEA_ALPHA, 0.0)
-        val createdBy = startIntent.getStringExtra(IDEA_CREATED_BY)
-        val targetPrice = startIntent.getDoubleExtra(IDEA_TARGET_PRICE, 0.0)
-        val currentPrice = startIntent.getDoubleExtra(IDEA_CURRENT_PRICE, 0.0)
+        ideaModel = startIntent.getParcelableExtra<IdeaModel>("IDEA")!!
+
+        println("idea unparceled: $ideaModel")
+
         val direction = startIntent.getStringExtra(IDEA_DIRECTION)
-        val horizon = startIntent.getStringExtra(IDEA_HORIZON)
         val conviction = startIntent.getStringExtra(IDEA_CONVICTION)
 
 
-        ideaCompany.text = companyName
-        ideaTicker.text = ticker
+        ideaCompany.text = ideaModel.securityName
+        ideaTicker.text = ideaModel.securityTicker
 
         val df = DecimalFormat("00.00")
         df.roundingMode = RoundingMode.CEILING
-        val alphaFormatted = df.format(alpha)
+        val alphaFormatted = df.format(ideaModel.alpha)
         alphaValue.text = alphaFormatted
-        val targetFormatted = df.format(targetPrice)
-        val currentFormatted = df.format(currentPrice)
+        val targetFormatted = df.format(ideaModel.targetPrice)
+        val currentFormatted = df.format(ideaModel.currentPrice)
         ideaDetailCurrentPrice.text ="$${currentFormatted}"
         ideaDetailTargetPrice.text ="$${targetFormatted}"
 
-        ideaHorizon.text = horizon
+        ideaHorizon.text = ideaModel.timeHorizon
         ideaConviction.text = conviction
 
-        val fishImageResource = getFishImageForAlpha(alpha)
+        val fishImageResource = getFishImageForAlpha(ideaModel.alpha)
         alphaLabl.setImageResource(fishImageResource)
 
-        setFishermanImage(createdBy)
+        setFishermanImage(ideaModel.createdBy)
 
         setDirectionImage(direction)
 
