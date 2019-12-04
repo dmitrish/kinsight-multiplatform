@@ -17,6 +17,7 @@ struct KotlinProjectLogo: View {
             Text("Powered by Kotlin Multiplatform")
                 .foregroundColor(.white)
             .font(.callout)
+                .padding(.top, 2)
         }
     }
 }

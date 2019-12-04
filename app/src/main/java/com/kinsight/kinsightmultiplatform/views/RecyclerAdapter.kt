@@ -1,5 +1,6 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.extensions.inflate
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
-import com.kinsight.kinsightmultiplatform.resources.Strings
 import kotlinx.android.synthetic.main.idea_item.view.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -42,32 +42,96 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
         }
 
         fun bindIdea(idea: IdeaModel, clickListener: OnItemClickListener) {
-            val df = DecimalFormat("#0.00")
-            df.roundingMode = RoundingMode.CEILING
-            val alpha = df.format(idea.alpha)
-            val psi = df.format(idea.benchMarkPerformance)
+
             this.idea = idea
-            if (idea.alpha > 4){
-                view.ideaImage2.setImageResource(R.drawable.ic_fish_green)
-            }
-            if (idea.alpha > 3 && idea.alpha < 4){
-                view.ideaImage2.setImageResource(R.drawable.ic_fish_yellow)
-            }
-            if (idea.alpha < 1){
-                view.ideaImage2.setImageResource(R.drawable.ic_fish_pale_yellow)
-            }
-            view.nameText.text = idea.securityTicker
 
-            view.ideaAlpha.text =  alpha
-            view.ideaTargetPrice.text = idea.securityName
-
-            view.ideaCreatedBy.text ="By: ${idea.createdBy}"
-            view.ideaPsi.text ="φ" + ": " + psi.drop(0)
             itemView.setOnClickListener {
                 clickListener.onItemClicked(idea, view)
             }
+
+            setViewValues(idea)
+
+            setViewImages(idea)
+
+            animateView(idea)
         }
 
+        private fun setViewImages(idea: IdeaModel) {
+            val fishImageResource = getFishImageForAlpha(idea.alpha)
+            view.ideaImage2.setImageResource(fishImageResource)
+        }
+
+        private fun setViewValues(idea: IdeaModel) {
+            val alpha = getRoundedValue(idea.alpha)
+            val psi = getRoundedValue(idea.benchMarkPerformance)
+
+            view.nameText.text = idea.securityTicker
+
+            view.ideaAlpha.text = alpha
+            view.ideaSecurityName.text = idea.securityName
+
+            view.ideaCreatedBy.text = "By: ${idea.createdBy}"
+            view.ideaPsi.text = "φ  " + psi.drop(0)
+        }
+
+
+        private fun animateView(idea: IdeaModel){
+
+            if (idea.currentPrice == idea.previousCurrentPrice) {
+                return
+            }
+
+            animateAlpha(idea)
+        }
+
+        private fun animateAlpha(idea: IdeaModel) {
+            val alphaColor = getColorForAlphaValue(idea)
+
+            view.ideaAlpha.alpha = 0.5f
+            view.ideaAlpha.setTextColor(alphaColor)
+            view.ideaAlpha.visibility = View.VISIBLE
+            view.ideaAlpha.animate().apply {
+                duration = 2000
+                alpha(1f)
+                start()
+            }
+
+            view.ideaAlpha.postDelayed({ view.ideaAlpha.setTextColor(Color.WHITE) }, 2000)
+        }
+
+    }
+
+    companion object {
+         private val df = DecimalFormat("#0.00").apply {
+             roundingMode = RoundingMode.CEILING
+         }
+
+         fun getRoundedValue (value: Double): String {
+             return df.format(value)
+         }
+
+         fun getColorForAlphaValue (idea: IdeaModel) : Int {
+             var alphaColor = Color.WHITE
+
+             if (idea.currentPrice > idea.previousCurrentPrice ){
+                 alphaColor =  Color.GREEN
+             }
+             else if (idea.currentPrice > idea.previousCurrentPrice){
+                 alphaColor = Color.RED
+             }
+
+             return alphaColor
+         }
+
+        fun getFishImageForAlpha(alpha: Double) : Int {
+            return when {
+                alpha >= 4 -> R.drawable.ic_fish_green
+                alpha >= 3 -> R.drawable.ic_fish_yellow
+                alpha >= 1 -> R.drawable.ic_fish_pale_yellow
+                alpha < 1 -> R.drawable.ic_fish_superhot
+                else -> R.drawable.ic_fish_blue
+            }
+        }
     }
 }
 

@@ -12,7 +12,7 @@ import SharedCode
 import Starscream
 
 class ProgressModel : ObservableObject {
-    var inProgress = false
+    var inProgress = true
 }
 
 public class IdeasViewModel : ObservableObject {
@@ -22,6 +22,8 @@ public class IdeasViewModel : ObservableObject {
     @Published var ideasOriginal = [IdeaModelSwift]()
     
     @Published var dataRequestInProgress = ProgressModel()
+    
+    @Published var inProgress : Bool = true
     
     private let repository: IdeaRepository?
     private var socket: WebSocket!
@@ -35,10 +37,10 @@ public class IdeasViewModel : ObservableObject {
     init() {
         self.repository = nil
         //dummy delay - to make sure progress indicator working
-        let seconds = 5.0
-        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+        let seconds = 1.0
+        //DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             self.fetchNative()  // Put your code which should be executed with a delay here
-        }
+       // }
        
     }
     
@@ -51,8 +53,9 @@ public class IdeasViewModel : ObservableObject {
     func fetchKotlin() {
         sendNotification()
          dataRequestInProgress.inProgress = true
-//        let seconds = 5.0
-       // DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+        inProgress = true
+        let seconds = 1.0
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
        
             self.repository?.fetchIdeas(success: { data in
                 self.ideas  = data
@@ -63,9 +66,10 @@ public class IdeasViewModel : ObservableObject {
 //                self.ideas.append(ideaExt)
 //            }
             self.dataRequestInProgress.inProgress = false
+                self.inProgress = false
             print(self.ideas)
         })
-       // }
+        }
     }
     
     private var searchCancellable: Cancellable? {

@@ -37,7 +37,10 @@ class IdeaSample {
             targetPrice: 37,
             targetPricePercentage: 4,
             timeHorizon: "1 week",
-            createdBy: "Someone"
+            createdBy: "Dmitri",
+            createdFrom: "iPhone",
+            previousCurrentPrice: 32.23,
+            isActive: true
         )
 }
 

@@ -28,4 +28,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="direction_long">Long</string>
+    <string name="direction_short">Short</string>
+    <string name="conviction_high">High</string>
+    <string name="conviction_medium">Medium</string>
+    <string name="conviction_low">Low</string>
+    <string name="time_horizon_one_week">1 week</string>
+    <string name="time_horizon_one_month">1 month</string>
+    <string name="time_horizon_three_months">3 months</string>
 </resources>

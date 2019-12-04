@@ -119,7 +119,14 @@ typealias DelayProvider = suspend (ms: Int) -> Unit
                               @SerialName("timeHorizon")
                               val timeHorizon: String,
                               @SerialName("createdBy")
-                              val createdBy: String)
+                              val createdBy: String,
+                                @SerialName("createdFrom")
+                                var createdFrom: String,
+                                @SerialName("previousCurrentPrice")
+                                var previousCurrentPrice: Double,
+                              @SerialName ("isActive")
+                              var isActive: Boolean
+                                )
 
 var ideas = mutableListOf<Idea>()
 var wssessions=  mutableListOf<WebSocketSession>()
@@ -194,7 +201,12 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         targetPrice = 360.00,
         targetPricePercentage = 0.00,
         timeHorizon = "1 Week",
-        createdBy = "Dmitri"))
+        createdBy = "Dmitri",
+        createdFrom = "Web",
+        previousCurrentPrice = 24.59,
+        isActive = true
+
+    ))
 
 
     try {

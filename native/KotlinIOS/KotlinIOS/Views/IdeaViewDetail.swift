@@ -12,6 +12,7 @@ import SharedCode
 
 struct IdeaViewDetail: View {
     var ideaModel: IdeaModel
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator
     
      @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
      @State var startPoint = UnitPoint(x: 0, y: 0)
@@ -21,6 +22,7 @@ struct IdeaViewDetail: View {
     
     init(ideaModel: IdeaModel){
         self.ideaModel = ideaModel
+        self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
     }
@@ -40,19 +42,21 @@ struct IdeaViewDetail: View {
                         .overlay(
                             VStack (alignment: .leading){
                                 HStack {
-                                    Image(ideaModel.alpha > 4 ? "dmitri" : (ideaModel.alpha > 3 ? "ajay" : "piyush"))
+                                    Image(ideaModel.createdBy.lowercased())
                                     .resizable()
                                         .frame(width: 88, height: 88)
+                                        .padding(.leading, 30)
                                        
                                 }
                                 .frame(width: 88, height: 88)
                                 Text("Fisherman")
                                     .foregroundColor(.white)
-                                Text(ideaModel.alpha > 4 ? "Dmitri" : (ideaModel.alpha > 3 ? "Ajay" : "Piyush"))
+                                    .padding(.leading, 15)
+                                Text(ideaModel.createdBy)
                                     .foregroundColor(.white)
-                                    .padding(.leading, 20)
+                                    .padding(.leading, 47)
                                     
-                            }.padding(.leading, 210)
+                            }.padding(.leading, 240)
                                 .padding(.bottom, 130)
                         )
                             
@@ -79,7 +83,7 @@ struct IdeaViewDetail: View {
                                 Spacer()
                               
                             }
-                                    Text(String(format: "%.2f", ideaModel.alpha))
+                                    Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
                                         .foregroundColor(.white)
                                         .fontWeight(Font.Weight.semibold)
                                         .font(.largeTitle)
@@ -92,35 +96,31 @@ struct IdeaViewDetail: View {
                                  
                             
                         )
+                        
                         Spacer()
-                        Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white).padding(.bottom)
-                        Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
-                        Text("PRICE" ).kerning(62).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
-                        VStack (alignment: .leading){
-                            HStack (alignment: .top){
-                                Text("Target")
-                                    .foregroundColor(.white)
+                        
+                      
+                        NavigationLink(destination: GraphView()) {
+                            VStack{
+                                IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
+                        
+                                /* Text("IDEA DETAIL" ).kerning(22).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
+ */
+                                               
+                                Rectangle()
+                                      .frame(height: 1.0, alignment: .bottom)
+                                    .foregroundColor(Color.white)
                                     .padding(.leading, 43)
-                                    Spacer()
-                                Text("Current")
-                                     .foregroundColor(.white)
-                                    .padding(.trailing, 44)
-                            }.padding(.top, 30)
-                            HStack (alignment: .top){
-                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 43)
-                                    .padding(.top, 30)
-                                    .font(.largeTitle)
-                                    Spacer()
-                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
-                                     .foregroundColor(.white)
-                                    .padding(.trailing, 44)
-                                    .padding(.top, 30)
-                                    .font(.largeTitle)
+                                    .padding(.trailing, 43)
+                                    .padding(.bottom, 25)
+
+                                IdeaViewDetailThesisBlock(ideaModel: ideaModel)
+                       
+                                IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
+                        
+                                Spacer()
                             }
                         }
-                        Spacer()
            
                     }
         }

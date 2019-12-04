@@ -3,15 +3,10 @@ package com.kinsight.kinsightmultiplatform.views
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.extensions.inflate
-import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
-import kotlinx.android.synthetic.main.idea_item.view.*
-import kotlinx.android.synthetic.main.idea_item.view.ideaAlpha
-import kotlinx.android.synthetic.main.idea_item.view.ideaTargetPrice
 import kotlinx.android.synthetic.main.ticker_item.view.*
 
 class TickerRecyclerAdapter (private val tickers: List<TickerModel>, val itemClickListener: OnTickerClickListener) :

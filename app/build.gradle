@@ -1,17 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
         // buildConfigField("String", "url", '"https://alphacapture.appspot.com"')
         // buildConfigField("String", "url", '"https://localhost:8081"')
         buildConfigField("String", "url", '"http://35.239.179.43:8081"')
         applicationId "com.kinsight.kinsightmultiplatform.mobile"
-        minSdkVersion 25
-        targetSdkVersion 28
+        minSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary true
@@ -76,6 +77,8 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'info.hoang8f:android-segmented:1.0.6'
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
 
     implementation "org.java-websocket:Java-WebSocket:1.4.0"
 }

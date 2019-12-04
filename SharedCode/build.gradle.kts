@@ -1,6 +1,7 @@
 
 import groovy.util.XmlParser
 import org.jdom2.input.SAXBuilder
+import org.jetbrains.kotlin.config.AnalysisFlags.experimental
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import java.io.File
 
@@ -9,6 +10,7 @@ val klockVersion = "1.7.0"
 repositories {
     google()
     jcenter()
+    gradlePluginPortal()
     maven(url = "https://maven.fabric.io/public")
     maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
     maven(url = "https://kotlin.bintray.com/kotlinx")
@@ -16,9 +18,33 @@ repositories {
 }
 
 plugins {
-    kotlin("multiplatform")
+    id("com.android.library")
+    //kotlin("android")
+   kotlin("multiplatform")
     id("kotlinx-serialization")
+
+    id( "kotlin-android-extensions") apply true
+
+  //  apply plugin: 'kotlin-android-extensions'
    // apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
+}
+
+//apply ( plugin = "kotlin-android-extensions")
+
+android{
+    compileSdkVersion (29)
+    buildToolsVersion("29.0.1")
+    defaultConfig {
+        minSdkVersion(19)
+        targetSdkVersion(29)
+    }
+    sourceSets {
+        getByName("main") {
+            manifest.srcFile("src/androidMain/AndroidManifest.xml")
+            java.srcDirs(file("src/androidMain/kotlin"))
+            res.srcDirs(file("src/androidMain/res"))
+        }
+    }
 }
 
 kotlin {
@@ -37,7 +63,11 @@ kotlin {
         }
     }
 
-    jvm("android")
+   // jvm("android")
+    android {
+
+    }
+
 
     val sp = sourceSets["commonMain"].kotlin.sourceDirectories.single().absolutePath
     println("Sp is " + sp)
@@ -113,7 +143,7 @@ val packForXcode by tasks.creating(Sync::class) {
 tasks.getByName("build").dependsOn(packForXcode)
 
 
-tasks.getByName("androidProcessResources").dependsOn("resourceConverter")
+tasks.getByName("build").dependsOn("resourceConverter")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

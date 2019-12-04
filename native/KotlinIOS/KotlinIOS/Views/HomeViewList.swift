@@ -27,6 +27,8 @@ struct HomeViewList: View {
     @State var endPoint = UnitPoint(x: 0, y: 2)
      @State var showModal: Bool = false
     
+    //@Binding var progress : Bool
+    
     init() {
         UINavigationBar.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
@@ -39,13 +41,23 @@ struct HomeViewList: View {
         backgroundView.backgroundColor = UIColor.clear
         
         UITableViewCell.appearance().selectedBackgroundView = backgroundView
+        
+       // progress = ideaViewModel.inProgress
+        
+       
     }
     
     var body: some View {
 
         VStack {
+            
             HStack {
-                Image("fish").resizable().frame(width:36, height:36).padding(.leading, 15)
+                
+                Image("fish")
+                    .resizable()
+                    .frame(width:36, height:36)
+                    .padding(.leading, 15)
+                
                 Spacer()
 //                Text("My Team Ideas").foregroundColor(Color.yellow)
 //                    //.font(.headline)
@@ -55,6 +67,7 @@ struct HomeViewList: View {
                 AddButton(destination: NewIdeaView()).padding(.trailing, 30)
                 
             }
+            
             List(ideaViewModel.ideasSortedByAlpha){
                 idea in
                 
@@ -66,46 +79,18 @@ struct HomeViewList: View {
                     .foregroundColor(Color.white)
 
             }.background(Color.clear)
-        }
-//        }.navigationBarTitle("My Team Ideas", displayMode: .inline)
-//            .navigationBarItems(trailing:
-//
-//        )
-    }
-
-    
-}
-        
-//
-//    }
-//}
-
-//              ZStack{
+                .overlay(ProgressView()
+                    .opacity(ideaViewModel.inProgress ? 1 : 0)
                 
-//                 LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint)
-//                 .edgesIgnoringSafeArea(.all)
-//                 .zIndex(0)
-//                VStack{
-//                     ActivityIndicator(isAnimating: $ideaViewModel.dataRequestInProgress)
-
-//                 }.zIndex(1)
-//                 NavigationView {
-//                VStack {
-// //                    Text("My Team Ideas")
-//                     List(ideaViewModel.ideas){
-//                         idea in
-//                         NavigationLink(destination: IdeaView(ideaModel: idea)) {
-//                            HomeViewListRow(ideaModel: idea)
-//                         }
-
-//                     }
-
-//                }.zIndex(0)
-//                 .foregroundColor(.white)
-//                 .navigationBarTitle("My Team Ideas", displayMode: .inline)
-//                                   .navigationBarItems(trailing:
-//                                            AddButton(destination: TickerSearchView())
-//                                          )
+            )
+        }.onAppear(){
+            let seconds = 1.0
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            
+            }
+        }
+    }
+}
    
 
 struct HomeList_Previews: PreviewProvider {

@@ -17,19 +17,33 @@ import kotlinx.coroutines.withContext
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
+import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
+import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.resources.Strings
 
 
 class IdeaActivity : FullScreenActivity() {
 
-    private companion object Params {
+     companion object Params {
         val INITIAL_SCALE = 1f
         val STIFFNESS = SpringForce.STIFFNESS_VERY_LOW
         val DAMPING_RATIO = SpringForce.DAMPING_RATIO_HIGH_BOUNCY
+        const val IDEA_COMPANY_NAME = "IDEA_COMPANY_NAME"
+        const val IDEA_TICKER = "IDEA_TICKER"
+        const val IDEA_ALPHA = "IDEA_ALPHA"
+        const val IDEA_CREATED_BY = "IDEA_CREATED_BY"
+        const val IDEA_TARGET_PRICE = "IDEA_TARGET_PRICE"
+        const val IDEA_CURRENT_PRICE = "IDEA_CURRENT_PRICE"
+        const val IDEA_DIRECTION = "IDEA_DIRECTION"
+        const val IDEA_HORIZON = "IDEA_HORIZON"
+        const val IDEA_CONVICTION = "IDEA_CONVICTION"
+        const val IDEA_CREATED_FROM = "IDEA_CREATED_FROM"
     }
 
     lateinit var scaleXAnimation: SpringAnimation
     lateinit var scaleYAnimation: SpringAnimation
     lateinit var scaleGestureDetector: ScaleGestureDetector
+    lateinit var ideaModel: IdeaModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,27 +51,36 @@ class IdeaActivity : FullScreenActivity() {
         setContentView(R.layout.activity_idea)
 
         val startIntent = intent
-        val companyName = startIntent.getStringExtra("ideaCompanyName")
-        val ticker = startIntent.getStringExtra("ideaTicker")
-        val alpha = startIntent.getDoubleExtra("ideaAlpha", 0.0)
-        val createdBy = startIntent.getStringExtra("ideaCreatedBy")
-        val targetPrice = startIntent.getDoubleExtra("ideaTargetPrice", 0.0)
+        ideaModel = startIntent.getParcelableExtra<IdeaModel>("IDEA")!!
+        val ideaModelDecorator = IdeaModelLogicDecorator(ideaModel)
 
-        ideaCompany.text = companyName
-        ideaTicker.text = ticker
+        println("idea unparceled: $ideaModel")
+
+        val direction = startIntent.getStringExtra(IDEA_DIRECTION)
+        val conviction = startIntent.getStringExtra(IDEA_CONVICTION)
+
+
+        ideaCompany.text = ideaModel.securityName
+        ideaTicker.text = ideaModel.securityTicker
 
         val df = DecimalFormat("00.00")
         df.roundingMode = RoundingMode.CEILING
-        val alphaFormatted = df.format(alpha)
-        alphaValue.text = alphaFormatted
-        val targetFormatted = df.format(targetPrice)
-        ideaDetailCurrentPrice.text ="$${targetFormatted}"
+        //val alphaFormatted = ide // df.format(ideaModel.alpha)
+        alphaValue.text = ideaModelDecorator.getDisplayValueForAlpha() //alphaFormatted
+        val targetFormatted = df.format(ideaModel.targetPrice)
+        val currentFormatted = df.format(ideaModel.currentPrice)
+        ideaDetailCurrentPrice.text ="$${currentFormatted}"
         ideaDetailTargetPrice.text ="$${targetFormatted}"
 
-        val fishImageResource = getFishImageForAlpha(alpha)
+        ideaHorizon.text = ideaModel.timeHorizon
+        ideaConviction.text = conviction
+
+        val fishImageResource = getFishImageForAlpha(ideaModel.alpha)
         alphaLabl.setImageResource(fishImageResource)
 
-        setFishermanImage(alpha)
+        setFishermanImage(ideaModel.createdBy)
+
+        setDirectionImage(direction)
 
        // animateFish()
 
@@ -89,19 +112,33 @@ class IdeaActivity : FullScreenActivity() {
 
     }
 
-    private fun setFishermanImage(alpha: Double) {
-        val imageResource = getFishermanImageForAlpha(alpha)
+    private fun setFishermanImage(createdBy: String) {
+        val imageResource = getFishermanImageResourceForCreatedBy(createdBy)
         fishermanImage.setImageResource(imageResource)
         val fishermanName = getFishermanImageName(imageResource)
         fishermanText.text = fishermanName
     }
 
-    private fun getFishermanImageForAlpha(alpha: Double) : Int{
-        return when {
-            alpha >= 4 -> R.drawable.ic_man
-            alpha >= 3 -> R.drawable.ic_ajay
-            alpha >= 1 -> R.drawable.ic_piyush
-            alpha < 1 -> R.drawable.ic_mark
+    private fun setDirectionImage(direction: String) {
+        val imageResource = getDirectionImageResource(direction)
+        directionImage.setImageResource(imageResource)
+    }
+
+    private fun getDirectionImageResource(direction: String) : Int{
+        return when (direction){
+            Strings.direction_long -> R.drawable.ic_bullmarket
+            Strings.direction_short -> R.drawable.ic_bearmarket
+            else -> R.drawable.ic_bearmarket
+        }
+    }
+
+
+    private fun getFishermanImageResourceForCreatedBy(createdBy: String) : Int{
+        return when (createdBy) {
+            "Dmitri"  -> R.drawable.ic_man
+            "Ajay" -> R.drawable.ic_ajay
+            "Piyush"  -> R.drawable.ic_piyush
+            "Mark"  -> R.drawable.ic_mark
             else -> R.drawable.ic_fish_blue
         }
     }
@@ -156,20 +193,7 @@ class IdeaActivity : FullScreenActivity() {
             alpha(1f)
             start()
         }
-       /* alphaLabl.animate().apply {
-            duration = 2000
-            scaleX(1.2f)
-            scaleY(1.2f)
-            start()
-        }*/
 
-/*
-
-        SpringAnimation(alphaLabl, DynamicAnimation.TRANSLATION_Y, 0f).apply {
-            start()
-        }
-
- */
 
     }
 
