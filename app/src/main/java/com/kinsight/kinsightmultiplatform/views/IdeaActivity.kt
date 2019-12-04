@@ -51,13 +51,13 @@ class IdeaActivity : FullScreenActivity() {
         setContentView(R.layout.activity_idea)
 
         val startIntent = intent
-        ideaModel = startIntent.getParcelableExtra<IdeaModel>("IDEA")!!
+        ideaModel = startIntent.getParcelableExtra("IDEA")!!
         val ideaModelDecorator = IdeaModelLogicDecorator(ideaModel)
 
         println("idea unparceled: $ideaModel")
 
         val direction = startIntent.getStringExtra(IDEA_DIRECTION)
-        val conviction = startIntent.getStringExtra(IDEA_CONVICTION)
+        val conviction = ideaModelDecorator.getConviction()
 
 
         ideaCompany.text = ideaModel.securityName
