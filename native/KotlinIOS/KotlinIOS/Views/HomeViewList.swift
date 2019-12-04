@@ -25,6 +25,7 @@ struct HomeViewList: View {
     @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
+     @State var showModal: Bool = false
     
     init() {
         UINavigationBar.appearance().backgroundColor = .clear
@@ -56,7 +57,9 @@ struct HomeViewList: View {
             }
             List(ideaViewModel.ideasSortedByAlpha){
                 idea in
-                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
+                
+                
+                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)){
                     
                     HomeViewListRow(ideaModel: idea)
                 }.background(Color.clear)
@@ -69,7 +72,7 @@ struct HomeViewList: View {
 //
 //        )
     }
-    
+
     
 }
         
