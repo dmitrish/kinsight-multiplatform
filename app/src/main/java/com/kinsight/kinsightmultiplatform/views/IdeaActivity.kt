@@ -17,6 +17,7 @@ import kotlinx.coroutines.withContext
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
+import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.resources.Strings
 
@@ -51,6 +52,7 @@ class IdeaActivity : FullScreenActivity() {
 
         val startIntent = intent
         ideaModel = startIntent.getParcelableExtra<IdeaModel>("IDEA")!!
+        val ideaModelDecorator = IdeaModelLogicDecorator(ideaModel)
 
         println("idea unparceled: $ideaModel")
 
@@ -63,8 +65,8 @@ class IdeaActivity : FullScreenActivity() {
 
         val df = DecimalFormat("00.00")
         df.roundingMode = RoundingMode.CEILING
-        val alphaFormatted = df.format(ideaModel.alpha)
-        alphaValue.text = alphaFormatted
+        //val alphaFormatted = ide // df.format(ideaModel.alpha)
+        alphaValue.text = ideaModelDecorator.getDisplayValueForAlpha() //alphaFormatted
         val targetFormatted = df.format(ideaModel.targetPrice)
         val currentFormatted = df.format(ideaModel.currentPrice)
         ideaDetailCurrentPrice.text ="$${currentFormatted}"

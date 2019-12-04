@@ -12,6 +12,7 @@ import SharedCode
 
 struct IdeaViewDetail: View {
     var ideaModel: IdeaModel
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator
     
      @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
      @State var startPoint = UnitPoint(x: 0, y: 0)
@@ -21,6 +22,7 @@ struct IdeaViewDetail: View {
     
     init(ideaModel: IdeaModel){
         self.ideaModel = ideaModel
+        self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
     }
@@ -81,7 +83,7 @@ struct IdeaViewDetail: View {
                                 Spacer()
                               
                             }
-                                    Text(String(format: "%.2f", ideaModel.alpha))
+                                    Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
                                         .foregroundColor(.white)
                                         .fontWeight(Font.Weight.semibold)
                                         .font(.largeTitle)
