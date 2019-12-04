@@ -18,6 +18,7 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
 import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
+import com.kinsight.kinsightmultiplatform.PriceKind
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.resources.Strings
 
@@ -28,7 +29,7 @@ class IdeaActivity : FullScreenActivity() {
         val INITIAL_SCALE = 1f
         val STIFFNESS = SpringForce.STIFFNESS_VERY_LOW
         val DAMPING_RATIO = SpringForce.DAMPING_RATIO_HIGH_BOUNCY
-        const val IDEA_COMPANY_NAME = "IDEA_COMPANY_NAME"
+       /* const val IDEA_COMPANY_NAME = "IDEA_COMPANY_NAME"
         const val IDEA_TICKER = "IDEA_TICKER"
         const val IDEA_ALPHA = "IDEA_ALPHA"
         const val IDEA_CREATED_BY = "IDEA_CREATED_BY"
@@ -37,7 +38,7 @@ class IdeaActivity : FullScreenActivity() {
         const val IDEA_DIRECTION = "IDEA_DIRECTION"
         const val IDEA_HORIZON = "IDEA_HORIZON"
         const val IDEA_CONVICTION = "IDEA_CONVICTION"
-        const val IDEA_CREATED_FROM = "IDEA_CREATED_FROM"
+        const val IDEA_CREATED_FROM = "IDEA_CREATED_FROM"*/
     }
 
     lateinit var scaleXAnimation: SpringAnimation
@@ -50,47 +51,43 @@ class IdeaActivity : FullScreenActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idea)
 
-        val startIntent = intent
-        ideaModel = startIntent.getParcelableExtra<IdeaModel>("IDEA")!!
+        ideaModel = intent.getParcelableExtra("IDEA")!!
         val ideaModelDecorator = IdeaModelLogicDecorator(ideaModel)
 
         println("idea unparceled: $ideaModel")
 
-        val direction = startIntent.getStringExtra(IDEA_DIRECTION)
-        val conviction = startIntent.getStringExtra(IDEA_CONVICTION)
-
 
         ideaCompany.text = ideaModel.securityName
         ideaTicker.text = ideaModel.securityTicker
-
-        val df = DecimalFormat("00.00")
-        df.roundingMode = RoundingMode.CEILING
-        //val alphaFormatted = ide // df.format(ideaModel.alpha)
         alphaValue.text = ideaModelDecorator.getDisplayValueForAlpha() //alphaFormatted
-        val targetFormatted = df.format(ideaModel.targetPrice)
-        val currentFormatted = df.format(ideaModel.currentPrice)
-        ideaDetailCurrentPrice.text ="$${currentFormatted}"
-        ideaDetailTargetPrice.text ="$${targetFormatted}"
-
+        ideaDetailCurrentPrice.text = ideaModelDecorator.getDisplayValueForPrice(priceKind = PriceKind.CURRENT)
+        ideaDetailTargetPrice.text = ideaModelDecorator.getDisplayValueForPrice(priceKind = PriceKind.TARGET)
         ideaHorizon.text = ideaModel.timeHorizon
-        ideaConviction.text = conviction
+        ideaConviction.text = ideaModelDecorator.getConviction()
 
+        setImagesAndAnimation()
+
+
+    }
+
+    private fun setImagesAndAnimation() {
         val fishImageResource = getFishImageForAlpha(ideaModel.alpha)
         alphaLabl.setImageResource(fishImageResource)
 
         setFishermanImage(ideaModel.createdBy)
 
-        setDirectionImage(direction)
+        setDirectionImage(ideaModel.direction)
 
-       // animateFish()
 
         // create scaleX and scaleY animations
         scaleXAnimation = createSpringAnimation(
             alphaLabl, SpringAnimation.SCALE_X,
-            INITIAL_SCALE, STIFFNESS, DAMPING_RATIO)
+            INITIAL_SCALE, STIFFNESS, DAMPING_RATIO
+        )
         scaleYAnimation = createSpringAnimation(
             alphaLabl, SpringAnimation.SCALE_Y,
-            INITIAL_SCALE, STIFFNESS, DAMPING_RATIO)
+            INITIAL_SCALE, STIFFNESS, DAMPING_RATIO
+        )
 
         setupPinchToZoom()
 
@@ -108,8 +105,6 @@ class IdeaActivity : FullScreenActivity() {
             }
             true
         }
-
-
     }
 
     private fun setFishermanImage(createdBy: String) {

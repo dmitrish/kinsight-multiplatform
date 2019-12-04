@@ -17,4 +17,14 @@ actual class IdeaModelLogicDecorator actual constructor (private var ideaModel: 
     actual fun getDisplayValueForAlpha(): String {
         return NSString.stringWithFormat("%.2f", ideaModel.alpha)
     }
+
+    actual fun getDisplayValueForPrice(priceKind: PriceKind): String{
+        val result = when (priceKind){
+            PriceKind.CURRENT -> NSString.stringWithFormat("%.2f", ideaModel.currentPrice)
+            PriceKind.PREVIOUS -> NSString.stringWithFormat("%.2f", ideaModel.previousCurrentPrice)
+            PriceKind.TARGET -> NSString.stringWithFormat("%.2f", ideaModel.targetPrice)
+        }
+        return "$$result"
+
+    }
 }
