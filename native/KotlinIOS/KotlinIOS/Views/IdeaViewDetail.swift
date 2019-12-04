@@ -100,24 +100,27 @@ struct IdeaViewDetail: View {
                         Spacer()
                         
                       
-                        IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
+                        NavigationLink(destination: GraphView()) {
+                            VStack{
+                                IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
                         
-                       /* Text("IDEA DETAIL" ).kerning(22).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
+                                /* Text("IDEA DETAIL" ).kerning(22).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
  */
                                                
-                        Rectangle()
+                                Rectangle()
                                       .frame(height: 1.0, alignment: .bottom)
-                        
-                            .foregroundColor(Color.white)
-                            .padding(.leading, 43)
-                            .padding(.trailing, 43)
-                            .padding(.bottom, 25)
+                                    .foregroundColor(Color.white)
+                                    .padding(.leading, 43)
+                                    .padding(.trailing, 43)
+                                    .padding(.bottom, 25)
 
-                         IdeaViewDetailThesisBlock(ideaModel: ideaModel)
+                                IdeaViewDetailThesisBlock(ideaModel: ideaModel)
                        
-                        IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
+                                IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
                         
-                        Spacer()
+                                Spacer()
+                            }
+                        }
            
                     }
         }
