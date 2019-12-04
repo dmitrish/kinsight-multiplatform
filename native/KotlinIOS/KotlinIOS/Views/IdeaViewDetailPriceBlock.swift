@@ -12,10 +12,17 @@ import SharedCode
 struct IdeaViewDetailPriceBlock: View {
     
     var ideaModel: IdeaModel
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator
+    
+    init(ideaModel: IdeaModel){
+        self.ideaModel = ideaModel
+        self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
+       
+    }
     
     var body: some View {
          VStack (alignment: .leading){
-            /* Text("PRICE" ).kerning(62).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20) */
+            
            HStack (alignment: .top){
                    Text("Target")
                        .foregroundColor(.white)
@@ -26,12 +33,12 @@ struct IdeaViewDetailPriceBlock: View {
                        .padding(.trailing, 44)
                }.padding(.top, 20)
                HStack (alignment: .top){
-                   Text("$" + String(format: "%.2f", ideaModel.targetPrice))
+                Text(ideaModelLogicDecorator.getDisplayValueForPrice(priceKind: PriceKind.target))
                        .foregroundColor(.white)
                        .padding(.leading, 43)
                        .font(.title)
                        Spacer()
-                   Text("$" + String(format: "%.2f", ideaModel.currentPrice))
+                Text(ideaModelLogicDecorator.getDisplayValueForPrice(priceKind: PriceKind.current))
                        .foregroundColor(.white)
                        .padding(.trailing, 44)
                        .font(.title)
