@@ -1,5 +1,6 @@
 package com.kinsight.kinsightmultiplatform
 
+import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import platform.UIKit.UIDevice
 
 import platform.*
@@ -9,4 +10,6 @@ actual fun platformName(): String {
             " " +
             UIDevice.currentDevice.systemVersion
 }
+actual interface Parcelable
+
 

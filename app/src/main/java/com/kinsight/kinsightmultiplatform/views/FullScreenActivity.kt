@@ -2,6 +2,7 @@ package com.kinsight.kinsightmultiplatform.views
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kinsight.kinsightmultiplatform.R
 import com.kinsight.kinsightmultiplatform.uihelpers.makeWindowFullScreen
@@ -27,6 +28,11 @@ abstract class FullScreenActivity : AppCompatActivity(){
             alpha < 1 -> R.drawable.ic_fish_superhot
             else -> R.drawable.ic_fish_blue
         }
+    }
+
+    fun showUserWarning (message: String){
+        Toast.makeText(this, message, Toast.LENGTH_LONG)
+            .show()
     }
 
 

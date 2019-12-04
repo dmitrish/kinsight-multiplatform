@@ -12,13 +12,8 @@ import com.kinsight.kinsightmultiplatform.ViewModels.IdeaCreateViewModel
 import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import kotlinx.android.synthetic.main.activity_idea_create.*
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.Uri
 import android.widget.RadioButton
-
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import com.kinsight.kinsightmultiplatform.models.TickerPriceModel
 import com.kinsight.kinsightmultiplatform.resources.Strings
@@ -28,8 +23,21 @@ class IdeaCreateActivity : FullScreenActivity(),
     PickIdeaDurationFragment.OnFragmentInteractionListener {
 
 
-    private var isBear: Boolean = false
-    private var isBull: Boolean = false
+    inner class IdeaCreateUtilityClass {
+        val targetPriceValue : Double
+        get() = targetPrice.text.toString().plus(".00").toDouble()
+
+        val stopLossValue: Int
+        get() = stopLoss.text.toString().toInt()
+
+        val benchMarkTicker: String = "SPX"
+
+        val initialAlphaValue: Double = 0.0
+
+        val ideaReason: String = "Target Price"
+        val stockCurrency: String = "USD"
+    }
+
     private var companyName: String? = null
     private var companyTicker: String? = null
     private var companyPrice: Double? = null
@@ -60,23 +68,20 @@ class IdeaCreateActivity : FullScreenActivity(),
         saveIdea.setOnClickListener {
 
             if (companyTicker == null) {
-                Toast.makeText(this, "Please choose ticker first!", Toast.LENGTH_LONG)
-                    .show()
+                showUserWarning("Please choose ticker first!")
             }
-            else if (companyDirection == null || timeHorizon == null) {
-                Toast.makeText(this, "Direction, Conviction and Investment Horizon are required!", Toast.LENGTH_LONG)
-                    .show()
+            else if (companyDirection == null || timeHorizon == null || companyConvictionId == null) {
+               showUserWarning("Direction, Conviction and Investment Horizon are required!")
             }
-
             else {
                 try {
-                    val securityTicker = companyTicker
-                    val targetPrice = targetPrice.text.toString().plus(".00").toDouble()
-                    val stopLoss = stopLoss.text.toString().toInt()
+                    val ideaCreateUtilityClass = IdeaCreateUtilityClass()
+                   // val targetPrice = ideaCreateUtilityClass.targetPriceValue
+                   // val stopLoss = ideaCreateUtilityClass.stopLossValue
                     val newIdea = IdeaModel(
                         id = nextId,
-                        alpha = 0.0,
-                        benchMarkTicker = "SPX",
+                        alpha = ideaCreateUtilityClass.initialAlphaValue,
+                        benchMarkTicker = ideaCreateUtilityClass.benchMarkTicker,
                         //benchMarkTickerDesk= "SP 500 Index",
                         benchMarkCurrentPrice = 2856.66,
                         benchMarkPerformance = 0.392,
@@ -85,13 +90,13 @@ class IdeaCreateActivity : FullScreenActivity(),
                         direction = companyDirection!!,
                         directionId = if (companyDirection!! == "Long")  1 else 2,
                         entryPrice = companyPrice!!,
-                        reason = "Target Price",
+                        reason = ideaCreateUtilityClass.ideaReason,
                         securityName = companyName ?: companyTicker!!,
                         securityTicker = companyTicker!!,
-                        stockCurrency = "USD",
-                        stopLoss = stopLoss,
+                        stockCurrency = ideaCreateUtilityClass.stockCurrency,
+                        stopLoss = ideaCreateUtilityClass.stopLossValue,
                         stopLossValue = 313.4823,
-                        targetPrice = targetPrice,
+                        targetPrice = ideaCreateUtilityClass.targetPriceValue,
                         targetPricePercentage = 0.0,
                         timeHorizon = timeHorizon!!,
                         createdBy = "Dmitri",
@@ -104,8 +109,7 @@ class IdeaCreateActivity : FullScreenActivity(),
                     viewModel.saveIdea(newIdea)
                     finish()
                 } catch (e: Throwable) {
-                    Toast.makeText(this, "Failed to save: ${e.message}", Toast.LENGTH_LONG)
-                        .show()
+                    showUserWarning("Failed to save: ${e.message}")
                     Log.e("IDEA_", e.message + e.stackTrace)
                 }
             }
@@ -119,7 +123,7 @@ class IdeaCreateActivity : FullScreenActivity(),
                 Log.i("APP", "Ticker price model observed: $tickerPriceModel")
                 val ticker = companyTicker
                 companyPrice = tickerPriceModel.latestPrice
-                chooseTicker.text = "$ticker  | Latest Price: USD ${companyPrice} | Benchmark: SPX"
+                chooseTicker.text = "$ticker  |  Price: USD ${companyPrice} | Benchmark: SPX"
 
             }
         )
@@ -162,7 +166,7 @@ class IdeaCreateActivity : FullScreenActivity(),
   }
 
     override fun onFragmentInteraction(uri: Uri) {
-       println("callback from dialog fragment")//To change body of created functions use File | Settings | File Templates.
+       println("callback from dialog fragment")
     }
 
 }
