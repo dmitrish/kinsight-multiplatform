@@ -26,4 +26,14 @@ actual class IdeaModelLogicDecorator actual constructor (private var ideaModel: 
     actual fun getDisplayValueForAlpha(): String {
         return df.format(ideaModel.alpha)
     }
+
+    actual fun getDisplayValueForPrice(priceKind: PriceKind): String{
+        val result = when (priceKind){
+            PriceKind.CURRENT -> df.format(ideaModel.currentPrice)
+            PriceKind.PREVIOUS -> df.format(ideaModel.previousCurrentPrice)
+            PriceKind.TARGET -> df.format(ideaModel.targetPrice)
+        }
+         return "$$result"
+
+    }
 }

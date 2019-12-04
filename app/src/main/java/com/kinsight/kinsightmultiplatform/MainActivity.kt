@@ -18,9 +18,6 @@ import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.views.*
 import kotlinx.android.synthetic.main.ideas_layout.*
 import androidx.core.util.Pair
-//import kotlinx.s
-
-
 
 class MainActivity : FullScreenActivity(), OnItemClickListener {
 
@@ -60,34 +57,10 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
         val sharedImage = view.findViewById<ImageView>(R.id.ideaImage2)
         val imagePair = Pair.create(sharedImage as View, "tImage")
-
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, imagePair)
-
         val intent = Intent(this, IdeaActivity::class.java)
         intent.putExtra("IDEA", idea)
-       /* intent.putExtra(IdeaActivity.IDEA_COMPANY_NAME, idea.securityName)
-        intent.putExtra(IdeaActivity.IDEA_TICKER, idea.securityTicker)
-        intent.putExtra(IdeaActivity.IDEA_ALPHA, idea.alpha)
-        intent.putExtra(IdeaActivity.IDEA_TARGET_PRICE, idea.targetPrice)
-        intent.putExtra(IdeaActivity.IDEA_CURRENT_PRICE, idea.currentPrice)
-        intent.putExtra(IdeaActivity.IDEA_CREATED_BY, idea.createdBy)
-        intent.putExtra(IdeaActivity.IDEA_CREATED_FROM, idea.createdFrom)
-        intent.putExtra(IdeaActivity.IDEA_DIRECTION, idea.direction)
-        intent.putExtra(IdeaActivity.IDEA_HORIZON, idea.timeHorizon)*/
-        intent.putExtra(IdeaActivity.IDEA_DIRECTION, getConvictionFromId(idea.convictionId))
-
         ActivityCompat.startActivity(this@MainActivity, intent, options.toBundle())
-
-    }
-
-    private fun getConvictionFromId(convictionId: Int) : String {
-        return when (convictionId) {
-            1  -> "High"
-            2 -> "Medium"
-            3  -> "Low"
-            else -> "NA"
-        }
-
     }
 
     private fun startIdeaCreateActivity() {

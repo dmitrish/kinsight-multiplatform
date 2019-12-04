@@ -104,8 +104,6 @@ struct IdeaViewDetail: View {
                             VStack{
                                 IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
                         
-                                /* Text("IDEA DETAIL" ).kerning(22).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
- */
                                                
                                 Rectangle()
                                       .frame(height: 1.0, alignment: .bottom)
