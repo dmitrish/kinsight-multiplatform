@@ -46,9 +46,7 @@ struct TickerSearchView: View {
     var body: some View {
         
         ZStack {
-            RoundedRectangle(cornerRadius: 0)
-                               .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
-                               .edgesIgnoringSafeArea(.all)
+           AnimatedBackground()
         VStack {
             SearchBar(text: $tickerSearchViewModel.searchText)
             List(tickerSearchViewModel.tickers){

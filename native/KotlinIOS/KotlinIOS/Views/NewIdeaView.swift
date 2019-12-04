@@ -14,11 +14,65 @@ import SharedCode
 extension TickerModel {
    
 }
+struct TargetView: View {
+
+    @Binding var targetPrice: String
+    @Binding var stopLoss: String
+    
+    var body: some View {
+        
+        VStack {
+            HStack {
+                             Text("Target Price: ")
+                             Spacer()
+                             TextField("Target Price: ", text: $targetPrice).foregroundColor(.white)
+                                }
+                         HStack {
+                         Text("Stop Loss: ")
+                             Spacer()
+                         TextField("Stop Loss: ", text: $stopLoss).foregroundColor(.white)
+                            }
+               }
+        }
+  
+}
+
+struct PickerView: View {
+   
+    
+    @Binding var direction: String
+   @Binding var duration: String
+    @Binding var conviction: String
+   
+    var body: some View {
+        VStack {
+
+                    Text("Direction: ")
+                Picker(selection: $direction, label: Text("")) {
+                          Text("Long").tag(0).foregroundColor(.white)
+                          Text("Short").tag(1).foregroundColor(.white)
+                      }.pickerStyle(SegmentedPickerStyle())
+                        
+                
+                Text("Conviction: ")
+                       Picker(selection: $conviction, label: Text("")) {
+                                 Text("High").tag(0).foregroundColor(.white)
+                                 Text("Medium").tag(1).foregroundColor(.white)
+                                Text("Low").tag(2).foregroundColor(.white)
+                             }.pickerStyle(SegmentedPickerStyle())
+                
+                Text("Duration: ")
+            Picker(selection: $duration, label: Text("")) {
+                                                  Text("1 week").tag(0).foregroundColor(.white)
+                                                  Text("1 month").tag(1).foregroundColor(.white)
+                                                 Text("3 months").tag(2).foregroundColor(.white)
+                                              }.pickerStyle(SegmentedPickerStyle())
+        }
+    }
+}
+
 struct NewIdeaView: View {
-    
-    
-    
-    
+
     var idearepo = IdeaRepository(baseUrl: Constants.htttpUrl)
     
 //     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -35,6 +89,7 @@ struct NewIdeaView: View {
      @State private var conviction = ""
      @State private var duration = ""
      @State private var showingAlert = false
+     @State private var showingTickerSearch = false
     
     
     var body: some View {
@@ -57,57 +112,29 @@ struct NewIdeaView: View {
 //                         }
 //                     }
 //                 )
+        ZStack {
+            AnimatedBackground()
 
               VStack {
+//                Image("fish")
                 HStack {
-                    
-                     Text("Ticker: ")
-                
-                    NavigationLink(destination: TickerSearchView(selectedTicker: self.$selectedTicker)) {
-                        
-                        Text(self.selectedTicker.symbol.isEmpty ? "Search Ticker": "\(self.selectedTicker.symbol)" ) }
-//                    TickerSearchView.init(selectedTicker: self.$selectedTicker)
-                    
-//                     NavigationButton(destination: ){
-//                     Text("Search Ticker")
-//                    }
-//                    Button(action: {
-//
-//                                              }) {
-//
-//                                              }
+                    Text("Ticker: ")
+                    Button(action: {
+                        self.showingTickerSearch.toggle()
+                    }) {
+                       Text(self.selectedTicker.symbol.isEmpty ? "Search Ticker": "\(self.selectedTicker.symbol)" ) 
+                    }.sheet(isPresented: $showingTickerSearch) {
+                       TickerSearchView(selectedTicker: self.$selectedTicker)
+                    }
                 }
-                   
-                
-                HStack {
-                    Text("Target Price: ")
-                    TextField("Target Price: ", text: $targetPrice)
-                       }
-                HStack {
-                Text("Stop Loss: ")
-                TextField("Stop Loss: ", text: $stopLoss)
-                   }
-                    Text("Direction: ")
-                Picker(selection: $direction, label: Text("")) {
-                          Text("Long").tag(0)
-                          Text("Short").tag(1)
-                      }.pickerStyle(SegmentedPickerStyle())
-                
-                Text("Conviction: ")
-                       Picker(selection: $duration, label: Text("")) {
-                                 Text("High").tag(0)
-                                 Text("Medium").tag(1)
-                                Text("Low").tag(2)
-                             }.pickerStyle(SegmentedPickerStyle())
-                
-                Text("Duration: ")
-            Picker(selection: $duration, label: Text("")) {
-                                                  Text("1 week").tag(0)
-                                                  Text("1 month").tag(1)
-                                                 Text("3 months").tag(2)
-                                              }.pickerStyle(SegmentedPickerStyle())
 
-                
+                Spacer()
+                TargetView(targetPrice: $targetPrice, stopLoss: $stopLoss)
+      
+                Spacer()
+                PickerView(direction: $direction, duration: $duration, conviction: $conviction)
+
+                Spacer()
                 Button(
                     "Save Idea",
                     action: {
@@ -115,8 +142,8 @@ struct NewIdeaView: View {
                 }
                 )
                 
-                }
-        
+              }.foregroundColor(.white)
+    }
 //        .alert(isPresented: $showingAlert) {
 //             Alert(title: Text("Success"), message: Text("Idea Save"), dismissButton: .default(Text("Ok")))
 //                       
@@ -127,7 +154,9 @@ struct NewIdeaView: View {
 
         let randomID = Int32((1...100000).randomElement() ?? 0)
 
-        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason:  "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS")
+        
+        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS", createdFrom: "Piyush iOS ", previousCurrentPrice: 12.22, isActive: true)
+//        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason:  "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS", createdFrom: <#String#>, previousCurrentPrice: <#Double#>, isActive: <#Bool#>)
         idearepo.saveIdea(ideaModel: ideaModel) {
 //            self.showingAlert = true
 //            self.presentationMode.wrappedValue.dismiss()
