@@ -44,6 +44,7 @@ public class GraphViewModel : ObservableObject {
 }
 
 struct GraphView: View {
+    var ideaModel: IdeaModel
     
     @ObservedObject var graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"))
     
@@ -51,119 +52,138 @@ struct GraphView: View {
         ZStack {
             AnimatedBackground()
             
-            Path { path in
-                let width: CGFloat = 380
-                let height: CGFloat = 250
+            VStack {
+                Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28)
+                    .padding(.top, 15).padding(.bottom, 7);
                 
-                path.move(to: CGPoint(x: Double(20.0), y: Double(0.0)))
-                path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(0.0)))
-                path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(height)))
-                path.addLine(to: CGPoint(x: Double(20.0), y: Double(height)))
-            }
-            .fill(Color(red: 47.0/255.0, green: 55.0/255.0, blue: 69.0/255.0))
-             
-            Path { path in
-                let width: CGFloat = 380
-                let height: CGFloat = 250
+                IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
                 
-                var y: CGFloat = 50.0
-                let dy: CGFloat = 50.0
+                Rectangle()
+                .frame(height: 1.0, alignment: .bottom)
+                .foregroundColor(Color.white)
+                .padding(.leading, 43)
+                .padding(.trailing, 43)
+                .padding(.bottom, 25)
 
-                while y < height {
-                    path.move(to: CGPoint(x: Double(20.0), y: Double(y)))
-                    path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(y)))
-                    y += dy
+                IdeaViewDetailThesisBlock(ideaModel: ideaModel)
+                IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.bottom, 50)
+                
+                ZStack {
+                    Path { path in
+                        let width: CGFloat = 380
+                        let height: CGFloat = 250
+                        
+                        var y: CGFloat = 50.0
+                        let dy: CGFloat = 50.0
+
+                        while y < height {
+                            path.move(to: CGPoint(x: Double(20.0), y: Double(y)))
+                            path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(y)))
+                            y += dy
+                        }
+                    }
+                    .stroke(Color(red: 64.0/255.0, green: 70.0/255.0, blue: 79.0/255.0))
+                    
+                    getPath(graphViewModel.graphModel?.benchmark, isBenchmark: true)
+                        .stroke(lineWidth: CGFloat(2.0))
+                        .fill(Color(red: 165.0/255.0, green: 170.0/255.0, blue: 180.0/255.0))
+                    
+                    getPath(graphViewModel.graphModel?.ticker, isBenchmark: false)
+                        .stroke(lineWidth: CGFloat(2.0))
+                        .fill(Color(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0))
                 }
             }
-            .stroke(Color(red: 64.0/255.0, green: 70.0/255.0, blue: 79.0/255.0))
-            
-            getPath(graphViewModel.graphModel?.benchmark)
-            .stroke(lineWidth: CGFloat(2.0))
-            .fill(Color(red: 165.0/255.0, green: 170.0/255.0, blue: 180.0/255.0))
-            
-            getPath(graphViewModel.graphModel?.ticker)
-            .stroke(lineWidth: CGFloat(2.0))
-            .fill(Color(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0))
         }
     }
     
-    func getPath(_ tickModels: [TickModel]?) -> Path {
+    func getPath(_ tickModels: [TickModel]?, isBenchmark: Bool) -> Path {
+        let benchmarkItems = graphViewModel.graphModel?.benchmark ?? []
+        let tickerItems = graphViewModel.graphModel?.ticker ?? []
+        let (minX, minY, scaleX, scaleY) = getScaleFactor(benchmarkItems, tickerItems)
+        let items = isBenchmark ? benchmarkItems : tickerItems
+        
         return Path { path in
-            let width: CGFloat = 380
-            let height: CGFloat = 250
-            
-            if let items = tickModels {
-                var index = 0
-                var x: CGFloat = 0.0
-                var y: CGFloat = 0.0
-                var minX: CGFloat = 0.0
-                var isMinXSet = false
-                var maxX: CGFloat = 0.0
-                var isMaxXSet = false
-                var minY: CGFloat = 0.0
-                var isMinYSet = false
-                var maxY: CGFloat = 0.0
-                var isMaxYSet = false
+            var index = 0
+            var x: CGFloat = 0.0
+            var y: CGFloat = 0.0
+
+            for item in items {
+                let vx = CGFloat(item.x)
+                let vy = CGFloat(item.y)
+                x = (vx-minX) * scaleX + 20.0
+                y = (vy-minY) * scaleY + 70.0
                 
-                for item in items {
-                    x = CGFloat(item.x)
-                    y = CGFloat(item.y)
-                    print("###### test1.5 \(x) \(y)")
-                    
-                    if isMinXSet {
-                        minX = min(x, minX)
-                    }
-                    else {
-                        isMinXSet = true
-                        minX = x
-                    }
-                    
-                    if isMaxXSet {
-                        maxX = max(x, maxX)
-                    }
-                    else {
-                        isMaxXSet = true
-                        maxX = x
-                    }
-                    
-                    if isMinYSet {
-                        minY = min(y, minY)
-                    }
-                    else {
-                        isMinYSet = true
-                        minY = y
-                    }
-                    
-                    if isMaxYSet {
-                        maxY = max(y, maxY)
-                    }
-                    else {
-                        isMaxYSet = true
-                        maxY = y
-                    }
+                if index == 0 {
+                    path.move(to: CGPoint(x: Double(x), y: Double(y)))
                 }
-                
-                for item in items {
-                    let vx = CGFloat(item.x)
-                    let vy = CGFloat(item.y)
-                    x = ((vx-minX) / (maxX-minX)) * CGFloat(width) + 20.0
-                    y = ((vy-minY) / (maxY-minY)) * CGFloat(height)
-                    
-                    if index == 0 {
-                        path.move(to: CGPoint(x: Double(x), y: Double(y)))
-                    }
-                    else {
-                        path.addLine(to: CGPoint(x: Double(x), y: Double(y)))
-                    }
-                    index += 1
+                else {
+                    path.addLine(to: CGPoint(x: Double(x), y: Double(y)))
                 }
+                index += 1
             }
         }
+    }
+    
+    func getScaleFactor(_ benchmarkItems: [TickModel], _ tickerItems: [TickModel]) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+        let width: CGFloat = 380
+        let height: CGFloat = 250
+        let items = benchmarkItems + tickerItems
+        var minX: CGFloat = 0.0
+        var isMinXSet = false
+        var maxX: CGFloat = 0.0
+        var isMaxXSet = false
+        var minY: CGFloat = 0.0
+        var isMinYSet = false
+        var maxY: CGFloat = 0.0
+        var isMaxYSet = false
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+            
+        for item in items {
+            x = CGFloat(item.x)
+            y = CGFloat(item.y)
+                    
+            if isMinXSet {
+                minX = min(x, minX)
+            }
+            else {
+                isMinXSet = true
+                minX = x
+            }
+                    
+            if isMaxXSet {
+                maxX = max(x, maxX)
+            }
+            else {
+                isMaxXSet = true
+                maxX = x
+            }
+                    
+            if isMinYSet {
+                minY = min(y, minY)
+            }
+            else {
+                isMinYSet = true
+                minY = y
+            }
+                    
+            if isMaxYSet {
+                maxY = max(y, maxY)
+            }
+            else {
+                isMaxYSet = true
+                maxY = y
+            }
+        }
+            
+        let scaleX: CGFloat = (CGFloat(width) / (maxX-minX))
+        let scaleY: CGFloat = (CGFloat(height) / (maxY-minY))
+        return (minX, minY, scaleX, 0.5*scaleY)
     }
 }
 
 struct GraphView_Preview: PreviewProvider {
     static var previews: some View {
-        GraphView()
+        GraphView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample)
     }
 }

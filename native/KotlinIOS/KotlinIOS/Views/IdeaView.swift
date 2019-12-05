@@ -21,7 +21,7 @@ struct IdeaView: View {
             Text("Entry price: \(ideaModel.entryPrice)" )
             Text("Target price: \(ideaModel.targetPrice)" )
             Text("Time Horizon: \(ideaModel.timeHorizon)" )
-            GraphView()
+            GraphView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample)
         }
 
 
@@ -33,7 +33,7 @@ struct IdeaView_Preview: PreviewProvider {
 
 
     static var previews: some View {
-        IdeaView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample  )
+        IdeaView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample)
     }
 
 
