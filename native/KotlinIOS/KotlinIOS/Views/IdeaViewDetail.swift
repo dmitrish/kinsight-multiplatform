@@ -99,21 +99,21 @@ struct IdeaViewDetail: View {
                         
                         Spacer()
                         
+                        Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28)
+                            .padding(.top, 15).padding(.bottom, 7);
                       
-                        NavigationLink(destination: GraphView()) {
+                        NavigationLink(destination: GraphView(ideaModel: ideaModel)) {
                             VStack{
                                 IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
-                        
-                                               
+
                                 Rectangle()
-                                      .frame(height: 1.0, alignment: .bottom)
+                                    .frame(height: 1.0, alignment: .bottom)
                                     .foregroundColor(Color.white)
                                     .padding(.leading, 43)
                                     .padding(.trailing, 43)
                                     .padding(.bottom, 25)
 
                                 IdeaViewDetailThesisBlock(ideaModel: ideaModel)
-                       
                                 IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
                         
                                 Spacer()

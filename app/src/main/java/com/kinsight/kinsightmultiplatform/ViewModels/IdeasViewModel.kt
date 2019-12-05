@@ -15,6 +15,12 @@ import kotlinx.coroutines.*
 
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {
 
+    companion object NotificationParams {
+        const val RELOAD = "RELOAD"
+        const val NEW_IDEA = "NEWIDEA"
+        const val PRICE_OBJECTIVE_ACHIEVED = "PRICEOBJECTIVE"
+    }
+
     private val serverApiUrl = BuildConfig.url
 
     private var isSubscribedToLiveUpdates: Boolean = false
@@ -84,13 +90,53 @@ class IdeasViewModel (application: Application, private val userName: String) : 
        }
     }
 
+    private  fun notifyOnNewIdeaCreated(serverMessage: String){
+        val notificationMessage = getUserNotificationMessage(serverMessage)
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                NotificationHelper.sendNotification(
+                    getApplication(),
+                    "Alpha Capture", notificationMessage, notificationMessage, false
+                )
+            }
+        }
+    }
+
+    private fun getUserNotificationMessage(serverMessage: String): String {
+        val notificationMessageArray = serverMessage.split("|")
+        val notificationMessage = notificationMessageArray[1]
+        return notificationMessage
+    }
+
+    private  fun notifyOnNewPriceObjectiveAchieved(serverMessage: String){
+        val notificationMessage = getUserNotificationMessage(serverMessage)
+        viewModelScope.launch {
+            withContext(Dispatchers.Default) {
+                NotificationHelper.sendNotification(
+                    getApplication(),
+                    "Alpha Capture", notificationMessage, notificationMessage, false
+                )
+            }
+        }
+    }
+
+
     private suspend fun subscribeToLiveUpdates() {
         withContext(Dispatchers.IO) {
             ideaRep.receive("35.239.179.43", 8081) {
                 println("android app received from server: $it")
-                if (it == "reload") {
+
+                val upperCasedMessage = it.toUpperCase()
+
+                if (upperCasedMessage == RELOAD) {
                     loadIdeas()
                     notifyOnPriceChanged()
+                }
+                else if (upperCasedMessage.startsWith(NEW_IDEA)){
+                    notifyOnNewIdeaCreated(it)
+                }
+                else if (upperCasedMessage.startsWith(PRICE_OBJECTIVE_ACHIEVED)){
+                    notifyOnNewPriceObjectiveAchieved(it)
                 }
                 isSubscribedToLiveUpdates = true
             }
