@@ -45,17 +45,20 @@ public class GraphViewModel : ObservableObject {
 
 struct GraphView: View {
     var ideaModel: IdeaModel
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator
     
     @ObservedObject var graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"))
     
+    init(ideaModel: IdeaModel) {
+        self.ideaModel = ideaModel
+        self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
+    }
+
     var body: some View {
         ZStack {
             AnimatedBackground()
             
             VStack {
-                Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28)
-                    .padding(.top, 15).padding(.bottom, 7);
-                
                 IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
                 
                 Rectangle()
@@ -65,24 +68,22 @@ struct GraphView: View {
                 .padding(.trailing, 43)
                 .padding(.bottom, 25)
 
-                IdeaViewDetailThesisBlock(ideaModel: ideaModel)
-                IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.bottom, 50)
+                Text("Alpha" ).foregroundColor(.white).padding(.bottom, 10)
+                Text(ideaModelLogicDecorator.getDisplayValueForAlpha()).font(.largeTitle).foregroundColor(.white)
+                    .padding(.bottom)
+                    .frame(width: 300)
                 
                 ZStack {
                     Path { path in
                         let width: CGFloat = 380
                         let height: CGFloat = 250
+                        let y: CGFloat = 0
                         
-                        var y: CGFloat = 50.0
-                        let dy: CGFloat = 50.0
-
-                        while y < height {
-                            path.move(to: CGPoint(x: Double(20.0), y: Double(y)))
-                            path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(y)))
-                            y += dy
-                        }
+                        path.move(to: CGPoint(x: Double(20.0), y: Double(y)))
+                        path.addLine(to: CGPoint(x: Double(20.0), y: Double(y+height)))
+                        path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(y+height)))
                     }
-                    .stroke(Color(red: 64.0/255.0, green: 70.0/255.0, blue: 79.0/255.0))
+                    .stroke(Color(red: 255.0/255.0, green: 255.0/255.0, blue: 204.0/255.0))
                     
                     getPath(graphViewModel.graphModel?.benchmark, isBenchmark: true)
                         .stroke(lineWidth: CGFloat(2.0))
