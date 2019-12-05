@@ -29,16 +29,6 @@ class IdeaActivity : FullScreenActivity() {
         val INITIAL_SCALE = 1f
         val STIFFNESS = SpringForce.STIFFNESS_VERY_LOW
         val DAMPING_RATIO = SpringForce.DAMPING_RATIO_HIGH_BOUNCY
-       /* const val IDEA_COMPANY_NAME = "IDEA_COMPANY_NAME"
-        const val IDEA_TICKER = "IDEA_TICKER"
-        const val IDEA_ALPHA = "IDEA_ALPHA"
-        const val IDEA_CREATED_BY = "IDEA_CREATED_BY"
-        const val IDEA_TARGET_PRICE = "IDEA_TARGET_PRICE"
-        const val IDEA_CURRENT_PRICE = "IDEA_CURRENT_PRICE"
-        const val IDEA_DIRECTION = "IDEA_DIRECTION"
-        const val IDEA_HORIZON = "IDEA_HORIZON"
-        const val IDEA_CONVICTION = "IDEA_CONVICTION"
-        const val IDEA_CREATED_FROM = "IDEA_CREATED_FROM"*/
     }
 
     lateinit var scaleXAnimation: SpringAnimation
@@ -56,7 +46,6 @@ class IdeaActivity : FullScreenActivity() {
 
         println("idea unparceled: $ideaModel")
 
-
         ideaCompany.text = ideaModel.securityName
         ideaTicker.text = ideaModel.securityTicker
         alphaValue.text = ideaModelDecorator.getDisplayValueForAlpha() //alphaFormatted
@@ -66,7 +55,6 @@ class IdeaActivity : FullScreenActivity() {
         ideaConviction.text = ideaModelDecorator.getConviction()
 
         setImagesAndAnimation()
-
 
     }
 
@@ -160,8 +148,6 @@ class IdeaActivity : FullScreenActivity() {
             }
             animateFisherman()
         }
-
-
     }
 
     private fun animateFisherman(){
@@ -188,8 +174,6 @@ class IdeaActivity : FullScreenActivity() {
             alpha(1f)
             start()
         }
-
-
     }
 
     private fun setupPinchToZoom() {
