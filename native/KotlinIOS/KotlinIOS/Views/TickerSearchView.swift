@@ -39,8 +39,8 @@ struct TickerSearchView: View {
         
         ZStack {
               RoundedRectangle(cornerRadius: 0)
-                               .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
-                               .edgesIgnoringSafeArea(.all)
+               .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
+               .edgesIgnoringSafeArea(.all)
         VStack {
             SearchBar(text: $tickerSearchViewModel.searchText)
             List(tickerSearchViewModel.tickers){

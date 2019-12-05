@@ -33,8 +33,8 @@ struct IdeaViewDetail: View {
 
         ZStack {
             RoundedRectangle(cornerRadius: 0)
-                                      .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
-                                      .edgesIgnoringSafeArea(.all)
+              .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
+              .edgesIgnoringSafeArea(.all)
                      VStack{
                         Image("undraw_fishing_hoxa")
                             .resizable().scaledToFit().frame(width: 400, height: 250, alignment: .topLeading)
