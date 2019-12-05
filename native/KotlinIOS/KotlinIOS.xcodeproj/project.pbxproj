@@ -34,6 +34,7 @@
 		7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2872382FAB20096A4D5 /* TickerSearchView.swift */; };
 		7831D28A2382FACB0096A4D5 /* TickerSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */; };
 		7831D28C238426810096A4D5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D28B238426810096A4D5 /* SearchBar.swift */; };
+		78D206D823901ABA00348D63 /* NewIdeaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D206D723901ABA00348D63 /* NewIdeaView.swift */; };
 		D04BA3F5238C598F0098F7F2 /* IdeaViewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04BA3F4238C598F0098F7F2 /* IdeaViewDetail.swift */; };
 		D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772A2350E296007E4CC2 /* IdeaModel.swift */; };
 		D087772D2350E2DC007E4CC2 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772C2350E2DC007E4CC2 /* Data.swift */; };
@@ -114,6 +115,7 @@
 		7831D2872382FAB20096A4D5 /* TickerSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchView.swift; sourceTree = "<group>"; };
 		7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchViewModel.swift; sourceTree = "<group>"; };
 		7831D28B238426810096A4D5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		78D206D723901ABA00348D63 /* NewIdeaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdeaView.swift; sourceTree = "<group>"; };
 		96ABD00FE6EBA474897CA94A /* Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS.release.xcconfig"; sourceTree = "<group>"; };
 		D04BA3F4238C598F0098F7F2 /* IdeaViewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetail.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				2AF326212353FD60006B3594 /* HomeViewListNative.swift */,
 				2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */,
 				2AE129CE23556050006C5329 /* WelcomeView.swift */,
+				78D206D723901ABA00348D63 /* NewIdeaView.swift */,
 				2AE129D02356952F006C5329 /* IdeaView.swift */,
 				1D0B036B2379FF5E00614430 /* GraphView.swift */,
 				7831D2872382FAB20096A4D5 /* TickerSearchView.swift */,
@@ -547,6 +550,7 @@
 				2A480DA5236625D200894630 /* IdeaSample.swift in Sources */,
 				2A9276CD238E222000DC6600 /* AnimatedBackground.swift in Sources */,
 				2AF326202353F990006B3594 /* HomeView.swift in Sources */,
+				78D206D823901ABA00348D63 /* NewIdeaView.swift in Sources */,
 				2A25CAE2239483DA00F3E779 /* IdeaViewDetailThesisBlock.swift in Sources */,
 				2A9276CF238E22C800DC6600 /* KotlinProjectLogo.swift in Sources */,
 				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,

@@ -10,6 +10,19 @@ import Foundation
 import SwiftUI
 import SharedCode
 
+
+enum Constants {
+    static let  baseUrl: String = "35.239.179.43:8081"
+    
+    static var htttpUrl: String {
+        return "http://" + Constants.baseUrl
+    }
+    static var websocketUrl: String {
+        return "ws://" + Constants.baseUrl + "/ws"
+    }
+}
+
+
 struct WelcomeView: View {
     
     @State private var opacity = 0.0
