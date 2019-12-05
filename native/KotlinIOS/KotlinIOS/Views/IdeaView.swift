@@ -21,7 +21,7 @@ struct IdeaView: View {
             Text("Entry price: \(ideaModel.entryPrice)" )
             Text("Target price: \(ideaModel.targetPrice)" )
             Text("Time Horizon: \(ideaModel.timeHorizon)" )
-            GraphView()
+            GraphView(ideaModel:  IdeaSample.sharedInstance.ideaModelSample)
         }
 
 

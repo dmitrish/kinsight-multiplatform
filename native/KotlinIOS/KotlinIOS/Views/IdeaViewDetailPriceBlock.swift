@@ -35,7 +35,7 @@ struct IdeaViewDetailPriceBlock: View {
                        .foregroundColor(.white)
                        .padding(.trailing, 44)
                        .font(.title)
-               }.padding(.top, 10)
+               }
         }
     }
     
