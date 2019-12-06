@@ -88,7 +88,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
                 if (notificationOnNewIdea != null){
                     notificationOnNewIdea = null
                     //TODO - once idea id is passed from server, read from notification and pass that
-                    val ideaModel = viewModel.getIdea(11)
+                    val ideaModel = viewModel.getIdea(notificationOnNewIdea!!.toInt())
                     val intent = Intent(this, IdeaActivity::class.java)
                     intent.putExtra("IDEA", ideaModel)
                     startActivity(intent)

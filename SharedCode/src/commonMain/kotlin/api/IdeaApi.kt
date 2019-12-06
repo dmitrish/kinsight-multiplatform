@@ -125,4 +125,12 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
             body = json.write(ideaModel) // Generates an OutgoingContent
         }
     }
+
+    suspend fun closeIdea(ideaModel: IdeaModel){
+        val json = io.ktor.client.features.json.defaultSerializer()
+        client.post<Unit>() {
+            url("$baseUrl/api/closeidea")
+            body = json.write(ideaModel) // Generates an OutgoingContent
+        }
+    }
 }

@@ -109,7 +109,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     private fun getUserNotificationMessage(serverMessage: String): NotificationMessage {
         val notificationMessageArray = serverMessage.split("|")
         val notificationMessage = NotificationMessage(notificationMessageArray[0],
-            notificationMessageArray[1], notificationMessageArray[2], notificationMessageArray[3])
+            notificationMessageArray[1], notificationMessageArray[2], notificationMessageArray[3], notificationMessageArray[4].toInt())
         return notificationMessage
     }
 
@@ -159,7 +159,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
 }
 
 data class NotificationMessage(val messageHeader: String, val message: String,
-                               val by: String, val from: String)
+                               val by: String, val from: String, val ideaId: Int)
 
 
 
