@@ -36,14 +36,21 @@ struct GraphView: View {
                 .padding(.bottom, 50)
 
                 Text("Alpha" ).foregroundColor(.white)
-                    .padding(.top, 50)
+                    .padding(.top, 20)
                     .padding(.bottom, 10)
                 Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .frame(width: 300)
-                    .padding(.bottom, 90)
+                    .padding(.bottom, 50)
                 
+                Rectangle()
+                .frame(height: 1.0, alignment: .bottom)
+                .foregroundColor(Color.white)
+                .padding(.leading, 43)
+                .padding(.trailing, 43)
+                .padding(.bottom, 50)
+
                 ZStack {
                     Path { path in
                         let width: CGFloat = 380
