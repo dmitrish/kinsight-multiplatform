@@ -100,7 +100,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             withContext(Dispatchers.Default) {
                 NotificationHelper.sendNotification(
                     getApplication(),
-                    "Alpha Capture", notificationMessage.message, notificationMessage.message, false
+                    "Alpha Capture", notificationMessage.message, notificationMessage.message, false, notificationMessage.ideaId
                 )
             }
         }
@@ -138,6 +138,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
                     notifyOnPriceChanged()
                 }
                 else if (upperCasedMessage.startsWith(NEW_IDEA)){
+                    loadIdeas()
                     notifyOnNewIdeaCreated(it)
                 }
                 else if (upperCasedMessage.startsWith(PRICE_OBJECTIVE_ACHIEVED)){

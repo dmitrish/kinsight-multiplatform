@@ -23,7 +23,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
     private lateinit var adapter: RecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private var notificationOnNewIdea: String? = null
+    private var notificationOnNewIdea: Int? = null
     private val viewModel: IdeasViewModel by lazy {
         getViewModel { IdeasViewModel(application, "dmitri") }
     }
@@ -40,7 +40,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
             startIdeaCreateActivity()
         }
 
-        notificationOnNewIdea = intent.getStringExtra("notificationExtra")
+        notificationOnNewIdea = intent.getIntExtra("notificationExtra", 0)
 
     }
 
@@ -85,12 +85,13 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
                 swiperefresh.isRefreshing = false
                 loading.isVisible = false
 
-                if (notificationOnNewIdea != null){
-                    notificationOnNewIdea = null
+                if (notificationOnNewIdea != 0){
+
                     //TODO - once idea id is passed from server, read from notification and pass that
-                    val ideaModel = viewModel.getIdea(notificationOnNewIdea!!.toInt())
+                    val ideaModel = viewModel.getIdea(notificationOnNewIdea!!)
                     val intent = Intent(this, IdeaActivity::class.java)
                     intent.putExtra("IDEA", ideaModel)
+                    notificationOnNewIdea = null
                     startActivity(intent)
 
                 }
