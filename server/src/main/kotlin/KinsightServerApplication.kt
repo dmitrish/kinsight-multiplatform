@@ -49,6 +49,7 @@ import kotlinx.coroutines.*
 import java.util.Timer
 import kotlin.concurrent.fixedRateTimer
 import kotlin.concurrent.schedule
+import kotlin.math.nextUp
 import kotlin.system.measureTimeMillis
 
 /**
@@ -259,11 +260,11 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
 
 
     // Registers routes
-    suspend fun sendReloadSignalNew() {
+    suspend fun sendSignalToClient(signal: String) {
         try {
             for (wssession in wssessions) {
                 try {
-                    wssession.send(Frame.Text("reload"))
+                    wssession.send(Frame.Text(signal))
                 } catch (e: Throwable) {
                     println("Exception in Hi: ${e.message}")
                 }
@@ -375,14 +376,17 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         }
 
         post("/api/hi"){
-            sendReloadSignalNew()
+            sendSignalToClient("reload")
             call.respond(mapOf("OK" to true))
         }
 
         post("/api/postidea") {
             val post = call.receive<Idea>()
             ideas.add(post)
-            sendReloadSignal()
+
+
+            sendSignalToClient("NEWIDEA|${post.createdBy} created a new ${post.direction} idea on ${post.securityTicker} with price objective of \$25|${post.createdBy}|${post.createdFrom}|${post.id}")
+
             call.respond(mapOf("OK" to true))
         }
         post("/api/updateidea") {
@@ -390,7 +394,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             var idea = ideas.find { it.id == post.id }
             var index = ideas.indexOf(idea)
             ideas[index] = post
-            sendReloadSignal()
+            //sendReloadSignal()
             call.respond(mapOf("OK" to true))
         }
 
@@ -399,19 +403,19 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             var idea = ideas.find { it.id == post.id }
             var index = ideas.indexOf(idea)
             ideas.removeAt(index)
-            sendReloadSignal()
+            //sendReloadSignal()
             call.respond(mapOf("OK" to true))
         }
 
         post("/api/simulate/{id}") {
-            val id =  call.parameters["id"]!!.toUpperCase(Locale.ROOT)
+            val id =  call.parameters["id"]!!.toInt()
 
             println("simulate start...")
 
-            sendReloadSignal()
+            //sendReloadSignal()
 
             val startTime = System.currentTimeMillis()
-            call.respondHandlingLongCalculation(random, delayProvider, startTime)
+            call.respondHandlingLongCalculation(random, delayProvider, startTime, id)
 
         }
 
@@ -467,11 +471,11 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
 }
 
 // Registers routes
-private suspend fun Application.sendReloadSignal() {
+private suspend fun Application.sendReloadSignal(signal: String) {
     try {
         for (wssession in wssessions) {
             try {
-                wssession.send(Frame.Text("reload"))
+                wssession.send(Frame.Text(signal))
             } catch (e: Throwable) {
                 println("Exception in Application.sendReloadSignal: ${e.message}")
             }
@@ -485,7 +489,7 @@ private suspend fun Application.sendReloadSignal() {
  * Function that will perform a long computation in a threadpool generating random numbers
  * and then will respond with the result.
  */
-private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long) {
+private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long, ideaid: Int) {
     val queueTime = System.currentTimeMillis() - startTime
 
     val computeTime = measureTimeMillis {
@@ -495,9 +499,19 @@ private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Rando
         // that would block threads.
         withContext(compute) {
             for (index in 0 until 5) {
-                delayProvider(20000)
+                delayProvider(15000)
 
-                application.sendReloadSignal()
+
+                println("before: alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+
+                    ideas.filter { x -> x.id == ideaid }.first().alpha.plus(1)
+                //val filteredIdea =
+                    //ideas.first{ f -> f.id == ideaid }.alpha.nextUp()
+                //filteredIdea.alpha = filteredIdea.alpha+1
+
+                println("after: alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+
+                application.sendReloadSignal("RELOAD|$ideaid")
             }
         }
     }
