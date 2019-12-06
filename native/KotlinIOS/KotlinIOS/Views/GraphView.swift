@@ -91,6 +91,9 @@ class ChartView: UIView {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.setNeedsDisplay()
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.setNeedsDisplay()
+        }
     }
 
     override init(frame: CGRect) {
@@ -112,8 +115,8 @@ class ChartView: UIView {
         
         if let context = UIGraphicsGetCurrentContext() {
             drawAxis(context)
-            drawData(context, graphViewModel?.graphModel?.benchmark, isBenchmark: true)
-            drawData(context, graphViewModel?.graphModel?.benchmark, isBenchmark: false)
+            drawLineGraph(context, isBenchmark: true)
+            drawLineGraph(context, isBenchmark: false)
         }
     }
     
@@ -129,7 +132,7 @@ class ChartView: UIView {
         context.strokePath()
     }
     
-    func drawData(_ context: CGContext, _ tickModels: [TickModel]?, isBenchmark: Bool) {
+    func drawLineGraph(_ context: CGContext, isBenchmark: Bool) {
 
         let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
         let tickerItems = graphViewModel?.graphModel?.ticker ?? []
