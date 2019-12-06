@@ -26,18 +26,23 @@ struct GraphView: View {
             
             VStack {
                 IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
+                .padding(.top, 25)
                 
                 Rectangle()
                 .frame(height: 1.0, alignment: .bottom)
                 .foregroundColor(Color.white)
                 .padding(.leading, 43)
                 .padding(.trailing, 43)
-                .padding(.bottom, 25)
+                .padding(.bottom, 50)
 
-                Text("Alpha" ).foregroundColor(.white).padding(.bottom, 10)
-                Text(ideaModelLogicDecorator.getDisplayValueForAlpha()).font(.largeTitle).foregroundColor(.white)
-                    .padding(.bottom)
+                Text("Alpha" ).foregroundColor(.white)
+                    .padding(.top, 50)
+                    .padding(.bottom, 10)
+                Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
                     .frame(width: 300)
+                    .padding(.bottom, 90)
                 
                 ZStack {
                     Path { path in
