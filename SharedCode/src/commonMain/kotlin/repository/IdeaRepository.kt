@@ -74,6 +74,18 @@ class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
         }
     }
 
+    @Suppress("unused")
+    suspend fun closeIdea(ideaModel: IdeaModel): Unit {
+        ideaApi.saveIdea(ideaModel)
+    }
+
+    @Suppress("unused", "unused_parameter")
+    fun closeIdea(ideaModel: IdeaModel, success: () -> Unit){
+        GlobalScope.launch (ApplicationDispatcher){
+            closeIdea(ideaModel)
+        }
+    }
+
 
     @Suppress("unused")
     suspend fun fetchTickerPrice(ticker: String): TickerPriceModel {

@@ -92,19 +92,24 @@ class IdeasViewModel (application: Application, private val userName: String) : 
 
     private  fun notifyOnNewIdeaCreated(serverMessage: String){
         val notificationMessage = getUserNotificationMessage(serverMessage)
+        if (notificationMessage.by.toLowerCase() == "dmitri"){
+            println("ping back on own new idea")
+            return
+        }
         viewModelScope.launch {
             withContext(Dispatchers.Default) {
                 NotificationHelper.sendNotification(
                     getApplication(),
-                    "Alpha Capture", notificationMessage, notificationMessage, false
+                    "Alpha Capture", notificationMessage.message, notificationMessage.message, false
                 )
             }
         }
     }
 
-    private fun getUserNotificationMessage(serverMessage: String): String {
+    private fun getUserNotificationMessage(serverMessage: String): NotificationMessage {
         val notificationMessageArray = serverMessage.split("|")
-        val notificationMessage = notificationMessageArray[1]
+        val notificationMessage = NotificationMessage(notificationMessageArray[0],
+            notificationMessageArray[1], notificationMessageArray[2], notificationMessageArray[3], notificationMessageArray[4].toInt())
         return notificationMessage
     }
 
@@ -114,7 +119,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             withContext(Dispatchers.Default) {
                 NotificationHelper.sendNotification(
                     getApplication(),
-                    "Alpha Capture", notificationMessage, notificationMessage, false
+                    "Alpha Capture", notificationMessage.message, notificationMessage.message, false
                 )
             }
         }
@@ -152,6 +157,9 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     fun nextId() = ideas.value!!.maxBy { it.id }!!.id
     //endregion
 }
+
+data class NotificationMessage(val messageHeader: String, val message: String,
+                               val by: String, val from: String, val ideaId: Int)
 
 
 
