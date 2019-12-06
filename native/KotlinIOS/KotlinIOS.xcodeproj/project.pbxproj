@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0B036B2379FF5E00614430 /* GraphView.swift */; };
+		1D1972FC239AB37500BD5236 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1972FB239AB37500BD5236 /* GraphViewModel.swift */; };
 		1DCC628D237F324D00D5D955 /* IdeaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DCC628C237F324D00D5D955 /* IdeaData.json */; };
 		2A25CADE23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */; };
 		2A25CAE02394824300F3E779 /* IdeaViewDetailSecurityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */; };
@@ -82,6 +83,7 @@
 		0A16C584A74157E300F947AF /* Pods_KotlinIOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0B036B2379FF5E00614430 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		1D1972FB239AB37500BD5236 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		1DCC628C237F324D00D5D955 /* IdeaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdeaData.json; sourceTree = "<group>"; };
 		2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailPriceBlock.swift; sourceTree = "<group>"; };
 		2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailSecurityHeader.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 		D087772E2350E338007E4CC2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				1D1972FB239AB37500BD5236 /* GraphViewModel.swift */,
 				D087772F2350E362007E4CC2 /* IdeaViewModel.swift */,
 				7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */,
 			);
@@ -568,6 +571,7 @@
 				2AE129D12356952F006C5329 /* IdeaView.swift in Sources */,
 				2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
+				1D1972FC239AB37500BD5236 /* GraphViewModel.swift in Sources */,
 				7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */,
 				7831D28C238426810096A4D5 /* SearchBar.swift in Sources */,
 				D087772D2350E2DC007E4CC2 /* Data.swift in Sources */,
