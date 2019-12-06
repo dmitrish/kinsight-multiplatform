@@ -7,11 +7,15 @@ import com.kinsight.kinsightmultiplatform.R
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
+
+
+
 
 
 object NotificationHelper {
@@ -53,7 +57,7 @@ object NotificationHelper {
      * open the application.
      */
     fun sendNotification(context: Context, title: String, message: String,
-                         bigText: String, autoCancel: Boolean) {
+                         bigText: String, autoCancel: Boolean, ideaId: Int = 0) {
 
         val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
@@ -70,8 +74,10 @@ object NotificationHelper {
             setAutoCancel(autoCancel)
 
             val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+           // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+           // intent.flags = Intent.FLAG_ACTIVITY_UP
+            intent.putExtra("notificationExtra", "hi")
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT)
             setContentIntent(pendingIntent)
         }
 
