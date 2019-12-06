@@ -171,7 +171,7 @@
                 android:id="@+id/button21"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="Long"
+                android:text="@string/direction_long"
                 android:onClick="onRadioButtonClicked"
                 style="@style/RadioButton" />
 
@@ -179,33 +179,11 @@
                 android:id="@+id/button22"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="Short"
+                android:text="@string/direction_short"
                 android:onClick="onRadioButtonClicked"
                 style="@style/RadioButton" />
         </info.hoang8f.android.segmented.SegmentedGroup>
-    <!--<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:orientation="horizontal">
-        <RadioButton android:id="@+id/radio_pirates"
-            android:layout_width="wrap_content"
 
-            android:buttonTint="@android:color/white"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="Long"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/radio_ninjas"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:buttonTint="@android:color/white"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:text="Short"
-            android:onClick="onRadioButtonClicked"/>
-    </RadioGroup>-->
 </LinearLayout>
     <View
         android:id="@+id/separatorTwo"
@@ -240,7 +218,7 @@
                 android:buttonTint="@android:color/white"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="High"
+                android:text="@string/conviction_high"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton android:id="@+id/radio_conviction_medium"
                 android:layout_width="wrap_content"
@@ -248,7 +226,7 @@
                 android:buttonTint="@android:color/white"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="Medium"
+                android:text="@string/conviction_medium"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton android:id="@+id/radio_conviction_low"
                 android:layout_width="wrap_content"
@@ -256,7 +234,7 @@
                 android:buttonTint="@android:color/white"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="Low"
+                android:text="@string/conviction_low"
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
     </LinearLayout>

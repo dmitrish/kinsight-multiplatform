@@ -1,8 +1,11 @@
 package com.kinsight.kinsightmultiplatform.models
 
+import com.kinsight.kinsightmultiplatform.Parcelable
+import com.kinsight.kinsightmultiplatform.Parcelize
 import kotlinx.serialization.*
 
-@Serializable data class IdeaModel (
+@Parcelize
+@Serializable data class IdeaModel  (
     @SerialName("id")
     val id: Int,
     @SerialName("securityName")
@@ -52,7 +55,9 @@ import kotlinx.serialization.*
     var previousCurrentPrice: Double,
     @SerialName ("isActive")
     var isActive: Boolean
-)
+
+
+): Parcelable
 
 interface Idea {
     val id: Int

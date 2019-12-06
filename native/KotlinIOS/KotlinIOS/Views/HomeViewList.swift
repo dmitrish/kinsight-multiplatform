@@ -21,10 +21,11 @@ struct AddButton<Destination : View>: View {
 
 struct HomeViewList: View {
     
-    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"))
+    @ObservedObject var ideaViewModel = IdeasViewModel(repository: IdeaRepository(baseUrl: Constants.htttpUrl))
     @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
+     @State var showModal: Bool = false
     
     //@Binding var progress : Bool
     
@@ -49,20 +50,29 @@ struct HomeViewList: View {
     var body: some View {
 
         VStack {
+            
             HStack {
-                Image("fish").resizable().frame(width:36, height:36).padding(.leading, 15)
+                
+                Image("fish")
+                    .resizable()
+                    .frame(width:36, height:36)
+                    .padding(.leading, 15)
+                
                 Spacer()
-                Text("My Team Ideas").foregroundColor(Color.yellow)
-                    //.font(.headline)
-                    .fontWeight(Font.Weight.semibold)
-                    .font(.system(size: 20))
-                    .padding(.trailing, 70)
-                AddButton(destination: TickerSearchView()).padding(.trailing, 30)
+//                Text("My Team Ideas").foregroundColor(Color.yellow)
+//                    //.font(.headline)
+//                    .fontWeight(Font.Weight.semibold)
+//                    .font(.system(size: 20))
+//                    .padding(.trailing, 70)
+                AddButton(destination: NewIdeaView()).padding(.trailing, 30)
                 
             }
+            
             List(ideaViewModel.ideasSortedByAlpha){
                 idea in
-                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
+                
+                
+                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)){
                     
                     HomeViewListRow(ideaModel: idea)
                 }.background(Color.clear)
@@ -76,48 +86,11 @@ struct HomeViewList: View {
         }.onAppear(){
             let seconds = 1.0
             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-               // self.progress = false  // Put your code which should be executed with a delay here
+            
             }
         }
-//        }.navigationBarTitle("My Team Ideas", displayMode: .inline)
-//            .navigationBarItems(trailing:
-//
-//        )
     }
-    
-    
 }
-        
-//
-//    }
-//}
-
-//              ZStack{
-                
-//                 LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint)
-//                 .edgesIgnoringSafeArea(.all)
-//                 .zIndex(0)
-//                VStack{
-//                     ActivityIndicator(isAnimating: $ideaViewModel.dataRequestInProgress)
-
-//                 }.zIndex(1)
-//                 NavigationView {
-//                VStack {
-// //                    Text("My Team Ideas")
-//                     List(ideaViewModel.ideas){
-//                         idea in
-//                         NavigationLink(destination: IdeaView(ideaModel: idea)) {
-//                            HomeViewListRow(ideaModel: idea)
-//                         }
-
-//                     }
-
-//                }.zIndex(0)
-//                 .foregroundColor(.white)
-//                 .navigationBarTitle("My Team Ideas", displayMode: .inline)
-//                                   .navigationBarItems(trailing:
-//                                            AddButton(destination: TickerSearchView())
-//                                          )
    
 
 struct HomeList_Previews: PreviewProvider {

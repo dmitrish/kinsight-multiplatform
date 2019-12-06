@@ -12,6 +12,7 @@ import SharedCode
 
 struct IdeaViewDetail: View {
     var ideaModel: IdeaModel
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator
     
      @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
      @State var startPoint = UnitPoint(x: 0, y: 0)
@@ -21,6 +22,7 @@ struct IdeaViewDetail: View {
     
     init(ideaModel: IdeaModel){
         self.ideaModel = ideaModel
+        self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
     }
@@ -31,8 +33,8 @@ struct IdeaViewDetail: View {
 
         ZStack {
             RoundedRectangle(cornerRadius: 0)
-                                      .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
-                                      .edgesIgnoringSafeArea(.all)
+              .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
+              .edgesIgnoringSafeArea(.all)
                      VStack{
                         Image("undraw_fishing_hoxa")
                             .resizable().scaledToFit().frame(width: 400, height: 250, alignment: .topLeading)
@@ -43,16 +45,18 @@ struct IdeaViewDetail: View {
                                     Image(ideaModel.createdBy.lowercased())
                                     .resizable()
                                         .frame(width: 88, height: 88)
+                                        .padding(.leading, 30)
                                        
                                 }
                                 .frame(width: 88, height: 88)
                                 Text("Fisherman")
                                     .foregroundColor(.white)
+                                    .padding(.leading, 15)
                                 Text(ideaModel.createdBy)
                                     .foregroundColor(.white)
-                                    .padding(.leading, 20)
+                                    .padding(.leading, 47)
                                     
-                            }.padding(.leading, 210)
+                            }.padding(.leading, 240)
                                 .padding(.bottom, 130)
                         )
                             
@@ -79,7 +83,7 @@ struct IdeaViewDetail: View {
                                 Spacer()
                               
                             }
-                                    Text(String(format: "%.2f", ideaModel.alpha))
+                                    Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
                                         .foregroundColor(.white)
                                         .fontWeight(Font.Weight.semibold)
                                         .font(.largeTitle)
@@ -92,35 +96,29 @@ struct IdeaViewDetail: View {
                                  
                             
                         )
+                        
                         Spacer()
-                        Text(ideaModel.securityTicker).font(.largeTitle).foregroundColor(.white).padding(.bottom)
-                        Text("\(ideaModel.securityName)" ).foregroundColor(.white).padding(.bottom, 40)
-                        Text("PRICE" ).kerning(62).foregroundColor(.white).padding(.leading, 43).padding(.bottom, 20)
-                        VStack (alignment: .leading){
-                            HStack (alignment: .top){
-                                Text("Target")
-                                    .foregroundColor(.white)
+                        
+                        Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28)
+                            .padding(.top, 15).padding(.bottom, 7);
+                      
+                        NavigationLink(destination: GraphView(ideaModel: ideaModel)) {
+                            VStack{
+                                IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
+
+                                Rectangle()
+                                    .frame(height: 1.0, alignment: .bottom)
+                                    .foregroundColor(Color.white)
                                     .padding(.leading, 43)
-                                    Spacer()
-                                Text("Current")
-                                     .foregroundColor(.white)
-                                    .padding(.trailing, 44)
-                            }.padding(.top, 30)
-                            HStack (alignment: .top){
-                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
-                                    .foregroundColor(.white)
-                                    .padding(.leading, 43)
-                                    .padding(.top, 30)
-                                    .font(.largeTitle)
-                                    Spacer()
-                                Text("$" + String(format: "%.2f", ideaModel.targetPrice))
-                                     .foregroundColor(.white)
-                                    .padding(.trailing, 44)
-                                    .padding(.top, 30)
-                                    .font(.largeTitle)
+                                    .padding(.trailing, 43)
+                                    .padding(.bottom, 25)
+
+                                IdeaViewDetailThesisBlock(ideaModel: ideaModel)
+                                IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
+                        
+                                Spacer()
                             }
                         }
-                        Spacer()
            
                     }
         }

@@ -9,6 +9,11 @@ import android.widget.TextView
 import com.kinsight.kinsightmultiplatform.resources.Strings
 import com.kinsight.kinsightmultiplatform.views.FullScreenActivity
 import kotlinx.android.synthetic.main.activity_welcome.*
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.animation.CycleInterpolator
+
 
 class WelcomeActivity : FullScreenActivity() {
 
@@ -19,6 +24,7 @@ class WelcomeActivity : FullScreenActivity() {
         animate()
         initNavigation()
         displayWelcomeMessage()
+        animateText()
     }
 
     private fun displayWelcomeMessage() {
@@ -37,5 +43,35 @@ class WelcomeActivity : FullScreenActivity() {
         animDrawable.setEnterFadeDuration(10)
         animDrawable.setExitFadeDuration(5000)
         animDrawable.start()
+    }
+
+    private fun animateText(){
+
+        welcome_text.alpha = 0f
+       welcome_text.animate().apply {
+            duration = 3000
+            alpha(1f)
+            start()
+        }
+
+        val durationMs = 60000L
+        val cycleDurationMs = 5000f
+        exunum.alpha = 0f
+        powered.alpha = 0f
+        exunum.animate().apply {
+           // interpolator = CycleInterpolator(durationMs / cycleDurationMs)
+            duration = 5000
+            alpha(1f)
+            start()
+        }
+
+        powered.animate().apply {
+            duration = 5000
+            alpha(1f)
+            start()
+       }
+
+
+
     }
 }

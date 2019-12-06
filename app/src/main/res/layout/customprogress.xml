@@ -8,7 +8,8 @@
             android:pivotX="50%"
             android:pivotY="50%"
             android:duration="1"
-            android:toDegrees="1440"
+            android:interpolator="@android:anim/linear_interpolator"
+            android:toDegrees="2200"
             android:fromDegrees="0">
             <shape
                 android:shape="ring"

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0B036B2379FF5E00614430 /* GraphView.swift */; };
 		1DCC628D237F324D00D5D955 /* IdeaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DCC628C237F324D00D5D955 /* IdeaData.json */; };
+		2A25CADE23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */; };
+		2A25CAE02394824300F3E779 /* IdeaViewDetailSecurityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */; };
+		2A25CAE2239483DA00F3E779 /* IdeaViewDetailThesisBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CAE1239483DA00F3E779 /* IdeaViewDetailThesisBlock.swift */; };
 		2A480DA5236625D200894630 /* IdeaSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A480DA4236625D200894630 /* IdeaSample.swift */; };
 		2A9276CD238E222000DC6600 /* AnimatedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9276CC238E222000DC6600 /* AnimatedBackground.swift */; };
 		2A9276CF238E22C800DC6600 /* KotlinProjectLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9276CE238E22C800DC6600 /* KotlinProjectLogo.swift */; };
@@ -31,6 +34,7 @@
 		7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2872382FAB20096A4D5 /* TickerSearchView.swift */; };
 		7831D28A2382FACB0096A4D5 /* TickerSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */; };
 		7831D28C238426810096A4D5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7831D28B238426810096A4D5 /* SearchBar.swift */; };
+		78D206D823901ABA00348D63 /* NewIdeaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D206D723901ABA00348D63 /* NewIdeaView.swift */; };
 		D04BA3F5238C598F0098F7F2 /* IdeaViewDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04BA3F4238C598F0098F7F2 /* IdeaViewDetail.swift */; };
 		D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772A2350E296007E4CC2 /* IdeaModel.swift */; };
 		D087772D2350E2DC007E4CC2 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D087772C2350E2DC007E4CC2 /* Data.swift */; };
@@ -79,6 +83,9 @@
 		17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0B036B2379FF5E00614430 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		1DCC628C237F324D00D5D955 /* IdeaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdeaData.json; sourceTree = "<group>"; };
+		2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailPriceBlock.swift; sourceTree = "<group>"; };
+		2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailSecurityHeader.swift; sourceTree = "<group>"; };
+		2A25CAE1239483DA00F3E779 /* IdeaViewDetailThesisBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailThesisBlock.swift; sourceTree = "<group>"; };
 		2A480DA4236625D200894630 /* IdeaSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaSample.swift; sourceTree = "<group>"; };
 		2A9276CC238E222000DC6600 /* AnimatedBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBackground.swift; sourceTree = "<group>"; };
 		2A9276CE238E22C800DC6600 /* KotlinProjectLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KotlinProjectLogo.swift; sourceTree = "<group>"; };
@@ -108,6 +115,7 @@
 		7831D2872382FAB20096A4D5 /* TickerSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchView.swift; sourceTree = "<group>"; };
 		7831D2892382FACB0096A4D5 /* TickerSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSearchViewModel.swift; sourceTree = "<group>"; };
 		7831D28B238426810096A4D5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		78D206D723901ABA00348D63 /* NewIdeaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIdeaView.swift; sourceTree = "<group>"; };
 		96ABD00FE6EBA474897CA94A /* Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS-KotlinIOSUITests/Pods-KotlinIOS-KotlinIOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KotlinIOS.release.xcconfig"; path = "Target Support Files/Pods-KotlinIOS/Pods-KotlinIOS.release.xcconfig"; sourceTree = "<group>"; };
 		D04BA3F4238C598F0098F7F2 /* IdeaViewDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetail.swift; sourceTree = "<group>"; };
@@ -263,6 +271,7 @@
 				2AF326212353FD60006B3594 /* HomeViewListNative.swift */,
 				2AF3262323540FDE006B3594 /* HomeViewListRowNative.swift */,
 				2AE129CE23556050006C5329 /* WelcomeView.swift */,
+				78D206D723901ABA00348D63 /* NewIdeaView.swift */,
 				2AE129D02356952F006C5329 /* IdeaView.swift */,
 				1D0B036B2379FF5E00614430 /* GraphView.swift */,
 				7831D2872382FAB20096A4D5 /* TickerSearchView.swift */,
@@ -272,6 +281,9 @@
 				2A9276CE238E22C800DC6600 /* KotlinProjectLogo.swift */,
 				2A9276D023903A9A00DC6600 /* ProgressView.swift */,
 				2A9276D223907A8E00DC6600 /* HomeViewListWithProgress.swift */,
+				2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */,
+				2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */,
+				2A25CAE1239483DA00F3E779 /* IdeaViewDetailThesisBlock.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -534,9 +546,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A25CADE23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift in Sources */,
 				2A480DA5236625D200894630 /* IdeaSample.swift in Sources */,
 				2A9276CD238E222000DC6600 /* AnimatedBackground.swift in Sources */,
 				2AF326202353F990006B3594 /* HomeView.swift in Sources */,
+				78D206D823901ABA00348D63 /* NewIdeaView.swift in Sources */,
+				2A25CAE2239483DA00F3E779 /* IdeaViewDetailThesisBlock.swift in Sources */,
 				2A9276CF238E22C800DC6600 /* KotlinProjectLogo.swift in Sources */,
 				D087775923512453007E4CC2 /* HomeViewListRow.swift in Sources */,
 				D08777352350ED5B007E4CC2 /* HomeViewList.swift in Sources */,
@@ -548,6 +563,7 @@
 				D087775723510B68007E4CC2 /* ContentView.swift in Sources */,
 				1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */,
 				D087772B2350E296007E4CC2 /* IdeaModel.swift in Sources */,
+				2A25CAE02394824300F3E779 /* IdeaViewDetailSecurityHeader.swift in Sources */,
 				2AF3262423540FDE006B3594 /* HomeViewListRowNative.swift in Sources */,
 				2AE129D12356952F006C5329 /* IdeaView.swift in Sources */,
 				2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */,

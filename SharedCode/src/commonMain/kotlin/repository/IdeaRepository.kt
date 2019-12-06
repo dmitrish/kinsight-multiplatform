@@ -6,6 +6,7 @@ import com.kinsight.kinsightmultiplatform.api.IdeaApi
 import com.kinsight.kinsightmultiplatform.models.GraphModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.TickerModel
+import com.kinsight.kinsightmultiplatform.models.TickerPriceModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -70,6 +71,20 @@ class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
     fun saveIdea(ideaModel: IdeaModel, success: () -> Unit){
         GlobalScope.launch (ApplicationDispatcher){
             saveIdea(ideaModel)
+        }
+    }
+
+
+    @Suppress("unused")
+    suspend fun fetchTickerPrice(ticker: String): TickerPriceModel {
+        val tickerPriceModel = ideaApi.fetchTickerPrice(ticker)
+        return tickerPriceModel
+    }
+
+    @Suppress("unused")
+    fun fetchTickerPrice(ticker: String, success: (TickerPriceModel) -> Unit) {
+        GlobalScope.launch(ApplicationDispatcher) {
+            success(fetchTickerPrice(ticker))
         }
     }
 

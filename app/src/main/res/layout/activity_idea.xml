@@ -64,7 +64,7 @@
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="25dp"
         android:transitionName="tImage"
         app:srcCompat="@drawable/ic_fish_blue"
         android:textColor="@android:color/white"
@@ -79,11 +79,22 @@
 
         android:textColor="@android:color/white"
         android:text="2.50"/>
+    <ImageView
+        android:id="@+id/directionImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+
+        app:srcCompat="@drawable/ic_bullmarket"
+        android:textColor="@android:color/white"
+        android:text="Alpha:"/>
     <TextView
         android:id="@+id/ideaTicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:textSize="36dp"
@@ -100,17 +111,71 @@
         android:textColor="@android:color/white"
         android:text="Oracle Corporation"/>
 
-    <TextView
-        android:id="@+id/priceLabel"
+    <View
+        android:id="@+id/separatorBlock"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:letterSpacing="3.5"
-        android:layout_marginTop="45dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"
-        android:textColor="@android:color/white"
-        android:text="PRICE"/>
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="15dp"
+        android:background="#FFFFFFFF"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+        <TextView
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Horizon"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:textColor="@android:color/white"
+            android:layout_marginRight="50dp"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conviction"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/ideaHorizon"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="45dp"
+            android:textSize="@dimen/idea_detail_block_font_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+
+            android:text="1 Month"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/ideaConviction"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="45dp"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textSize="@dimen/idea_detail_block_font_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="High"/>
+
+    </LinearLayout>
 <LinearLayout
     android:orientation="horizontal"
     android:layout_marginTop="25dp"
@@ -138,14 +203,14 @@
 </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
             android:id="@+id/ideaDetailTargetPrice"
             android:textColor="@android:color/white"
             android:layout_marginLeft="45dp"
-            android:textSize="40dp"
+            android:textSize="@dimen/idea_detail_block_font_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -161,7 +226,7 @@
             android:layout_marginRight="45dp"
             android:layout_gravity="right"
             android:gravity="right"
-            android:textSize="40dp"
+            android:textSize="@dimen/idea_detail_block_font_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$50"/>
