@@ -385,7 +385,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             ideas.add(post)
 
 
-            sendSignalToClient("NEWIDEA|${post.createdBy} created a new ${post.direction} idea on ${post.securityTicker} with price objective of \$25|${post.createdBy}|${post.createdFrom}|${post.id}")
+            sendSignalToClient("NEWIDEA|${post.createdBy} created a new ${post.direction} idea on ${post.securityTicker} with price objective of \$${post.targetPrice}|${post.createdBy}|${post.createdFrom}|${post.id}")
 
             call.respond(mapOf("OK" to true))
         }
@@ -395,6 +395,23 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             var index = ideas.indexOf(idea)
             ideas[index] = post
             //sendReloadSignal()
+            call.respond(mapOf("OK" to true))
+        }
+
+        post("/api/closeidea") {
+            val post = call.receive<Idea>()
+            //var idea = ideas.find { it.id == post.id }
+            //var index = ideas.indexOf(idea)
+            //ideas.removeAt(index)
+            //sendReloadSignal()
+
+            //ideas.filter { x -> x.id == post.id }.first().isActive = false
+
+            ideas.mapNotNull { if(it.id == post.id) it.isActive = false }
+
+            sendSignalToClient("CLOSEIDEA|${post.createdBy} Closed an ${post.direction} idea on ${post.securityTicker} with price objective of \$${post.targetPrice}|${post.createdBy}|${post.createdFrom}|${post.id}")
+
+
             call.respond(mapOf("OK" to true))
         }
 
@@ -504,7 +521,9 @@ private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Rando
 
                 println("before: alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
 
-                    ideas.filter { x -> x.id == ideaid }.first().alpha.plus(1)
+                    //ideas.filter { x -> x.id == ideaid }.first().alpha.plus(1)
+                ideas.mapNotNull { if(it.id == ideaid) it.alpha.plus(1) else it.alpha }
+
                 //val filteredIdea =
                     //ideas.first{ f -> f.id == ideaid }.alpha.nextUp()
                 //filteredIdea.alpha = filteredIdea.alpha+1
