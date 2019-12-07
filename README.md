@@ -5,7 +5,7 @@
 
 KInsight Alpha Capture is a proof of concept project currently being developed for our annual CodeWeek event (where you pitch business or technology ideas). 
 Alpha Capture app is intended for Sales to create and distribute trade ideas to our institutional clients. The app will track the performance of each idea relative to the performance of the benchmark, and alert users when the idea has reached the price objective or stop loss value so that the user can then close the idea.
-This is proof of concept only, and as such will have the following limitations: 1) there will be only limited live market data availability (when creating an idea, current stock price); b) there will be no permanent storage for newly created ideas, they will be stored in memory on the server until the next server reload.
+This is proof of concept only, and as such will have the following limitations: 1) there will be only limited live market data availability (when creating an idea, current stock price - for this we use https://iexcloud.io/docs/api/ - if you clone this project, make sure to get your own api key - it's free!); b) there will be no permanent storage for newly created ideas, they will be stored in memory on the server until the next server reload.
 However, there will be a number of “prefabricated” ideas along with their historical (mocked) performance.
 As we cannot control the market (alas), some market data manipulation is in order. The server will provide an API to update prices for ideas so that an alert can be triggered. These price updates will flow into the app via websockets, updating UI in real time and triggering notification alerts when price objective or stop loss thresholds are met.
 
