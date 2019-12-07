@@ -34,7 +34,7 @@ Ideas (new design)
 
 Idea Graph:
 
-![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaperformance.png)
+![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaGraphIhone.png)
 
 Idea Alert:
 
