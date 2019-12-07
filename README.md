@@ -36,9 +36,9 @@ Idea Graph:
 
 ![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaGraphIhone.png)
 
-Idea Alert:
+Idea Alert (Android):
 
-![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/notification.png)
+![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/idea-created-alert-android.jpg)
 
 
 # Steps to build different server flavors and run them locally
