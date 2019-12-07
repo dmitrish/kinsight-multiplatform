@@ -10,14 +10,13 @@ import SwiftUI
 import SharedCode
 
 struct GraphView: View {
+
     var ideaModel: IdeaModel
     var ideaModelLogicDecorator: IdeaModelLogicDecorator
-    var graphViewModel: GraphViewModel?
     
     init(ideaModel: IdeaModel) {
         self.ideaModel = ideaModel
         self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
-        graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"), ideaModel: ideaModel)
     }
 
     var body: some View {
@@ -26,79 +25,149 @@ struct GraphView: View {
             
             VStack {
                 IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
-                .padding(.top, 25)
+                .padding(.top, 5)
                 
                 Rectangle()
                 .frame(height: 1.0, alignment: .bottom)
                 .foregroundColor(Color.white)
                 .padding(.leading, 43)
                 .padding(.trailing, 43)
-                .padding(.bottom, 50)
+                .padding(.bottom, 30)
 
-                Text("Alpha" ).foregroundColor(.white)
-                    .padding(.top, 50)
+                Text("Alpha").foregroundColor(.white)
+                    .padding(.top, 20)
                     .padding(.bottom, 10)
                 Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .frame(width: 300)
-                    .padding(.bottom, 90)
+                    .padding(.bottom, 30)
                 
-                ZStack {
-                    Path { path in
-                        let width: CGFloat = 380
-                        let height: CGFloat = 250
-                        let y: CGFloat = 0
-                        
-                        path.move(to: CGPoint(x: Double(20.0), y: Double(y)))
-                        path.addLine(to: CGPoint(x: Double(20.0), y: Double(y+height)))
-                        path.addLine(to: CGPoint(x: Double(20.0+width), y: Double(y+height)))
-                    }
-                    .stroke(Color(red: 255.0/255.0, green: 255.0/255.0, blue: 204.0/255.0))
-                    
-                    getPath(graphViewModel?.graphModel?.benchmark, isBenchmark: true)
-                        .stroke(lineWidth: CGFloat(2.0))
-                        .fill(Color(red: 165.0/255.0, green: 170.0/255.0, blue: 180.0/255.0))
-                    
-                    getPath(graphViewModel?.graphModel?.ticker, isBenchmark: false)
-                        .stroke(lineWidth: CGFloat(2.0))
-                        .fill(Color(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0))
-                }
+                Rectangle()
+                .frame(height: 1.0, alignment: .bottom)
+                .foregroundColor(Color.white)
+                .padding(.leading, 43)
+                .padding(.trailing, 43)
+                .padding(.bottom, 60)
+
+                ChartFrame(ideaModel)
+                    .foregroundColor(.gray)
+                    .frame(width: 320.0, height: 240.0)
             }
         }
     }
+}
+
+struct ChartFrame: UIViewRepresentable {
     
-    func getPath(_ tickModels: [TickModel]?, isBenchmark: Bool) -> Path {
+    var ideaModel: IdeaModel?
+    
+    init(_ ideaModel: IdeaModel?) {
+        self.ideaModel = ideaModel
+    }
+
+    func makeUIView(context: Context) -> UIView {
+        return ChartView(ideaModel)
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+    }
+}
+
+class ChartView: UIView {
+    
+    let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 204.0/255.0, alpha: 1.0)
+    let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+    let tickerColor = UIColor(red: 165.0/255.0, green: 170.0/255.0, blue: 180.0/255.0, alpha: 1.0)
+    
+    var ideaModel: IdeaModel?
+    var graphViewModel: GraphViewModel?
+    
+    convenience init(_ ideaModel: IdeaModel?) {
+        self.init(frame: CGRect.zero)
+        self.ideaModel = ideaModel
+        graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"), ideaModel: ideaModel!)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.setNeedsDisplay()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.setNeedsDisplay()
+        }
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    private func setup() {
+        backgroundColor = .clear
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            drawAxis(context)
+            drawLineGraph(context, isBenchmark: true)
+            drawLineGraph(context, isBenchmark: false)
+        }
+    }
+    
+    func drawAxis(_ context: CGContext) {
+        let width = bounds.width
+        let height = bounds.height
+        
+        context.setStrokeColor(axisColor.cgColor)
+        context.setLineWidth(2.0)
+        context.move(to: CGPoint(x: 0, y: 0))
+        context.addLine(to: CGPoint(x: 0, y: height))
+        context.addLine(to: CGPoint(x: width, y: height))
+        context.strokePath()
+    }
+    
+    func drawLineGraph(_ context: CGContext, isBenchmark: Bool) {
+
         let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
         let tickerItems = graphViewModel?.graphModel?.ticker ?? []
         let (minX, minY, scaleX, scaleY) = getScaleFactor(benchmarkItems, tickerItems)
         let items = isBenchmark ? benchmarkItems : tickerItems
-        
-        return Path { path in
-            var index = 0
-            var x: CGFloat = 0.0
-            var y: CGFloat = 0.0
 
-            for item in items {
-                let vx = CGFloat(item.x)
-                let vy = CGFloat(item.y)
-                x = (vx-minX) * scaleX + 20.0
-                y = (vy-minY) * scaleY + 70.0
-                
-                if index == 0 {
-                    path.move(to: CGPoint(x: Double(x), y: Double(y)))
-                }
-                else {
-                    path.addLine(to: CGPoint(x: Double(x), y: Double(y)))
-                }
-                index += 1
+        var index = 0
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        let lineColor = isBenchmark ? benchmarkColor : tickerColor
+        
+        context.setStrokeColor(lineColor.cgColor)
+        context.setLineWidth(4.0)
+        
+        for item in items {
+            let vx = CGFloat(item.x)
+            let vy = CGFloat(item.y)
+            x = (vx-minX) * scaleX
+            y = (vy-minY) * scaleY + 70.0
+            
+            if index == 0 {
+                context.move(to: CGPoint(x: Double(x), y: Double(y)))
             }
+            else {
+                context.addLine(to: CGPoint(x: Double(x), y: Double(y)))
+            }
+            index += 1
         }
+        
+        context.strokePath()
     }
     
     func getScaleFactor(_ benchmarkItems: [TickModel], _ tickerItems: [TickModel]) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
-        let width: CGFloat = 380
-        let height: CGFloat = 250
+        let width: CGFloat = bounds.width
+        let height: CGFloat = bounds.height
         let items = benchmarkItems + tickerItems
         var minX: CGFloat = 0.0
         var isMinXSet = false

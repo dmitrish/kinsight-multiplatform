@@ -76,7 +76,7 @@ object NotificationHelper {
             val intent = Intent(context, MainActivity::class.java)
            // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
            // intent.flags = Intent.FLAG_ACTIVITY_UP
-            intent.putExtra("notificationExtra", "hi")
+            intent.putExtra("notificationExtra", ideaId)
             val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_UPDATE_CURRENT)
             setContentIntent(pendingIntent)
         }
