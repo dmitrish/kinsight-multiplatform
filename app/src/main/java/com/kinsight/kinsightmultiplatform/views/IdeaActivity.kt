@@ -2,6 +2,7 @@ package com.kinsight.kinsightmultiplatform.views
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -17,6 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.view.ViewAnimationUtils
+import androidx.core.view.isVisible
 import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
 import com.kinsight.kinsightmultiplatform.PriceKind
 import com.kinsight.kinsightmultiplatform.ViewModels.IdeaDetailViewModel
@@ -61,6 +63,8 @@ class IdeaActivity : FullScreenActivity() {
         setImagesAndAnimation()
 
         closeIdea.alpha = 0.5f
+
+        closeIdea.isVisible = false
 
         closeIdea.setOnClickListener{
             val dialogBuilder = AlertDialog.Builder(this, R.style.MyDialogTheme)
