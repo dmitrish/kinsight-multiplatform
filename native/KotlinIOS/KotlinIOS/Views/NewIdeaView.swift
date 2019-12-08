@@ -30,7 +30,8 @@ struct TargetView: View {
                 
                 VStack {
                     
-                    TextField("Target Price: ", text: $targetPrice).foregroundColor(.white) .padding(.leading, 43)
+                    
+                    TextField("", text: $targetPrice).foregroundColor(.white) .padding(.leading, 43)
                         .padding(.trailing, 43)
                         .font(.headline)
                     Rectangle()
@@ -46,7 +47,7 @@ struct TargetView: View {
                     .font(.headline)
                 Spacer()
                 VStack {
-                    TextField("Stop Loss:", text: $stopLoss).foregroundColor(.white)
+                    TextField("", text: $stopLoss).foregroundColor(.white)
                         .padding(.leading, 43)
                         .padding(.trailing, 43)
                         .font(.headline)
@@ -72,8 +73,8 @@ struct PickerView: View {
         self._direction = direction
 //         .font: UIFont.boldSystemFont(ofSize: 24),
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.lightGray
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.boldSystemFont(ofSize: 16)], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white ,.font: UIFont.boldSystemFont(ofSize: 16)], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.boldSystemFont(ofSize: 17)], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white ,.font: UIFont.boldSystemFont(ofSize: 17)], for: .normal)
     }
     
     @Binding var direction: String
@@ -134,7 +135,7 @@ struct NewIdeaView: View {
 
     var idearepo = IdeaRepository(baseUrl: Constants.htttpUrl)
     
-//     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     @State private var selectedTicker: TickerModel = TickerModel.init(symbol: "", exchange: "", name: "", type: "", region: "", currency: "", isEnabled: true)
     
@@ -200,21 +201,38 @@ struct NewIdeaView: View {
              
                               }
                     
-                HStack {
-                    Text("Ticker: ")
-                        .padding()
-                        .font(.headline)
+                    HStack {
+                    
                     Button(action: {
                         self.showingTickerSearch.toggle()
                     }) {
-                       Text(self.selectedTicker.symbol.isEmpty ? "Search Ticker": "\(self.selectedTicker.symbol)" )
-                            .padding()
-                            .font(.headline)
+                        HStack {
+                            
+                            Image(systemName: "magnifyingglass").padding(.leading)
+                            Text(self.selectedTicker.symbol.isEmpty ? "Search Tickers": "\(self.selectedTicker.symbol)" )
+                                                                      .padding()
+                                                                      .font(.headline)
+                            Spacer()
+                                            
+                                             
+                        }
+                        .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                                                                                 .stroke(Color.blue, lineWidth: 4)
+                                                                                         )
+               
+//                        Text("Hacking with Swift")
+//                        .padding()
+//
+//                        TextField(self.selectedTicker.symbol.isEmpty ? "Search Ticker": "\(self.selectedTicker.symbol)", text: $targetPrice).foregroundColor(.white) .padding(.leading, 43)
+//                                               .padding(.trailing, 43)
+//                                               .font(.headline)
+ 
                     }.sheet(isPresented: $showingTickerSearch) {
                        TickerSearchView(selectedTicker: self.$selectedTicker)
                     }
-                     Spacer()
-                }
+                    }
+            
 
                 TargetView(targetPrice: $targetPrice, stopLoss: $stopLoss)
 
@@ -230,24 +248,30 @@ struct NewIdeaView: View {
                 
               }.foregroundColor(.white)
     }
-//        .alert(isPresented: $showingAlert) {
-//             Alert(title: Text("Success"), message: Text("Idea Save"), dismissButton: .default(Text("Ok")))
-//                       
-//        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Success"), message: Text("Idea Saved"), dismissButton: .default(Text("Ok"), action: {
+                     self.presentationMode.wrappedValue.dismiss()
+            }))
+                       
+        }
 }
     
     func saveIdea() {
 
-        let randomID = Int32((1...100000).randomElement() ?? 0)
+  let randomID = Int32((1...100000).randomElement() ?? 0)
 
+let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush", createdFrom: "iOS", previousCurrentPrice: 12.22, isActive: true)
         
-        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush", createdFrom: "iOS", previousCurrentPrice: 12.22, isActive: true)
-//        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason:  "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS", createdFrom: <#String#>, previousCurrentPrice: <#Double#>, isActive: <#Bool#>)
-        idearepo.saveIdea(ideaModel: ideaModel) {
-//            self.showingAlert = true
-//            self.presentationMode.wrappedValue.dismiss()
-           
-        }
+////        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason:  "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS", createdFrom: <#String#>, previousCurrentPrice: <#Double#>, isActive: <#Bool#>)
+        
+        idearepo.saveIdea(ideaModel: ideaModel, success: {
+            print("Ideas Saved")
+                      self.showingAlert = true
+            
+        })
+//        idearepo.saveIdea(ideaModel: ideaModel) {
+//          
+//        }
 
     }
 }

@@ -48,6 +48,7 @@ struct SearchBar : UIViewRepresentable {
         
         
         searchBar.delegate = context.coordinator
+        
         return searchBar
     }
     

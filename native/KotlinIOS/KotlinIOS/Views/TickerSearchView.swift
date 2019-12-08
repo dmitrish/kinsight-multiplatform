@@ -30,6 +30,7 @@ struct TickerSearchView: View {
         UITableViewCell.appearance().backgroundColor = .clear
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorColor = .clear
+        
     }
     
 //     TickerSearchView()
