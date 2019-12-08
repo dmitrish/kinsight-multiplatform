@@ -1,5 +1,8 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -14,11 +17,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.math.RoundingMode
-import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
+import androidx.core.view.isVisible
 import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
 import com.kinsight.kinsightmultiplatform.PriceKind
+import com.kinsight.kinsightmultiplatform.ViewModels.IdeaDetailViewModel
+import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.resources.Strings
 
@@ -35,6 +39,8 @@ class IdeaActivity : FullScreenActivity() {
     lateinit var scaleYAnimation: SpringAnimation
     lateinit var scaleGestureDetector: ScaleGestureDetector
     lateinit var ideaModel: IdeaModel
+
+    private val viewModel by lazy { getViewModel { IdeaDetailViewModel() }}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +61,34 @@ class IdeaActivity : FullScreenActivity() {
         ideaConviction.text = ideaModelDecorator.getConviction()
 
         setImagesAndAnimation()
+
+        closeIdea.alpha = 0.5f
+
+        closeIdea.isVisible = false
+
+        closeIdea.setOnClickListener{
+            val dialogBuilder = AlertDialog.Builder(this, R.style.MyDialogTheme)
+
+            // set message of alert dialog
+            dialogBuilder.setMessage("Confirm you want to close this idea?")
+                // if the dialog is cancelable
+                .setCancelable(false)
+                // positive button text and action
+                .setPositiveButton("Proceed", DialogInterface.OnClickListener {
+                      dialog, id ->  viewModel.closeIdea(ideaModel); finish()
+                })
+                // negative button text and action
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                        dialog, id -> dialog.cancel()
+                })
+
+            // create dialog box
+            val alert = dialogBuilder.create()
+            // set title for alert dialog box
+            alert.setTitle("Close Idea")
+            // show alert dialog
+            alert.show()
+        }
 
     }
 

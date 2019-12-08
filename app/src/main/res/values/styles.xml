@@ -54,6 +54,9 @@
         <item name="android:drawablePadding">-10dp</item>
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/yellow</item>
+    </style>
 
 </resources>
 

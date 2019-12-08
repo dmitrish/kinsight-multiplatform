@@ -42,6 +42,8 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
         notificationOnNewIdea = intent.getIntExtra("notificationExtra", 0)
 
+        fab.alpha = 0.5f
+
     }
 
     override fun onResume() {
