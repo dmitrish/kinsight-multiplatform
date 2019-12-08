@@ -60,6 +60,8 @@ class IdeaActivity : FullScreenActivity() {
 
         setImagesAndAnimation()
 
+        closeIdea.alpha = 0.5f
+
         closeIdea.setOnClickListener{
             val dialogBuilder = AlertDialog.Builder(this, R.style.MyDialogTheme)
 
@@ -69,7 +71,7 @@ class IdeaActivity : FullScreenActivity() {
                 .setCancelable(false)
                 // positive button text and action
                 .setPositiveButton("Proceed", DialogInterface.OnClickListener {
-                      dialog, id ->  viewModel.closeIdea(ideaModel)
+                      dialog, id ->  viewModel.closeIdea(ideaModel); finish()
                 })
                 // negative button text and action
                 .setNegativeButton("Cancel", DialogInterface.OnClickListener {
