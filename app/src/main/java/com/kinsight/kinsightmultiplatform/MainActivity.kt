@@ -42,7 +42,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
 
         notificationOnNewIdea = intent.getIntExtra("notificationExtra", 0)
 
-        fab.alpha = 0.5f
+        fab.alpha = 0.4f
 
     }
 
