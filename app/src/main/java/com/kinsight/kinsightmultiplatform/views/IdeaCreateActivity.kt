@@ -64,6 +64,8 @@ class IdeaCreateActivity : FullScreenActivity(),
 
         initViewModelListener()
 
+        saveIdea.alpha = 0.3f
+
 
         saveIdea.setOnClickListener {
 
