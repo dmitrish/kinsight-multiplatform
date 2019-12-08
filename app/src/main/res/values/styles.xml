@@ -54,6 +54,15 @@
         <item name="android:drawablePadding">-10dp</item>
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:colorAccent">#FFFF00</item>
+        <item name="android:windowIsTranslucent">false</item>
+
+    </style>
 
 </resources>
 
+<!--<item name="android:background">@color/colorGradientCenter</item>-->

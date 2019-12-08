@@ -36,12 +36,19 @@ struct SearchBar : UIViewRepresentable {
         searchBar.backgroundColor = UIColor.clear
         searchBar.isTranslucent = true
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-      
-        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = .white
+//        searchBar.setImage(UIImage(named: "SearchIcon"), for: .search, state: .normal)
+        if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField,
+              let glassIconView = textFieldInsideSearchBar.leftView as? UIImageView {
+
+              textFieldInsideSearchBar.textColor = .white
+                  //Magnifying glass
+                  glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+            glassIconView.tintColor = .white
+          }
         
         
         searchBar.delegate = context.coordinator
+        
         return searchBar
     }
     

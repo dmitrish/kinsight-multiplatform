@@ -22,9 +22,16 @@ struct TickerSearchView: View {
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
     
-//    init(selectedTicker: Binding<TickerModel>) {
-//        self._selectedTicker = selectedTicker
-//    }
+    init(selectedTicker: Binding<TickerModel>) {
+        self._selectedTicker = selectedTicker
+        UISearchBar.appearance().backgroundColor = .clear
+        UINavigationBar.appearance().backgroundColor = .clear
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorColor = .clear
+        
+    }
     
 //     TickerSearchView()
     
@@ -55,15 +62,29 @@ struct TickerSearchView: View {
                 
 //                   NavigationLink(destination: TickerSearchView(selectedTicker: self.$selectedTicker)) {  Text("Search Ticker") }
 //                  Text("\(ticker.symbol)")
-                Button(
-                    "\(ticker.symbol)",
-                    action: {
+                Button( action: {
                         self.selectedTicker = ticker
                         self.presentationMode.wrappedValue.dismiss()
                         
+                }){
+                    VStack {
+                        HStack {
+                           Text("\(ticker.symbol) (\(ticker.exchange))")
+                            .font(.headline).padding(.top)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("\(ticker.name)")
+                                .font(.subheadline)
+                                .padding(.bottom)
+                            Spacer()
+                        }
+                                   
+                    }
                 }
-                )
-            }
+                
+            }.overlay(ProgressView()
+            .opacity(tickerSearchViewModel.inProgress ? 1 : 0))
         }
         }.background(Color.clear).foregroundColor(Color.white)
     }

@@ -76,7 +76,7 @@ class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
 
     @Suppress("unused")
     suspend fun closeIdea(ideaModel: IdeaModel): Unit {
-        ideaApi.saveIdea(ideaModel)
+        ideaApi.closeIdea(ideaModel)
     }
 
     @Suppress("unused", "unused_parameter")

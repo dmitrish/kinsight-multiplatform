@@ -1,5 +1,10 @@
 package com.kinsight.kinsightmultiplatform.views
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
@@ -14,11 +19,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.math.RoundingMode
-import java.text.DecimalFormat
 import android.view.ViewAnimationUtils
+import androidx.core.view.isVisible
 import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
 import com.kinsight.kinsightmultiplatform.PriceKind
+import com.kinsight.kinsightmultiplatform.ViewModels.IdeaDetailViewModel
+import com.kinsight.kinsightmultiplatform.extensions.getViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.resources.Strings
 
@@ -35,6 +41,8 @@ class IdeaActivity : FullScreenActivity() {
     lateinit var scaleYAnimation: SpringAnimation
     lateinit var scaleGestureDetector: ScaleGestureDetector
     lateinit var ideaModel: IdeaModel
+
+    private val viewModel by lazy { getViewModel { IdeaDetailViewModel() }}
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +63,43 @@ class IdeaActivity : FullScreenActivity() {
         ideaConviction.text = ideaModelDecorator.getConviction()
 
         setImagesAndAnimation()
+
+        closeIdea.alpha = 0.3f
+
+        closeIdea.isVisible = false
+
+        closeIdea.setOnClickListener{
+            val dialogBuilder = AlertDialog.Builder(this, R.style.MyDialogTheme)
+
+            // set message of alert dialog
+            dialogBuilder.setMessage("Confirm closing this ${ideaModel.securityTicker} idea?")
+                // if the dialog is cancelable
+
+                .setCancelable(false)
+                // positive button text and action
+                .setPositiveButton("Proceed", DialogInterface.OnClickListener {
+                      dialog, id ->  viewModel.closeIdea(ideaModel); finish()
+                })
+                // negative button text and action
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                        dialog, id -> dialog.cancel()
+                })
+
+            // create dialog box
+            val alert = dialogBuilder.create()
+
+          //  alert.window!!.setA
+
+           // alert.window!!.setBackgroundDrawableResource(R.drawable.gradient_animation);
+
+            // set title for alert dialog box
+            alert.setTitle("Alpha Capture")
+
+            alert.setIcon(R.drawable.ic_fish_monogram)
+            // show alert dialog
+            alert.show()
+            alert.getWindow()!!.setBackgroundDrawable( ColorDrawable(Color.argb(125, 128, 0, 108)));
+        }
 
     }
 

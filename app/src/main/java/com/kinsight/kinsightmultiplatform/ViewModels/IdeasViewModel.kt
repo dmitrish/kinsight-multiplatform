@@ -37,7 +37,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
         Log.i("APP", "loading ideas")
         CoroutineScope(Dispatchers.IO).launch {
             delay(500)
-           ideas.postValue( ideaRep.fetchIdeas().sortedByDescending { it.alpha })
+           ideas.postValue( ideaRep.fetchIdeas().filter { it.isActive }.sortedByDescending { it.alpha })
         }
     }
 
@@ -57,7 +57,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             ideasTemp = ideaRep.fetchIdeas()
         }
         delay(500)
-        ideas.value = ideasTemp?.sortedByDescending{ it.alpha }
+        ideas.value = ideasTemp?.filter{it.isActive}?.sortedByDescending{ it.alpha }
 
         /*
         * this is temp, just to test ticker search and graph reading
@@ -100,7 +100,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             withContext(Dispatchers.Default) {
                 NotificationHelper.sendNotification(
                     getApplication(),
-                    "Alpha Capture", notificationMessage.message, notificationMessage.message, false
+                    "Alpha Capture", notificationMessage.message, notificationMessage.message, false, notificationMessage.ideaId
                 )
             }
         }
@@ -138,6 +138,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
                     notifyOnPriceChanged()
                 }
                 else if (upperCasedMessage.startsWith(NEW_IDEA)){
+                    loadIdeas()
                     notifyOnNewIdeaCreated(it)
                 }
                 else if (upperCasedMessage.startsWith(PRICE_OBJECTIVE_ACHIEVED)){

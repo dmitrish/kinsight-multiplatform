@@ -64,8 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        app:srcCompat="@drawable/ic_rod"
+        app:srcCompat="@drawable/ic_fishcreate"
         app:backgroundTint="@color/colorGradientCenter"
+
         android:elevation="6dp"
         app:pressedTranslationZ="12dp"
         android:contentDescription="Create"
@@ -74,3 +75,5 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--  app:backgroundTint="#41B4E6"-->
