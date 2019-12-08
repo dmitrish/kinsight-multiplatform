@@ -45,7 +45,7 @@ struct IdeaViewDetail: View {
                                     Image(ideaModel.createdBy.lowercased())
                                     .resizable()
                                         .frame(width: 88, height: 88)
-                                        .padding(.leading, 30)
+                                         .overlay(Circle().stroke(Color.white,lineWidth:2).shadow(radius: 10)) .padding(.leading, 30)
                                        
                                 }
                                 .frame(width: 88, height: 88)
