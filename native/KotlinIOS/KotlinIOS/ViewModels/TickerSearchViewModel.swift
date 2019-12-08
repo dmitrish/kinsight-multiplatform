@@ -22,6 +22,7 @@ public class TickerSearchViewModel : ObservableObject {
     @Published var tickers = [TickerModel]()
     @Published var dataRequestInProgress = ProgressModel()
     @Published var searchText = ""
+    @Published var inProgress : Bool = false
     
     private var searchSubscriber: AnyCancellable!
       private var disposables = Set<AnyCancellable>()
@@ -38,15 +39,18 @@ public class TickerSearchViewModel : ObservableObject {
     
     func fetchTickers(for tickerString: String){
         dataRequestInProgress.inProgress = true
+        inProgress = true
         if tickerString.isEmpty {
             self.tickers = []
         self.dataRequestInProgress.inProgress = false
+                inProgress = false
             return
         }
         
         self.repository?.fetchTickers(tickerFilter: tickerString, success: { (tickerModels) in
             
             self.tickers = tickerModels
+            self.inProgress = false
             self.dataRequestInProgress.inProgress = false
             print("Ticker Values == \(self.tickers)")
             
