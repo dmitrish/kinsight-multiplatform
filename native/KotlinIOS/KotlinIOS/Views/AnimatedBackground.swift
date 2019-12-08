@@ -20,12 +20,12 @@ struct AnimatedBackground: View {
         RoundedRectangle(cornerRadius: 0)
         .fill(LinearGradient(gradient: Gradient(colors: self.gradient), startPoint: self.startPoint, endPoint: self.endPoint))
         .edgesIgnoringSafeArea(.all)
-        .onAppear() {
-            withAnimation (Animation.easeInOut(duration: 5).repeatForever()){
-                self.startPoint = UnitPoint(x: 1, y: -1)
-                self.endPoint = UnitPoint(x: 0, y: 1)
-            }
-        }
+//        .onAppear() {
+//            withAnimation (Animation.easeInOut(duration: 5).repeatForever()){
+//                self.startPoint = UnitPoint(x: 1, y: -1)
+//                self.endPoint = UnitPoint(x: 0, y: 1)
+//            }
+//        }
     }
 }
 

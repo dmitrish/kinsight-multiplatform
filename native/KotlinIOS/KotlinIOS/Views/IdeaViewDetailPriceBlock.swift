@@ -35,7 +35,7 @@ struct IdeaViewDetailPriceBlock: View {
                HStack (alignment: .top){
                 Text(ideaModelLogicDecorator.getDisplayValueForPrice(priceKind: PriceKind.target))
                        .foregroundColor(.white)
-                       .padding(.leading, 43)
+                    .padding(.leading, 43)
                        .font(.title)
                        Spacer()
                 Text(ideaModelLogicDecorator.getDisplayValueForPrice(priceKind: PriceKind.current))
