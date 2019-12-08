@@ -2,6 +2,8 @@ package com.kinsight.kinsightmultiplatform.views
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MotionEvent
@@ -62,16 +64,17 @@ class IdeaActivity : FullScreenActivity() {
 
         setImagesAndAnimation()
 
-        closeIdea.alpha = 0.5f
+        closeIdea.alpha = 0.3f
 
-       // closeIdea.isVisible = false
+        closeIdea.isVisible = false
 
         closeIdea.setOnClickListener{
             val dialogBuilder = AlertDialog.Builder(this, R.style.MyDialogTheme)
 
             // set message of alert dialog
-            dialogBuilder.setMessage("Confirm you want to close this idea?")
+            dialogBuilder.setMessage("Confirm closing this ${ideaModel.securityTicker} idea?")
                 // if the dialog is cancelable
+
                 .setCancelable(false)
                 // positive button text and action
                 .setPositiveButton("Proceed", DialogInterface.OnClickListener {
@@ -84,10 +87,18 @@ class IdeaActivity : FullScreenActivity() {
 
             // create dialog box
             val alert = dialogBuilder.create()
+
+          //  alert.window!!.setA
+
+           // alert.window!!.setBackgroundDrawableResource(R.drawable.gradient_animation);
+
             // set title for alert dialog box
-            alert.setTitle("Close Idea")
+            alert.setTitle("Alpha Capture")
+
+            alert.setIcon(R.drawable.ic_fish_monogram)
             // show alert dialog
             alert.show()
+            alert.getWindow()!!.setBackgroundDrawable( ColorDrawable(Color.argb(125, 128, 0, 108)));
         }
 
     }
