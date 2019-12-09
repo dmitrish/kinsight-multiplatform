@@ -9,6 +9,12 @@ This is proof of concept only, and as such will have the following limitations: 
 However, there will be a number of “prefabricated” ideas along with their historical (mocked) performance.
 As we cannot control the market (alas), some market data manipulation is in order. The server will provide an API to update prices for ideas so that an alert can be triggered. These price updates will flow into the app via websockets, updating UI in real time and triggering notification alerts when price objective or stop loss thresholds are met.
 
+# Overview
+
+https://github.com/dmitrish/kinsight-multiplatform/blob/master/overview.png
+
+
+
 IPhone intro:
 
 ![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
