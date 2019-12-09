@@ -15,16 +15,16 @@ As we cannot control the market (alas), some market data manipulation is in orde
 
 
 
-IPhone intro:
+# IPhone intro:
 
 ![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
 
-Android intro:
+# Android intro:
 
 ![android gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif)
 
 
-Screenshots:
+# Screenshots:
 
 
 
@@ -33,22 +33,22 @@ Screenshots:
 
 ![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogethernewdesign.png)
 
-Ideas list - Android
+# Ideas list - Android
 
 ![ideas list android](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideas-android.jpg)
 
 
 
 
-Ideas (new design)
+# Ideas (new design)
 
 ![android and iphone detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideadetailsidebyside.png)
 
-Idea Graph:
+# Idea Graph:
 
 ![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaGraphIhone.png)
 
-Idea Alert (Android):
+# Idea Alert (Android):
 
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/idea-created-alert-android.jpg)
 
