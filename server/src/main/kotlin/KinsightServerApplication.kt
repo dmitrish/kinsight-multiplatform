@@ -37,12 +37,18 @@ import kotlinx.serialization.internal.StringDescriptor
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import kinsight.server.api.model.*
 import kinsight.server.api.service.*
 import kinsight.server.api.web.*
 
 import com.fasterxml.jackson.databind.SerializationFeature
+import io.ktor.http.CacheControl
+import io.ktor.http.CacheControl.NoCache
+import io.ktor.http.content.CachingOptions
+import io.ktor.http.content.OutgoingContent
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.*
 
@@ -94,7 +100,7 @@ typealias DelayProvider = suspend (ms: Int) -> Unit
                               @SerialName("convictionId")
                               val convictionId: Int,
                               @SerialName("currentPrice")
-                              val currentPrice: Double,
+                              var currentPrice: Double,
                               @SerialName("direction")
                               val direction: String,
                               @SerialName("directionId")
@@ -163,7 +169,7 @@ fun loadResourceText(path: String): String {
 
 fun loadEmbeddedJsonIdeas(){
     try{
-        val fileIdeasText = loadResourceText("/ideas.json")
+        val fileIdeasText = loadResourceText("/ideas2.json")
        val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
         ideas.addAll(fileIdeas)
         println("reader: $fileIdeasText")
@@ -211,7 +217,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
 
 
     try {
-        val fileIdeasText = File("WEB-INF/ideas.json").readText()
+        val fileIdeasText = File("WEB-INF/ideas2.json").readText()
         val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
         ideas.addAll(fileIdeas)
     }
@@ -246,6 +252,23 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             setDateFormat(DateFormat.LONG)
             setPrettyPrinting()
         }
+    }
+
+
+    install(CachingHeaders){
+        /*CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Private))*/
+
+        CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 1))
+
+        /*options{
+                /*outgoingContent: OutgoingContent -> val cachingOptions = CachingOptions(cacheControl = CacheControl.NoCache(
+            CacheControl.Visibility.Private))
+            cachingOptions*/
+
+            outgoingContent -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 1))
+        }
+
+        */
     }
 
     /*
@@ -297,7 +320,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         }
 
         get ("/api/1"){
-            val json = File("WEB-INF/ideas.json").readText()
+            val json = File("WEB-INF/ideas2.json").readText()
                 call.respondText(json,  ContentType.Application.Json)
         }
 
@@ -355,14 +378,20 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
                 val client = HttpClient()
                 val address =    Url("$iexBaseUrl$iexRefDataUrl$iexToken")
                 var result = ""
-                var finalResult: List<Ticker>? = null
+                var finalResult: MutableList<Ticker>? = null
 
                 try {
                     result = client.get<String> {
                         url(address.toString())
                     }
-                    println(result)
-                    tickers =  Json.nonstrict.parse(Ticker.serializer().list, result).toMutableList()
+                    //println(result)
+
+                    var resultJson = Json.nonstrict.parse(Ticker.serializer().list, result).toMutableList()
+                    println("loaded ticker count before ${resultJson.count()}")
+                    resultJson = resultJson.filter { it.type == "cs" }.toMutableList()
+                    println("loaded ticker count after ${resultJson.count()}")
+                    tickers =  resultJson
+
                 } catch (t: Throwable) {
                     call.respondText(
                         (if (t.message != null) t.message!! else ""),
@@ -384,8 +413,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             val post = call.receive<Idea>()
             ideas.add(post)
 
-
-            sendSignalToClient("NEWIDEA|${post.createdBy} created a new ${post.direction} idea on ${post.securityTicker} with price objective of \$25|${post.createdBy}|${post.createdFrom}|${post.id}")
+            sendSignalToClient("NEWIDEA|${post.createdBy} created a new ${post.direction} idea on ${post.securityTicker} with price objective of \$${post.targetPrice}|${post.createdBy}|${post.createdFrom}|${post.id}")
 
             call.respond(mapOf("OK" to true))
         }
@@ -394,7 +422,19 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             var idea = ideas.find { it.id == post.id }
             var index = ideas.indexOf(idea)
             ideas[index] = post
-            //sendReloadSignal()
+
+            sendSignalToClient("UPDATEIDEA|${post.createdBy} Updated an ${post.direction} idea on ${post.securityTicker} with price objective of \$${post.targetPrice}|${post.createdBy}|${post.createdFrom}|${post.id}")
+
+            call.respond(mapOf("OK" to true))
+        }
+
+        post("/api/closeidea") {
+            val post = call.receive<Idea>()
+
+            ideas.mapNotNull { if(it.id == post.id) it.isActive = false }
+
+            sendSignalToClient("CLOSEIDEA|${post.createdBy} Closed an ${post.direction} idea on ${post.securityTicker} with price objective of \$${post.targetPrice}|${post.createdBy}|${post.createdFrom}|${post.id}")
+
             call.respond(mapOf("OK" to true))
         }
 
@@ -410,12 +450,18 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         post("/api/simulate/{id}") {
             val id =  call.parameters["id"]!!.toInt()
 
-            println("simulate start...")
+            val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+            val simulateStartTime = LocalDateTime.now().format(formatter)
 
-            //sendReloadSignal()
+            println("simulate start... $simulateStartTime")
+
 
             val startTime = System.currentTimeMillis()
             call.respondHandlingLongCalculation(random, delayProvider, startTime, id)
+
+            val simulateEndTime = LocalDateTime.now().format(formatter)
+
+            println("simulate end... $simulateEndTime")
 
         }
 
@@ -475,7 +521,9 @@ private suspend fun Application.sendReloadSignal(signal: String) {
     try {
         for (wssession in wssessions) {
             try {
-                wssession.send(Frame.Text(signal))
+                if(wssession.isActive) {
+                    wssession.send(Frame.Text(signal))
+                }
             } catch (e: Throwable) {
                 println("Exception in Application.sendReloadSignal: ${e.message}")
             }
@@ -491,6 +539,9 @@ private suspend fun Application.sendReloadSignal(signal: String) {
  */
 private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long, ideaid: Int) {
     val queueTime = System.currentTimeMillis() - startTime
+    val upIndexes: IntArray = intArrayOf(0, 1, 4 )
+    val downIndexes: IntArray = intArrayOf(2, 3)
+    val poaIndex: IntArray = intArrayOf(5)
 
     val computeTime = measureTimeMillis {
         // We specify a coroutine context, that will use a thread pool for long computing operations.
@@ -498,20 +549,41 @@ private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Rando
         // But serves as an example of what to do if we want to perform slow non-asynchronous operations
         // that would block threads.
         withContext(compute) {
-            for (index in 0 until 5) {
-                delayProvider(15000)
+            for (index in 0 until 6) {
+                println("before: index: $index alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
 
+                var idea = ideas.filter { it.id == ideaid }.first()
 
-                println("before: alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+                if(upIndexes.contains(index)) {
+                    idea.previousCurrentPrice = idea.currentPrice;
+                    idea.currentPrice = idea.currentPrice + ((idea.currentPrice / 100) * 0.7)
+                    idea.alpha = idea.alpha + ((idea.alpha / 100) * 0.7)
 
-                    ideas.filter { x -> x.id == ideaid }.first().alpha.plus(1)
-                //val filteredIdea =
-                    //ideas.first{ f -> f.id == ideaid }.alpha.nextUp()
-                //filteredIdea.alpha = filteredIdea.alpha+1
+                    println("after: reload - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+                    application.sendReloadSignal("RELOAD")
+                    delayProvider(3000)
+                }
 
-                println("after: alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+                if(downIndexes.contains(index)){
+                    idea.previousCurrentPrice = idea.currentPrice;
+                    idea.currentPrice = idea.currentPrice - ((idea.currentPrice / 100) * 0.7)
+                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.7)
 
-                application.sendReloadSignal("RELOAD|$ideaid")
+                    println("after: reload - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+                    application.sendReloadSignal("RELOAD")
+                    delayProvider(3000)
+                }
+
+                if(poaIndex.contains(index))
+                {
+                    idea.previousCurrentPrice = idea.currentPrice;
+                    idea.currentPrice = idea.targetPrice;
+                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.7)
+
+                    println("after: poa - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
+
+                    application.sendReloadSignal("PRICEOBJECTIVE|Price Objective Achieved on Idea ${idea.securityTicker} with target price of \$${idea.targetPrice}|${idea.createdBy}|${idea.createdFrom}|${idea.id}")
+                }
             }
         }
     }
