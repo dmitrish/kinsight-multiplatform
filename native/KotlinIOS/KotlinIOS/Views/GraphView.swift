@@ -23,28 +23,10 @@ struct GraphView: View {
         ZStack {
             AnimatedBackground()
             
-            VStack {
-                IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
-                .padding(.top, 20)
-                
-                Rectangle()
-                .frame(height: 1.0, alignment: .bottom)
-                .foregroundColor(Color.white)
-                .padding(.leading, 43)
-                .padding(.trailing, 43)
-                .padding(.bottom, 50)
-
-                Text("Alpha").foregroundColor(.white)
-                    .padding(.top, 40)
-                    .padding(.bottom, 10)
-                Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .frame(width: 300)
-                
-                Graph2DView(ideaModel)
-                .frame(width: 320.0, height: 380.0)
-            }
+            Graph2DView(ideaModel)
+            .padding(.leading, 43)
+            .padding(.trailing, 43)
+            .padding(.bottom, 20)
         }
     }
 }
