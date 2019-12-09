@@ -66,7 +66,7 @@ class IdeaActivity : FullScreenActivity() {
 
         closeIdea.alpha = 0.3f
 
-        closeIdea.isVisible = false
+       // closeIdea.isVisible = false
 
         closeIdea.setOnClickListener{
             val dialogBuilder = AlertDialog.Builder(this, R.style.MyDialogTheme)
