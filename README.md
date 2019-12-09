@@ -9,16 +9,22 @@ This is proof of concept only, and as such will have the following limitations: 
 However, there will be a number of “prefabricated” ideas along with their historical (mocked) performance.
 As we cannot control the market (alas), some market data manipulation is in order. The server will provide an API to update prices for ideas so that an alert can be triggered. These price updates will flow into the app via websockets, updating UI in real time and triggering notification alerts when price objective or stop loss thresholds are met.
 
-IPhone intro:
+# Overview
+
+![overview](https://github.com/dmitrish/kinsight-multiplatform/blob/master/overview.png)
+
+
+
+# IPhone intro:
 
 ![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
 
-Android intro:
+# Android intro:
 
 ![android gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif)
 
 
-Screenshots:
+# Screenshots:
 
 
 
@@ -27,22 +33,22 @@ Screenshots:
 
 ![ideas side by side](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideastogethernewdesign.png)
 
-Ideas list - Android
+# Ideas list - Android
 
 ![ideas list android](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideas-android.jpg)
 
 
 
 
-Ideas (new design)
+# Ideas (new design)
 
 ![android and iphone detail](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideadetailsidebyside.png)
 
-Idea Graph:
+# Idea Graph:
 
 ![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaGraphIhone.png)
 
-Idea Alert (Android):
+# Idea Alert (Android):
 
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/idea-created-alert-android.jpg)
 
