@@ -159,6 +159,7 @@ class ChartView: UIView {
         var index = 0
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
+        let height = bounds.height
         let lineColor = isBenchmark ? benchmarkColor : tickerColor
         
         context.setStrokeColor(lineColor.cgColor)
@@ -171,10 +172,10 @@ class ChartView: UIView {
             y = (vy-minY) * scaleY + 70.0
             
             if index == 0 {
-                context.move(to: CGPoint(x: Double(x), y: Double(y)))
+                context.move(to: CGPoint(x: Double(x), y: Double(height-y)))
             }
             else {
-                context.addLine(to: CGPoint(x: Double(x), y: Double(y)))
+                context.addLine(to: CGPoint(x: Double(x), y: Double(height-y)))
             }
             index += 1
         }
