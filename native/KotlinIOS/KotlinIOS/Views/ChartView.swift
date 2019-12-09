@@ -27,6 +27,7 @@ struct ChartView: UIViewRepresentable {
 
 class ChartNativeView: UIView {
     
+    let graphHeight: CGFloat = 240.0
     let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
@@ -66,31 +67,40 @@ class ChartNativeView: UIView {
         super.draw(rect)
         
         if let context = UIGraphicsGetCurrentContext() {
-            drawAxis(context)
-            drawGrid(context)
-            drawLineGraph(context, isBenchmark: true)
-            drawLineGraph(context, isBenchmark: false)
+            let width = bounds.width
+            let height = bounds.height
+            
+            drawLine2(context, width, height)
+            drawAxis(context, width, height)
+            drawGrid(context, width, height)
+            drawLineGraph(context, width, height, isBenchmark: true)
+            drawLineGraph(context, width, height, isBenchmark: false)
         }
     }
     
-    func drawAxis(_ context: CGContext) {
-        let width = bounds.width
-        let height = bounds.height
-        
+    func drawLine2(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
+        let dy: CGFloat = 300.0
         context.setStrokeColor(axisColor.cgColor)
-        context.setLineWidth(2.0)
+        context.setLineWidth(1.0)
+        context.move(to: CGPoint(x: 0, y: height-dy))
+        context.addLine(to: CGPoint(x: width, y: height-dy))
+        context.strokePath()
+    }
+    
+    func drawAxis(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
+        context.setStrokeColor(axisColor.cgColor)
+        context.setLineWidth(1.5)
         context.move(to: CGPoint(x: 0, y: height))
         context.addLine(to: CGPoint(x: width, y: height))
         context.strokePath()
     }
     
-    func drawGrid(_ context: CGContext) {
-        let width = bounds.width
-        let height = bounds.height
+    func drawGrid(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
         let dy: CGFloat = 36.0
+        let minY: CGFloat = height-graphHeight
         var y: CGFloat = height-dy
         
-        while y > 0 {
+        while y >= minY {
             context.setStrokeColor(axisColor.cgColor)
             context.setLineWidth(0.25)
             context.move(to: CGPoint(x: 0, y: y))
@@ -100,17 +110,16 @@ class ChartNativeView: UIView {
         }
     }
 
-    func drawLineGraph(_ context: CGContext, isBenchmark: Bool) {
+    func drawLineGraph(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, isBenchmark: Bool) {
 
         let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
         let tickerItems = graphViewModel?.graphModel?.ticker ?? []
-        let (minX, minY, scaleX, scaleY) = getScaleFactor(benchmarkItems, tickerItems)
+        let (minX, minY, scaleX, scaleY) = getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
         let items = isBenchmark ? benchmarkItems : tickerItems
 
         var index = 0
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
-        let height = bounds.height
         let lineColor = isBenchmark ? benchmarkColor : tickerColor
         
         context.setStrokeColor(lineColor.cgColor)
@@ -134,9 +143,7 @@ class ChartNativeView: UIView {
         context.strokePath()
     }
     
-    func getScaleFactor(_ benchmarkItems: [TickModel], _ tickerItems: [TickModel]) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
-        let width: CGFloat = bounds.width
-        let height: CGFloat = bounds.height
+    func getScaleFactor(_ benchmarkItems: [TickModel], _ tickerItems: [TickModel], _ width: CGFloat, _ height: CGFloat) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
         let items = benchmarkItems + tickerItems
         var minX: CGFloat = 0.0
         var isMinXSet = false
