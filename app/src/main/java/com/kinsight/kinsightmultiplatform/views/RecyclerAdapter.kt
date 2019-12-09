@@ -116,7 +116,7 @@ class RecyclerAdapter (private val ideas: List<IdeaModel>, val itemClickListener
              if (idea.currentPrice > idea.previousCurrentPrice ){
                  alphaColor =  Color.GREEN
              }
-             else if (idea.currentPrice > idea.previousCurrentPrice){
+             else if (idea.currentPrice < idea.previousCurrentPrice){
                  alphaColor = Color.RED
              }
 
