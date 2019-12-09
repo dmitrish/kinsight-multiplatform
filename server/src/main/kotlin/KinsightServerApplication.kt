@@ -45,6 +45,10 @@ import kinsight.server.api.service.*
 import kinsight.server.api.web.*
 
 import com.fasterxml.jackson.databind.SerializationFeature
+import io.ktor.http.CacheControl
+import io.ktor.http.CacheControl.NoCache
+import io.ktor.http.content.CachingOptions
+import io.ktor.http.content.OutgoingContent
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.*
 
@@ -165,7 +169,7 @@ fun loadResourceText(path: String): String {
 
 fun loadEmbeddedJsonIdeas(){
     try{
-        val fileIdeasText = loadResourceText("/ideas.json")
+        val fileIdeasText = loadResourceText("/ideas2.json")
        val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
         ideas.addAll(fileIdeas)
         println("reader: $fileIdeasText")
@@ -213,7 +217,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
 
 
     try {
-        val fileIdeasText = File("WEB-INF/ideas.json").readText()
+        val fileIdeasText = File("WEB-INF/ideas2.json").readText()
         val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
         ideas.addAll(fileIdeas)
     }
@@ -248,6 +252,23 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
             setDateFormat(DateFormat.LONG)
             setPrettyPrinting()
         }
+    }
+
+
+    install(CachingHeaders){
+        /*CachingOptions(CacheControl.NoCache(CacheControl.Visibility.Private))*/
+
+        CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 1))
+
+        /*options{
+                /*outgoingContent: OutgoingContent -> val cachingOptions = CachingOptions(cacheControl = CacheControl.NoCache(
+            CacheControl.Visibility.Private))
+            cachingOptions*/
+
+            outgoingContent -> CachingOptions(CacheControl.MaxAge(maxAgeSeconds = 1))
+        }
+
+        */
     }
 
     /*
@@ -299,7 +320,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         }
 
         get ("/api/1"){
-            val json = File("WEB-INF/ideas.json").readText()
+            val json = File("WEB-INF/ideas2.json").readText()
                 call.respondText(json,  ContentType.Application.Json)
         }
 
@@ -357,14 +378,20 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
                 val client = HttpClient()
                 val address =    Url("$iexBaseUrl$iexRefDataUrl$iexToken")
                 var result = ""
-                var finalResult: List<Ticker>? = null
+                var finalResult: MutableList<Ticker>? = null
 
                 try {
                     result = client.get<String> {
                         url(address.toString())
                     }
-                    println(result)
-                    tickers =  Json.nonstrict.parse(Ticker.serializer().list, result).toMutableList()
+                    //println(result)
+
+                    var resultJson = Json.nonstrict.parse(Ticker.serializer().list, result).toMutableList()
+                    println("loaded ticker count before ${resultJson.count()}")
+                    resultJson = resultJson.filter { it.type == "cs" }.toMutableList()
+                    println("loaded ticker count after ${resultJson.count()}")
+                    tickers =  resultJson
+
                 } catch (t: Throwable) {
                     call.respondText(
                         (if (t.message != null) t.message!! else ""),
@@ -494,7 +521,9 @@ private suspend fun Application.sendReloadSignal(signal: String) {
     try {
         for (wssession in wssessions) {
             try {
-                wssession.send(Frame.Text(signal))
+                if(wssession.isActive) {
+                    wssession.send(Frame.Text(signal))
+                }
             } catch (e: Throwable) {
                 println("Exception in Application.sendReloadSignal: ${e.message}")
             }
@@ -510,7 +539,7 @@ private suspend fun Application.sendReloadSignal(signal: String) {
  */
 private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long, ideaid: Int) {
     val queueTime = System.currentTimeMillis() - startTime
-    val upIndexes: IntArray = intArrayOf(0, 1, 4)
+    val upIndexes: IntArray = intArrayOf(0, 1, 4 )
     val downIndexes: IntArray = intArrayOf(2, 3)
     val poaIndex: IntArray = intArrayOf(5)
 
@@ -527,29 +556,29 @@ private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Rando
 
                 if(upIndexes.contains(index)) {
                     idea.previousCurrentPrice = idea.currentPrice;
-                    idea.currentPrice = idea.currentPrice + ((idea.currentPrice / 100) * 0.5)
-                    idea.alpha = idea.alpha + ((idea.alpha / 100) * 0.5)
+                    idea.currentPrice = idea.currentPrice + ((idea.currentPrice / 100) * 0.7)
+                    idea.alpha = idea.alpha + ((idea.alpha / 100) * 0.7)
 
                     println("after: reload - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
                     application.sendReloadSignal("RELOAD")
-                    delayProvider(6000)
+                    delayProvider(3000)
                 }
 
                 if(downIndexes.contains(index)){
                     idea.previousCurrentPrice = idea.currentPrice;
-                    idea.currentPrice = idea.currentPrice - ((idea.currentPrice / 100) * 0.5)
-                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.5)
+                    idea.currentPrice = idea.currentPrice - ((idea.currentPrice / 100) * 0.7)
+                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.7)
 
                     println("after: reload - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
                     application.sendReloadSignal("RELOAD")
-                    delayProvider(6000)
+                    delayProvider(3000)
                 }
 
                 if(poaIndex.contains(index))
                 {
                     idea.previousCurrentPrice = idea.currentPrice;
                     idea.currentPrice = idea.targetPrice;
-                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.5)
+                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.7)
 
                     println("after: poa - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
 
