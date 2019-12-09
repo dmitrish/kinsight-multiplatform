@@ -28,17 +28,22 @@ struct ChartView: UIViewRepresentable {
 class ChartNativeView: UIView {
     
     let graphHeight: CGFloat = 240.0
+    let textColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
     let tickerColor = UIColor(red: 216.0/255.0, green: 154.0/255.0, blue: 115.0/255.0, alpha: 1.0)
     
     var ideaModel: IdeaModel?
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator?
     var graphViewModel: GraphViewModel?
     
     convenience init(_ ideaModel: IdeaModel?) {
         self.init(frame: CGRect.zero)
         self.ideaModel = ideaModel
+        if let ideaModel = ideaModel {
+            self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
+        }
         graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"), ideaModel: ideaModel!)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -70,20 +75,49 @@ class ChartNativeView: UIView {
             let width = bounds.width
             let height = bounds.height
             
-            drawLine2(context, width, height)
-            drawAxis(context, width, height)
+            drawSecurityHeader(context, width, height)
+            drawLine(context, width, height, 180.0)
+            drawAlpha(context, width, height)
+            drawLine(context, width, height, 450.0)
+            
             drawGrid(context, width, height)
+            drawAxis(context, width, height)
             drawLineGraph(context, width, height, isBenchmark: true)
             drawLineGraph(context, width, height, isBenchmark: false)
         }
     }
     
-    func drawLine2(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
-        let dy: CGFloat = 300.0
-        context.setStrokeColor(axisColor.cgColor)
+    func drawSecurityHeader(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
+        drawText(context, width, height, 46.0, ideaModel?.securityTicker, .largeTitle)
+        drawText(context, width, height, 98.0, ideaModel?.securityName, .body)
+    }
+    
+    func drawAlpha(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
+        drawText(context, width, height, 276.0, "Alpha", .body)
+        drawText(context, width, height, 306.0, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle)
+    }
+    
+    func drawText(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, _ text: String?, _ textStyle: UIFont.TextStyle) {
+        guard let text = text else {
+            return
+        }
+
+        let font = UIFont.preferredFont(forTextStyle: textStyle)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attributes = [NSAttributedString.Key.font: font,
+                          NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                          NSAttributedString.Key.foregroundColor: textColor]
+        let string = NSAttributedString(string: text,
+                                        attributes: attributes)
+        string.draw(in: CGRect(x: 0.0, y: offset, width: width, height: 50.0))
+    }
+    
+    func drawLine(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat) {
+        context.setStrokeColor(textColor.cgColor)
         context.setLineWidth(1.0)
-        context.move(to: CGPoint(x: 0, y: height-dy))
-        context.addLine(to: CGPoint(x: width, y: height-dy))
+        context.move(to: CGPoint(x: 0, y: offset))
+        context.addLine(to: CGPoint(x: width, y: offset))
         context.strokePath()
     }
     
