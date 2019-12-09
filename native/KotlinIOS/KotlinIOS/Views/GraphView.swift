@@ -41,20 +41,59 @@ struct GraphView: View {
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .frame(width: 300)
-                    .padding(.bottom, 60)
                 
-                Rectangle()
-                .frame(height: 1.0, alignment: .bottom)
-                .foregroundColor(Color.white)
-                .padding(.leading, 43)
-                .padding(.trailing, 43)
-                .padding(.bottom, 40)
-
-                ChartView(ideaModel)
-                    .foregroundColor(.gray)
-                    .frame(width: 320.0, height: 240.0)
+                Graph2DView(ideaModel)
+                .frame(width: 320.0, height: 380.0)
             }
         }
+    }
+}
+
+struct Graph2DView: UIViewRepresentable {
+    
+    var ideaModel: IdeaModel?
+    
+    init(_ ideaModel: IdeaModel?) {
+        self.ideaModel = ideaModel
+    }
+
+    func makeUIView(context: Context) -> UIView {
+        return Graph2DNativeView(ideaModel)
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+    }
+}
+
+class Graph2DNativeView: UIView {
+    
+    var chartView: ChartNativeView?
+
+    convenience init(_ ideaModel: IdeaModel?) {
+        self.init(frame: CGRect.zero)
+        let chartView = ChartNativeView(ideaModel)
+        self.chartView = chartView
+        self.addSubview(chartView)
+        
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        chartView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        chartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        chartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+
+    private func setup() {
+        backgroundColor = .clear
     }
 }
 
