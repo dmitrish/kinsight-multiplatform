@@ -48,7 +48,7 @@ struct GraphView: View {
                 .foregroundColor(Color.white)
                 .padding(.leading, 43)
                 .padding(.trailing, 43)
-                .padding(.bottom, 30)
+                .padding(.bottom, 40)
 
                 ChartFrame(ideaModel)
                     .foregroundColor(.gray)
@@ -77,6 +77,7 @@ struct ChartFrame: UIViewRepresentable {
 class ChartView: UIView {
     
     let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
     let tickerColor = UIColor(red: 216.0/255.0, green: 154.0/255.0, blue: 115.0/255.0, alpha: 1.0)
     
@@ -115,6 +116,7 @@ class ChartView: UIView {
         
         if let context = UIGraphicsGetCurrentContext() {
             drawAxis(context)
+            drawGrid(context)
             drawLineGraph(context, isBenchmark: true)
             drawLineGraph(context, isBenchmark: false)
         }
@@ -131,6 +133,22 @@ class ChartView: UIView {
         context.strokePath()
     }
     
+    func drawGrid(_ context: CGContext) {
+        let width = bounds.width
+        let height = bounds.height
+        let dy: CGFloat = 36.0
+        var y: CGFloat = height-dy
+        
+        while y > 0 {
+            context.setStrokeColor(axisColor.cgColor)
+            context.setLineWidth(0.25)
+            context.move(to: CGPoint(x: 0, y: y))
+            context.addLine(to: CGPoint(x: width, y: y))
+            context.strokePath()
+            y -= dy
+        }
+    }
+
     func drawLineGraph(_ context: CGContext, isBenchmark: Bool) {
 
         let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
@@ -144,7 +162,7 @@ class ChartView: UIView {
         let lineColor = isBenchmark ? benchmarkColor : tickerColor
         
         context.setStrokeColor(lineColor.cgColor)
-        context.setLineWidth(3.0)
+        context.setLineWidth(2.5)
         
         for item in items {
             let vx = CGFloat(item.x)
