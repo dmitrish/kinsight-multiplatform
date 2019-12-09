@@ -11,7 +11,7 @@ As we cannot control the market (alas), some market data manipulation is in orde
 
 # Overview
 
-https://github.com/dmitrish/kinsight-multiplatform/blob/master/overview.png
+![overview](https://github.com/dmitrish/kinsight-multiplatform/blob/master/overview.png)
 
 
 
