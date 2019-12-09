@@ -74,12 +74,18 @@ class ChartNativeView: UIView {
         if let context = UIGraphicsGetCurrentContext() {
             let width = bounds.width
             let height = bounds.height
-            
-            drawSecurityHeader(context, width, height)
-            drawLine(context, width, height, 180.0)
-            drawAlpha(context, width, height)
-            drawLine(context, width, height, 450.0)
-            
+                    
+            if width < height {
+                drawSecurityHeader(context, width, height, 46.0)
+                drawLine(context, width, height, 180.0)
+                drawAlpha(context, width, height, 276.0)
+                drawLine(context, width, height, 450.0)
+            }
+            else {
+                drawSecurityHeader(context, width, height, 6.0, textAlignment: .left)
+                drawAlpha(context, width, height, 6.0, textAlignment: .right)
+            }
+
             drawGrid(context, width, height)
             drawAxis(context, width, height)
             drawLineGraph(context, width, height, isBenchmark: true)
@@ -87,24 +93,24 @@ class ChartNativeView: UIView {
         }
     }
     
-    func drawSecurityHeader(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
-        drawText(context, width, height, 46.0, ideaModel?.securityTicker, .largeTitle)
-        drawText(context, width, height, 98.0, ideaModel?.securityName, .body)
+    func drawSecurityHeader(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, textAlignment: NSTextAlignment = .center) {
+        drawText(context, width, height, offset, ideaModel?.securityTicker, .largeTitle, textAlignment: textAlignment)
+        drawText(context, width, height, offset+52.0, ideaModel?.securityName, .body, textAlignment: textAlignment)
     }
     
-    func drawAlpha(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
-        drawText(context, width, height, 276.0, "Alpha", .body)
-        drawText(context, width, height, 306.0, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle)
+    func drawAlpha(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, textAlignment: NSTextAlignment = .center) {
+        drawText(context, width, height, offset, "Alpha", .body, textAlignment: textAlignment)
+        drawText(context, width, height, offset+30.0, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle, textAlignment: textAlignment)
     }
     
-    func drawText(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, _ text: String?, _ textStyle: UIFont.TextStyle) {
+    func drawText(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, _ text: String?, _ textStyle: UIFont.TextStyle, textAlignment: NSTextAlignment = .center) {
         guard let text = text else {
             return
         }
 
         let font = UIFont.preferredFont(forTextStyle: textStyle)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
+        paragraphStyle.alignment = textAlignment
         let attributes = [NSAttributedString.Key.font: font,
                           NSAttributedString.Key.paragraphStyle: paragraphStyle,
                           NSAttributedString.Key.foregroundColor: textColor]
