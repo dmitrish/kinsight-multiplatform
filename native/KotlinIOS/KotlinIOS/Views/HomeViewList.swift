@@ -26,7 +26,8 @@ struct HomeViewList: View {
     @State var startPoint = UnitPoint(x: 0, y: 0)
     @State var endPoint = UnitPoint(x: 0, y: 2)
      @State var showModal: Bool = false
-    
+     @State var showingAlert: Bool = false
+    @State var pushActive: Bool = false
     //@Binding var progress : Bool
     
     init() {
@@ -59,14 +60,25 @@ struct HomeViewList: View {
                     .padding(.leading, 15)
                 
                 Spacer()
-//                Text("My Team Ideas").foregroundColor(Color.yellow)
-//                    //.font(.headline)
-//                    .fontWeight(Font.Weight.semibold)
-//                    .font(.system(size: 20))
-//                    .padding(.trailing, 70)
-                AddButton(destination: NewIdeaView()).padding(.trailing, 30)
+                
+                Text("My Team Ideas").foregroundColor(Color.yellow)
+                    //.font(.headline)
+                    .fontWeight(Font.Weight.semibold)
+                    .font(.system(size: 20))
+                    .padding(.trailing, 70)
+                
+                Button(action: {
+                    self.pushActive = true
+                }){
+                    Text("New Idea")
+                }
+//                AddButton(destination: NewIdeaView()).padding(.trailing, 30)
                 
             }
+            
+            NavigationLink(destination:  NewIdeaView(), isActive: self.$pushActive) {
+               Text("")
+             }.hidden()
             
             List(ideaViewModel.ideasSortedByAlpha){
                 idea in
@@ -81,6 +93,9 @@ struct HomeViewList: View {
             }.background(Color.clear)
                 .overlay(ProgressView()
                     .opacity(ideaViewModel.inProgress ? 1 : 0)
+                    .alert(isPresented: $ideaViewModel.isPriceComplete) {
+                        Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
+                    }
                 
             )
         }.onAppear(){

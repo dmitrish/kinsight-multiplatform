@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D0B036C2379FF5E00614430 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0B036B2379FF5E00614430 /* GraphView.swift */; };
 		1D1972FC239AB37500BD5236 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1972FB239AB37500BD5236 /* GraphViewModel.swift */; };
+		1D5A11D3239ECCAB00367A26 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5A11D2239ECCAB00367A26 /* ChartView.swift */; };
 		1DCC628D237F324D00D5D955 /* IdeaData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DCC628C237F324D00D5D955 /* IdeaData.json */; };
 		2A25CADE23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */; };
 		2A25CAE02394824300F3E779 /* IdeaViewDetailSecurityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */; };
@@ -84,6 +85,7 @@
 		17886D3FE6D21170C5FB5159 /* Pods_KotlinIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KotlinIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D0B036B2379FF5E00614430 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		1D1972FB239AB37500BD5236 /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		1D5A11D2239ECCAB00367A26 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		1DCC628C237F324D00D5D955 /* IdeaData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = IdeaData.json; sourceTree = "<group>"; };
 		2A25CADD23947E6200F3E779 /* IdeaViewDetailPriceBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailPriceBlock.swift; sourceTree = "<group>"; };
 		2A25CADF2394824300F3E779 /* IdeaViewDetailSecurityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailSecurityHeader.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				78D206D723901ABA00348D63 /* NewIdeaView.swift */,
 				2AE129D02356952F006C5329 /* IdeaView.swift */,
 				1D0B036B2379FF5E00614430 /* GraphView.swift */,
+				1D5A11D2239ECCAB00367A26 /* ChartView.swift */,
 				7831D2872382FAB20096A4D5 /* TickerSearchView.swift */,
 				7831D28B238426810096A4D5 /* SearchBar.swift */,
 				D04BA3F4238C598F0098F7F2 /* IdeaViewDetail.swift */,
@@ -572,6 +575,7 @@
 				2AE129CF23556050006C5329 /* WelcomeView.swift in Sources */,
 				47729E0622F447C800B9B36B /* AppDelegate.swift in Sources */,
 				1D1972FC239AB37500BD5236 /* GraphViewModel.swift in Sources */,
+				1D5A11D3239ECCAB00367A26 /* ChartView.swift in Sources */,
 				7831D2882382FAB20096A4D5 /* TickerSearchView.swift in Sources */,
 				7831D28C238426810096A4D5 /* SearchBar.swift in Sources */,
 				D087772D2350E2DC007E4CC2 /* Data.swift in Sources */,
@@ -758,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alphaca;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -782,7 +786,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alphaca;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
