@@ -98,7 +98,9 @@ struct PickerView: View {
                 Text("Short").tag(1).foregroundColor(.white)
                     .font(.headline)
             }.pickerStyle(SegmentedPickerStyle())
-                .padding()
+                .overlay( RoundedRectangle(cornerRadius: 12)
+                                                                                                                .stroke(Color.white, lineWidth: 2)
+            ).padding()
             
             
             HStack{
@@ -113,6 +115,9 @@ struct PickerView: View {
                 Text("Medium").tag(1).foregroundColor(.white)
                 Text("Low").tag(2).foregroundColor(.white)
             }.pickerStyle(SegmentedPickerStyle())
+                .overlay( RoundedRectangle(cornerRadius: 12)
+                                                                                                                    .stroke(Color.white, lineWidth: 2)
+                )
                 .padding()
             HStack {
                 Text("Duration: ")
@@ -126,6 +131,9 @@ struct PickerView: View {
                 Text("1 month").tag(1).foregroundColor(.white)
                 Text("3 months").tag(2).foregroundColor(.white)
             }.pickerStyle(SegmentedPickerStyle())
+                .overlay( RoundedRectangle(cornerRadius: 12)
+                                                                                                                    .stroke(Color.white, lineWidth: 2)
+                )
                 .padding()
         }
     }
@@ -135,7 +143,7 @@ struct NewIdeaView: View {
 
     var idearepo = IdeaRepository(baseUrl: Constants.htttpUrl)
     
-     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+//     @Environment(\.presentationMode) var presentationMode
 
     @State private var selectedTicker: TickerModel = TickerModel.init(symbol: "", exchange: "", name: "", type: "", region: "", currency: "", isEnabled: true)
     
@@ -216,10 +224,7 @@ struct NewIdeaView: View {
                                             
                                              
                         }
-                        .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                                                                                 .stroke(Color.blue, lineWidth: 4)
-                                                                                         )
+                       
                
 //                        Text("Hacking with Swift")
 //                        .padding()
@@ -250,7 +255,7 @@ struct NewIdeaView: View {
     }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("Success"), message: Text("Idea Saved"), dismissButton: .default(Text("Ok"), action: {
-                     self.presentationMode.wrappedValue.dismiss()
+//                     self.presentationMode.wrappedValue.dismiss()
             }))
                        
         }
@@ -270,7 +275,7 @@ let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTi
             
         })
 //        idearepo.saveIdea(ideaModel: ideaModel) {
-//          
+//
 //        }
 
     }

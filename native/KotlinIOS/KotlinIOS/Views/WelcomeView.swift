@@ -11,6 +11,14 @@ import SwiftUI
 import SharedCode
 
 
+
+
+public enum  IdeaNotificationType: String, RawRepresentable {
+     case reload = "reload"
+     case newIdea = "newidea"
+     case priceObjective = "priceobjective"
+}
+
 enum Constants {
     static let  baseUrl: String = "35.239.179.43:8081"
     

@@ -15,6 +15,12 @@ class ProgressModel : ObservableObject {
     var inProgress = true
 }
 
+
+extension IdeaModel {
+    
+    
+}
+
 public class IdeasViewModel : ObservableObject {
     
     @Published var ideas = [IdeaModel]()
@@ -25,13 +31,17 @@ public class IdeasViewModel : ObservableObject {
     
     @Published var inProgress : Bool = true
     
+    @Published var ideaId : String = ""
+    
+    @Published var isPriceComplete: Bool = false
+    
     private let repository: IdeaRepository?
     private var socket: WebSocket!
     private var hasSubscribed: Bool = false
     
     init(repository: IdeaRepository) {
         self.repository = repository
-        fetchKotlin()
+        loadIdeas()
     }
     
     init() {
@@ -50,8 +60,8 @@ public class IdeasViewModel : ObservableObject {
  
     
     
-    func fetchKotlin() {
-        sendNotification()
+    func loadIdeas() {
+//        sendNotification()
          dataRequestInProgress.inProgress = true
         inProgress = true
         let seconds = 1.0
@@ -87,10 +97,9 @@ public class IdeasViewModel : ObservableObject {
 
     
     func fetchNative() {
-      
+        
         var urlComponents = URLComponents(string: "http://localhost:8081/api/ideas")!
-       
-
+        
         var request = URLRequest(url: urlComponents.url!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
@@ -169,10 +178,35 @@ extension IdeasViewModel : WebSocketDelegate {
     
     public func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         print("Received text: \(text)")
-        if (text == "reload") {
-            fetchKotlin()
-            
+        
+        
+        /*
+            val upperCasedMessage = it.toUpperCase()
+            if (upperCasedMessage == RELOAD) {
+                loadIdeas()
+                notifyOnPriceChanged()
+            }
+            else if (upperCasedMessage.startsWith(NEW_IDEA)){
+                notifyOnNewIdeaCreated(it)
+            }
+            else if (upperCasedMessage.startsWith(PRICE_OBJECTIVE_ACHIEVED)){
+                notifyOnNewPriceObjectiveAchieved(it)
+            }
+            isSubscribedToLiveUpdates = true
         }
+        */
+
+        
+        if (text.lowercased().hasPrefix(IdeaNotificationType.reload.rawValue)) {
+            loadIdeas()
+        }
+        else if (text.lowercased().hasPrefix(IdeaNotificationType.newIdea.rawValue)) {
+             print("New Idea")
+            }
+        else if (text.lowercased().hasPrefix(IdeaNotificationType.priceObjective.rawValue)) {
+            print("Price Objective")
+        }
+
     }
     
     public func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
