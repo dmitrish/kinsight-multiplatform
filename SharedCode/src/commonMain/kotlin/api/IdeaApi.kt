@@ -84,6 +84,7 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
     }
 
     suspend fun fetchIdeas(): List<IdeaModel> {
+        println("fetchIdeas")
         val jsonArrayString = client.get<String> {
             url("$baseUrl/api/ideas")
         }

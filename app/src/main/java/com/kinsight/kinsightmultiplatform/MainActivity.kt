@@ -51,6 +51,7 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
         swiperefresh.setOnRefreshListener {
             loading.isVisible = true
             initViewModelListener()
+            viewModel.reloadIdeas()
         }
     }
 

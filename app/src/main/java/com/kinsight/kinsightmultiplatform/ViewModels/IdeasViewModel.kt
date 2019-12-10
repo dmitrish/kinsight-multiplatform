@@ -19,6 +19,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     companion object NotificationParams {
         const val RELOAD = "RELOAD"
         const val NEW_IDEA = "NEWIDEA"
+        const val UPDATE_IDEA = "UPDATEIDEA"
         const val PRICE_OBJECTIVE_ACHIEVED = "PRICEOBJECTIVE"
     }
 
@@ -40,6 +41,11 @@ class IdeasViewModel (application: Application, private val userName: String) : 
             delay(500)
            ideas.postValue( ideaRep.fetchIdeas().filter { it.isActive }.sortedByDescending { it.alpha })
         }
+    }
+
+    public fun reloadIdeas(){
+        Log.i("APP", "reloading ideas")
+        loadIdeas()
     }
 
     private fun loadIdeas(createdBy: String?, subsribeToLiveUpdates: Boolean) {
@@ -134,7 +140,7 @@ class IdeasViewModel (application: Application, private val userName: String) : 
 
                 val upperCasedMessage = it.toUpperCase()
 
-                if (upperCasedMessage == RELOAD) {
+                if (upperCasedMessage == RELOAD || upperCasedMessage.startsWith(UPDATE_IDEA)) {
                     loadIdeas()
                     /* do not pop up notification, only flash price color changes*/
                    // notifyOnPriceChanged()
