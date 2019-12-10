@@ -82,10 +82,11 @@ class ChartNativeView: UIView {
                 drawLine(context, 0.0, 450.0, width)
             }
             else {
-                drawSecurityHeader(context, 0.0, 6.0, width, 50.0, textAlignment: .left)
-                drawAlpha(context, 0.0, 6.0, width, 50.0, textAlignment: .right)
+                drawSecurityHeader(context, 0.0, -4.0, width, 50.0, isHorizontal: true, textAlignment: .left)
+                drawAlpha(context, 0.0, -2.0, width, 50.0, isHorizontal: true, textAlignment: .right)
             }
 
+            drawChartLegend(context, 0.0, height-graphHeight-20.0, width, 50.0, textAlignment: .left)
             drawGrid(context, width, height)
             drawAxis(context, width, height)
             drawLineGraph(context, width, height, isBenchmark: true)
@@ -93,14 +94,32 @@ class ChartNativeView: UIView {
         }
     }
     
-    func drawSecurityHeader(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, textAlignment: NSTextAlignment = .center) {
-        drawText(context, x, y, width, height, ideaModel?.securityTicker, .largeTitle, textAlignment: textAlignment)
-        drawText(context, x, y+52.0, width, height, ideaModel?.securityName, .body, textAlignment: textAlignment)
+    func drawChartLegend(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, textAlignment: NSTextAlignment = .center) {
+        let lineWidth: CGFloat = 16.0
+        drawLegendLine(context, x, y+11.0, lineWidth)
+        drawText(context, x+lineWidth+8.0, y, width, height, ideaModel?.securityName, .body, textAlignment: textAlignment)
     }
     
-    func drawAlpha(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, textAlignment: NSTextAlignment = .center) {
-        drawText(context, x, y, width, height, "Alpha", .body, textAlignment: textAlignment)
-        drawText(context, x, y+30.0, width, height, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle, textAlignment: textAlignment)
+    func drawSecurityHeader(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, isHorizontal: Bool = false, textAlignment: NSTextAlignment = .center) {
+        if isHorizontal {
+            drawText(context, x, y, width, height, ideaModel?.securityTicker, .title1, textAlignment: textAlignment)
+            drawText(context, x, y+38.0, width, height, ideaModel?.securityName, .body, textAlignment: textAlignment)
+        }
+        else {
+            drawText(context, x, y, width, height, ideaModel?.securityTicker, .largeTitle, textAlignment: textAlignment)
+            drawText(context, x, y+52.0, width, height, ideaModel?.securityName, .body, textAlignment: textAlignment)
+        }
+    }
+    
+    func drawAlpha(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, isHorizontal: Bool = false, textAlignment: NSTextAlignment = .center) {
+        if isHorizontal {
+            drawText(context, x, y, width, height, "Alpha", .body, textAlignment: textAlignment)
+            drawText(context, x, y+26.0, width, height, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .title1, textAlignment: textAlignment)
+        }
+        else {
+            drawText(context, x, y, width, height, "Alpha", .body, textAlignment: textAlignment)
+                    drawText(context, x, y+30.0, width, height, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle, textAlignment: textAlignment)
+        }
     }
     
     func drawText(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ text: String?, _ textStyle: UIFont.TextStyle, textAlignment: NSTextAlignment = .center) {
@@ -114,14 +133,21 @@ class ChartNativeView: UIView {
         let attributes = [NSAttributedString.Key.font: font,
                           NSAttributedString.Key.paragraphStyle: paragraphStyle,
                           NSAttributedString.Key.foregroundColor: textColor]
-        let string = NSAttributedString(string: text,
-                                        attributes: attributes)
+        let string = NSAttributedString(string: text, attributes: attributes)
         string.draw(in: CGRect(x: x, y: y, width: width, height: height))
     }
     
     func drawLine(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat) {
         context.setStrokeColor(textColor.cgColor)
         context.setLineWidth(1.0)
+        context.move(to: CGPoint(x: x, y: y))
+        context.addLine(to: CGPoint(x: x+width, y: y))
+        context.strokePath()
+    }
+    
+    func drawLegendLine(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat) {
+        context.setStrokeColor(tickerColor.cgColor)
+        context.setLineWidth(4.0)
         context.move(to: CGPoint(x: x, y: y))
         context.addLine(to: CGPoint(x: x+width, y: y))
         context.strokePath()
