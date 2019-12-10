@@ -135,9 +135,9 @@ class IdeaCreateActivity : FullScreenActivity(),
             when ((v as RadioButton).text.toString()){
                 Strings.direction_long ->  companyDirection = Strings.direction_long
                 Strings.direction_short -> companyDirection = Strings.direction_short
-                Strings.conviction_low -> companyConvictionId = 1
+                Strings.conviction_low -> companyConvictionId = 3
                 Strings.conviction_medium -> companyConvictionId = 2
-                Strings.conviction_high -> companyConvictionId = 3
+                Strings.conviction_high -> companyConvictionId = 1
                 Strings.time_horizon_one_month -> timeHorizon = Strings.time_horizon_one_month
                 Strings.time_horizon_three_months -> timeHorizon = Strings.time_horizon_three_months
                 Strings.time_horizon_one_week -> timeHorizon = Strings.time_horizon_one_week
