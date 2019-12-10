@@ -56,6 +56,8 @@ class GraphViewController: UIViewController {
         self.chartView = chartView
         view.addSubview(chartView)
         
+        chartView.startAnimationTimer()
+        
         chartView.translatesAutoresizingMaskIntoConstraints = false
         chartView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 43).isActive = true
@@ -64,6 +66,7 @@ class GraphViewController: UIViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        chartView?.startAnimationTimer()
         chartView?.setNeedsDisplay()
     }
 }
