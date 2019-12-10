@@ -65,18 +65,21 @@ struct HomeViewList: View {
                     //.font(.headline)
                     .fontWeight(Font.Weight.semibold)
                     .font(.system(size: 20))
-                    .padding(.trailing, 70)
+                    .padding(.leading, 20)
+                     Spacer()
                 
-                Button(action: {
-                    self.pushActive = true
-                }){
-                    Text("New Idea")
-                }
-//                AddButton(destination: NewIdeaView()).padding(.trailing, 30)
+
+                NavigationLink(destination:  NewIdeaView()) {
+                 Image("ideacreate")
+                    .resizable().aspectRatio(contentMode: .fit)
+                   .frame(width: 25, height: 30, alignment: .trailing)
+                   .padding(.trailing, 15)
+                 }
+
                 
             }
             
-            NavigationLink(destination:  NewIdeaView(), isActive: self.$pushActive) {
+            NavigationLink(destination:  IdeaViewDetail(ideaModel: ideaViewModel.seletedIdea, ideaRepo: IdeaRepository.init(baseUrl: Constants.baseUrl)), isActive: $ideaViewModel.showNewIdea) {
                Text("")
              }.hidden()
             
@@ -84,7 +87,7 @@ struct HomeViewList: View {
                 idea in
                 
                 
-                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)){
+                NavigationLink(destination: IdeaViewDetail(ideaModel: idea, ideaRepo: IdeaRepository.init(baseUrl: Constants.baseUrl))){
                     
                     HomeViewListRow(ideaModel: idea)
                 }.background(Color.clear)
@@ -93,9 +96,9 @@ struct HomeViewList: View {
             }.background(Color.clear)
                 .overlay(ProgressView()
                     .opacity(ideaViewModel.inProgress ? 1 : 0)
-                    .alert(isPresented: $ideaViewModel.isPriceComplete) {
-                        Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
-                    }
+//                    .alert(isPresented: $ideaViewModel.isPriceComplete) {
+//                        Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
+//                    }
                 
             )
         }.onAppear(){

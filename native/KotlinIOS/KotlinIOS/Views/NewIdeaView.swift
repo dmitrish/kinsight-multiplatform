@@ -143,6 +143,7 @@ struct NewIdeaView: View {
 
     var idearepo = IdeaRepository(baseUrl: Constants.htttpUrl)
     
+    var randomPrice =  Int32 ((42...80).randomElement() ?? 0)
 //     @Environment(\.presentationMode) var presentationMode
 
     @State private var selectedTicker: TickerModel = TickerModel.init(symbol: "", exchange: "", name: "", type: "", region: "", currency: "", isEnabled: true)
@@ -202,7 +203,7 @@ struct NewIdeaView: View {
 
                     HStack {
                         if(!self.selectedTicker.symbol.isEmpty) {
-                            Text("\(self.selectedTicker.symbol) | Latest Price: \(self.selectedTicker.currency)" )
+                            Text("\(self.selectedTicker.symbol) | Latest Price: \(randomPrice)" )
                                              .font(.headline).padding()
                                          Spacer()
                         }
@@ -265,13 +266,13 @@ struct NewIdeaView: View {
 
   let randomID = Int32((1...100000).randomElement() ?? 0)
 
-let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush", createdFrom: "iOS", previousCurrentPrice: 12.22, isActive: true)
+        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 2, currentPrice: Double(randomPrice), direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: "1 week", createdBy: "Piyush", createdFrom: "iOS", previousCurrentPrice: 12.22, isActive: true, isPOAchieved: false, isNewIdea: false)
         
 ////        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason:  "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS", createdFrom: <#String#>, previousCurrentPrice: <#Double#>, isActive: <#Bool#>)
         
         idearepo.saveIdea(ideaModel: ideaModel, success: {
             print("Ideas Saved")
-                      self.showingAlert = true
+//                      self.showingAlert = true
             
         })
 //        idearepo.saveIdea(ideaModel: ideaModel) {

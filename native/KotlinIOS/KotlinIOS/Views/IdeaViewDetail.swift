@@ -13,15 +13,16 @@ import SharedCode
 struct IdeaViewDetail: View {
     var ideaModel: IdeaModel
     var ideaModelLogicDecorator: IdeaModelLogicDecorator
-    
+    var ideaRepo: IdeaRepository
      @State var gradient = [Color(hex: Colors().colorGradientStart), Color(hex: Colors().colorGradientCenter), Color(hex: Colors().colorGradientEnd)]
      @State var startPoint = UnitPoint(x: 0, y: 0)
      @State var endPoint = UnitPoint(x: 0, y: 2)
     
     @State private var jiggle = false
     
-    init(ideaModel: IdeaModel){
+    init(ideaModel: IdeaModel , ideaRepo: IdeaRepository){
         self.ideaModel = ideaModel
+        self.ideaRepo = ideaRepo
         self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
@@ -99,9 +100,8 @@ struct IdeaViewDetail: View {
                         
                         Spacer()
                         
-                        Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28)
-                            .padding(.top, 15).padding(.bottom, 7);
-                      
+                        Image(ideaModel.direction == "Long" ? "bullmarket-2" : "bearmarket").resizable().frame(width: 28, height: 28).padding(.top, 15).padding(.bottom, 7);
+                        
                         NavigationLink(destination: GraphView(ideaModel: ideaModel)) {
                             VStack{
                                 IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
@@ -117,6 +117,21 @@ struct IdeaViewDetail: View {
                                 IdeaViewDetailPriceBlock(ideaModel: ideaModel).padding(.top, 20)
                         
                                 Spacer()
+                                
+                                if(ideaModel.isPOAchieved) {
+                                    Button(action: {
+                                                            self.closeIdea(model: self.ideaModel)
+                                                        }){
+                                                            Image("ideaclose")
+                                                                        .resizable().aspectRatio(contentMode: .fit)
+                                                                .accentColor(.green)
+                                                                       .frame(width: 36, height: 40, alignment: .trailing)
+                                                                  .padding()
+                                                                .overlay(Circle().stroke(Color.white,lineWidth:2).shadow(radius: 10)) .padding(.leading, 30)
+                                                                     
+                                                                     }
+                                }
+                    
                             }
                         }
            
@@ -127,12 +142,31 @@ struct IdeaViewDetail: View {
     }
 }
 
+
+extension IdeaViewDetail {
+    
+    func closeIdea(model: IdeaModel) {
+        
+        self.ideaRepo.closeIdea(ideaModel: model) {
+            print(" Idea Closed Successfully")
+        }
+    }
+}
+
+//
+//extension  IdeaModelLogicDecorator {
+//    var ideaRepo: IdeaRepository
+//
+
+//
+//}
+
 struct IdeaViewDetail_Preview: PreviewProvider {
 
 
 
     static var previews: some View {
-        IdeaViewDetail(ideaModel:  IdeaSample.sharedInstance.ideaModelSample  )
+        IdeaViewDetail(ideaModel:  IdeaSample.sharedInstance.ideaModelSample, ideaRepo: .init(baseUrl: Constants.htttpUrl)  )
     }
 
 
