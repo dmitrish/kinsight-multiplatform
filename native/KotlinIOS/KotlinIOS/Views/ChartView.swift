@@ -28,6 +28,9 @@ struct ChartView: UIViewRepresentable {
 class ChartNativeView: UIView {
     
     let graphHeight: CGFloat = 240.0
+    var chartFraction: CGFloat = 0.0
+    var animationTimer: Timer?
+
     let textColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
@@ -201,6 +204,7 @@ class ChartNativeView: UIView {
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         let lineColor = isBenchmark ? benchmarkColor : tickerColor
+        let totalCount = items.count
         
         context.setStrokeColor(lineColor.cgColor)
         context.setLineWidth(2.5)
@@ -208,13 +212,14 @@ class ChartNativeView: UIView {
         for item in items {
             let vx = CGFloat(item.x)
             let vy = CGFloat(item.y)
+            let fraction = CGFloat(index) / CGFloat(totalCount)
             x = (vx-minX) * scaleX
             y = (vy-minY) * scaleY + 70.0
             
             if index == 0 {
                 context.move(to: CGPoint(x: Double(x), y: Double(height-y)))
             }
-            else {
+            else if fraction <= chartFraction {
                 context.addLine(to: CGPoint(x: Double(x), y: Double(height-y)))
             }
             index += 1
@@ -276,5 +281,17 @@ class ChartNativeView: UIView {
         let scaleX: CGFloat = (CGFloat(width) / (maxX-minX))
         let scaleY: CGFloat = (CGFloat(height) / (maxY-minY))
         return (minX, minY, scaleX, 0.5*scaleY)
+    }
+    
+    func startAnimationTimer() {
+        animationTimer?.invalidate()
+        
+        chartFraction = 0.0
+        animationTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(stepAnimationTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func stepAnimationTimer() {
+        chartFraction = chartFraction + 0.05
+        setNeedsDisplay()
     }
 }
