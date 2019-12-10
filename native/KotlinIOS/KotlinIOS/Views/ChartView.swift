@@ -95,9 +95,22 @@ class ChartNativeView: UIView {
     }
     
     func drawChartLegend(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, textAlignment: NSTextAlignment = .center) {
-        let lineWidth: CGFloat = 16.0
-        drawLegendLine(context, x, y+11.0, lineWidth)
-        drawText(context, x+lineWidth+8.0, y, width, height, ideaModel?.securityName, .body, textAlignment: textAlignment)
+        let lineWidth: CGFloat = 20.0
+        let securityName = ideaModel?.securityTicker ?? ""
+        let vsText = "Vs"
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        let textWidth = securityName.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        let textWidth2 = vsText.size(withAttributes: [NSAttributedString.Key.font: font]).width
+
+        drawLegendLine(context, x, y+10.0, lineWidth, isBenchmark: false)
+        drawText(context, x+lineWidth+8.0, y, width, height, securityName, .body, textAlignment: textAlignment)
+        
+        let x2 = x+30.0+textWidth+16.0
+        drawText(context, x2, y, width, height, vsText, .body, textAlignment: textAlignment)
+        
+        let x3 = x2 + textWidth2 + 18.0
+        drawLegendLine(context, x3, y+10.0, lineWidth, isBenchmark: true)
+        drawText(context, x3+lineWidth+8.0, y, width, height, "S&P 500 Index", .body, textAlignment: textAlignment)
     }
     
     func drawSecurityHeader(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, isHorizontal: Bool = false, textAlignment: NSTextAlignment = .center) {
@@ -145,8 +158,9 @@ class ChartNativeView: UIView {
         context.strokePath()
     }
     
-    func drawLegendLine(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat) {
-        context.setStrokeColor(tickerColor.cgColor)
+    func drawLegendLine(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, isBenchmark: Bool) {
+        let lineColor = isBenchmark ? benchmarkColor : tickerColor
+        context.setStrokeColor(lineColor.cgColor)
         context.setLineWidth(4.0)
         context.move(to: CGPoint(x: x, y: y))
         context.addLine(to: CGPoint(x: x+width, y: y))
