@@ -62,6 +62,10 @@ class GraphViewController: UIViewController {
         chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -43).isActive = true
         chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        chartView?.setNeedsDisplay()
+    }
 }
 
 struct GraphView_Preview: PreviewProvider {
