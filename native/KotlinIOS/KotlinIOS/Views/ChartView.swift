@@ -76,14 +76,14 @@ class ChartNativeView: UIView {
             let height = bounds.height
                     
             if width < height {
-                drawSecurityHeader(context, width, height, 46.0)
-                drawLine(context, width, height, 180.0)
-                drawAlpha(context, width, height, 276.0)
-                drawLine(context, width, height, 450.0)
+                drawSecurityHeader(context, 0.0, 46.0, width, 50.0)
+                drawLine(context, 0.0, 180.0, width)
+                drawAlpha(context, 0.0, 276.0, width, 50.0)
+                drawLine(context, 0.0, 450.0, width)
             }
             else {
-                drawSecurityHeader(context, width, height, 6.0, textAlignment: .left)
-                drawAlpha(context, width, height, 6.0, textAlignment: .right)
+                drawSecurityHeader(context, 0.0, 6.0, width, 50.0, textAlignment: .left)
+                drawAlpha(context, 0.0, 6.0, width, 50.0, textAlignment: .right)
             }
 
             drawGrid(context, width, height)
@@ -93,17 +93,17 @@ class ChartNativeView: UIView {
         }
     }
     
-    func drawSecurityHeader(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, textAlignment: NSTextAlignment = .center) {
-        drawText(context, width, height, offset, ideaModel?.securityTicker, .largeTitle, textAlignment: textAlignment)
-        drawText(context, width, height, offset+52.0, ideaModel?.securityName, .body, textAlignment: textAlignment)
+    func drawSecurityHeader(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, textAlignment: NSTextAlignment = .center) {
+        drawText(context, x, y, width, height, ideaModel?.securityTicker, .largeTitle, textAlignment: textAlignment)
+        drawText(context, x, y+52.0, width, height, ideaModel?.securityName, .body, textAlignment: textAlignment)
     }
     
-    func drawAlpha(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, textAlignment: NSTextAlignment = .center) {
-        drawText(context, width, height, offset, "Alpha", .body, textAlignment: textAlignment)
-        drawText(context, width, height, offset+30.0, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle, textAlignment: textAlignment)
+    func drawAlpha(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, textAlignment: NSTextAlignment = .center) {
+        drawText(context, x, y, width, height, "Alpha", .body, textAlignment: textAlignment)
+        drawText(context, x, y+30.0, width, height, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .largeTitle, textAlignment: textAlignment)
     }
     
-    func drawText(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat, _ text: String?, _ textStyle: UIFont.TextStyle, textAlignment: NSTextAlignment = .center) {
+    func drawText(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ text: String?, _ textStyle: UIFont.TextStyle, textAlignment: NSTextAlignment = .center) {
         guard let text = text else {
             return
         }
@@ -116,21 +116,21 @@ class ChartNativeView: UIView {
                           NSAttributedString.Key.foregroundColor: textColor]
         let string = NSAttributedString(string: text,
                                         attributes: attributes)
-        string.draw(in: CGRect(x: 0.0, y: offset, width: width, height: 50.0))
+        string.draw(in: CGRect(x: x, y: y, width: width, height: height))
     }
     
-    func drawLine(_ context: CGContext, _ width: CGFloat, _ height: CGFloat, _ offset: CGFloat) {
+    func drawLine(_ context: CGContext, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat) {
         context.setStrokeColor(textColor.cgColor)
         context.setLineWidth(1.0)
-        context.move(to: CGPoint(x: 0, y: offset))
-        context.addLine(to: CGPoint(x: width, y: offset))
+        context.move(to: CGPoint(x: x, y: y))
+        context.addLine(to: CGPoint(x: x+width, y: y))
         context.strokePath()
     }
     
     func drawAxis(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
         context.setStrokeColor(axisColor.cgColor)
         context.setLineWidth(1.5)
-        context.move(to: CGPoint(x: 0, y: height))
+        context.move(to: CGPoint(x: 0.0, y: height))
         context.addLine(to: CGPoint(x: width, y: height))
         context.strokePath()
     }
