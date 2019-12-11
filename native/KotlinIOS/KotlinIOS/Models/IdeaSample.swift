@@ -40,7 +40,9 @@ class IdeaSample {
             createdBy: "Dmitri",
             createdFrom: "iPhone",
             previousCurrentPrice: 32.23,
-            isActive: true
+            isActive: true,
+            isPOAchieved: false,
+            isNewIdea: false
         )
 }
 

@@ -22,60 +22,52 @@ struct GraphView: View {
     var body: some View {
         ZStack {
             AnimatedBackground()
-            
-            Graph2DView(ideaModel)
-            .padding(.leading, 43)
-            .padding(.trailing, 43)
-            .padding(.bottom, 20)
+            GraphViewControllerWrapper(ideaModel)
         }
     }
 }
 
-struct Graph2DView: UIViewRepresentable {
-    
+struct GraphViewControllerWrapper: UIViewControllerRepresentable {
+
+    typealias UIViewControllerType = GraphViewController
+
     var ideaModel: IdeaModel?
     
     init(_ ideaModel: IdeaModel?) {
         self.ideaModel = ideaModel
     }
 
-    func makeUIView(context: Context) -> UIView {
-        return Graph2DNativeView(ideaModel)
+    func makeUIViewController(context: UIViewControllerRepresentableContext<GraphViewControllerWrapper>) -> GraphViewControllerWrapper.UIViewControllerType {
+        return GraphViewController(ideaModel)
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
+    func updateUIViewController(_ uiViewController: GraphViewControllerWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<GraphViewControllerWrapper>) {
     }
 }
 
-class Graph2DNativeView: UIView {
+class GraphViewController: UIViewController {
     
     var chartView: ChartNativeView?
 
-    convenience init(_ ideaModel: IdeaModel?) {
-        self.init(frame: CGRect.zero)
+    convenience init(_ ideaModel: IdeaModel?){
+        self.init()
+
         let chartView = ChartNativeView(ideaModel)
         self.chartView = chartView
-        self.addSubview(chartView)
+        view.addSubview(chartView)
+        
+        chartView.startAnimationTimer()
         
         chartView.translatesAutoresizingMaskIntoConstraints = false
-        chartView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        chartView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        chartView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chartView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        chartView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 43).isActive = true
+        chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -43).isActive = true
+        chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
     }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    private func setup() {
-        backgroundColor = .clear
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        chartView?.startAnimationTimer()
+        chartView?.setNeedsDisplay()
     }
 }
 
