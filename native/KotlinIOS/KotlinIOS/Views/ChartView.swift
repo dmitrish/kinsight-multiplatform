@@ -48,13 +48,6 @@ class ChartNativeView: UIView {
             self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
         }
         graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"), ideaModel: ideaModel!)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.setNeedsDisplay()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.setNeedsDisplay()
-        }
     }
 
     override init(frame: CGRect) {
@@ -81,15 +74,15 @@ class ChartNativeView: UIView {
             if width < height {
                 drawSecurityHeader(context, 0.0, 46.0, width, 50.0)
                 drawLine(context, 0.0, 180.0, width)
-                drawAlpha(context, 0.0, 276.0-20.0, width, 50.0)
-                drawLine(context, 0.0, 450.0-40.0, width)
+                drawAlpha(context, 0.0, 256.0, width, 50.0)
+                drawLine(context, 0.0, 410.0, width)
             }
             else {
                 drawSecurityHeader(context, 0.0, -4.0, width, 50.0, isHorizontal: true, textAlignment: .left)
                 drawAlpha(context, 0.0, -2.0, width, 50.0, isHorizontal: true, textAlignment: .right)
             }
 
-            drawChartLegend(context, 0.0, height-graphHeight-20.0, width, 50.0, textAlignment: .left)
+            drawChartLegend(context, 0.0, height-graphHeight-34.0, width, 50.0, textAlignment: .left)
             drawGrid(context, width, height)
             drawAxis(context, width, height)
             drawLineGraph(context, width, height, isBenchmark: true)
@@ -179,11 +172,10 @@ class ChartNativeView: UIView {
     }
     
     func drawGrid(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
-        let dy: CGFloat = graphHeight / 7.0
-        let minY: CGFloat = height-graphHeight
+        let dy: CGFloat = graphHeight / 6.0
         var y: CGFloat = height-dy
         
-        while y >= minY {
+        for _ in 1...6 {
             context.setStrokeColor(axisColor.cgColor)
             context.setLineWidth(0.25)
             context.move(to: CGPoint(x: 0, y: y))
@@ -214,7 +206,7 @@ class ChartNativeView: UIView {
             let vy = CGFloat(item.y)
             let fraction = CGFloat(index) / CGFloat(totalCount)
             x = (vx-minX) * scaleX
-            y = (vy-minY) * scaleY + 30.0
+            y = (vy-minY) * scaleY + (0.25*graphHeight)
             
             if index == 0 {
                 context.move(to: CGPoint(x: Double(x), y: Double(height-y)))
@@ -287,11 +279,14 @@ class ChartNativeView: UIView {
         animationTimer?.invalidate()
         
         chartFraction = 0.0
-        animationTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(stepAnimationTimer), userInfo: nil, repeats: true)
+        animationTimer = Timer.scheduledTimer(timeInterval: (1.0/60.0), target: self, selector: #selector(stepAnimationTimer), userInfo: nil, repeats: true)
     }
     
     @objc func stepAnimationTimer() {
-        chartFraction = chartFraction + 0.05
+        chartFraction = chartFraction + 0.015
         setNeedsDisplay()
+        if chartFraction >= 1.0 {
+            animationTimer?.invalidate()
+        }
     }
 }
