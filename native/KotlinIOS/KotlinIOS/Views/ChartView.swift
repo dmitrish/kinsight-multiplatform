@@ -27,7 +27,7 @@ struct ChartView: UIViewRepresentable {
 
 class ChartNativeView: UIView {
     
-    let graphHeight: CGFloat = 240.0
+    let graphHeight: CGFloat = 200.0
     var chartFraction: CGFloat = 0.0
     var animationTimer: Timer?
 
@@ -81,8 +81,8 @@ class ChartNativeView: UIView {
             if width < height {
                 drawSecurityHeader(context, 0.0, 46.0, width, 50.0)
                 drawLine(context, 0.0, 180.0, width)
-                drawAlpha(context, 0.0, 276.0, width, 50.0)
-                drawLine(context, 0.0, 450.0, width)
+                drawAlpha(context, 0.0, 276.0-20.0, width, 50.0)
+                drawLine(context, 0.0, 450.0-40.0, width)
             }
             else {
                 drawSecurityHeader(context, 0.0, -4.0, width, 50.0, isHorizontal: true, textAlignment: .left)
@@ -179,7 +179,7 @@ class ChartNativeView: UIView {
     }
     
     func drawGrid(_ context: CGContext, _ width: CGFloat, _ height: CGFloat) {
-        let dy: CGFloat = 36.0
+        let dy: CGFloat = graphHeight / 7.0
         let minY: CGFloat = height-graphHeight
         var y: CGFloat = height-dy
         
@@ -214,7 +214,7 @@ class ChartNativeView: UIView {
             let vy = CGFloat(item.y)
             let fraction = CGFloat(index) / CGFloat(totalCount)
             x = (vx-minX) * scaleX
-            y = (vy-minY) * scaleY + 70.0
+            y = (vy-minY) * scaleY + 30.0
             
             if index == 0 {
                 context.move(to: CGPoint(x: Double(x), y: Double(height-y)))
