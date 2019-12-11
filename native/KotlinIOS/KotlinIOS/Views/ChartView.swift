@@ -350,6 +350,8 @@ class ChartViewController: UIViewController {
         if let node = sceneNode {
             node.scale = SCNVector3(x: 0.001, y: 0.001, z: 0.001)
             scene.rootNode.addChildNode(node)
+            addSecurityHeader(node)
+            addAlpha(node)
             addGrid(node, gridColor)
             addAxis(node, axisColor)
         }
@@ -358,8 +360,8 @@ class ChartViewController: UIViewController {
         let camera = SCNCamera()
         camera.automaticallyAdjustsZRange = true
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3(x: Float(-0.15), y: Float(0.4), z: Float(0.5))
-        cameraNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-30), y: GLKMathDegreesToRadians(-15), z: 0.0)
+        cameraNode.position = SCNVector3(x: Float(-0.22), y: Float(0.15), z: Float(0.65))
+        cameraNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(5), y: GLKMathDegreesToRadians(-18), z: 0.0)
         scene.rootNode.addChildNode(cameraNode)
 
         sceneView.translatesAutoresizingMaskIntoConstraints = false
@@ -376,9 +378,39 @@ class ChartViewController: UIViewController {
         startChartAnimationTimer()
     }
     
+    func addSecurityHeader(_ node: SCNNode) {
+        let y: CGFloat = 370.0
+        addText(node, 0.0, y+20.0, ideaModel?.securityTicker, .largeTitle)
+        addText(node, 0.0, y, ideaModel?.securityName, .body)
+    }
+    
+    func addAlpha(_ node: SCNNode) {
+        let y: CGFloat = 286.0
+        addText(node, 0.0, y+34.0, "Alpha", .body)
+        addText(node, 0.0, y, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .title1)
+    }
+    
+    func addText(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ string: String?, _ textStyle: UIFont.TextStyle) {
+        guard let string = string else {
+            return
+        }
+
+        let font = UIFont.preferredFont(forTextStyle: textStyle)
+        let textWidth = string.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        
+        let text = SCNText(string: string, extrusionDepth: 0)
+        text.font = font
+        text.firstMaterial?.diffuse.contents = UIColor.white
+        text.flatness = 0.01
+        
+        let textNode = SCNNode(geometry: text)
+        textNode.position = SCNVector3Make(Float(x-0.5*textWidth), Float(y), 0.0)
+        node.addChildNode(textNode)
+    }
+    
     func addAxis(_ node: SCNNode, _ color: UIColor) {
         let width: CGFloat = view.bounds.width
-        addLine(node, 0.0, 0.0, width, 2.0, 2.0, UIColor.gray)
+        addLine(node, 0.0, 0.0, width, 3.0, 3.0, UIColor.gray)
     }
     
     func addGrid(_ node: SCNNode, _ color: UIColor) {
@@ -387,7 +419,7 @@ class ChartViewController: UIViewController {
         var y: CGFloat = dy
         
         for _ in 1...6 {
-            addLine(node, 0.0, y, width, 1.0, 1.0, UIColor.gray)
+            addLine(node, 0.0, y, width, 1.5, 1.5, UIColor.gray)
             y += dy
         }
     }
