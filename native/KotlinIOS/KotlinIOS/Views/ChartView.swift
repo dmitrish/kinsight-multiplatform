@@ -312,15 +312,23 @@ struct ChartViewControllerWrapper: UIViewControllerRepresentable {
 
 class ChartViewController: UIViewController {
     
+    let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+    let tickerColor = UIColor(red: 216.0/255.0, green: 154.0/255.0, blue: 115.0/255.0, alpha: 1.0)
+    
     let graphHeight: CGFloat = 200.0
     var chartFraction: CGFloat = 0.0
-    var animationTimer: Timer?
+    var chartAnimationTimer: Timer?
 
     var ideaModel: IdeaModel?
     var ideaModelLogicDecorator: IdeaModelLogicDecorator?
     var graphViewModel: GraphViewModel?
     
     var sceneView = SCNView()
+    var sceneNode: SCNNode?
+    var benchmarkNode: SCNNode?
+    var tickerNode: SCNNode?
 
     convenience init(_ ideaModel: IdeaModel?) {
         self.init()
@@ -337,23 +345,15 @@ class ChartViewController: UIViewController {
         view.addSubview(sceneView)
 
         let scene = SCNScene()
-        let node = SCNNode()
-        node.scale = SCNVector3(x: 0.001, y: 0.001, z: 0.001)
-        scene.rootNode.addChildNode(node)
-        
-        let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-        let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
-        let tickerColor = UIColor(red: 216.0/255.0, green: 154.0/255.0, blue: 115.0/255.0, alpha: 1.0)
-        
-        addGrid(node, gridColor)
-        addAxis(node, axisColor)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.addLineGraph(node, isBenchmark: true, benchmarkColor)
-            self.addLineGraph(node, isBenchmark: false, tickerColor)
+        sceneNode = SCNNode()
+
+        if let node = sceneNode {
+            node.scale = SCNVector3(x: 0.001, y: 0.001, z: 0.001)
+            scene.rootNode.addChildNode(node)
+            addGrid(node, gridColor)
+            addAxis(node, axisColor)
         }
-        
+
         let cameraNode = SCNNode()
         let camera = SCNCamera()
         camera.automaticallyAdjustsZRange = true
@@ -372,6 +372,8 @@ class ChartViewController: UIViewController {
         sceneView.allowsCameraControl = true
         sceneView.backgroundColor = UIColor.clear
         sceneView.autoenablesDefaultLighting = true
+        
+        startChartAnimationTimer()
     }
     
     func addAxis(_ node: SCNNode, _ color: UIColor) {
@@ -401,7 +403,7 @@ class ChartViewController: UIViewController {
         node.addChildNode(planeNode)
     }
     
-    func addLineGraph(_ node: SCNNode, isBenchmark: Bool, _ color: UIColor) {
+    func addLineGraph(_ node: SCNNode, isBenchmark: Bool, _ color: UIColor) -> SCNNode {
         let width: CGFloat = view.bounds.width
         let graphPath = UIBezierPath()
         var index = 0
@@ -411,8 +413,9 @@ class ChartViewController: UIViewController {
         let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
         let tickerItems = graphViewModel?.graphModel?.ticker ?? []
         let (minX, minY, scaleX, scaleY) = ChartNativeView.getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
-        let items = isBenchmark ? benchmarkItems : tickerItems
-        
+        let graphItems = isBenchmark ? benchmarkItems : tickerItems
+        let items = getItems(graphItems)
+
         for item in items {
             let vx = CGFloat(item.x)
             let vy = CGFloat(item.y)
@@ -447,6 +450,21 @@ class ChartViewController: UIViewController {
         let shapeNode = SCNNode(geometry: shape)
         shapeNode.position = SCNVector3(x: Float(-0.5*width), y: 0.0, z: 0.0);
         node.addChildNode(shapeNode)
+        return shapeNode
+    }
+    
+    func getItems(_ items: [TickModel]) -> [TickModel] {
+        var list = [TickModel]()
+        var index = 0
+        let maxIndex = Int(ceil(chartFraction * CGFloat(items.count)))
+        
+        for item in items {
+            if index <= maxIndex {
+                list.append(item)
+            }
+            index += 1
+        }
+        return list
     }
     
     override var shouldAutorotate: Bool {
@@ -462,6 +480,31 @@ class ChartViewController: UIViewController {
             return .allButUpsideDown
         } else {
             return .all
+        }
+    }
+    
+    func refreshChart() {
+        if let node = sceneNode {
+            benchmarkNode?.removeFromParentNode()
+            tickerNode?.removeFromParentNode()
+            
+            benchmarkNode = addLineGraph(node, isBenchmark: true, benchmarkColor)
+            tickerNode = addLineGraph(node, isBenchmark: false, tickerColor)
+        }
+    }
+
+    func startChartAnimationTimer() {
+        chartAnimationTimer?.invalidate()
+        
+        chartFraction = 0.0
+        chartAnimationTimer = Timer.scheduledTimer(timeInterval: (1.0/60.0), target: self, selector: #selector(stepChartAnimationTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc func stepChartAnimationTimer() {
+        chartFraction = chartFraction + 0.015
+        refreshChart()
+        if chartFraction >= 1.0 {
+            chartAnimationTimer?.invalidate()
         }
     }
 }
