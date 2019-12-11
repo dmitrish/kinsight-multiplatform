@@ -169,7 +169,7 @@ fun loadResourceText(path: String): String {
 
 fun loadEmbeddedJsonIdeas(){
     try{
-        val fileIdeasText = loadResourceText("/ideas2.json")
+        val fileIdeasText = loadResourceText("/ideas3.json")
        val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
         ideas.clear()
         ideas.addAll(fileIdeas)
@@ -327,7 +327,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         }
 
         get ("/api/1"){
-            val json = File("WEB-INF/ideas2.json").readText()
+            val json = File("WEB-INF/ideas3.json").readText()
                 call.respondText(json,  ContentType.Application.Json)
         }
 
