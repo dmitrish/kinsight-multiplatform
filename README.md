@@ -46,7 +46,7 @@ As we cannot control the market (alas), some market data manipulation is in orde
 
 # Idea Graph:
 
-![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/ideaGraphIhone.png)
+![idea graph](https://github.com/dmitrish/kinsight-multiplatform/blob/master/idea-graph-iphone.png)
 
 # Idea Alert (Android):
 

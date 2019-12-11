@@ -22,39 +22,52 @@ struct GraphView: View {
     var body: some View {
         ZStack {
             AnimatedBackground()
-            
-            VStack {
-                IdeaViewDetailSecurityHeader(ideaModel: ideaModel)
-                .padding(.top, 20)
-                
-                Rectangle()
-                .frame(height: 1.0, alignment: .bottom)
-                .foregroundColor(Color.white)
-                .padding(.leading, 43)
-                .padding(.trailing, 43)
-                .padding(.bottom, 50)
-
-                Text("Alpha").foregroundColor(.white)
-                    .padding(.top, 40)
-                    .padding(.bottom, 10)
-                Text(ideaModelLogicDecorator.getDisplayValueForAlpha())
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .frame(width: 300)
-                    .padding(.bottom, 60)
-                
-                Rectangle()
-                .frame(height: 1.0, alignment: .bottom)
-                .foregroundColor(Color.white)
-                .padding(.leading, 43)
-                .padding(.trailing, 43)
-                .padding(.bottom, 40)
-
-                ChartView(ideaModel)
-                    .foregroundColor(.gray)
-                    .frame(width: 320.0, height: 240.0)
-            }
+            GraphViewControllerWrapper(ideaModel)
         }
+    }
+}
+
+struct GraphViewControllerWrapper: UIViewControllerRepresentable {
+
+    typealias UIViewControllerType = GraphViewController
+
+    var ideaModel: IdeaModel?
+    
+    init(_ ideaModel: IdeaModel?) {
+        self.ideaModel = ideaModel
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<GraphViewControllerWrapper>) -> GraphViewControllerWrapper.UIViewControllerType {
+        return GraphViewController(ideaModel)
+    }
+
+    func updateUIViewController(_ uiViewController: GraphViewControllerWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<GraphViewControllerWrapper>) {
+    }
+}
+
+class GraphViewController: UIViewController {
+    
+    var chartView: ChartNativeView?
+
+    convenience init(_ ideaModel: IdeaModel?){
+        self.init()
+
+        let chartView = ChartNativeView(ideaModel)
+        self.chartView = chartView
+        view.addSubview(chartView)
+        
+        chartView.startAnimationTimer()
+        
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        chartView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 43).isActive = true
+        chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -43).isActive = true
+        chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        chartView?.startAnimationTimer()
+        chartView?.setNeedsDisplay()
     }
 }
 

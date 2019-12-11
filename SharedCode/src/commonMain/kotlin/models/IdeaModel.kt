@@ -54,7 +54,11 @@ import kotlinx.serialization.*
     @SerialName("previousCurrentPrice")
     var previousCurrentPrice: Double,
     @SerialName ("isActive")
-    var isActive: Boolean
+    var isActive: Boolean,
+    @Transient
+    var isPOAchieved: Boolean = false,
+    @Transient
+    var isNewIdea: Boolean = false
 
 
 ): Parcelable
