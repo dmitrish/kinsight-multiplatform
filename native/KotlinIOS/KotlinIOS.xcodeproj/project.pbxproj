@@ -749,8 +749,9 @@
 			baseConfigurationReference = E0C8F6AD955A6E60063470C4 /* Pods-KotlinIOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GD4G9TGE9T;
+				DEVELOPMENT_TEAM = DN25KPRY2Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../../SharedCode/build/xcode-frameworks",
 					"$(inherited)",
@@ -762,8 +763,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.piyush.kinsight.alphaca;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -774,8 +776,9 @@
 			baseConfigurationReference = CE297BF4C6ACDAE1F331FDFA /* Pods-KotlinIOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GD4G9TGE9T;
+				DEVELOPMENT_TEAM = DN25KPRY2Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)/../../SharedCode/build/xcode-frameworks",
 					"$(inherited)",
@@ -786,8 +789,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = com.piyush.kinsight.alphaca;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

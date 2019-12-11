@@ -98,7 +98,9 @@ struct PickerView: View {
                 Text("Short").tag(1).foregroundColor(.white)
                     .font(.headline)
             }.pickerStyle(SegmentedPickerStyle())
-                .padding()
+                .overlay( RoundedRectangle(cornerRadius: 12)
+                                                                                                                .stroke(Color.white, lineWidth: 2)
+            ).padding()
             
             
             HStack{
@@ -113,6 +115,9 @@ struct PickerView: View {
                 Text("Medium").tag(1).foregroundColor(.white)
                 Text("Low").tag(2).foregroundColor(.white)
             }.pickerStyle(SegmentedPickerStyle())
+                .overlay( RoundedRectangle(cornerRadius: 12)
+                                                                                                                    .stroke(Color.white, lineWidth: 2)
+                )
                 .padding()
             HStack {
                 Text("Duration: ")
@@ -126,6 +131,9 @@ struct PickerView: View {
                 Text("1 month").tag(1).foregroundColor(.white)
                 Text("3 months").tag(2).foregroundColor(.white)
             }.pickerStyle(SegmentedPickerStyle())
+                .overlay( RoundedRectangle(cornerRadius: 12)
+                                                                                                                    .stroke(Color.white, lineWidth: 2)
+                )
                 .padding()
         }
     }
@@ -135,7 +143,8 @@ struct NewIdeaView: View {
 
     var idearepo = IdeaRepository(baseUrl: Constants.htttpUrl)
     
-     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    var randomPrice =  Int32 ((42...80).randomElement() ?? 0)
+//     @Environment(\.presentationMode) var presentationMode
 
     @State private var selectedTicker: TickerModel = TickerModel.init(symbol: "", exchange: "", name: "", type: "", region: "", currency: "", isEnabled: true)
     
@@ -194,7 +203,7 @@ struct NewIdeaView: View {
 
                     HStack {
                         if(!self.selectedTicker.symbol.isEmpty) {
-                            Text("\(self.selectedTicker.symbol) | Latest Price: \(self.selectedTicker.currency)" )
+                            Text("\(self.selectedTicker.symbol) | Latest Price: \(randomPrice)" )
                                              .font(.headline).padding()
                                          Spacer()
                         }
@@ -216,10 +225,7 @@ struct NewIdeaView: View {
                                             
                                              
                         }
-                        .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                                                                                 .stroke(Color.blue, lineWidth: 4)
-                                                                                         )
+                       
                
 //                        Text("Hacking with Swift")
 //                        .padding()
@@ -250,7 +256,7 @@ struct NewIdeaView: View {
     }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("Success"), message: Text("Idea Saved"), dismissButton: .default(Text("Ok"), action: {
-                     self.presentationMode.wrappedValue.dismiss()
+//                     self.presentationMode.wrappedValue.dismiss()
             }))
                        
         }
@@ -260,17 +266,17 @@ struct NewIdeaView: View {
 
   let randomID = Int32((1...100000).randomElement() ?? 0)
 
-let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush", createdFrom: "iOS", previousCurrentPrice: 12.22, isActive: true)
+        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 2, currentPrice: Double(randomPrice), direction: direction, directionId: 1, entryPrice: 24.59, reason: "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: "1 week", createdBy: "Piyush", createdFrom: "iOS", previousCurrentPrice: 12.22, isActive: true, isPOAchieved: false, isNewIdea: false)
         
 ////        let ideaModel: IdeaModel = IdeaModel.init(id: randomID, securityName: selectedTicker.name, securityTicker: selectedTicker.symbol, alpha: 0.0, benchMarkTicker: "SPX", benchMarkCurrentPrice: 2856.66, benchMarkPerformance: 0.392, convictionId: 1, currentPrice: 24.59, direction: direction, directionId: 1, entryPrice: 24.59, reason:  "Target Price", stockCurrency: "USD", stopLoss: Int32(stopLoss) ?? 0, stopLossValue: 313.4823, targetPrice: Double(targetPrice) ?? 0.0, targetPricePercentage: 0.0, timeHorizon: duration, createdBy: "Piyush - from iOS", createdFrom: <#String#>, previousCurrentPrice: <#Double#>, isActive: <#Bool#>)
         
         idearepo.saveIdea(ideaModel: ideaModel, success: {
             print("Ideas Saved")
-                      self.showingAlert = true
+//                      self.showingAlert = true
             
         })
 //        idearepo.saveIdea(ideaModel: ideaModel) {
-//          
+//
 //        }
 
     }

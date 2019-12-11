@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kinsight.kinsightmultiplatform.BuildConfig
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.models.NotificationMessage
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
 import kotlinx.coroutines.*
@@ -135,13 +136,15 @@ class IdeasViewModel (application: Application, private val userName: String) : 
 
                 if (upperCasedMessage == RELOAD) {
                     loadIdeas()
-                    notifyOnPriceChanged()
+                    /* do not pop up notification, only flash price color changes*/
+                   // notifyOnPriceChanged()
                 }
                 else if (upperCasedMessage.startsWith(NEW_IDEA)){
                     loadIdeas()
                     notifyOnNewIdeaCreated(it)
                 }
                 else if (upperCasedMessage.startsWith(PRICE_OBJECTIVE_ACHIEVED)){
+                    loadIdeas()
                     notifyOnNewPriceObjectiveAchieved(it)
                 }
                 isSubscribedToLiveUpdates = true
@@ -158,9 +161,9 @@ class IdeasViewModel (application: Application, private val userName: String) : 
     fun nextId() = ideas.value!!.maxBy { it.id }!!.id
     //endregion
 }
-
+/*
 data class NotificationMessage(val messageHeader: String, val message: String,
-                               val by: String, val from: String, val ideaId: Int)
+                               val by: String, val from: String, val ideaId: Int)*/
 
 
 

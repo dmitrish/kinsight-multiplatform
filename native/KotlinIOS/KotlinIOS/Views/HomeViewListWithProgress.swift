@@ -56,7 +56,7 @@ struct HomeViewListWithProgress: View {
             }
             List(ideaViewModel.ideasSortedByAlpha){
                 idea in
-                NavigationLink(destination: IdeaViewDetail(ideaModel: idea)) {
+                NavigationLink(destination: IdeaViewDetail(ideaModel: idea, ideaRepo: IdeaRepository(baseUrl: Constants.htttpUrl))) {
                     
                     HomeViewListRow(ideaModel: idea)
                 }.background(Color.clear)
