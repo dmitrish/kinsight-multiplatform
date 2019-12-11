@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SharedCode
+import SceneKit
 
 struct ChartView: UIViewRepresentable {
     
@@ -189,7 +190,7 @@ class ChartNativeView: UIView {
 
         let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
         let tickerItems = graphViewModel?.graphModel?.ticker ?? []
-        let (minX, minY, scaleX, scaleY) = getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
+        let (minX, minY, scaleX, scaleY) = ChartNativeView.getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
         let items = isBenchmark ? benchmarkItems : tickerItems
 
         var index = 0
@@ -207,7 +208,7 @@ class ChartNativeView: UIView {
             let fraction = CGFloat(index) / CGFloat(totalCount)
             x = (vx-minX) * scaleX
             y = (vy-minY) * scaleY + (0.25*graphHeight)
-            
+
             if index == 0 {
                 context.move(to: CGPoint(x: Double(x), y: Double(height-y)))
             }
@@ -216,11 +217,11 @@ class ChartNativeView: UIView {
             }
             index += 1
         }
-        
+
         context.strokePath()
     }
     
-    func getScaleFactor(_ benchmarkItems: [TickModel], _ tickerItems: [TickModel], _ width: CGFloat, _ height: CGFloat) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+    static func getScaleFactor(_ benchmarkItems: [TickModel], _ tickerItems: [TickModel], _ width: CGFloat, _ height: CGFloat) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
         let items = benchmarkItems + tickerItems
         var minX: CGFloat = 0.0
         var isMinXSet = false
@@ -290,3 +291,188 @@ class ChartNativeView: UIView {
         }
     }
 }
+
+struct ChartViewControllerWrapper: UIViewControllerRepresentable {
+
+    typealias UIViewControllerType = ChartViewController
+
+    var ideaModel: IdeaModel?
+    
+    init(_ ideaModel: IdeaModel?) {
+        self.ideaModel = ideaModel
+    }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ChartViewControllerWrapper>) -> ChartViewControllerWrapper.UIViewControllerType {
+        return ChartViewController(ideaModel)
+    }
+
+    func updateUIViewController(_ uiViewController: ChartViewControllerWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<ChartViewControllerWrapper>) {
+    }
+}
+
+class ChartViewController: UIViewController {
+    
+    let graphHeight: CGFloat = 200.0
+    var chartFraction: CGFloat = 0.0
+    var animationTimer: Timer?
+
+    var ideaModel: IdeaModel?
+    var ideaModelLogicDecorator: IdeaModelLogicDecorator?
+    var graphViewModel: GraphViewModel?
+    
+    var sceneView = SCNView()
+
+    convenience init(_ ideaModel: IdeaModel?) {
+        self.init()
+        self.ideaModel = ideaModel
+        if let ideaModel = ideaModel {
+            self.ideaModelLogicDecorator = IdeaModelLogicDecorator(ideaModel: ideaModel)
+        }
+        graphViewModel = GraphViewModel(repository: IdeaRepository(baseUrl: "http://35.239.179.43:8081"), ideaModel: ideaModel!)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(sceneView)
+
+        let scene = SCNScene()
+        let node = SCNNode()
+        node.scale = SCNVector3(x: 0.001, y: 0.001, z: 0.001)
+        scene.rootNode.addChildNode(node)
+        
+        let axisColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        let gridColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        let benchmarkColor = UIColor(red: 88.0/255.0, green: 154.0/255.0, blue: 234.0/255.0, alpha: 1.0)
+        let tickerColor = UIColor(red: 216.0/255.0, green: 154.0/255.0, blue: 115.0/255.0, alpha: 1.0)
+        
+        addGrid(node, gridColor)
+        addAxis(node, axisColor)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.addLineGraph(node, self.getGraphData(isBenchmark: true), 3.0, benchmarkColor)
+            self.addLineGraph(node, self.getGraphData(isBenchmark: false), 3.0, tickerColor)
+        }
+        
+        let cameraNode = SCNNode()
+        let camera = SCNCamera()
+        camera.automaticallyAdjustsZRange = true
+        cameraNode.camera = camera
+        cameraNode.position = SCNVector3(x: Float(-0.15), y: Float(0.4), z: Float(0.5))
+        cameraNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-30), y: GLKMathDegreesToRadians(-15), z: 0.0)
+        scene.rootNode.addChildNode(cameraNode)
+
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        sceneView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        sceneView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        sceneView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        sceneView.scene = scene
+        sceneView.allowsCameraControl = true
+        sceneView.backgroundColor = UIColor.clear
+        sceneView.autoenablesDefaultLighting = true
+    }
+    
+    func addAxis(_ node: SCNNode, _ color: UIColor) {
+        let width: CGFloat = view.bounds.width
+        addLine(node, 0.0, 0.0, width, 2.0, 2.0, UIColor.gray)
+    }
+    
+    func addGrid(_ node: SCNNode, _ color: UIColor) {
+        let width: CGFloat = view.bounds.width
+        let dy: CGFloat = 36.0
+        var y: CGFloat = dy
+        
+        for _ in 1...6 {
+            addLine(node, 0.0, y, width, 1.0, 1.0, UIColor.gray)
+            y += dy
+        }
+    }
+    
+    func addLine(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ length: CGFloat, _ color: UIColor) {
+        let shape = SCNBox(width: width, height: height, length: length, chamferRadius: 0.0)
+        shape.firstMaterial?.lightingModel = .physicallyBased
+        shape.firstMaterial?.diffuse.contents = color
+        shape.firstMaterial?.metalness.contents = 0.8
+        shape.firstMaterial?.roughness.contents = 0.2
+        let planeNode = SCNNode(geometry: shape)
+        planeNode.position = SCNVector3Make(Float(x), Float(y), 0.0)
+        node.addChildNode(planeNode)
+    }
+    
+    func addLineGraph(_ node: SCNNode, _ dataList: [CGFloat], _ extrusionDepth: CGFloat, _ color: UIColor) {
+        let width: CGFloat = view.bounds.width
+        let graphPath = UIBezierPath()
+        var x: CGFloat = 0.0
+        let dx: CGFloat = width/CGFloat(dataList.count)
+        var index = 0
+        var y: CGFloat = 0.0
+        let lineWidth: CGFloat = 5.0
+        
+        for value in dataList {
+            y = CGFloat(value)
+            
+            if index == 0 {
+                graphPath.move(to: CGPoint(x: x, y: y))
+            }
+            else {
+                graphPath.addLine(to: CGPoint(x: x, y: y))
+            }
+            
+            x += dx
+            index += 1
+        }
+
+        for value in dataList.reversed() {
+            x -= dx
+            y = CGFloat(value)
+            graphPath.addLine(to: CGPoint(x: x, y: y-lineWidth))
+        }
+        
+        graphPath.close()
+
+        let shape = SCNShape(path: graphPath, extrusionDepth: 1.0)
+        shape.firstMaterial?.lightingModel = .physicallyBased
+        shape.firstMaterial?.diffuse.contents = color
+        shape.firstMaterial?.metalness.contents = 0.8
+        shape.firstMaterial?.roughness.contents = 0.2
+        let shapeNode = SCNNode(geometry: shape)
+        shapeNode.position = SCNVector3(x: Float(-0.5*width), y: 0.0, z: 0.0);
+        node.addChildNode(shapeNode)
+    }
+    
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
+        } else {
+            return .all
+        }
+    }
+    
+    func getGraphData(isBenchmark: Bool) -> [CGFloat] {
+        let width: CGFloat = view.bounds.width
+        let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
+        let tickerItems = graphViewModel?.graphModel?.ticker ?? []
+        let (_, minY, _, scaleY) = ChartNativeView.getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
+        let items = isBenchmark ? benchmarkItems : tickerItems
+        var y: CGFloat = 0.0
+        var dataList: [CGFloat] = []
+        
+        for item in items {
+            let vy = CGFloat(item.y)
+            y = (vy-minY) * scaleY + (0.25*graphHeight)
+            dataList.append(y)
+        }
+        return dataList
+    }
+}
+
