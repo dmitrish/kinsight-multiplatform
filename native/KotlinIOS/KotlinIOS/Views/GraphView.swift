@@ -22,7 +22,14 @@ struct GraphView: View {
     var body: some View {
         ZStack {
             AnimatedBackground()
-            GraphViewControllerWrapper(ideaModel)
+            NavigationLink(destination:
+                ZStack {
+                    AnimatedBackground()
+                    ChartViewControllerWrapper(ideaModel)
+                }
+            ) {
+                GraphViewControllerWrapper(ideaModel)
+            }
         }
     }
 }
