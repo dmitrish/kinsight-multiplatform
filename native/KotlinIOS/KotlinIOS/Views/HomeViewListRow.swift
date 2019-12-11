@@ -78,7 +78,7 @@ struct HomeViewListRow: View {
                                             .fontWeight(.regular)
                                             .foregroundColor(Color.init(hex: white))
                     .padding(.top, -28)
-                                        Text( String(format: "%.2f", ideaModel.alpha))
+                                        Text( String(format: "%.2f", ideaModel.benchMarkPerformance))
                                             .fontWeight(.regular)
                                             .foregroundColor(Color.init(hex: white))
                     .padding(.top, -25)
