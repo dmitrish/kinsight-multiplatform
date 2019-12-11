@@ -350,8 +350,8 @@ class ChartViewController: UIViewController {
         addAxis(node, axisColor)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.addLineGraph(node, self.getGraphData(isBenchmark: true), 3.0, benchmarkColor)
-            self.addLineGraph(node, self.getGraphData(isBenchmark: false), 3.0, tickerColor)
+            self.addLineGraph(node, isBenchmark: true, benchmarkColor)
+            self.addLineGraph(node, isBenchmark: false, tickerColor)
         }
         
         let cameraNode = SCNNode()
@@ -401,17 +401,23 @@ class ChartViewController: UIViewController {
         node.addChildNode(planeNode)
     }
     
-    func addLineGraph(_ node: SCNNode, _ dataList: [CGFloat], _ extrusionDepth: CGFloat, _ color: UIColor) {
+    func addLineGraph(_ node: SCNNode, isBenchmark: Bool, _ color: UIColor) {
         let width: CGFloat = view.bounds.width
         let graphPath = UIBezierPath()
-        var x: CGFloat = 0.0
-        let dx: CGFloat = width/CGFloat(dataList.count)
         var index = 0
+        var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         let lineWidth: CGFloat = 5.0
+        let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
+        let tickerItems = graphViewModel?.graphModel?.ticker ?? []
+        let (minX, minY, scaleX, scaleY) = ChartNativeView.getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
+        let items = isBenchmark ? benchmarkItems : tickerItems
         
-        for value in dataList {
-            y = CGFloat(value)
+        for item in items {
+            let vx = CGFloat(item.x)
+            let vy = CGFloat(item.y)
+            x = (vx-minX) * scaleX
+            y = (vy-minY) * scaleY + (0.25*graphHeight)
             
             if index == 0 {
                 graphPath.move(to: CGPoint(x: x, y: y))
@@ -419,14 +425,15 @@ class ChartViewController: UIViewController {
             else {
                 graphPath.addLine(to: CGPoint(x: x, y: y))
             }
-            
-            x += dx
             index += 1
         }
 
-        for value in dataList.reversed() {
-            x -= dx
-            y = CGFloat(value)
+        for item in items.reversed() {
+            let vx = CGFloat(item.x)
+            let vy = CGFloat(item.y)
+            x = (vx-minX) * scaleX
+            y = (vy-minY) * scaleY + (0.25*graphHeight)
+            
             graphPath.addLine(to: CGPoint(x: x, y: y-lineWidth))
         }
         
@@ -456,23 +463,6 @@ class ChartViewController: UIViewController {
         } else {
             return .all
         }
-    }
-    
-    func getGraphData(isBenchmark: Bool) -> [CGFloat] {
-        let width: CGFloat = view.bounds.width
-        let benchmarkItems = graphViewModel?.graphModel?.benchmark ?? []
-        let tickerItems = graphViewModel?.graphModel?.ticker ?? []
-        let (_, minY, _, scaleY) = ChartNativeView.getScaleFactor(benchmarkItems, tickerItems, width, graphHeight)
-        let items = isBenchmark ? benchmarkItems : tickerItems
-        var y: CGFloat = 0.0
-        var dataList: [CGFloat] = []
-        
-        for item in items {
-            let vy = CGFloat(item.y)
-            y = (vy-minY) * scaleY + (0.25*graphHeight)
-            dataList.append(y)
-        }
-        return dataList
     }
 }
 
