@@ -171,6 +171,7 @@ fun loadEmbeddedJsonIdeas(){
     try{
         val fileIdeasText = loadResourceText("/ideas2.json")
        val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
+        ideas.clear()
         ideas.addAll(fileIdeas)
         println("reader: $fileIdeasText")
     }
@@ -188,6 +189,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
 
     loadEmbeddedJsonIdeas()
 
+    /*
     ideas.add(Idea(11,
         absolutePerformance = 3.4212,
         alpha = 3.0912,
@@ -214,8 +216,8 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         isActive = true
 
     ))
-
-
+*/
+/*
     try {
         val fileIdeasText = File("WEB-INF/ideas2.json").readText()
         val fileIdeas = Json.nonstrict.parse(Idea.serializer().list, fileIdeasText).toMutableList()
@@ -224,7 +226,7 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
     catch(e: Throwable){
         println("exception loading ideas file: ${e.message} ${e.stackTrace}")
     }
-
+*/
 
     install(WebSockets) {
         pingPeriod = java.time.Duration.ofMinutes(1)
@@ -316,7 +318,12 @@ fun Application.main(random: Random = Random(), delayProvider: DelayProvider = {
         }
 
         get("/api/ideas") {
-            call.respond(ideas)
+            call.respond(ideas.sortedByDescending { it -> it.alpha }.toMutableList())
+        }
+
+        get("/api/reset"){
+            loadEmbeddedJsonIdeas()
+            call.respond(mapOf("OK" to true))
         }
 
         get ("/api/1"){
@@ -539,9 +546,9 @@ private suspend fun Application.sendReloadSignal(signal: String) {
  */
 private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Random, delayProvider: DelayProvider, startTime: Long, ideaid: Int) {
     val queueTime = System.currentTimeMillis() - startTime
-    val upIndexes: IntArray = intArrayOf(0, 1, 4 )
+    val upIndexes: IntArray = intArrayOf(0, 1, 4, 5 )
     val downIndexes: IntArray = intArrayOf(2, 3)
-    val poaIndex: IntArray = intArrayOf(5)
+    val poaIndex: IntArray = intArrayOf(6)
 
     val computeTime = measureTimeMillis {
         // We specify a coroutine context, that will use a thread pool for long computing operations.
@@ -549,36 +556,36 @@ private suspend fun ApplicationCall.respondHandlingLongCalculation(random: Rando
         // But serves as an example of what to do if we want to perform slow non-asynchronous operations
         // that would block threads.
         withContext(compute) {
-            for (index in 0 until 6) {
+            for (index in 0 until 7) {
                 println("before: index: $index alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
 
                 var idea = ideas.filter { it.id == ideaid }.first()
 
                 if(upIndexes.contains(index)) {
                     idea.previousCurrentPrice = idea.currentPrice;
-                    idea.currentPrice = idea.currentPrice + ((idea.currentPrice / 100) * 0.7)
-                    idea.alpha = idea.alpha + ((idea.alpha / 100) * 0.7)
+                    idea.currentPrice = idea.currentPrice + ((idea.currentPrice / 100) * 3.4)
+                    idea.alpha = idea.alpha + ((idea.alpha / 100) * 3.4)
 
                     println("after: reload - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
                     application.sendReloadSignal("RELOAD")
-                    delayProvider(3000)
+                    delayProvider(2500)
                 }
 
                 if(downIndexes.contains(index)){
                     idea.previousCurrentPrice = idea.currentPrice;
-                    idea.currentPrice = idea.currentPrice - ((idea.currentPrice / 100) * 0.7)
-                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.7)
+                    idea.currentPrice = idea.currentPrice - ((idea.currentPrice / 100) * 1.4)
+                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 1.4)
 
                     println("after: reload - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
                     application.sendReloadSignal("RELOAD")
-                    delayProvider(3000)
+                    delayProvider(2500)
                 }
 
                 if(poaIndex.contains(index))
                 {
                     idea.previousCurrentPrice = idea.currentPrice;
                     idea.currentPrice = idea.targetPrice;
-                    idea.alpha = idea.alpha - ((idea.alpha / 100) * 0.7)
+                    idea.alpha = idea.alpha + ((idea.alpha / 100) * 5.4)
 
                     println("after: poa - alpha:  ${ideas.first{x ->x.id == ideaid}.alpha}")
 
