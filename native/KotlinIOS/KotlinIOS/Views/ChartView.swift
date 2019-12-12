@@ -352,6 +352,7 @@ class ChartViewController: UIViewController {
             scene.rootNode.addChildNode(node)
             addSecurityHeader(node)
             addAlpha(node)
+            addChartLegend(node, 0.0)
             addGrid(node, gridColor)
             addAxis(node, axisColor)
         }
@@ -390,21 +391,44 @@ class ChartViewController: UIViewController {
         addText(node, 0.0, y, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .title1)
     }
     
-    func addText(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ string: String?, _ textStyle: UIFont.TextStyle) {
+    func addChartLegend(_ node: SCNNode, _ x: CGFloat) {
+        let y: CGFloat = 230.0
+        let lineWidth: CGFloat = 20.0
+        let securityName = ideaModel?.securityTicker ?? ""
+        let vsText = "Vs"
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        let textWidth = securityName.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        let textWidth2 = vsText.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        
+        addLegendLine(node, x, y+10.0, lineWidth, 4.0, 3.0, tickerColor)
+        addText(node, x+lineWidth+8.0, y, securityName, .body, isCentered: false)
+        
+        let x2 = x+30.0+textWidth+16.0
+        addText(node, x2, y, vsText, .body, isCentered: false)
+        
+        let x3 = x2 + textWidth2 + 18.0
+        addLegendLine(node, x3, y+10.0, lineWidth, 4.0, 3.0, benchmarkColor)
+        addText(node, x3+lineWidth+8.0, y, "S&P 500 Index", .body, isCentered: false)
+    }
+    
+    func addText(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ string: String?, _ textStyle: UIFont.TextStyle, isCentered: Bool = true) {
         guard let string = string else {
             return
         }
 
         let font = UIFont.preferredFont(forTextStyle: textStyle)
+        let width: CGFloat = view.bounds.width
         let textWidth = string.size(withAttributes: [NSAttributedString.Key.font: font]).width
         
         let text = SCNText(string: string, extrusionDepth: 0)
         text.font = font
         text.firstMaterial?.diffuse.contents = UIColor.white
+        text.firstMaterial?.isDoubleSided = true
         text.flatness = 0.01
-        
+
         let textNode = SCNNode(geometry: text)
-        textNode.position = SCNVector3Make(Float(x-0.5*textWidth), Float(y), 0.0)
+        let offset = isCentered ? x-0.5*textWidth : x-0.5*width
+        textNode.position = SCNVector3Make(Float(offset), Float(y), 0.0)
         node.addChildNode(textNode)
     }
     
@@ -432,6 +456,18 @@ class ChartViewController: UIViewController {
         shape.firstMaterial?.roughness.contents = 0.2
         let planeNode = SCNNode(geometry: shape)
         planeNode.position = SCNVector3Make(Float(x), Float(y), 0.0)
+        node.addChildNode(planeNode)
+    }
+
+    func addLegendLine(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ length: CGFloat, _ color: UIColor) {
+        let shape = SCNBox(width: width, height: height, length: length, chamferRadius: 0.0)
+        shape.firstMaterial?.lightingModel = .physicallyBased
+        shape.firstMaterial?.diffuse.contents = color
+        shape.firstMaterial?.metalness.contents = 0.8
+        shape.firstMaterial?.roughness.contents = 0.2
+        let planeNode = SCNNode(geometry: shape)
+        let offset: CGFloat = 0.5*width-0.5*view.bounds.width
+        planeNode.position = SCNVector3Make(Float(offset+x), Float(y), 0.0)
         node.addChildNode(planeNode)
     }
     
