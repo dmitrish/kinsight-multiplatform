@@ -7,6 +7,8 @@ actual fun platformName(): String {
     return "Android"
 }
 
+//actual interface Codable {}
+
 actual typealias Parcelable = android.os.Parcelable
 
 actual typealias Parcelize = kotlinx.android.parcel.Parcelize

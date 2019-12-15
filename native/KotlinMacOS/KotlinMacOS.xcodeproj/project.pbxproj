@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A61876423A337810041D493 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A61876323A337810041D493 /* AppDelegate.swift */; };
+		2A61876623A337810041D493 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A61876523A337810041D493 /* ContentView.swift */; };
+		2A61876823A337840041D493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A61876723A337840041D493 /* Assets.xcassets */; };
+		2A61876B23A337840041D493 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A61876A23A337840041D493 /* Preview Assets.xcassets */; };
+		2A61876E23A337840041D493 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A61876C23A337840041D493 /* Main.storyboard */; };
+		2A61877723A3380D0041D493 /* AnimatedBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A61877623A3380D0041D493 /* AnimatedBackground.swift */; };
+		2A61879323A454DF0041D493 /* IdeaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A61879223A454DF0041D493 /* IdeaViewModel.swift */; };
+		2A6187B323A47B420041D493 /* HomeViewListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187B223A47B420041D493 /* HomeViewListRow.swift */; };
+		2A6187B823A47C0E0041D493 /* IdeaSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187B723A47C0E0041D493 /* IdeaSample.swift */; };
+		2A6187BD23A49F270041D493 /* IdeaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187BC23A49F270041D493 /* IdeaDetailView.swift */; };
+		2A6187C123A4A01C0041D493 /* IdeaViewDetailPriceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187C023A4A01C0041D493 /* IdeaViewDetailPriceBlock.swift */; };
+		2A6187C323A4A0540041D493 /* IdeaViewDetailSecurityHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187C223A4A0540041D493 /* IdeaViewDetailSecurityHeader.swift */; };
+		2A6187C523A4A0AD0041D493 /* IdeaViewDetailThesisBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187C423A4A0AD0041D493 /* IdeaViewDetailThesisBlock.swift */; };
+		2A6187C723A4ABB70041D493 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187C623A4ABB70041D493 /* TestView.swift */; };
+		2A6187C923A4AF4E0041D493 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187C823A4AF4E0041D493 /* Test.swift */; };
+		2A6187CC23A560700041D493 /* DetailWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6187CB23A560700041D493 /* DetailWindowController.swift */; };
+		2A6188AA23A6CE7F0041D493 /* SharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6188A923A6CE7F0041D493 /* SharedCode.framework */; };
+		2A6188AB23A6CE7F0041D493 /* SharedCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6188A923A6CE7F0041D493 /* SharedCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2A6188AC23A6CE7F0041D493 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2A6188AB23A6CE7F0041D493 /* SharedCode.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2A61876023A337810041D493 /* KotlinMacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KotlinMacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A61876323A337810041D493 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2A61876523A337810041D493 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2A61876723A337840041D493 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A61876A23A337840041D493 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2A61876D23A337840041D493 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2A61876F23A337840041D493 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2A61877023A337840041D493 /* KotlinMacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KotlinMacOS.entitlements; sourceTree = "<group>"; };
+		2A61877623A3380D0041D493 /* AnimatedBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedBackground.swift; sourceTree = "<group>"; };
+		2A61879223A454DF0041D493 /* IdeaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewModel.swift; sourceTree = "<group>"; };
+		2A6187AE23A477990041D493 /* SharedCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedCode.framework; path = "../kinsight-multiplatform/SharedCode/build/bin/macos/debugFramework/SharedCode.framework"; sourceTree = "<group>"; };
+		2A6187B223A47B420041D493 /* HomeViewListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewListRow.swift; sourceTree = "<group>"; };
+		2A6187B723A47C0E0041D493 /* IdeaSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaSample.swift; sourceTree = "<group>"; };
+		2A6187BC23A49F270041D493 /* IdeaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaDetailView.swift; sourceTree = "<group>"; };
+		2A6187C023A4A01C0041D493 /* IdeaViewDetailPriceBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailPriceBlock.swift; sourceTree = "<group>"; };
+		2A6187C223A4A0540041D493 /* IdeaViewDetailSecurityHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailSecurityHeader.swift; sourceTree = "<group>"; };
+		2A6187C423A4A0AD0041D493 /* IdeaViewDetailThesisBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaViewDetailThesisBlock.swift; sourceTree = "<group>"; };
+		2A6187C623A4ABB70041D493 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		2A6187C823A4AF4E0041D493 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		2A6187CB23A560700041D493 /* DetailWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWindowController.swift; sourceTree = "<group>"; };
+		2A6188A923A6CE7F0041D493 /* SharedCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedCode.framework; path = ../../SharedCode/build/bin/macos/debugFramework/SharedCode.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A61875D23A337810041D493 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A6188AA23A6CE7F0041D493 /* SharedCode.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A61875723A337810041D493 = {
+			isa = PBXGroup;
+			children = (
+				2A61876223A337810041D493 /* KotlinMacOS */,
+				2A61876123A337810041D493 /* Products */,
+				2A61877823A342100041D493 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2A61876123A337810041D493 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A61876023A337810041D493 /* KotlinMacOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2A61876223A337810041D493 /* KotlinMacOS */ = {
+			isa = PBXGroup;
+			children = (
+				2A6188A223A5DCA00041D493 /* ViewModels */,
+				2A6187CA23A5603A0041D493 /* Helpers */,
+				2A6187B923A47CB10041D493 /* Views */,
+				2A6187B623A47BFC0041D493 /* Models */,
+				2A61876323A337810041D493 /* AppDelegate.swift */,
+				2A61876523A337810041D493 /* ContentView.swift */,
+				2A61876723A337840041D493 /* Assets.xcassets */,
+				2A61876C23A337840041D493 /* Main.storyboard */,
+				2A61876F23A337840041D493 /* Info.plist */,
+				2A61877023A337840041D493 /* KotlinMacOS.entitlements */,
+				2A61876923A337840041D493 /* Preview Content */,
+				2A61877623A3380D0041D493 /* AnimatedBackground.swift */,
+				2A61879223A454DF0041D493 /* IdeaViewModel.swift */,
+				2A6187B223A47B420041D493 /* HomeViewListRow.swift */,
+			);
+			path = KotlinMacOS;
+			sourceTree = "<group>";
+		};
+		2A61876923A337840041D493 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2A61876A23A337840041D493 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2A61877823A342100041D493 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A6188A923A6CE7F0041D493 /* SharedCode.framework */,
+				2A6187AE23A477990041D493 /* SharedCode.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2A6187B623A47BFC0041D493 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2A6187B723A47C0E0041D493 /* IdeaSample.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2A6187B923A47CB10041D493 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2A6187BC23A49F270041D493 /* IdeaDetailView.swift */,
+				2A6187C023A4A01C0041D493 /* IdeaViewDetailPriceBlock.swift */,
+				2A6187C223A4A0540041D493 /* IdeaViewDetailSecurityHeader.swift */,
+				2A6187C423A4A0AD0041D493 /* IdeaViewDetailThesisBlock.swift */,
+				2A6187C623A4ABB70041D493 /* TestView.swift */,
+				2A6187C823A4AF4E0041D493 /* Test.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2A6187CA23A5603A0041D493 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2A6187CB23A560700041D493 /* DetailWindowController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2A6188A223A5DCA00041D493 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2A61875F23A337810041D493 /* KotlinMacOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A61877323A337840041D493 /* Build configuration list for PBXNativeTarget "KotlinMacOS" */;
+			buildPhases = (
+				2A61875C23A337810041D493 /* Sources */,
+				2A61875D23A337810041D493 /* Frameworks */,
+				2A61875E23A337810041D493 /* Resources */,
+				2A6188AC23A6CE7F0041D493 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KotlinMacOS;
+			productName = TryMacOS;
+			productReference = 2A61876023A337810041D493 /* KotlinMacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2A61875823A337810041D493 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = spb;
+				TargetAttributes = {
+					2A61875F23A337810041D493 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+				};
+			};
+			buildConfigurationList = 2A61875B23A337810041D493 /* Build configuration list for PBXProject "KotlinMacOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2A61875723A337810041D493;
+			productRefGroup = 2A61876123A337810041D493 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2A61875F23A337810041D493 /* KotlinMacOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2A61875E23A337810041D493 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A61876E23A337840041D493 /* Main.storyboard in Resources */,
+				2A61876B23A337840041D493 /* Preview Assets.xcassets in Resources */,
+				2A61876823A337840041D493 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A61875C23A337810041D493 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A6187C123A4A01C0041D493 /* IdeaViewDetailPriceBlock.swift in Sources */,
+				2A6187B823A47C0E0041D493 /* IdeaSample.swift in Sources */,
+				2A6187C723A4ABB70041D493 /* TestView.swift in Sources */,
+				2A6187C523A4A0AD0041D493 /* IdeaViewDetailThesisBlock.swift in Sources */,
+				2A6187CC23A560700041D493 /* DetailWindowController.swift in Sources */,
+				2A61876623A337810041D493 /* ContentView.swift in Sources */,
+				2A6187C923A4AF4E0041D493 /* Test.swift in Sources */,
+				2A61879323A454DF0041D493 /* IdeaViewModel.swift in Sources */,
+				2A6187C323A4A0540041D493 /* IdeaViewDetailSecurityHeader.swift in Sources */,
+				2A61877723A3380D0041D493 /* AnimatedBackground.swift in Sources */,
+				2A61876423A337810041D493 /* AppDelegate.swift in Sources */,
+				2A6187B323A47B420041D493 /* HomeViewListRow.swift in Sources */,
+				2A6187BD23A49F270041D493 /* IdeaDetailView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2A61876C23A337840041D493 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2A61876D23A337840041D493 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2A61877123A337840041D493 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2A61877223A337840041D493 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		2A61877423A337840041D493 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KotlinMacOS/KotlinMacOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"KotlinMacOS/Preview Content\"";
+				DEVELOPMENT_TEAM = GD4G9TGE9T;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = KotlinMacOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alphaca.macos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2A61877523A337840041D493 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KotlinMacOS/KotlinMacOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"KotlinMacOS/Preview Content\"";
+				DEVELOPMENT_TEAM = GD4G9TGE9T;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = KotlinMacOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kinsight.alphaca.macos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A61875B23A337810041D493 /* Build configuration list for PBXProject "KotlinMacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A61877123A337840041D493 /* Debug */,
+				2A61877223A337840041D493 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2A61877323A337840041D493 /* Build configuration list for PBXNativeTarget "KotlinMacOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A61877423A337840041D493 /* Debug */,
+				2A61877523A337840041D493 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2A61875823A337810041D493 /* Project object */;
+}
