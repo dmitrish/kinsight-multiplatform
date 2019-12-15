@@ -53,6 +53,11 @@ As we cannot control the market (alas), some market data manipulation is in orde
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/idea-created-alert-android.jpg)
 
 
+# MacOS - Ideas
+
+![idea list macos](https://github.com/dmitrish/kinsight-multiplatform/blob/master/macos-ideas.png)
+
+
 # Steps to build different server flavors and run them locally
 
 Switching server between thee possible builds: google app angine, netty, and netty with fatjar - settings.gradle:
