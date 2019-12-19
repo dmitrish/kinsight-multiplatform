@@ -74,6 +74,14 @@ kotlin {
         }
     }
 
+    linuxX64("linux"){
+        binaries {
+           // dynamicLib()
+            //executable()
+            sharedLib("native")
+        }
+    }
+
     /*watchosX86("watchos") {
         binaries {
             framework {
@@ -153,6 +161,17 @@ kotlin {
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2-1.3.60")
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
         implementation ("io.ktor:ktor-client-curl:1.2.6")
+        implementation ("io.ktor:ktor-client-core-native:1.2.6")
+        implementation ("io.ktor:ktor-client-json-native:1.2.6")
+        implementation ("io.ktor:ktor-client-logging-native:1.2.6")
+        implementation ("io.ktor:ktor-client-serialization-native:1.2.6")
+        implementation("io.ktor:ktor-client-websockets-native:1.2.6")
+    }
+    sourceSets["linuxMain"].dependencies{
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2-1.3.60")
+        implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
+        //implementation ("io.ktor:ktor-client-curl:1.2.6")
         implementation ("io.ktor:ktor-client-core-native:1.2.6")
         implementation ("io.ktor:ktor-client-json-native:1.2.6")
         implementation ("io.ktor:ktor-client-logging-native:1.2.6")
