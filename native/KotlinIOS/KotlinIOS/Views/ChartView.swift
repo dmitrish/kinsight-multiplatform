@@ -350,6 +350,9 @@ class ChartViewController: UIViewController {
         if let node = sceneNode {
             node.scale = SCNVector3(x: 0.001, y: 0.001, z: 0.001)
             scene.rootNode.addChildNode(node)
+            addSecurityHeader(node)
+            addAlpha(node)
+            addChartLegend(node, 0.0)
             addGrid(node, gridColor)
             addAxis(node, axisColor)
         }
@@ -358,8 +361,8 @@ class ChartViewController: UIViewController {
         let camera = SCNCamera()
         camera.automaticallyAdjustsZRange = true
         cameraNode.camera = camera
-        cameraNode.position = SCNVector3(x: Float(-0.15), y: Float(0.4), z: Float(0.5))
-        cameraNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-30), y: GLKMathDegreesToRadians(-15), z: 0.0)
+        cameraNode.position = SCNVector3(x: Float(-0.22), y: Float(0.15), z: Float(0.65))
+        cameraNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(5), y: GLKMathDegreesToRadians(-18), z: 0.0)
         scene.rootNode.addChildNode(cameraNode)
 
         sceneView.translatesAutoresizingMaskIntoConstraints = false
@@ -376,9 +379,62 @@ class ChartViewController: UIViewController {
         startChartAnimationTimer()
     }
     
+    func addSecurityHeader(_ node: SCNNode) {
+        let y: CGFloat = 370.0
+        addText(node, 0.0, y+20.0, ideaModel?.securityTicker, .largeTitle)
+        addText(node, 0.0, y, ideaModel?.securityName, .body)
+    }
+    
+    func addAlpha(_ node: SCNNode) {
+        let y: CGFloat = 286.0
+        addText(node, 0.0, y+34.0, "Alpha", .body)
+        addText(node, 0.0, y, ideaModelLogicDecorator?.getDisplayValueForAlpha(), .title1)
+    }
+    
+    func addChartLegend(_ node: SCNNode, _ x: CGFloat) {
+        let y: CGFloat = 230.0
+        let lineWidth: CGFloat = 20.0
+        let securityName = ideaModel?.securityTicker ?? ""
+        let vsText = "Vs"
+        let font = UIFont.preferredFont(forTextStyle: .body)
+        let textWidth = securityName.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        let textWidth2 = vsText.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        
+        addLegendLine(node, x, y+10.0, lineWidth, 4.0, 3.0, tickerColor)
+        addText(node, x+lineWidth+8.0, y, securityName, .body, isCentered: false)
+        
+        let x2 = x+30.0+textWidth+16.0
+        addText(node, x2, y, vsText, .body, isCentered: false)
+        
+        let x3 = x2 + textWidth2 + 18.0
+        addLegendLine(node, x3, y+10.0, lineWidth, 4.0, 3.0, benchmarkColor)
+        addText(node, x3+lineWidth+8.0, y, "S&P 500 Index", .body, isCentered: false)
+    }
+    
+    func addText(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ string: String?, _ textStyle: UIFont.TextStyle, isCentered: Bool = true) {
+        guard let string = string else {
+            return
+        }
+
+        let font = UIFont.preferredFont(forTextStyle: textStyle)
+        let width: CGFloat = view.bounds.width
+        let textWidth = string.size(withAttributes: [NSAttributedString.Key.font: font]).width
+        
+        let text = SCNText(string: string, extrusionDepth: 0)
+        text.font = font
+        text.firstMaterial?.diffuse.contents = UIColor.white
+        text.firstMaterial?.isDoubleSided = true
+        text.flatness = 0.01
+
+        let textNode = SCNNode(geometry: text)
+        let offset = isCentered ? x-0.5*textWidth : x-0.5*width
+        textNode.position = SCNVector3Make(Float(offset), Float(y), 0.0)
+        node.addChildNode(textNode)
+    }
+    
     func addAxis(_ node: SCNNode, _ color: UIColor) {
         let width: CGFloat = view.bounds.width
-        addLine(node, 0.0, 0.0, width, 2.0, 2.0, UIColor.gray)
+        addLine(node, 0.0, 0.0, width, 3.0, 3.0, UIColor.gray)
     }
     
     func addGrid(_ node: SCNNode, _ color: UIColor) {
@@ -387,7 +443,7 @@ class ChartViewController: UIViewController {
         var y: CGFloat = dy
         
         for _ in 1...6 {
-            addLine(node, 0.0, y, width, 1.0, 1.0, UIColor.gray)
+            addLine(node, 0.0, y, width, 1.5, 1.5, UIColor.gray)
             y += dy
         }
     }
@@ -400,6 +456,18 @@ class ChartViewController: UIViewController {
         shape.firstMaterial?.roughness.contents = 0.2
         let planeNode = SCNNode(geometry: shape)
         planeNode.position = SCNVector3Make(Float(x), Float(y), 0.0)
+        node.addChildNode(planeNode)
+    }
+
+    func addLegendLine(_ node: SCNNode, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ length: CGFloat, _ color: UIColor) {
+        let shape = SCNBox(width: width, height: height, length: length, chamferRadius: 0.0)
+        shape.firstMaterial?.lightingModel = .physicallyBased
+        shape.firstMaterial?.diffuse.contents = color
+        shape.firstMaterial?.metalness.contents = 0.8
+        shape.firstMaterial?.roughness.contents = 0.2
+        let planeNode = SCNNode(geometry: shape)
+        let offset: CGFloat = 0.5*width-0.5*view.bounds.width
+        planeNode.position = SCNVector3Make(Float(offset+x), Float(y), 0.0)
         node.addChildNode(planeNode)
     }
     
@@ -509,3 +577,121 @@ class ChartViewController: UIViewController {
     }
 }
 
+struct Chart3DViewControllerWrapper: UIViewControllerRepresentable {
+
+    typealias UIViewControllerType = Chart3DViewController
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<Chart3DViewControllerWrapper>) -> Chart3DViewControllerWrapper.UIViewControllerType {
+        return Chart3DViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: Chart3DViewControllerWrapper.UIViewControllerType, context: UIViewControllerRepresentableContext<Chart3DViewControllerWrapper>) {
+    }
+}
+
+class Chart3DViewController: UIViewController {
+
+    var sceneView = SCNView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(sceneView)
+        
+        let scene = SCNScene()
+        let node = SCNNode()
+        scene.rootNode.addChildNode(node)
+        
+        addChartBar(node, "Dmitri", 3.7,  -1.875, .blue)
+        addChartBar(node, "Ajay", 3.5, -0.625, .green)
+        addChartBar(node, "Piyush", 2.9, 0.625, .orange)
+        addChartBar(node, "Mark", 2.7, 1.875, .red)
+        
+        let cameraNode = SCNNode()
+        let camera = SCNCamera()
+        camera.automaticallyAdjustsZRange = true
+        cameraNode.camera = camera
+        cameraNode.position = SCNVector3(x: Float(0.16), y: Float(0.45), z: Float(0.36))
+        cameraNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-45), y: GLKMathDegreesToRadians(25), z: 0.0)
+        scene.rootNode.addChildNode(cameraNode)
+
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        sceneView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        sceneView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        sceneView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        sceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        sceneView.scene = scene
+        sceneView.allowsCameraControl = true
+        sceneView.backgroundColor = UIColor.clear
+        sceneView.autoenablesDefaultLighting = true
+    }
+    
+    func addChartBar(_ node: SCNNode, _ name: String, _ value: CGFloat, _ offset: CGFloat, _ color: UIColor) {
+        let width: CGFloat = 0.04
+        let height: CGFloat = 0.04
+        let length: CGFloat = 0.04
+        let barScale: CGFloat = 1.8
+        let barHeight = barScale*value*height
+        
+        let bar = SCNBox(width: width, height: barHeight, length: length, chamferRadius: 0.1*width)
+        bar.firstMaterial?.lightingModel = .physicallyBased
+        bar.firstMaterial?.diffuse.contents = color
+        bar.firstMaterial?.metalness.contents = 0.8
+        bar.firstMaterial?.roughness.contents = 0.2
+        let barNode = SCNNode(geometry: bar)
+        barNode.position = SCNVector3(x: Float(offset*width), y: Float(0.5*barHeight), z: 0.0)
+        node.addChildNode(barNode)
+        
+        let title = "\(value)"
+        let textHeight = 0.5*width
+        let textScale: Float = Float(textHeight) / 10.0
+        let barText = SCNText(string: title, extrusionDepth: 0)
+        barText.font = UIFont(name: "Arial", size: 10)
+        barText.firstMaterial?.diffuse.contents = UIColor.white
+        barText.flatness = 0.01
+        let barTextNode = SCNNode(geometry: barText)
+        barTextNode.position = SCNVector3Make(Float((offset+0.35)*width), 0.5*0.03, Float(0.5*width+0.001))
+        barTextNode.scale = SCNVector3Make(textScale, textScale, textScale)
+        barTextNode.rotation = SCNVector4(x: 0, y: 0, z: 1, w: GLKMathDegreesToRadians(90.0))
+        node.addChildNode(barTextNode)
+        
+        let labelLength = 2.0*length
+        let label = SCNBox(width: width, height: 0.0, length: 2.0*length, chamferRadius: 0.0)
+        label.firstMaterial?.lightingModel = .physicallyBased
+        label.firstMaterial?.diffuse.contents = color
+        label.firstMaterial?.metalness.contents = 0.8
+        label.firstMaterial?.roughness.contents = 0.2
+        let labelNode = SCNNode(geometry: label)
+        labelNode.position = SCNVector3(x: Float(offset*width), y: Float(0.0), z: Float(0.5*length+0.5*labelLength+0.01))
+        node.addChildNode(labelNode)
+        
+        let labelHeight = 0.5*width
+        let labelScale: Float = Float(labelHeight) / 10.0
+        let labelText = SCNText(string: name, extrusionDepth: 0)
+        labelText.font = UIFont(name: "Arial", size: 10)
+        labelText.firstMaterial?.diffuse.contents = UIColor.white
+        labelText.flatness = 0.01
+        let labelTextNode = SCNNode(geometry: labelText)
+        labelTextNode.position = SCNVector3Make(Float((offset+0.35)*width), 0.001, 0.1)
+        labelTextNode.scale = SCNVector3Make(labelScale, labelScale, labelScale)
+        labelTextNode.eulerAngles = SCNVector3(x: GLKMathDegreesToRadians(-90), y: GLKMathDegreesToRadians(90), z: 0)
+        node.addChildNode(labelTextNode)
+    }
+
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .allButUpsideDown
+        } else {
+            return .all
+        }
+    }
+}

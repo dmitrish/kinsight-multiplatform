@@ -34,6 +34,7 @@ struct TargetView: View {
                     TextField("", text: $targetPrice).foregroundColor(.white) .padding(.leading, 43)
                         .padding(.trailing, 43)
                         .font(.headline)
+                        .keyboardType(.numberPad)
                     Rectangle()
                         .frame(height: 1.0, alignment: .bottom)
                         .foregroundColor(Color.white)
@@ -51,6 +52,7 @@ struct TargetView: View {
                         .padding(.leading, 43)
                         .padding(.trailing, 43)
                         .font(.headline)
+                    .keyboardType(.numberPad)
                     Rectangle()
                         .frame(height: 1.0, alignment: .bottom)
                         .foregroundColor(Color.white)
@@ -71,7 +73,11 @@ struct PickerView: View {
         self._duration = duration
         self._conviction = conviction
         self._direction = direction
+        
 //         .font: UIFont.boldSystemFont(ofSize: 24),
+        
+        UISegmentedControl.appearance().backgroundColor = UIColor.clear
+        UISegmentedControl.appearance().layer.borderColor = UIColor.white.cgColor
         UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.lightGray
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.black, .font: UIFont.boldSystemFont(ofSize: 17)], for: .selected)
         UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.white ,.font: UIFont.boldSystemFont(ofSize: 17)], for: .normal)

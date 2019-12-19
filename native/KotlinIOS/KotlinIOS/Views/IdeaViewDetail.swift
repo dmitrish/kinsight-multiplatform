@@ -50,12 +50,20 @@ struct IdeaViewDetail: View {
                                        
                                 }
                                 .frame(width: 88, height: 88)
+                                
                                 Text("Fisherman")
                                     .foregroundColor(.white)
                                     .padding(.leading, 15)
+                                NavigationLink(destination:
+                                    ZStack {
+                                        AnimatedBackground()
+                                        Chart3DViewControllerWrapper()
+                                    }
+                                ) {
                                 Text(ideaModel.createdBy)
                                     .foregroundColor(.white)
                                     .padding(.leading, 47)
+                                }
                                     
                             }.padding(.leading, 240)
                                 .padding(.bottom, 130)
