@@ -58,7 +58,15 @@ kotlin {
             }
         }
     }
-    /*watchosArm64("watchos") {
+    watchosX86("watchos") {
+        binaries {
+            framework {
+                baseName = "SharedCode"
+            }
+        }
+    }
+
+    /*watchos("watchos") {
         binaries {
             framework {
                 baseName = "SharedCode"
@@ -66,21 +74,13 @@ kotlin {
         }
     }*/
 
-    watchos("watchos") {
-        binaries {
-            framework {
-                baseName = "SharedCode"
-            }
-        }
-    }
-
-    linuxX64("linux"){
+    /*linuxX64("linux"){
         binaries {
            // dynamicLib()
             //executable()
             sharedLib("native")
         }
-    }
+    }*/
 
     /*watchosX86("watchos") {
         binaries {
@@ -116,7 +116,7 @@ kotlin {
 
     sourceSets["commonMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.2-1.3.60")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.3")
         // Serialize
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.14.0")
 
@@ -132,7 +132,7 @@ kotlin {
 
     sourceSets["androidMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
-        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2")
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
 
         implementation ("io.ktor:ktor-client-android:$kversion")
         implementation ("io.ktor:ktor-client-core-jvm:$kversion")
@@ -146,7 +146,7 @@ kotlin {
     }
 
     sourceSets["iosMain"].dependencies{
-        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2-1.3.60")
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3")
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
         implementation ("io.ktor:ktor-client-ios:1.2.6")
         implementation ("io.ktor:ktor-client-core-native:1.2.6")
@@ -158,7 +158,7 @@ kotlin {
 
     sourceSets["macosMain"].dependencies{
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2-1.3.60")
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3")
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
         implementation ("io.ktor:ktor-client-curl:1.2.6")
         implementation ("io.ktor:ktor-client-core-native:1.2.6")
@@ -167,7 +167,7 @@ kotlin {
         implementation ("io.ktor:ktor-client-serialization-native:1.2.6")
         implementation("io.ktor:ktor-client-websockets-native:1.2.6")
     }
-    sourceSets["linuxMain"].dependencies{
+   /* sourceSets["linuxMain"].dependencies{
         implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2-1.3.60")
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
@@ -177,16 +177,17 @@ kotlin {
         implementation ("io.ktor:ktor-client-logging-native:1.2.6")
         implementation ("io.ktor:ktor-client-serialization-native:1.2.6")
         implementation("io.ktor:ktor-client-websockets-native:1.2.6")
-    }
+    }*/
 
     sourceSets["watchosMain"].dependencies{
-
-        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.2-1.3.60")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-common:1.3.61")
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3")
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
-        implementation ("io.ktor:ktor-client-core-native:1.3.0-beta-2")
-        implementation ("io.ktor:ktor-client-json-native:1.3.0-beta-2")
-        implementation ("io.ktor:ktor-client-serialization-native:1.3.0-beta-2")
-       // implementation ("io.ktor:ktor-client-ios:1.2.6")
+        implementation ("io.ktor:ktor-client-core-native:1.3.0-rc")
+        implementation ("io.ktor:ktor-client-json-native:1.3.0-rc")
+        implementation ("io.ktor:ktor-client-serialization-native:1.3.0-rc")
+        implementation ("io.ktor:ktor-client-ios:1.3.0-rc")
+        implementation ("io.ktor:ktor-client-cio:1.3.0-rc")
 
     }
 
@@ -199,7 +200,7 @@ kotlin {
 
 
     sourceSets["macosMain"].dependsOn(appleMain)
-    sourceSets["watchosMain"].dependsOn(appleMain)
+   // sourceSets["watchosMain"].dependsOn(appleMain)
 }
 
 
