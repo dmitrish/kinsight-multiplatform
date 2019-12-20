@@ -105,7 +105,7 @@ kotlin {
         }
     }
 
-   // jvm("android")
+    //jvm()
     android {
 
     }
