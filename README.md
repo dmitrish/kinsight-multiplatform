@@ -42,7 +42,7 @@ As we cannot control the market (alas), some market data manipulation is in orde
   Your browser does not support the video tag.
 </video>
   </td>
-    <td>Coming soon!/></td> 
+    <td>Coming soon!</td> 
 
   </tr>
   
