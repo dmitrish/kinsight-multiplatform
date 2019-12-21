@@ -1,7 +1,7 @@
 [![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Kotlin Multiplatform project: Sharing code between iOS, MacOS, WatchOS, Android, and JVM Web Server (Ktor)
+# Kotlin Multiplatform project: Sharing code between iOS, MacOS, WatchOS, Android (phone and watch - Wear OS), and JVM Web Server (Ktor)
 
 KInsight Alpha Capture is a proof of concept project currently being developed for our annual CodeWeek event (where you pitch business or technology ideas). 
 Alpha Capture app is intended for Sales to create and distribute trade ideas to our institutional clients. The app will track the performance of each idea relative to the performance of the benchmark, and alert users when the idea has reached the price objective or stop loss value so that the user can then close the idea.
