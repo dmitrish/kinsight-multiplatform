@@ -37,10 +37,7 @@ As we cannot control the market (alas), some market data manipulation is in orde
   </tr>
   <tr>
     <td>
-  <video  controls>
-  <source src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/wearos-alpha.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+ <img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/wear-os.gif"/>
   </td>
     <td>Coming soon!</td> 
 
