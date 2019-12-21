@@ -12,4 +12,6 @@ actual fun platformName(): String {
 }
 actual interface Parcelable
 
+//actual interface Codable
+
 

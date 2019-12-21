@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':kinsightmultiplatformwearos', ':kinsightandroidsharedlibrary'
 include ':SharedCode'
 include ':server'
 

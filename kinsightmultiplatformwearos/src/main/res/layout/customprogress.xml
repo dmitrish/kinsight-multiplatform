@@ -1,0 +1,23 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <item android:id="@android:id/progress">
+        <rotate
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:duration="1"
+            android:interpolator="@android:anim/linear_interpolator"
+            android:toDegrees="2200"
+            android:fromDegrees="0">
+            <shape
+                android:shape="ring"
+                android:thickness="2dp"
+                android:innerRadiusRatio="3"
+                android:thicknessRatio="20.0">
+                <solid android:color="@color/circleFill" />
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

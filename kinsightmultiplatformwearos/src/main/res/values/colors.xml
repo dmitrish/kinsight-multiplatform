@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@android:color/white</color>
+    <color name="colorPrimaryDark">@android:color/white</color>
+    <color name="colorAccent">@android:color/white</color>
+    <color name="colorTransparent">#00ffffff</color>
+
+
+    <color name="colorGradientStart">#0000FF</color>
+    <color name="colorGradientCenter">#800080</color>
+    <color name="colorGradientEnd">#ffa500</color>
+
+    <color name="colorViewBackground">#3F3F3F</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="separator_color">#696969</color>
+
+
+    <color name="colorbackground">#f7f9f9</color>
+    <color name="colorRegText">#333333</color>
+    <color name="colorlabelText">#828995</color>
+    <color name="colorGreen">#14c1a4</color>
+    <color name="colorRed">#e86565</color>
+    <color name="primaryblue">#59a2fd</color>
+    <color name="backgrounddarkest">#e7e8ea</color>
+    <color name="colorbackgroundDark">#2f3746</color>
+    <color name="colorbackgroundDarker">#232b38</color>
+    <color name="colorWhite">#ffffff</color>
+
+    <color name="missingData">#ffff00</color>
+    <color name="circleFill">#ffff00</color>
+    <color name="yellow">#ffbf00</color>
+    <color name="radio_button_selected_color">#ff33b5e5</color>
+    <color name="radio_button_unselected_color">@android:color/transparent</color>
+</resources>
