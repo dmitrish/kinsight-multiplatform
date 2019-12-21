@@ -29,7 +29,26 @@ As we cannot control the market (alas), some market data manipulation is in orde
   
 </table>
 
+<table style="width:100%">
+  <tr>
+    <th>Wear OS</th>
+    <th>Watch OS</th> 
+ 
+  </tr>
+  <tr>
+    <td>
+  <video  controls>
+  <source src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/wearos-alpha.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+  </td>
+    <td>Coming soon!/></td> 
 
+  </tr>
+  
+</table>
+
+https://github.com/dmitrish/kinsight-multiplatform/blob/master/wearos-alpha.mp4
 
 # Screenshots:
 
