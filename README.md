@@ -22,21 +22,13 @@ As we cannot control the market (alas), some market data manipulation is in orde
  
   </tr>
   <tr>
-    <td>![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)</td>
-    <td>![android gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif)</td> 
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif"/></td>
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif"/></td> 
 
   </tr>
   
 </table>
 
-
-# IPhone intro:
-
-![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
-
-# Android intro:
-
-![android gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif)
 
 
 # Screenshots:
