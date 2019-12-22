@@ -16,17 +16,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Adapters.IdeasRecyclerAdapter
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Adapters.OnItemClickListener
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.IdeasViewModel
+import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Notifications.NotificationHelper
+import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Notifications.OnNotificationListener
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.kinsight.kinsightmultiplatform.models.NotificationMessage
 import kotlinx.android.synthetic.main.ideas_layout.*
+import android.app.Notification.WearableExtender
 
 
-class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener {
+class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener, OnNotificationListener {
 
     private lateinit var adapter: IdeasRecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val viewModel: IdeasViewModel by lazy {
-        IdeasViewModel(application, "dmitri")
+        IdeasViewModel(application, "dmitri", this as OnNotificationListener)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,5 +104,16 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
         val intent = Intent(this, WearIdeaDetailActivity::class.java)
         intent.putExtra("IDEA", idea)
         ActivityCompat.startActivity(this@WearIdeasActivity, intent, options.toBundle())
+    }
+
+    override fun onNotification(notificationMessage: NotificationMessage) {
+        NotificationHelper.sendNotification(
+            this,
+            applicationContext,
+            "Alpha Capture",
+            notificationMessage.message,
+            notificationMessage.message,
+            false,
+            notificationMessage.ideaId )
     }
 }

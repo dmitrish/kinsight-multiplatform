@@ -1,4 +1,5 @@
 package com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Notifications
+import android.app.Activity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import android.app.NotificationChannel
@@ -12,7 +13,9 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.R
-
+import android.app.Notification.WearableExtender
+//import android.support.v4.app.NotificationManagerCompat
+//import android.support.v4.app.NotificationCompat.WearableExtender
 
 object NotificationHelper {
 
@@ -52,7 +55,7 @@ object NotificationHelper {
      * if this is true, a [PendingIntent] is attached to the notification to
      * open the application.
      */
-    fun sendNotification(activity: AppCompatActivity, context: Context, title: String, message: String,
+    fun sendNotification(activity: Activity, context: Context, title: String, message: String,
                          bigText: String, autoCancel: Boolean, ideaId: Int = 0) {
 
         val channelId = "${context.packageName}-kinsight}"
