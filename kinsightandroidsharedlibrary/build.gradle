@@ -2,13 +2,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.1"
 
 
     defaultConfig {
         minSdkVersion 28
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -61,7 +61,7 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
 
     implementation "org.java-websocket:Java-WebSocket:1.4.0"
-
+    implementation 'com.google.android.gms:play-services-wearable:17.0.0'
     implementation 'androidx.wear:wear:1.0.0'
     implementation 'com.google.android.support:wearable:2.5.0'
     compileOnly 'com.google.android.wearable:wearable:2.5.0'
