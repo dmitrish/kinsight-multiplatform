@@ -29,7 +29,7 @@
         android:id="@+id/nameText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
+        android:visibility="gone"
    
         android:layout_marginStart="5dp"
         android:gravity="start"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/ideaImage"
 
-        tools:text="@sample/ideassample.json/data/securityName"/>
+        tools:text="MSFT"/>
 
     <ImageView
         android:id="@+id/ideaImage2"
@@ -62,7 +62,7 @@
         android:textStyle="normal"
         android:textFontWeight="600"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="1dp"
         android:layout_marginRight="5dp"
         android:paddingRight="10dp"
         android:gravity="start"
@@ -71,7 +71,7 @@
         app:layout_constraintLeft_toRightOf="@id/ideaImage"
 
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@sample/ideassample.json/data/alpha"/>
+        tools:text="2.35"/>
     <TextView
         android:id="@+id/ideaPsi"
         android:layout_width="0dp"
@@ -88,7 +88,7 @@
         app:layout_constraintLeft_toRightOf="@id/ideaImage"
 
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@sample/ideassample.json/data/alpha"/>
+        tools:text="3.45"/>
     <TextView
         android:id="@+id/ideaSecurityName"
         android:layout_width="0dp"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@id/ideaAlpha"
         app:layout_constraintLeft_toRightOf="@id/ideaImage"
 
-        tools:text="@sample/ideassample.json/data/createdBy"/>
+        tools:text="Dmitri"/>
 
 
 

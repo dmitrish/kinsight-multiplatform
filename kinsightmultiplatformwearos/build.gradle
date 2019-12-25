@@ -43,9 +43,12 @@ android {
 
 dependencies {
     def lifecycle_ver = "2.2.0-rc02"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_ver"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':SharedCode')
     implementation project(':kinsightandroidsharedlibrary')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ver"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

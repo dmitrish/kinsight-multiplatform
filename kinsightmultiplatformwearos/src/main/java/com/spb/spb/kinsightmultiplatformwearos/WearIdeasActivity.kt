@@ -10,9 +10,9 @@ import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.wear.widget.WearableLinearLayoutManager
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Adapters.IdeasRecyclerAdapter
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Adapters.OnItemClickListener
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.IdeasViewModel
@@ -21,12 +21,12 @@ import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModel
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.NotificationMessage
 import kotlinx.android.synthetic.main.ideas_layout.*
-import android.app.Notification.WearableExtender
 
 
-class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener, OnNotificationListener {
+class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener, OnNotificationListener, WearableRecyclerAdapter.ItemClickListener {
 
-    private lateinit var adapter: IdeasRecyclerAdapter
+    //private lateinit var adapter: IdeasRecyclerAdapter
+    private lateinit var wearableAdapter: WearableRecyclerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val viewModel: IdeasViewModel by lazy {
@@ -40,9 +40,12 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
         // Enables Always-on
         setAmbientEnabled()
 
-        initRecyclerView()
+       // initRecyclerView()
+
+        initWearableRecyclerView()
 
         initViewModelListener()
+
 
         swiperefresh.rootView.requestFocus()
 
@@ -55,8 +58,10 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
             this,
             Observer<List<IdeaModel>> { ideas ->
                 Log.i("APP", "Ideas observed: $ideas")
-                adapter = IdeasRecyclerAdapter(ideas, R.layout.idea_item, this)
-                ideasRecyclerView.adapter = adapter
+                wearableAdapter = WearableRecyclerAdapter(this, ideas)
+                wearableAdapter.setClickListener(this)
+              //  adapter = IdeasRecyclerAdapter(ideas, R.layout.idea_item, this)
+                ideasRecyclerView.adapter = wearableAdapter
                 swiperefresh.isRefreshing = false
                // loading.isVisible = false
                // swiperefresh.rootView.requestFocus()
@@ -79,11 +84,45 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
         ideasRecyclerView.layoutManager = linearLayoutManager
     }
 
+    private fun initWearableRecyclerView(){
+
+        // Aligns the first and last items on the list vertically centered on the screen.
+        ideasRecyclerView.setEdgeItemsCenteringEnabled(true)
+
+        // Customizes scrolling so items farther away form center are smaller.
+        // Customizes scrolling so items farther away form center are smaller.
+        val scalingScrollLayoutCallback = ScalingScrollLayoutCallback()
+        ideasRecyclerView.setLayoutManager(
+            WearableLinearLayoutManager(this, scalingScrollLayoutCallback)
+        )
+
+        // Improves performance because we know changes in content do not change the layout size of
+        // the RecyclerView.
+        // Improves performance because we know changes in content do not change the layout size of
+// the RecyclerView.
+        ideasRecyclerView.setHasFixedSize(true)
+
+       // ideasRecyclerView.setI
+
+    }
+
     var lastView: View? = null
     override fun onItemClicked(idea: IdeaModel, view: View) {
         // lastView = view
         Log.i("IDEA_", idea.securityName)
-        startIdeaDetailActivity(idea, view)
+
+
+        NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
+
+        // startIdeaDetailActivity(idea, view)
+        NotificationHelper.sendNotification(
+            this,
+            applicationContext,
+            "Alpha Capture",
+            "Mark created a new long idea on MSFT",
+            "hello",
+            false,
+            11)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -115,5 +154,11 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
             notificationMessage.message,
             false,
             notificationMessage.ideaId )
+    }
+
+    override fun onItemClick(view: View?, position: Int) {
+      val model = wearableAdapter.getItem(position)
+      println("selected model: $model")
+      startIdeaDetailActivity(model, view!!)
     }
 }

@@ -5,12 +5,29 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
+import android.view.MotionEvent
 import android.view.ScaleGestureDetector
+import android.view.View
+import androidx.dynamicanimation.animation.DynamicAnimation
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import com.kinsight.kinsightmultiplatform.IdeaModelLogicDecorator
+import com.kinsight.kinsightmultiplatform.PriceKind
+import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Adapters.IdeasRecyclerAdapter.Companion.getFishImageForAlpha
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
+import com.spb.spb.kinsightmultiplatformwearos.WearIdeaDetailActivity.Params.DAMPING_RATIO
+import com.spb.spb.kinsightmultiplatformwearos.WearIdeaDetailActivity.Params.INITIAL_SCALE
+import com.spb.spb.kinsightmultiplatformwearos.WearIdeaDetailActivity.Params.STIFFNESS
+import kotlinx.android.synthetic.main.activity_idea.*
 import kotlinx.android.synthetic.main.activity_wear_idea_detail.*
+import kotlinx.android.synthetic.main.activity_wear_idea_detail.alphaLabl
+import kotlinx.android.synthetic.main.activity_wear_idea_detail.ideaConviction
+import kotlinx.android.synthetic.main.activity_wear_idea_detail.ideaHorizon
+import kotlinx.android.synthetic.main.activity_wear_idea_detail.ideaTicker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class WearIdeaDetailActivity : WearableActivity() {
@@ -45,10 +62,12 @@ class WearIdeaDetailActivity : WearableActivity() {
      /*   ideaDetailCurrentPrice.text = ideaModelDecorator.getDisplayValueForPrice(priceKind = PriceKind.CURRENT)
         ideaDetailTargetPrice.text = ideaModelDecorator.getDisplayValueForPrice(priceKind = PriceKind.TARGET)
       */
+        ideaCurrentPriceValue.text = ideaModelDecorator.getDisplayValueForPrice(priceKind = PriceKind.CURRENT)
+        ideaTargetPriceValue.text =  ideaModelDecorator.getDisplayValueForPrice(priceKind = PriceKind.TARGET)
         ideaHorizon.text = ideaModel.timeHorizon
         ideaConviction.text = ideaModelDecorator.getConviction()
 
-       // setImagesAndAnimation()
+       setImagesAndAnimation()
 
         //closeIdea.alpha = 0.3f
     }
@@ -61,14 +80,28 @@ class WearIdeaDetailActivity : WearableActivity() {
 
     }
 
-    /*
+    override fun onResume() {
+        super.onResume()
+       // lifecycleScope.launch {
+       //     delay(250)
+       //     withContext(Dispatchers.Main) {
+                alphaLabl.scaleX = 6.5f
+                alphaLabl.scaleY = 6.5f
+                scaleXAnimation.start()
+                scaleYAnimation.start()
+        //    }
+           // animateFisherman()
+      //  }
+    }
+
+
     private fun setImagesAndAnimation() {
         val fishImageResource = getFishImageForAlpha(ideaModel.alpha)
         alphaLabl.setImageResource(fishImageResource)
 
-        setFishermanImage(ideaModel.createdBy)
+      //  setFishermanImage(ideaModel.createdBy)
 
-        setDirectionImage(ideaModel.direction)
+      //  setDirectionImage(ideaModel.direction)
 
 
         // create scaleX and scaleY animations
@@ -81,7 +114,7 @@ class WearIdeaDetailActivity : WearableActivity() {
             INITIAL_SCALE, STIFFNESS, DAMPING_RATIO
         )
 
-        setupPinchToZoom()
+      //  setupPinchToZoom()
 
         alphaLabl.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
@@ -98,7 +131,7 @@ class WearIdeaDetailActivity : WearableActivity() {
             true
         }
     }
-    */
+
 
     /*
     private fun setFishermanImage(createdBy: String) {
@@ -182,7 +215,9 @@ class WearIdeaDetailActivity : WearableActivity() {
         }
     }
 
-    private fun setupPinchToZoom() {
+     */
+
+    /*private fun setupPinchToZoom() {
         var scaleFactor = 1f
         scaleGestureDetector = ScaleGestureDetector(this,
             object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
@@ -193,7 +228,7 @@ class WearIdeaDetailActivity : WearableActivity() {
                     return true
                 }
             })
-    }
+    }*/
 
     private fun createSpringAnimation(view: View,
                                       property: DynamicAnimation.ViewProperty,
@@ -207,7 +242,7 @@ class WearIdeaDetailActivity : WearableActivity() {
         animation.spring = spring
         return animation
     }
-    */
+
 
 
 }
