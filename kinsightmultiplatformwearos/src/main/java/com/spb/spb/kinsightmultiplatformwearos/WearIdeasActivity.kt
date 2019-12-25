@@ -23,7 +23,7 @@ import com.kinsight.kinsightmultiplatform.models.NotificationMessage
 import kotlinx.android.synthetic.main.ideas_layout.*
 
 
-class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener, OnNotificationListener {
+class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener, OnNotificationListener, WearableRecyclerAdapter.ItemClickListener {
 
     //private lateinit var adapter: IdeasRecyclerAdapter
     private lateinit var wearableAdapter: WearableRecyclerAdapter
@@ -59,6 +59,7 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
             Observer<List<IdeaModel>> { ideas ->
                 Log.i("APP", "Ideas observed: $ideas")
                 wearableAdapter = WearableRecyclerAdapter(this, ideas)
+                wearableAdapter.setClickListener(this)
               //  adapter = IdeasRecyclerAdapter(ideas, R.layout.idea_item, this)
                 ideasRecyclerView.adapter = wearableAdapter
                 swiperefresh.isRefreshing = false
@@ -100,6 +101,8 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
         // Improves performance because we know changes in content do not change the layout size of
 // the RecyclerView.
         ideasRecyclerView.setHasFixedSize(true)
+
+       // ideasRecyclerView.setI
 
     }
 
@@ -151,5 +154,11 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
             notificationMessage.message,
             false,
             notificationMessage.ideaId )
+    }
+
+    override fun onItemClick(view: View?, position: Int) {
+      val model = wearableAdapter.getItem(position)
+      println("selected model: $model")
+      startIdeaDetailActivity(model, view!!)
     }
 }
