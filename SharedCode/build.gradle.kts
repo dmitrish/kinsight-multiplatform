@@ -9,6 +9,8 @@ val klockVersion = "1.7.0"
 
 val kversion ="1.2.6"
 
+val ktorversion = "1.3.0-rc"
+
 repositories {
     google()
     jcenter()
@@ -120,13 +122,13 @@ kotlin {
         // Serialize
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.14.0")
 
-        implementation ("io.ktor:ktor-client-core:$kversion")
+        implementation ("io.ktor:ktor-client-core:$ktorversion")
 
-        implementation ("io.ktor:ktor-client-json:$kversion")
-        implementation ("io.ktor:ktor-client-logging:$kversion")
-        implementation ("io.ktor:ktor-client-serialization:$kversion")
-        implementation("io.ktor:ktor-client-websockets:$kversion")
-        implementation ("io.ktor:ktor-client-cio:1.2.5")
+        implementation ("io.ktor:ktor-client-json:$ktorversion")
+        implementation ("io.ktor:ktor-client-logging:$ktorversion")
+        implementation ("io.ktor:ktor-client-serialization:$ktorversion")
+        implementation("io.ktor:ktor-client-websockets:$ktorversion")
+        implementation ("io.ktor:ktor-client-cio:$ktorversion")
 
     }
 
@@ -134,13 +136,13 @@ kotlin {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
 
-        implementation ("io.ktor:ktor-client-android:$kversion")
-        implementation ("io.ktor:ktor-client-core-jvm:$kversion")
+        implementation ("io.ktor:ktor-client-android:$ktorversion")
+        implementation ("io.ktor:ktor-client-core-jvm:$ktorversion")
 
-        implementation ("io.ktor:ktor-client-json-jvm:$kversion")
-        implementation ("io.ktor:ktor-client-logging-jvm:$kversion")
-        implementation ("io.ktor:ktor-client-serialization-jvm:$kversion")
-        implementation("io.ktor:ktor-client-websockets-jvm:$kversion")
+        implementation ("io.ktor:ktor-client-json-jvm:$ktorversion")
+        implementation ("io.ktor:ktor-client-logging-jvm:$ktorversion")
+        implementation ("io.ktor:ktor-client-serialization-jvm:$ktorversion")
+        implementation("io.ktor:ktor-client-websockets-jvm:$ktorversion")
           //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
 
     }

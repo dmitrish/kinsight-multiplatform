@@ -1,18 +1,21 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
 android {
-    compileSdkVersion 28
-    buildToolsVersion "29.0.1"
+    compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.spb.spb.kinsightmultiplatformwearos"
+        applicationId "com.kinsight.kinsightmultiplatform.kinsightmultiplatformjetpackcomposeui"
         minSdkVersion 28
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
-        vectorDrawables.useSupportLibrary true
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -22,6 +25,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
     }
     packagingOptions {
         pickFirst 'META-INF/kotlinx-io.kotlin_module'
@@ -40,29 +49,24 @@ android {
         pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
         pickFirst 'META-INF/ktor-io.kotlin_module'
     }
+
 }
 
 dependencies {
-    def lifecycle_ver = "2.2.0-rc02"
 
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_ver"
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':SharedCode')
     implementation project(':kinsightandroidsharedlibrary')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ver"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.android.support:wearable:2.5.0'
-    implementation 'com.google.android.gms:play-services-wearable:16.0.1'
-    implementation 'androidx.percentlayout:percentlayout:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    // implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-    //  implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
-    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'com.android.support:wear:28.0.0'
-    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
-    compileOnly 'com.google.android.wearable:wearable:2.5.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.ui:ui-framework:0.1.0-dev03'
+    implementation 'androidx.ui:ui-layout:0.1.0-dev03'
+    implementation 'androidx.ui:ui-foundation:0.1.0-dev03'
+    implementation 'androidx.ui:ui-material:0.1.0-dev03'
+    implementation 'androidx.ui:ui-tooling:0.1.0-dev03'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }

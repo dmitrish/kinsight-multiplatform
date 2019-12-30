@@ -52,17 +52,27 @@
             android:id="@+id/header_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="45dip"
+            android:paddingLeft="88dip"
             android:paddingTop="15dp"
-            android:alpha="0.9"
+            android:alpha="0.7"
+
             android:paddingBottom="18dp"
             android:drawablePadding="-45dp"
             android:gravity="center"
             android:background="@drawable/gradient_animation"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/yellow"
             android:drawableLeft="@drawable/ic_fish_monogram_38"
-            android:text="Team Ideas"/>
+            android:text=""/>
+        <View
+            android:id="@+id/separatorBlock"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="70dp"
+
+            android:background="@color/yellow"/>
 </FrameLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

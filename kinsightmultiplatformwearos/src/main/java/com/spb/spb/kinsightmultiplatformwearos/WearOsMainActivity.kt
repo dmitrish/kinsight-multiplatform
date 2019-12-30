@@ -1,12 +1,14 @@
 package com.spb.spb.kinsightmultiplatformwearos
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.view.KeyEvent
 import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_wear_os_main.*
+import kotlinx.android.synthetic.main.ideas_layout.*
 
 class WearOsMainActivity : WearableActivity() {
 
@@ -22,6 +24,8 @@ class WearOsMainActivity : WearableActivity() {
         val intent = Intent(this, WearIdeasActivity::class.java)
        // startActivity(intent)
         appLogo.requestFocus()
+
+        animate()
        // this.fo
     }
 
@@ -57,5 +61,14 @@ class WearOsMainActivity : WearableActivity() {
             }
             else -> return super.onKeyDown(keyCode, event)
         }
+    }
+
+    private fun animate() {
+        val animDrawable = mainLayout.background as AnimationDrawable
+        animDrawable.setEnterFadeDuration(10)
+        animDrawable.setExitFadeDuration(5000)
+        animDrawable.start()
+
+
     }
 }

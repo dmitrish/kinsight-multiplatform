@@ -3,6 +3,7 @@ package com.spb.spb.kinsightmultiplatformwearos
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,6 +21,8 @@ import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModel
 import com.kinsight.kinsightmultiplatform.kinsightandroidsharedlibrary.ViewModels.Notifications.OnNotificationListener
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.NotificationMessage
+import kotlinx.android.synthetic.main.activity_wear_ideas.*
+import kotlinx.android.synthetic.main.activity_wear_os_main.*
 import kotlinx.android.synthetic.main.ideas_layout.*
 
 
@@ -48,6 +51,8 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
 
 
         swiperefresh.rootView.requestFocus()
+
+        animate()
 
        // this.window.super
 
@@ -160,5 +165,17 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
       val model = wearableAdapter.getItem(position)
       println("selected model: $model")
       startIdeaDetailActivity(model, view!!)
+    }
+
+    private fun animate() {
+        val animDrawable = mainFrameLayout.background as AnimationDrawable
+        animDrawable.setEnterFadeDuration(10)
+        animDrawable.setExitFadeDuration(5000)
+        animDrawable.start()
+
+        val animDrawable2 = header_text_view.background as AnimationDrawable
+        animDrawable2.setEnterFadeDuration(10)
+        animDrawable2.setExitFadeDuration(5000)
+        animDrawable2.start()
     }
 }
