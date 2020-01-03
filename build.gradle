@@ -63,9 +63,11 @@ allprojects {
     }
 }
 
+/*
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+*/
 
 task doReflectyStuff {
     // dependsOn compileJava

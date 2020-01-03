@@ -68,3 +68,4 @@ interface Idea {
     val securityName: String
     val alpha: Double
 }
+

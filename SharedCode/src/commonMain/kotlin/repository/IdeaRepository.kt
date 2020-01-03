@@ -1,4 +1,4 @@
-package com.kinsight.kinsightmultiplatform.repository
+/*package com.kinsight.kinsightmultiplatform.repository
 
 
 import com.kinsight.kinsightmultiplatform.ApplicationDispatcher
@@ -104,3 +104,5 @@ class IdeaRepository(val baseUrl: String = "https://alphacapture.appspot.com") {
 
 
 }
+
+ */

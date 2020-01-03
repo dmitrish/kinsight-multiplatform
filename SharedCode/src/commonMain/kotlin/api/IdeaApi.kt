@@ -1,4 +1,5 @@
-package com.kinsight.kinsightmultiplatform.api
+/*package com.kinsight.kinsightmultiplatform.api
+
 
 
 import com.kinsight.kinsightmultiplatform.models.*
@@ -134,3 +135,5 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
         }
     }
 }
+
+ */

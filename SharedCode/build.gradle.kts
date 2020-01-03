@@ -105,10 +105,16 @@ kotlin {
         }
     }
 
+    js{
+        browser()
+    }
+
     //jvm()
-    android {
+    /*android {
 
     }
+
+     */
 
 
     val sp = sourceSets["commonMain"].kotlin.sourceDirectories.single().absolutePath
@@ -130,6 +136,25 @@ kotlin {
 
     }
 
+    sourceSets["jsMain"].dependencies {
+        implementation(kotlin("stdlib-js"))
+
+        implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.3")
+
+        implementation ("io.ktor:ktor-client-core:1.2.6") //aj
+        implementation ("io.ktor:ktor-client-core-js:1.2.6") //aj
+
+        implementation ("io.ktor:ktor-features:1.2.6")
+
+
+        implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:0.14.0")
+
+        implementation ("io.ktor:ktor-client-json-js:1.2.6")
+
+
+    }
+
+    /*
     sourceSets["androidMain"].dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
@@ -144,6 +169,8 @@ kotlin {
           //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0")
 
     }
+
+     */
 
     sourceSets["iosMain"].dependencies{
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3")
