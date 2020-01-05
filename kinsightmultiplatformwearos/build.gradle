@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.1"
 
     defaultConfig {
         applicationId "com.spb.spb.kinsightmultiplatformwearos"
         minSdkVersion 28
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         vectorDrawables.useSupportLibrary true
         versionName "1.0"
@@ -39,6 +39,7 @@ android {
         pickFirst 'META-INF/ktor-client-websockets.kotlin_module'
         pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
         pickFirst 'META-INF/ktor-io.kotlin_module'
+        pickFirst 'META-INF/DEPENDENCIES'
     }
 }
 
@@ -49,6 +50,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':SharedCode')
     implementation project(':kinsightandroidsharedlibrary')
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ver"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver"

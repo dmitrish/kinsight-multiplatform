@@ -2,16 +2,14 @@ package com.kinsight.kinsightmultiplatform.ViewModels
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.kinsight.kinsightmultiplatform.BuildConfig
 import com.kinsight.kinsightmultiplatform.models.IdeaModel
 import com.kinsight.kinsightmultiplatform.models.NotificationMessage
 import com.kinsight.kinsightmultiplatform.notifications.NotificationHelper
 import com.kinsight.kinsightmultiplatform.repository.IdeaRepository
 import kotlinx.coroutines.*
+
 
 
 class IdeasViewModel (application: Application, private val userName: String) : AndroidViewModel(application) {

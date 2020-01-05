@@ -48,12 +48,13 @@ android {
         pickFirst 'META-INF/ktor-client-websockets.kotlin_module'
         pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
         pickFirst 'META-INF/ktor-io.kotlin_module'
+        pickFirst 'META-INF/DEPENDENCIES'
     }
 
 }
 
 dependencies {
-
+    def lifecycle_ver = "2.2.0-rc02"
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':SharedCode')
     implementation project(':kinsightandroidsharedlibrary')
@@ -65,6 +66,8 @@ dependencies {
     implementation 'androidx.ui:ui-foundation:0.1.0-dev03'
     implementation 'androidx.ui:ui-material:0.1.0-dev03'
     implementation 'androidx.ui:ui-tooling:0.1.0-dev03'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ver"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

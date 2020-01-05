@@ -117,6 +117,10 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
         Log.i("IDEA_", idea.securityName)
 
 
+        //sendNotification()
+    }
+
+    private fun sendNotification() {
         NotificationHelper.createNotificationChannel(this, 1, true, "channel", "channel")
 
         // startIdeaDetailActivity(idea, view)
@@ -127,7 +131,8 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
             "Mark created a new long idea on MSFT",
             "hello",
             false,
-            11)
+            11
+        )
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -164,7 +169,8 @@ class WearIdeasActivity : WearableActivityLifecycleOwning(), OnItemClickListener
     override fun onItemClick(view: View?, position: Int) {
       val model = wearableAdapter.getItem(position)
       println("selected model: $model")
-      startIdeaDetailActivity(model, view!!)
+        sendNotification()
+      //startIdeaDetailActivity(model, view!!)
     }
 
     private fun animate() {

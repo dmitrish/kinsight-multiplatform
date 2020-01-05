@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">KinsightMultiplatformJetpackComposeUI</string>
+    <string name="title_activity_ideas">My Compose App</string>
 </resources>

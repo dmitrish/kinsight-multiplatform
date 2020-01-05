@@ -39,17 +39,19 @@
             android:textFontWeight="300"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:visibility="gone"
+
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ex Unum"
+
             android:layout_marginTop="230dp"
             android:layout_marginLeft="55dp"
             android:gravity="center"
              />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:text="Ex Unum"
             android:id="@+id/exunum"

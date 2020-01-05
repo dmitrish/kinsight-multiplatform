@@ -5,10 +5,9 @@ import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
 import android.view.KeyEvent
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
 import kotlinx.android.synthetic.main.activity_wear_os_main.*
-import kotlinx.android.synthetic.main.ideas_layout.*
+
 
 class WearOsMainActivity : WearableActivity() {
 
@@ -28,6 +27,7 @@ class WearOsMainActivity : WearableActivity() {
         animate()
        // this.fo
     }
+
 
     private fun initNavigation() {
        /* findViewById<TextView>(R.id.exunum).setOnClickListener {

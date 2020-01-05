@@ -74,7 +74,12 @@ class MainActivity : FullScreenActivity(), OnItemClickListener {
     private fun startIdeaCreateActivity() {
         val intent = Intent(this, IdeaCreateActivity::class.java)
         intent.putExtra("nextId", viewModel.nextId() + 2)
-        startActivity(intent)
+        //startActivity(intent)
+
+        NotificationHelper.sendNotification(
+            getApplication(),
+            "Alpha Capture", "Price Changed", "Price Changed", false
+        )
     }
 
     private fun initViewModelListener() {

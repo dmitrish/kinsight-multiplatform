@@ -49,6 +49,8 @@ android {
         pickFirst 'META-INF/ktor-client-core.kotlin_module'
         pickFirst 'META-INF/ktor-client-websockets.kotlin_module'
         pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
+        pickFirst 'META-INF/ktor-io.kotlin_module'
+        pickFirst 'META-INF/DEPENDENCIES'
     }
 }
 

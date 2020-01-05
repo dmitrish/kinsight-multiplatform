@@ -9,7 +9,7 @@ val klockVersion = "1.7.0"
 
 val kversion ="1.2.6"
 
-val ktorversion = "1.3.0-rc"
+val ktorversion = "1.3.0-rc2"
 
 repositories {
     google()
@@ -33,6 +33,9 @@ plugins {
    // apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
 }
 
+
+
+
 //apply ( plugin = "kotlin-android-extensions")
 
 android{
@@ -49,6 +52,13 @@ android{
             res.srcDirs(file("src/androidMain/res"))
         }
     }
+    lintOptions{
+        htmlOutput = file("$project.buildDir/outputs/lint/lint.html")
+        xmlReport = false
+        htmlReport = true
+        isAbortOnError = false
+    }
+
 }
 
 kotlin {
@@ -129,6 +139,9 @@ kotlin {
         implementation ("io.ktor:ktor-client-serialization:$ktorversion")
         implementation("io.ktor:ktor-client-websockets:$ktorversion")
         implementation ("io.ktor:ktor-client-cio:$ktorversion")
+        implementation ("io.ktor:ktor-client-okhttp:$ktorversion")
+        implementation("io.ktor:ktor-client-apache:$ktorversion")
+        implementation("ch.qos.logback:logback-classic:1.2.3")
 
     }
 
@@ -136,7 +149,7 @@ kotlin {
         implementation("org.jetbrains.kotlin:kotlin-stdlib")
         implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
 
-        implementation ("io.ktor:ktor-client-android:$ktorversion")
+      //  implementation ("io.ktor:ktor-client-android:$ktorversion")
         implementation ("io.ktor:ktor-client-core-jvm:$ktorversion")
 
         implementation ("io.ktor:ktor-client-json-jvm:$ktorversion")
@@ -187,6 +200,7 @@ kotlin {
         implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.14.0")
         implementation ("io.ktor:ktor-client-core-native:1.3.0-rc")
         implementation ("io.ktor:ktor-client-json-native:1.3.0-rc")
+        implementation ("io.ktor:ktor-client-logging-native:1.3.0-rc")
         implementation ("io.ktor:ktor-client-serialization-native:1.3.0-rc")
         implementation ("io.ktor:ktor-client-ios:1.3.0-rc")
         implementation ("io.ktor:ktor-client-cio:1.3.0-rc")
