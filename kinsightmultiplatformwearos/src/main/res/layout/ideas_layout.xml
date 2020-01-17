@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/swiperefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mainFrameLayout"
+        android:background="@drawable/gradient_animation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+
+    <TextView
+        android:id="@+id/ideasHeader"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:paddingTop="3dp"
+        android:text="Ideas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+        android:textColor="@color/yellow"
+        android:textStyle="bold"
+        android:drawableLeft="@drawable/ic_fish_monogram_38"
+        android:drawablePadding="-1dp"
+
+        tools:text="Team Ideas" />
+
+
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/ideasRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+
+        tools:itemcount="5"
+        tools:listitem="@layout/idea_item" />
+
+        <!-- Stacks the text field above the WearableRecyclerView at the top of the screen. -->
+        <TextView
+            android:id="@+id/header_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="45dip"
+            android:paddingTop="15dp"
+            android:alpha="0.9"
+            android:paddingBottom="18dp"
+            android:drawablePadding="-45dp"
+            android:gravity="center"
+            android:background="@drawable/gradient_animation"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:textColor="@color/yellow"
+            android:drawableLeft="@drawable/ic_fish_monogram_38"
+            android:text="Team Ideas"/>
+</FrameLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+<!--  app:backgroundTint="#41B4E6"-->

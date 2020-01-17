@@ -1,7 +1,7 @@
 [![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
 
-# Kotlin Multiplatform project: Sharing code between iOS, Android, and JVM Web Server (Ktor)
+# Kotlin Multiplatform project: Sharing code between iOS, MacOS, WatchOS, Android (phone and watch - Wear OS), and JVM Web Server (Ktor)
 
 KInsight Alpha Capture is a proof of concept project currently being developed for our annual CodeWeek event (where you pitch business or technology ideas). 
 Alpha Capture app is intended for Sales to create and distribute trade ideas to our institutional clients. The app will track the performance of each idea relative to the performance of the benchmark, and alert users when the idea has reached the price objective or stop loss value so that the user can then close the idea.
@@ -15,14 +15,37 @@ As we cannot control the market (alas), some market data manipulation is in orde
 
 
 
-# IPhone intro:
+<table style="width:100%">
+  <tr>
+    <th>IPhone</th>
+    <th>Android</th> 
+ 
+  </tr>
+  <tr>
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif"/></td>
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif"/></td> 
 
-![iphone gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/iphoneplay.gif)
+  </tr>
+  
+</table>
 
-# Android intro:
+<table style="width:100%">
+  <tr>
+    <th>Wear OS</th>
+    <th>Watch OS</th> 
+ 
+  </tr>
+  <tr>
+    <td>
+ <img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/wearos.gif"/>
+  </td>
+    <td>Coming soon!</td> 
 
-![android gif](https://github.com/dmitrish/kinsight-multiplatform/blob/master/androidplay.gif)
+  </tr>
+  
+</table>
 
+https://github.com/dmitrish/kinsight-multiplatform/blob/master/wearos-alpha.mp4
 
 # Screenshots:
 
@@ -51,6 +74,11 @@ As we cannot control the market (alas), some market data manipulation is in orde
 # Idea Alert (Android):
 
 ![idea alert](https://github.com/dmitrish/kinsight-multiplatform/blob/master/idea-created-alert-android.jpg)
+
+
+# MacOS - Ideas
+
+![idea list macos](https://github.com/dmitrish/kinsight-multiplatform/blob/master/macos-ideas.png)
 
 
 # Steps to build different server flavors and run them locally

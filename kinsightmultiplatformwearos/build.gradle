@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+
+    defaultConfig {
+        applicationId "com.spb.spb.kinsightmultiplatformwearos"
+        minSdkVersion 28
+        targetSdkVersion 29
+        versionCode 1
+        vectorDrawables.useSupportLibrary true
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        pickFirst 'META-INF/kotlinx-io.kotlin_module'
+        pickFirst 'META-INF/atomicfu.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-io.kotlin_module'
+        pickFirst 'META-INF/kotlinx-coroutines-core.kotlin_module'
+        pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
+        pickFirst 'META-INF/ktor-http.kotlin_module'
+        pickFirst 'META-INF/ktor-utils.kotlin_module'
+        pickFirst 'META-INF/kotlinx-serialization-runtime.kotlin_module'
+        pickFirst 'META-INF/ktor-http-cio.kotlin_module'
+        pickFirst 'META-INF/ktor-client-json.kotlin_module'
+        pickFirst 'META-INF/ktor-client-logging.kotlin_module'
+        pickFirst 'META-INF/ktor-client-core.kotlin_module'
+        pickFirst 'META-INF/ktor-client-websockets.kotlin_module'
+        pickFirst 'META-INF/ktor-client-serialization.kotlin_module'
+    }
+}
+
+dependencies {
+    def lifecycle_ver = "2.2.0-rc02"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_ver"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':SharedCode')
+    implementation project(':kinsightandroidsharedlibrary')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_ver"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_ver"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.android.support:wearable:2.5.0'
+    implementation 'com.google.android.gms:play-services-wearable:16.0.1'
+    implementation 'androidx.percentlayout:percentlayout:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    // implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+    //  implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'com.android.support:wear:28.0.0'
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+    compileOnly 'com.google.android.wearable:wearable:2.5.0'
+}

@@ -4,7 +4,7 @@ apply plugin: 'org.jetbrains.kotlin.native.cocoapods'
 //apply plugin: 'kotlinx-serialization'
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.3.60'
     repositories {
         google()
         jcenter()
@@ -13,7 +13,7 @@ buildscript {
         maven { url "http://dl.bintray.com/kotlin/kotlin-eap" }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         maven { url "https://plugins.gradle.org/m2/" }
-        
+
     }
     dependencies {
         classpath 'org.reflections:reflections:0.9.11'
@@ -22,10 +22,11 @@ buildscript {
 
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
 
-      //  classpath "com.android.tools.build:gradle:$gradlePluginVersion"
+        //  classpath "com.android.tools.build:gradle:$gradlePluginVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
 
 }
 
@@ -40,7 +41,7 @@ allprojects {
         maven { url "http://dl.bintray.com/kotlin/kotlin-eap" }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         maven { url "https://plugins.gradle.org/m2/" }
-        
+
     }
 
     project.tasks.whenTaskAdded { task ->
@@ -53,12 +54,12 @@ allprojects {
 
     gradle.taskGraph.afterTask { task ->
         println("task $task.name inputs:")
-      //  task.inputs.files.each {println "   " + it}
+        //  task.inputs.files.each {println "   " + it}
     }
 
     gradle.taskGraph.afterTask { task ->
         println("task $task.name outputs:")
-       // task.outputs.files.each {println "   " + it}
+        // task.outputs.files.each {println "   " + it}
     }
 }
 
@@ -67,7 +68,7 @@ task clean(type: Delete) {
 }
 
 task doReflectyStuff {
-   // dependsOn compileJava
+    // dependsOn compileJava
     doLast {
         URL[] urls = sourceSets.main.runtimeClasspath.files.collect {
             it.toURI().toURL()

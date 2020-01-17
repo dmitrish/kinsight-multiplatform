@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kinsight.kinsightmultiplatform">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -13,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.IdeaActivity"></activity>
+        <activity android:name=".views.IdeaActivity" />
         <activity android:name=".views.IdeaCreateActivity" />
         <activity android:name=".views.TickerSearchActivity" />
         <activity
