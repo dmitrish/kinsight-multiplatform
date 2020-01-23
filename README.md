@@ -39,7 +39,7 @@ As we cannot control the market (alas), some market data manipulation is in orde
     <td>
  <img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/wearos.gif"/>
   </td>
-    <td>Coming soon!</td> 
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/watchos.gif"/></td> 
 
   </tr>
   
