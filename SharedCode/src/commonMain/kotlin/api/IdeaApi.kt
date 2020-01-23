@@ -112,6 +112,7 @@ class IdeaApi(val baseUrl: String = "https://alphacapture.appspot.com") {
     }
 
     suspend fun fetchGraph(id: Int): GraphModel {
+  
         val jsonString = client.get<String> {
             url("$baseUrl/api/graph/${id}")
         }
