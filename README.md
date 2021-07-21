@@ -10,7 +10,20 @@ However, there will be a number of “prefabricated” ideas along with their hi
 As we cannot control the market (alas), some market data manipulation is in order. The server will provide an API to update prices for ideas so that an alert can be triggered. These price updates will flow into the app via websockets, updating UI in real time and triggering notification alerts when price objective or stop loss thresholds are met.
 
 # Demo
-(https://github.com/dmitrish/kinsight-multiplatform/blob/master/demop1a.gif)
+<table style="width:100%">
+  <tr>
+    <th>Demo</th>
+    
+ 
+  </tr>
+  <tr>
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/demop1a.gif"/></td>
+   
+
+  </tr>
+  
+</table>
+
 
 # Overview
 
