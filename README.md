@@ -24,6 +24,20 @@ As we cannot control the market (alas), some market data manipulation is in orde
   
 </table>
 
+<table style="width:100%">
+  <tr>
+    <th>Part 2</th>
+    
+ 
+  </tr>
+  <tr>
+    <td><img src="https://github.com/dmitrish/kinsight-multiplatform/blob/master/demop2.gif"/></td>
+   
+
+  </tr>
+  
+</table>
+
 
 # Overview
 
