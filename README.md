@@ -12,7 +12,7 @@ As we cannot control the market (alas), some market data manipulation is in orde
 # Demo
 <table style="width:100%">
   <tr>
-    <th>Demo</th>
+    <th>Part 1</th>
     
  
   </tr>
